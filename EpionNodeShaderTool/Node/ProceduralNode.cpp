@@ -11,7 +11,6 @@ namespace
 {
 	const ImVec2	size(0, 0);
 	bool open_popup[2];
-
 }
 
 //TODO repplenode
@@ -171,7 +170,7 @@ namespace	epion::NodeCustom
 
 	void	EllipseNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = "Ellipse_out" + std::to_string(m_ID);
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 
 		m_input_str[0] = "input.uv";
 		m_input_str[1] = std::to_string(Width);
