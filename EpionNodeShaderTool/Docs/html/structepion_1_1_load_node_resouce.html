@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.16"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shader Node Editor Reference: epion::LoadNodeResouce 構造体</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Shader Node Editor Reference
+   &#160;<span id="projectnumber">0.0.1a</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.16 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><b>epion</b></li><li class="navelem"><a class="el" href="structepion_1_1_load_node_resouce.html">LoadNodeResouce</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">公開メンバ関数</a> &#124;
+<a href="#pub-attribs">公開変数類</a> &#124;
+<a href="structepion_1_1_load_node_resouce-members.html">全メンバ一覧</a>  </div>
+  <div class="headertitle">
+<div class="title">epion::LoadNodeResouce 構造体<span class="mlabels"><span class="mlabel">final</span></span></div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:a922c8e6862faac2f0715971049c8fa34"><td class="memItemLeft" align="right" valign="top"><a id="a922c8e6862faac2f0715971049c8fa34"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>create</b> (epion::com_ptr&lt; ID3D11Device &gt; &amp;device)</td></tr>
+<tr class="separator:a922c8e6862faac2f0715971049c8fa34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91b8b38c5a502feba876fee8346f438f"><td class="memItemLeft" align="right" valign="top"><a id="a91b8b38c5a502feba876fee8346f438f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> (epion::com_ptr&lt; ID3D11DeviceContext &gt; &amp;device, com_ptr&lt; ID3D11ShaderResourceView &gt; &amp;view, com_ptr&lt; ID3D11SamplerState &gt; &amp;state)</td></tr>
+<tr class="separator:a91b8b38c5a502feba876fee8346f438f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+公開変数類</h2></td></tr>
+<tr class="memitem:a7a23a0854b7d63b35f553409d78b4459"><td class="memItemLeft" align="right" valign="top"><a id="a7a23a0854b7d63b35f553409d78b4459"></a>
+D3D11_TEXTURE2D_DESC&#160;</td><td class="memItemRight" valign="bottom"><b>texture2d_desc</b></td></tr>
+<tr class="separator:a7a23a0854b7d63b35f553409d78b4459"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84ec3ebcd6c3ce799fc4b65b568ad01a"><td class="memItemLeft" align="right" valign="top"><a id="a84ec3ebcd6c3ce799fc4b65b568ad01a"></a>
+std::unique_ptr&lt; <a class="el" href="classepion_1_1_vertex_buffer.html">VertexBuffer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>vertex_buffer</b></td></tr>
+<tr class="separator:a84ec3ebcd6c3ce799fc4b65b568ad01a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b30cbbd303229dad4144df206655d63"><td class="memItemLeft" align="right" valign="top"><a id="a0b30cbbd303229dad4144df206655d63"></a>
+std::unique_ptr&lt; <a class="el" href="classepion_1_1_vertex_shader.html">VertexShader</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>vertex_shader</b></td></tr>
+<tr class="separator:a0b30cbbd303229dad4144df206655d63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0c30fdd49e19c5fc020c17bf5c64e09"><td class="memItemLeft" align="right" valign="top"><a id="ae0c30fdd49e19c5fc020c17bf5c64e09"></a>
+std::unique_ptr&lt; <a class="el" href="classepion_1_1_pixel_shader.html">PixelShader</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pixel_shader</b></td></tr>
+<tr class="separator:ae0c30fdd49e19c5fc020c17bf5c64e09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60e3dde31a5c5c5c7d8b04af0a3c0e7e"><td class="memItemLeft" align="right" valign="top"><a id="a60e3dde31a5c5c5c7d8b04af0a3c0e7e"></a>
+std::unique_ptr&lt; <a class="el" href="classepion_1_1_shader_reflection.html">ShaderReflection</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>shader_refrection</b></td></tr>
+<tr class="separator:a60e3dde31a5c5c5c7d8b04af0a3c0e7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a443c13ed0698d3a729637ee026f24685"><td class="memItemLeft" align="right" valign="top"><a id="a443c13ed0698d3a729637ee026f24685"></a>
+std::unique_ptr&lt; <a class="el" href="classepion_1_1_input_layout.html">InputLayout</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>input_layout</b></td></tr>
+<tr class="separator:a443c13ed0698d3a729637ee026f24685"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcfd110fdab30e68359589bde7813066"><td class="memItemLeft" align="right" valign="top"><a id="afcfd110fdab30e68359589bde7813066"></a>
+epion::com_ptr&lt; ID3D11Texture2D &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Texture</b></td></tr>
+<tr class="separator:afcfd110fdab30e68359589bde7813066"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc4d48171f8055d544129897598be3a9"><td class="memItemLeft" align="right" valign="top"><a id="abc4d48171f8055d544129897598be3a9"></a>
+epion::com_ptr&lt; ID3D11ShaderResourceView &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>shader_resouce_view</b></td></tr>
+<tr class="separator:abc4d48171f8055d544129897598be3a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b3fd7ed8e04990950ccbe72c23ab3f5"><td class="memItemLeft" align="right" valign="top"><a id="a9b3fd7ed8e04990950ccbe72c23ab3f5"></a>
+epion::com_ptr&lt; ID3D11UnorderedAccessView &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>unordered_access_view</b></td></tr>
+<tr class="separator:a9b3fd7ed8e04990950ccbe72c23ab3f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02432c19732158da45236e6c215075c4"><td class="memItemLeft" align="right" valign="top"><a id="a02432c19732158da45236e6c215075c4"></a>
+epion::com_ptr&lt; ID3D11RenderTargetView &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>render_target_view</b></td></tr>
+<tr class="separator:a02432c19732158da45236e6c215075c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<hr/>この構造体詳解は次のファイルから抽出されました:<ul>
+<li>Node/<a class="el" href="_node_progress_tex_8h_source.html">NodeProgressTex.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+構築: &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.16
+</small></address>
+</body>
+</html>

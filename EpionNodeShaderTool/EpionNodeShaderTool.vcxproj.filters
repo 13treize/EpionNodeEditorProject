@@ -1,0 +1,551 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Dx11">
+      <UniqueIdentifier>{120bc38f-ef21-41c1-b8c2-92ff16ec47d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Dx11\Imgui">
+      <UniqueIdentifier>{6bf47a1d-ce57-41b2-ad27-585b45c88542}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Dx11">
+      <UniqueIdentifier>{4f453cf5-b554-43a4-aba1-dbd6a7025a43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Dx11\Imgui">
+      <UniqueIdentifier>{ac37b362-ef74-4842-be28-d5ff08de8e4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Imgui">
+      <UniqueIdentifier>{41d2a13c-5785-4aad-822d-1b5f6caba86d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\FileIO">
+      <UniqueIdentifier>{790b32a2-9ee3-497b-b4cc-1e7d413525c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\FileIO">
+      <UniqueIdentifier>{fc81467c-940d-4972-9d60-01abab04a8ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Node">
+      <UniqueIdentifier>{439f68f1-d803-4970-8038-8817939933a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Node">
+      <UniqueIdentifier>{e76d3e64-bcb1-4497-9024-c5812f61ee45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\epion_math">
+      <UniqueIdentifier>{c367bc79-622a-47f1-9006-3b3f6fc29cd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\epion_math">
+      <UniqueIdentifier>{dbd481c9-c505-472a-a4dc-fabd5d5643d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\epion_physics">
+      <UniqueIdentifier>{a410c0b6-b62f-40ce-91d8-b4dbf1ac7a25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\ShaderGenerate">
+      <UniqueIdentifier>{e6b4e8b7-d96d-4d3a-9cfe-080a74ce0323}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\ShaderGenerate">
+      <UniqueIdentifier>{055bf7eb-c394-4ed4-ab31-70abca46121a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\HLSLShader">
+      <UniqueIdentifier>{14def3e4-6f82-4df9-93c3-f05a34aefc0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\epion_physics">
+      <UniqueIdentifier>{abbdb7cc-25cf-4b32-9b10-5d30b405a42b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\HLSLShader\Imgui">
+      <UniqueIdentifier>{b7627477-7ce5-47ab-8615-3036f818a547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Node\UV">
+      <UniqueIdentifier>{ff7e89d3-f63d-4b9c-8e42-0205af2d2e70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Node\UV">
+      <UniqueIdentifier>{cb259b8b-b395-4ddf-9f16-c6b3ef8daa65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Node\Math">
+      <UniqueIdentifier>{05cb9375-94c5-430f-af0f-0233428e9057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Node\Math">
+      <UniqueIdentifier>{82df1146-9a30-402d-a9d3-2cfac283f7ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Node\Noise">
+      <UniqueIdentifier>{5aa2afd6-f0c3-4a66-87aa-9a81405c2f9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Node\Noise">
+      <UniqueIdentifier>{512bd4d6-187e-4835-98d3-d68bc71a4f8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Node\Input">
+      <UniqueIdentifier>{8ffb2672-846a-45c9-b9a7-1c612ccb3354}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Node\Procedural">
+      <UniqueIdentifier>{f3cc10ed-e7bb-466d-8e42-6616d3634bea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Node\Procedural">
+      <UniqueIdentifier>{3cde27a2-3e07-40d3-98f6-130242445035}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Node\Input">
+      <UniqueIdentifier>{7cb46584-493b-45b2-83b6-045325a704c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Node\raymarching">
+      <UniqueIdentifier>{3cf0dd60-2a15-41c0-ac61-2e54173058bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Node\raymarching">
+      <UniqueIdentifier>{b2282394-1da4-4d42-9a66-d7f2d337dbbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Node\Master">
+      <UniqueIdentifier>{00e7cc0a-41c6-4c69-8234-74d6f9660399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Node\Artistic">
+      <UniqueIdentifier>{8ec22c97-9687-47d6-873c-6921ff5f9dc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Node\Artistic">
+      <UniqueIdentifier>{2925475e-8533-4a2c-acf3-cc30213655a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Node\Channel">
+      <UniqueIdentifier>{c5314119-837b-4af3-ac17-7155986610ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Node\Channel">
+      <UniqueIdentifier>{b2bf32ce-493a-43f7-a2d4-e3a0cdcb4989}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Winmain.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="win_core.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\Imgui\dx11_imgui_main_window.cpp">
+      <Filter>ソース ファイル\Dx11\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\Imgui\dx11_imgui_manager.cpp">
+      <Filter>ソース ファイル\Dx11\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\dx11_device.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\dx11_dxgi.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\Imgui\grid.cpp">
+      <Filter>ソース ファイル\Dx11\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Imgui\imgui.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Imgui\imgui_draw.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Imgui\imgui_impl_dx11.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Imgui\imgui_widgets.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Imgui\imgui_demo.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Imgui\imgui_impl_win32.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="FileIO\Fileio_json.cpp">
+      <Filter>ソース ファイル\FileIO</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\PBRNode.cpp">
+      <Filter>ソース ファイル\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\viewport.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="epion_math\epion_random.cpp">
+      <Filter>ソース ファイル\epion_math</Filter>
+    </ClCompile>
+    <ClCompile Include="epion_physics\epion_collider.cpp">
+      <Filter>ソース ファイル\epion_physics</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderGenerate\ShaderGenerate.cpp">
+      <Filter>ソース ファイル\ShaderGenerate</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\Cube.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\shader_reflection.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\ObjLoader.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="epion_string.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\ObjMtlLoader.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\ObjMesh.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\Renderer.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\texture.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\rasterizer.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\blender.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\buffer.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\ShaderManager.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\InputLayout.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\dx11_state.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\square.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\Imgui\epion_imgui_node_context.cpp">
+      <Filter>ソース ファイル\Dx11\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\RotateNode.cpp">
+      <Filter>ソース ファイル\Node\UV</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\Flipbook.cpp">
+      <Filter>ソース ファイル\Node\UV</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\MathBasicNode.cpp">
+      <Filter>ソース ファイル\Node\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\InputBasicNode.cpp">
+      <Filter>ソース ファイル\Node\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\MathAdvancedNode.cpp">
+      <Filter>ソース ファイル\Node\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\MathDerivativeNode.cpp">
+      <Filter>ソース ファイル\Node\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\ProceduralNode.cpp">
+      <Filter>ソース ファイル\Node\Procedural</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\TextureNode.cpp">
+      <Filter>ソース ファイル\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\NodeProgressTex.cpp">
+      <Filter>ソース ファイル\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\NodeResult.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\UVNode.cpp">
+      <Filter>ソース ファイル\Node\UV</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\Imgui\EpionNodeEditor.cpp">
+      <Filter>ソース ファイル\Dx11\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\MathWaveNode.cpp">
+      <Filter>ソース ファイル\Node\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\NoiseNode.cpp">
+      <Filter>ソース ファイル\Node\Noise</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\RenderTarget.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="ImguiFunction.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\MasterNode.cpp">
+      <Filter>ソース ファイル\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\MathInterpolationNode.cpp">
+      <Filter>ソース ファイル\Node\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\NodeData.cpp">
+      <Filter>ソース ファイル\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\ConstantBuffer.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\ArtisticNormalNode.cpp">
+      <Filter>ソース ファイル\Node\Artistic</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\ChannelNode.cpp">
+      <Filter>ソース ファイル\Node\Channel</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="epion.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="win_core.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\Imgui\dx11_imgui_main_window.h">
+      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\Imgui\dx11_imgui_manager.h">
+      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\dx11_device.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\dx11_dxgi.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\viewport.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\Imgui\grid.h">
+      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Imgui\imconfig.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Imgui\imgui.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Imgui\imgui_impl_dx11.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Imgui\imgui_impl_win32.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Imgui\imgui_internal.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Imgui\imstb_rectpack.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Imgui\imstb_textedit.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Imgui\imstb_truetype.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="FileIO\Fileio_json.h">
+      <Filter>ヘッダー ファイル\FileIO</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\PBRNode.h">
+      <Filter>ヘッダー ファイル\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="epion_math\epion_math.h">
+      <Filter>ヘッダー ファイル\epion_math</Filter>
+    </ClInclude>
+    <ClInclude Include="epion_math\epion_matrix.h">
+      <Filter>ヘッダー ファイル\epion_math</Filter>
+    </ClInclude>
+    <ClInclude Include="epion_math\epion_random.h">
+      <Filter>ヘッダー ファイル\epion_math</Filter>
+    </ClInclude>
+    <ClInclude Include="epion_math\epion_vector2.h">
+      <Filter>ヘッダー ファイル\epion_math</Filter>
+    </ClInclude>
+    <ClInclude Include="epion_math\epion_vector3.h">
+      <Filter>ヘッダー ファイル\epion_math</Filter>
+    </ClInclude>
+    <ClInclude Include="epion_math\epion_vector4.h">
+      <Filter>ヘッダー ファイル\epion_math</Filter>
+    </ClInclude>
+    <ClInclude Include="epion_physics\epion_collider.h">
+      <Filter>ヘッダー ファイル\epion_physics</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderGenerate\ShaderGenerate.h">
+      <Filter>ヘッダー ファイル\ShaderGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\Cube.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\shader_reflection.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\ObjLoader.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="epion_string.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\ObjMtlLoader.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\Renderer.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\texture.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\rasterizer.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\blender.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\buffer.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\ShaderManager.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\InputLayout.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\dx11_state.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\ObjMesh.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\square.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\Imgui\epion_imgui_node_context.h">
+      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\RotateNode.h">
+      <Filter>ヘッダー ファイル\Node\UV</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\FlipbookNode.h">
+      <Filter>ヘッダー ファイル\Node\UV</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\MathBasicNode.h">
+      <Filter>ヘッダー ファイル\Node\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\MathAdvancedNode.h">
+      <Filter>ヘッダー ファイル\Node\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\MathDerivativeNode.h">
+      <Filter>ヘッダー ファイル\Node\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\MathInterpolation.h">
+      <Filter>ヘッダー ファイル\Node\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\ProceduralNode.h">
+      <Filter>ヘッダー ファイル\Node\Procedural</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\TextureNode.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ImguiFunction.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="All.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\NodeProgressTex.h">
+      <Filter>ヘッダー ファイル\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\InputBasicNode.h">
+      <Filter>ヘッダー ファイル\Node\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\NodeResult.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\UVNode.h">
+      <Filter>ヘッダー ファイル\Node\UV</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\Imgui\EpionNodeEditor.h">
+      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\MathWaveNode.h">
+      <Filter>ヘッダー ファイル\Node\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\NoiseNode.h">
+      <Filter>ヘッダー ファイル\Node\Noise</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\RenderTarget.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\MasterNode.h">
+      <Filter>ヘッダー ファイル\Node\Master</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\NodeData.h">
+      <Filter>ヘッダー ファイル\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\ConstantBuffer.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\ArtisticNormalNode.h">
+      <Filter>ヘッダー ファイル\Node\Artistic</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\ChannelNode.h">
+      <Filter>ヘッダー ファイル\Node\Channel</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="HLSLShader\ObjShader.hlsli">
+      <Filter>リソース ファイル\HLSLShader</Filter>
+    </None>
+    <None Include="HLSLShader\square.hlsli">
+      <Filter>リソース ファイル\HLSLShader</Filter>
+    </None>
+    <None Include="..\Imgui\Imgui.hlsli">
+      <Filter>Imgui</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="HLSLShader\ObjNoTexturePixelShader.hlsl">
+      <Filter>リソース ファイル\HLSLShader</Filter>
+    </FxCompile>
+    <FxCompile Include="HLSLShader\ObjVertexShader.hlsl">
+      <Filter>リソース ファイル\HLSLShader</Filter>
+    </FxCompile>
+    <FxCompile Include="HLSLShader\square_pixel_shader.hlsl">
+      <Filter>リソース ファイル\HLSLShader</Filter>
+    </FxCompile>
+    <FxCompile Include="HLSLShader\square_vertex_shader.hlsl">
+      <Filter>リソース ファイル\HLSLShader</Filter>
+    </FxCompile>
+    <FxCompile Include="HLSLShader\Imgui\imgui_default_pixel.hlsl">
+      <Filter>リソース ファイル\HLSLShader\Imgui</Filter>
+    </FxCompile>
+    <FxCompile Include="HLSLShader\imgui_default_vertex.hlsl">
+      <Filter>リソース ファイル\HLSLShader\Imgui</Filter>
+    </FxCompile>
+    <FxCompile Include="HLSLShader\PBR.hlsli">
+      <Filter>リソース ファイル\HLSLShader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Imgui\Imgui_ps.hlsl">
+      <Filter>Imgui</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Imgui\imgui_vs.hlsl">
+      <Filter>Imgui</Filter>
+    </FxCompile>
+    <FxCompile Include="HLSLShader\tests.hlsl">
+      <Filter>リソース ファイル\HLSLShader</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>

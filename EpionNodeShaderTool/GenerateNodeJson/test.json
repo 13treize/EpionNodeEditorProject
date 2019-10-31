@@ -1,0 +1,331 @@
+{
+    "node_param": [
+        {
+            "polymorphic_id": 2147483649,
+            "polymorphic_name": "epion::NodeCustom::UnlitMasterNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Unlit Master",
+                        "m_ID": 0,
+                        "m_Pos": {
+                            "x": 797,
+                            "y": 546
+                        },
+                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000, 0.0),Vector3_num1,1.000000,0.000000);\n"
+                    },
+                    "Pos": {
+                        "cereal_class_version": 0,
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "Color": {
+                        "cereal_class_version": 0,
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "Alpha": 1,
+                    "AlphaChipThreshold": 0
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483650,
+            "polymorphic_name": "epion::NodeCustom::Vector3Node",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Vector3Node",
+                        "m_ID": 1,
+                        "m_Pos": {
+                            "x": 690,
+                            "y": 260
+                        },
+                        "m_function_call_str": "    float3 Vector3_num1=float3(0.300000,Volonoi_out2,0.800000);\n"
+                    },
+                    "input_num": {
+                        "x": 0.30000001192092896,
+                        "y": 1,
+                        "z": 0.80000001192092896
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483651,
+            "polymorphic_name": "epion::NodeCustom::VoronoiNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Voronoi",
+                        "m_ID": 2,
+                        "m_Pos": {
+                            "x": 455,
+                            "y": 172
+                        },
+                        "m_function_call_str": "    float Volonoi_out2;\n    float Volonoi_cell2;\n    float Volonoi_line2;\n    Voronoi(PolarCoordinatesNode3,MultiplyNode_out8,5.000000,Volonoi_out2,Volonoi_cell2,Volonoi_line2);\n"
+                    },
+                    "UV": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "AngleOffset": 1,
+                    "CellDensity": 5
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483652,
+            "polymorphic_name": "epion::NodeCustom::PolarCoordinatesNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "PolarCoordinates",
+                        "m_ID": 3,
+                        "m_Pos": {
+                            "x": 163,
+                            "y": 135
+                        },
+                        "m_function_call_str": "    float2 PolarCoordinatesNode3;\n    PolarCoordinates_float(input.uv,float2(0.500000,0.500000),SawtoothWave_out4,0.000000,PolarCoordinatesNode3);\n"
+                    },
+                    "UV": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "Center": {
+                        "x": 0.5,
+                        "y": 0.5
+                    },
+                    "RadialScale": 1,
+                    "LengthScale": 0
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483653,
+            "polymorphic_name": "epion::NodeCustom::SawtoothWaveNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "SawtoothWave_float",
+                        "m_ID": 4,
+                        "m_Pos": {
+                            "x": -32,
+                            "y": 270
+                        },
+                        "m_function_call_str": "    float SawtoothWave_out4;\n    SawtoothWave_float(Sin_Time_,SawtoothWave_out4);\n"
+                    },
+                    "In": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483654,
+            "polymorphic_name": "epion::NodeCustom::TimeNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "TimeNode",
+                        "m_ID": 5,
+                        "m_Pos": {
+                            "x": -241,
+                            "y": 428
+                        },
+                        "m_function_call_str": " "
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483655,
+            "polymorphic_name": "epion::NodeCustom::AbsoluteNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Absolute_float",
+                        "m_ID": 6,
+                        "m_Pos": {
+                            "x": 73,
+                            "y": 522
+                        },
+                        "m_function_call_str": "    float Absolute_float_out6;\n    Absolute_float(Sin_Time_,Absolute_float_out6);\n"
+                    },
+                    "In": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483656,
+            "polymorphic_name": "epion::NodeCustom::AddNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "AddNode_float",
+                        "m_ID": 7,
+                        "m_Pos": {
+                            "x": 214,
+                            "y": 565
+                        },
+                        "m_function_call_str": "    float AddNode_out7;\n    Add_float(Absolute_float_out6,3.000000,AddNode_out7);\n"
+                    },
+                    "A": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "B": {
+                        "x": 3,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483657,
+            "polymorphic_name": "epion::NodeCustom::MultiplyNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "MultiplyNode_float",
+                        "m_ID": 8,
+                        "m_Pos": {
+                            "x": 426,
+                            "y": 490
+                        },
+                        "m_function_call_str": "    float MultiplyNode_out8;\n    Multiply_float(AddNode_out7,2.000000,MultiplyNode_out8);\n"
+                    },
+                    "A": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "B": {
+                        "x": 2,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483658,
+            "polymorphic_name": "epion::NodeCustom::FloatNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "FloatNode",
+                        "m_ID": 9,
+                        "m_Pos": {
+                            "x": 1229,
+                            "y": 674
+                        },
+                        "m_function_call_str": "    float Float_num9=1.000000;\n"
+                    },
+                    "input_num": 1
+                }
+            }
+        }
+    ],
+    "link_param": [
+        {
+            "m_input.id": 0,
+            "m_input.slot": 1,
+            "m_input_type": 3,
+            "m_output.id": 1,
+            "m_output.slot": 0,
+            "m_output_type": 3
+        },
+        {
+            "m_input.id": 1,
+            "m_input.slot": 1,
+            "m_input_type": 1,
+            "m_output.id": 2,
+            "m_output.slot": 0,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 2,
+            "m_input.slot": 0,
+            "m_input_type": 2,
+            "m_output.id": 3,
+            "m_output.slot": 0,
+            "m_output_type": 2
+        },
+        {
+            "m_input.id": 3,
+            "m_input.slot": 2,
+            "m_input_type": 1,
+            "m_output.id": 4,
+            "m_output.slot": 0,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 4,
+            "m_input.slot": 0,
+            "m_input_type": 1,
+            "m_output.id": 5,
+            "m_output.slot": 1,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 6,
+            "m_input.slot": 0,
+            "m_input_type": 1,
+            "m_output.id": 5,
+            "m_output.slot": 1,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 7,
+            "m_input.slot": 0,
+            "m_input_type": 1,
+            "m_output.id": 6,
+            "m_output.slot": 0,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 8,
+            "m_input.slot": 0,
+            "m_input_type": 1,
+            "m_output.id": 7,
+            "m_output.slot": 0,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 2,
+            "m_input.slot": 1,
+            "m_input_type": 1,
+            "m_output.id": 8,
+            "m_output.slot": 0,
+            "m_output_type": 1
+        }
+    ]
+}

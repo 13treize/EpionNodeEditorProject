@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.16"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shader Node Editor Reference: Node/NodeData.h ファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Shader Node Editor Reference
+   &#160;<span id="projectnumber">0.0.1a</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.16 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d587c2ac2532168f2ec4659101815a2e.html">Node</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">クラス</a> &#124;
+<a href="#typedef-members">型定義</a> &#124;
+<a href="#enum-members">列挙型</a> &#124;
+<a href="#var-members">変数</a>  </div>
+  <div class="headertitle">
+<div class="title">NodeData.h ファイル</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Nodeの基底クラス、Link情報  
+<a href="#details">[詳解]</a></p>
+<div class="textblock"><code>#include &lt;cereal/cereal.hpp&gt;</code><br />
+<code>#include &lt;cereal/archives/json.hpp&gt;</code><br />
+<code>#include &lt;cereal/types/vector.hpp&gt;</code><br />
+<code>#include &quot;../../../imgui\\imgui.h&quot;</code><br />
+<code>#include &quot;../epion.h&quot;</code><br />
+<code>#include &quot;../DX11/texture.h&quot;</code><br />
+<code>#include &quot;../DX11/square.h&quot;</code><br />
+</div>
+<p><a href="_node_data_8h_source.html">[ソースコード]</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+クラス</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepion_1_1_node_custom_1_1_node_function.html">epion::NodeCustom::NodeFunction</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepion_1_1_node_custom_1_1_input_slot_state.html">epion::NodeCustom::InputSlotState</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structepion_1_1_node_custom_1_1_link_data.html">epion::NodeCustom::LinkData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepion_1_1_node_custom_1_1_node_link.html">epion::NodeCustom::NodeLink</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepion_1_1_node_custom_1_1_node_states.html">epion::NodeCustom::NodeStates</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepion_1_1_node_custom_1_1_node_base.html">epion::NodeCustom::NodeBase</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+型定義</h2></td></tr>
+<tr class="memitem:aee4fe97aa9b866b585c9abfc987722a5"><td class="memItemLeft" align="right" valign="top"><a id="aee4fe97aa9b866b585c9abfc987722a5"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>epion::NodeCustom::LinkVector</b> = std::vector&lt; LinkData &gt;</td></tr>
+<tr class="separator:aee4fe97aa9b866b585c9abfc987722a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+列挙型</h2></td></tr>
+<tr class="memitem:a5a64ae6bf3c9c4eb5b71851a43250968"><td class="memItemLeft" align="right" valign="top"><a id="a5a64ae6bf3c9c4eb5b71851a43250968"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>SLOT_TYPE</b> { <br />
+&#160;&#160;<b>VECTOR1</b> = 1, 
+<b>VECTOR2</b>, 
+<b>VECTOR3</b>, 
+<b>VECTOR4</b>, 
+<br />
+&#160;&#160;<b>BOOLEAN</b>, 
+<b>TEXTURE2D</b>, 
+<b>POS</b>, 
+<b>UV</b>, 
+<br />
+&#160;&#160;<b>COLOR</b>
+<br />
+ }</td></tr>
+<tr class="separator:a5a64ae6bf3c9c4eb5b71851a43250968"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1294299fb30bd69f56b66dcc2e489adc"><td class="memItemLeft" align="right" valign="top"><a id="a1294299fb30bd69f56b66dcc2e489adc"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>NODE_TYPE</b> : unsigned char { <b>NORMAL</b>, 
+<b>DYNAMIC</b>, 
+<b>MASTER</b>
+ }</td></tr>
+<tr class="separator:a1294299fb30bd69f56b66dcc2e489adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+変数</h2></td></tr>
+<tr class="memitem:ab9b81bbed0cc8efbf82b601fd6fcac3e"><td class="memItemLeft" align="right" valign="top"><a id="ab9b81bbed0cc8efbf82b601fd6fcac3e"></a>
+const ImVec2&#160;</td><td class="memItemRight" valign="bottom"><b>epion::NodeCustom::NODE_MIN_SIZE</b> = { 80.0f, 50.0f}</td></tr>
+<tr class="separator:ab9b81bbed0cc8efbf82b601fd6fcac3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48be6b5bc3b89c444522d0a21b4d55e7"><td class="memItemLeft" align="right" valign="top"><a id="a48be6b5bc3b89c444522d0a21b4d55e7"></a>
+const ImVec2&#160;</td><td class="memItemRight" valign="bottom"><b>epion::NodeCustom::SLOT_INPUT_POS</b> = { SLOT_INPUT_POS_X, -static_cast&lt;float&gt;(SLOT_INPUT_FLOAT) }</td></tr>
+<tr class="separator:a48be6b5bc3b89c444522d0a21b4d55e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab74edb1903ceefdf1c72b1ad8654e3c0"><td class="memItemLeft" align="right" valign="top"><a id="ab74edb1903ceefdf1c72b1ad8654e3c0"></a>
+const ImVec2&#160;</td><td class="memItemRight" valign="bottom"><b>epion::NodeCustom::NODE_FONT_POS</b> = { 10.0f, 5.0f }</td></tr>
+<tr class="separator:ab74edb1903ceefdf1c72b1ad8654e3c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a546054e5ffc921173ab92df609d44ca8"><td class="memItemLeft" align="right" valign="top"><a id="a546054e5ffc921173ab92df609d44ca8"></a>
+const ImU32&#160;</td><td class="memItemRight" valign="bottom"><b>epion::NodeCustom::RECT_COLOR</b> = IM_COL32(60, 60, 60, 200)</td></tr>
+<tr class="separator:a546054e5ffc921173ab92df609d44ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock"><p>Nodeの基底クラス、Link情報 </p>
+<dl class="section author"><dt>著者</dt><dd>treize </dd></dl>
+<dl class="section date"><dt>日付</dt><dd>2019/10/25 </dd></dl>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+構築: &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.16
+</small></address>
+</body>
+</html>

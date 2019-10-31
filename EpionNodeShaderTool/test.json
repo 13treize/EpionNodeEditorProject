@@ -1,0 +1,89 @@
+{
+    "node_param": [
+        {
+            "polymorphic_id": 2147483649,
+            "polymorphic_name": "epion::NodeCustom::CheckerboardNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Checkerboard",
+                        "m_ID": 0,
+                        "m_Pos": {
+                            "x": 248,
+                            "y": 214
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_inputs_count": 4,
+                        "m_outputs_count": 1,
+                        "m_function_call_str": "    float3 Checkerboard_out0;\n   Checkerboard(input.uv,float3(1.000000,0.999990,0.999990),float3(0.000000,0.000000,0.000000),float2(1.000000,1.000000),Checkerboard_out0);\n"
+                    },
+                    "UV": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "ColorA": {
+                        "cereal_class_version": 0,
+                        "x": 1,
+                        "y": 0.99998998641967773,
+                        "z": 0.99998998641967773
+                    },
+                    "ColorB": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "Frequency": {
+                        "x": 1,
+                        "y": 1
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483650,
+            "polymorphic_name": "epion::NodeCustom::UnlitMasterNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Unlit Master",
+                        "m_ID": 1,
+                        "m_Pos": {
+                            "x": 717,
+                            "y": 240
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_inputs_count": 4,
+                        "m_outputs_count": 0,
+                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000, 0.0),Checkerboard_out0,1.000000,0.000000);\n"
+                    },
+                    "Pos": {
+                        "cereal_class_version": 0,
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "color": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "Alpha": 1,
+                    "AlphaChipThreshold": 0
+                }
+            }
+        }
+    ],
+    "link_param": [
+        {
+            "m_input.id": 1,
+            "m_input.slot": 1,
+            "m_input_type": 9,
+            "m_output.id": 0,
+            "m_output.slot": 0,
+            "m_output_type": 3
+        }
+    ]
+}
