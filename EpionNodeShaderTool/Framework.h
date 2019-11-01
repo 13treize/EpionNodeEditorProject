@@ -7,7 +7,7 @@ namespace	epion
 	public:
 		static	void	Init(int	width, int	height);
 		static	void	Update();
-		static	void	render();
+		static	void	Render();
 		static	void	release();
 	};
 

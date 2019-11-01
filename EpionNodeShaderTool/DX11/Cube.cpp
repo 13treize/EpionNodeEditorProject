@@ -42,7 +42,7 @@ namespace	epion
 	}
 
 
-	void	Cube::render(const	DirectX::XMFLOAT4X4& view,
+	void	Cube::Render(const	DirectX::XMFLOAT4X4& view,
 		const	DirectX::XMFLOAT4X4& projection,
 		const	math::FVector4& light)
 	{
@@ -59,7 +59,7 @@ namespace	epion
 		DirectX::XMStoreFloat4x4(&world_view_projection, WP);
 		DirectX::XMStoreFloat4x4(&world, DirectX::XMLoadFloat4x4(&matWorld));
 
-		obj->render(world_view_projection, world, light,color);
+		obj->Render(world_view_projection, world, light,color);
 	}
 
 	//setŠÖ”

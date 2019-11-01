@@ -73,6 +73,11 @@ $(function() {
 <div class="title">epion::NodeCustom::EllipseNode クラス<span class="mlabels"><span class="mlabel">final</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Ellipse class  
+ <a href="classepion_1_1_node_custom_1_1_ellipse_node.html#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="_procedural_node_8h_source.html">ProceduralNode.h</a>&gt;</code></p>
 <div class="dynheader">
 epion::NodeCustom::EllipseNode の継承関係図</div>
 <div class="dyncontent">
@@ -100,9 +105,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>OutputUpdate</b> (ImV
 <tr class="memitem:a0eafdd20498f320052465297d23959f6"><td class="memItemLeft" align="right" valign="top"><a id="a0eafdd20498f320052465297d23959f6"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ShaderUpdate</b> (std::vector&lt; std::unique_ptr&lt; <a class="el" href="classepion_1_1_node_custom_1_1_node_base.html">NodeBase</a> &gt;&gt; &amp;nodes_ptr, std::vector&lt; <a class="el" href="classepion_1_1_node_custom_1_1_node_link.html">NodeLink</a> &gt; &amp;links) override</td></tr>
 <tr class="separator:a0eafdd20498f320052465297d23959f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee271dc0436d20679ec174699bc41d38"><td class="memItemLeft" align="right" valign="top"><a id="aee271dc0436d20679ec174699bc41d38"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>get_function_def_str</b> () override</td></tr>
-<tr class="separator:aee271dc0436d20679ec174699bc41d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42c38243552c8364201f621ac9dd9c97"><td class="memItemLeft" align="right" valign="top"><a id="a42c38243552c8364201f621ac9dd9c97"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetFunctionDefStr</b> () override</td></tr>
+<tr class="separator:a42c38243552c8364201f621ac9dd9c97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76465183afe677fa1c623b5d00f279ee"><td class="memTemplParams" colspan="2"><a id="a76465183afe677fa1c623b5d00f279ee"></a>
 template&lt;class Archive &gt; </td></tr>
 <tr class="memitem:a76465183afe677fa1c623b5d00f279ee"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>serialize</b> (Archive &amp;archive)</td></tr>
@@ -261,7 +266,13 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_input_str</b></td></tr>
 <tr class="separator:ac7fdf810fa2e66a791fee7f6c6e6a239 inherit pro_attribs_classepion_1_1_node_custom_1_1_node_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock"><p>Ellipse class </p>
+<p>InputSlot 0 UV(VECTOR2)</p>
+<p>InputSlot 1 ColorA(COLOR)</p>
+<p>InputSlot 2 ColorB(COLOR)</p>
+<p>InputSlot 3 Frequency(VECTOR2) </p>
+</div><hr/>このクラス詳解は次のファイルから抽出されました:<ul>
 <li>Node/<a class="el" href="_procedural_node_8h_source.html">ProceduralNode.h</a></li>
 <li>Node/ProceduralNode.cpp</li>
 </ul>

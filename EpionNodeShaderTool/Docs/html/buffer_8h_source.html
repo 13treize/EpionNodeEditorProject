@@ -126,7 +126,7 @@ $(function() {
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        HRESULT hr = S_OK;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        create_desc(<span class="keyword">sizeof</span>(T));</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        hr =Device::get_device()-&gt;CreateBuffer(&amp;buffer_desc,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        hr =Device::GetDevice()-&gt;CreateBuffer(&amp;buffer_desc,</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keyword">nullptr</span>,</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            constant_buffer_ptr.ReleaseAndGetAddressOf());</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">return</span>  SUCCEEDED(hr);</div>
@@ -182,7 +182,7 @@ $(function() {
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    HRESULT hr = S_OK;</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    create_desc(<span class="keyword">sizeof</span>(T)   *static_cast&lt;unsigned int&gt;(buffer.size()));</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    create_sub_data&lt;T&gt;(buffer);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    hr  =Device::get_device()-&gt;CreateBuffer(&amp;buffer_desc,</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    hr  =Device::GetDevice()-&gt;CreateBuffer(&amp;buffer_desc,</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        &amp;sub_resource_data,</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        vertex_buffer_ptr.ReleaseAndGetAddressOf());</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordflow">return</span>  SUCCEEDED(hr);</div>

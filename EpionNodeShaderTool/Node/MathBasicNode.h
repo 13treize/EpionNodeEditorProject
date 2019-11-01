@@ -20,7 +20,7 @@ namespace	epion::NodeCustom
 		AddNode(int id, const math::FVector2& pos);
 		~AddNode();
 
-		void	Init()override;
+		void	Init()	override;
 
 		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
 		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;

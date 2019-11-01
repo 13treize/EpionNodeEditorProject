@@ -88,7 +88,7 @@ namespace	epion::NodeCustom
 		NodeResult();
 		~NodeResult();
 		void	Init(std::wstring name);
-		void	render(float time, math::FVector2 d_xy, math::FVector2 d_wh);
+		void	Render(float time, math::FVector2 d_xy, math::FVector2 d_wh);
 
 	private:
 		VertexBuffer v_buffer;

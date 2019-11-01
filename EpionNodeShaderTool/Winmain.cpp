@@ -72,7 +72,7 @@ int	WINAPI	wWinMain(HINSTANCE	hInstance, HINSTANCE	hPrevInstance, LPWSTR	lpCmdLi
 		else
 		{
 			epion::FrameWork::Update();
-			epion::FrameWork::render();
+			epion::FrameWork::Render();
 		}
 	}
 	epion::FrameWork::release();

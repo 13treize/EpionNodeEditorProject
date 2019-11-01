@@ -276,7 +276,7 @@ namespace epion::NodeCustom
 		m_shader_reflection.set_layout(m_shader_manager.vertex_blob);
 		InputLayoutCreate(Device::GetDevice(), m_inputlayout, m_shader_reflection.get_layout(), m_shader_manager.vertex_blob);
 	}
-	void	NodeResult::render(float time, math::FVector2  d_xy, math::FVector2  d_wh)
+	void	NodeResult::Render(float time, math::FVector2  d_xy, math::FVector2  d_wh)
 	{
 		std::valarray<float>	arr_x =
 		{

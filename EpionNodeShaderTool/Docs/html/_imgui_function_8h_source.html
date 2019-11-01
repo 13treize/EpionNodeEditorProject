@@ -94,20 +94,47 @@ $(function() {
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">static</span> <a class="code" href="structepion_1_1math_1_1_vector3.html">math::FVector3</a> m_ret_color;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    };</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classepion_1_1_menu_bar.html">   49</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classepion_1_1_menu_bar.html">MenuBar</a> final</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> ShowExampleAppMain();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    };</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classepion_1_1_color_picker2.html">   53</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classepion_1_1_color_picker2.html">ColorPicker2</a> final</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <a class="code" href="classepion_1_1_color_picker2.html">ColorPicker2</a>() {}</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        ~<a class="code" href="classepion_1_1_color_picker2.html">ColorPicker2</a>() {}</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classepion_1_1_color_picker2.html#a7f47f691a475d09b712a0ffa26d59b78">Init</a>(std::string str, std::string str2);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classepion_1_1_color_picker2.html#a412786990dcb650bccf9e37f391b7382">Activate</a>(<span class="keywordtype">bool</span> is_popup, <a class="code" href="structepion_1_1math_1_1_vector3.html">math::FVector3</a>&amp; color);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordtype">void</span> SetInputSlotColor2(ImVec2&amp; set_cursor, <span class="keywordtype">bool</span>&amp; popup, <a class="code" href="structepion_1_1math_1_1_vector3.html">math::FVector3</a>&amp; num, <span class="keywordtype">int</span> label_num = 0);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        ImGuiColorEditFlags m_edit_flags;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        ImVec4 m_backup_color;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        ImVec4 m_color;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <a class="code" href="structepion_1_1math_1_1_vector3.html">math::FVector3</a> m_ret_color;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        std::string m_popup_name;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        std::string m_picker_name;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        std::string m_current_name;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        std::string m_previous_name;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        std::string m_color_button_name;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        std::string m_button_name;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    };</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classepion_1_1_menu_bar.html">   85</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classepion_1_1_menu_bar.html">MenuBar</a> final</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> ShowExampleAppMain();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    };</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassepion_1_1_color_picker_html_a34a820ca1b12c5675280208e365cbc1a"><div class="ttname"><a href="classepion_1_1_color_picker.html#a34a820ca1b12c5675280208e365cbc1a">epion::ColorPicker::Activate</a></div><div class="ttdeci">static void Activate(bool is_popup, math::FVector3 &amp;color)</div><div class="ttdoc">ColorPickerを開ける</div><div class="ttdef"><b>Definition:</b> ImguiFunction.cpp:51</div></div>
+<div class="ttc" id="aclassepion_1_1_color_picker_html_a34a820ca1b12c5675280208e365cbc1a"><div class="ttname"><a href="classepion_1_1_color_picker.html#a34a820ca1b12c5675280208e365cbc1a">epion::ColorPicker::Activate</a></div><div class="ttdeci">static void Activate(bool is_popup, math::FVector3 &amp;color)</div><div class="ttdoc">ColorPickerを開ける</div><div class="ttdef"><b>Definition:</b> ImguiFunction.cpp:52</div></div>
+<div class="ttc" id="aclassepion_1_1_color_picker2_html_a7f47f691a475d09b712a0ffa26d59b78"><div class="ttname"><a href="classepion_1_1_color_picker2.html#a7f47f691a475d09b712a0ffa26d59b78">epion::ColorPicker2::Init</a></div><div class="ttdeci">void Init(std::string str, std::string str2)</div><div class="ttdoc">privateメンバー変数の初期化、Activateを呼び出す前に使う</div><div class="ttdef"><b>Definition:</b> ImguiFunction.cpp:125</div></div>
 <div class="ttc" id="aclassepion_1_1_color_picker_html"><div class="ttname"><a href="classepion_1_1_color_picker.html">epion::ColorPicker</a></div><div class="ttdoc">Imguiを用いたColorPickerクラス</div><div class="ttdef"><b>Definition:</b> ImguiFunction.h:24</div></div>
-<div class="ttc" id="aclassepion_1_1_menu_bar_html"><div class="ttname"><a href="classepion_1_1_menu_bar.html">epion::MenuBar</a></div><div class="ttdef"><b>Definition:</b> ImguiFunction.h:49</div></div>
+<div class="ttc" id="aclassepion_1_1_menu_bar_html"><div class="ttname"><a href="classepion_1_1_menu_bar.html">epion::MenuBar</a></div><div class="ttdef"><b>Definition:</b> ImguiFunction.h:85</div></div>
+<div class="ttc" id="aclassepion_1_1_color_picker2_html_a412786990dcb650bccf9e37f391b7382"><div class="ttname"><a href="classepion_1_1_color_picker2.html#a412786990dcb650bccf9e37f391b7382">epion::ColorPicker2::Activate</a></div><div class="ttdeci">void Activate(bool is_popup, math::FVector3 &amp;color)</div><div class="ttdoc">ColorPickerを開ける</div><div class="ttdef"><b>Definition:</b> ImguiFunction.cpp:138</div></div>
 <div class="ttc" id="astructepion_1_1math_1_1_vector4_html"><div class="ttname"><a href="structepion_1_1math_1_1_vector4.html">epion::math::Vector4&lt; float &gt;</a></div></div>
-<div class="ttc" id="aclassepion_1_1_color_picker_html_aca23dcefaad883826d427a505f3c5755"><div class="ttname"><a href="classepion_1_1_color_picker.html#aca23dcefaad883826d427a505f3c5755">epion::ColorPicker::Init</a></div><div class="ttdeci">static void Init()</div><div class="ttdoc">privateメンバー変数の初期化、Activateを呼び出す前に使う</div><div class="ttdef"><b>Definition:</b> ImguiFunction.cpp:40</div></div>
+<div class="ttc" id="aclassepion_1_1_color_picker_html_aca23dcefaad883826d427a505f3c5755"><div class="ttname"><a href="classepion_1_1_color_picker.html#aca23dcefaad883826d427a505f3c5755">epion::ColorPicker::Init</a></div><div class="ttdeci">static void Init()</div><div class="ttdoc">privateメンバー変数の初期化、Activateを呼び出す前に使う</div><div class="ttdef"><b>Definition:</b> ImguiFunction.cpp:41</div></div>
 <div class="ttc" id="aclassepion_1_1_im_gui_function_html"><div class="ttname"><a href="classepion_1_1_im_gui_function.html">epion::ImGuiFunction</a></div><div class="ttdef"><b>Definition:</b> ImguiFunction.h:14</div></div>
 <div class="ttc" id="astructepion_1_1math_1_1_vector3_html"><div class="ttname"><a href="structepion_1_1math_1_1_vector3.html">epion::math::Vector3&lt; float &gt;</a></div></div>
+<div class="ttc" id="aclassepion_1_1_color_picker2_html"><div class="ttname"><a href="classepion_1_1_color_picker2.html">epion::ColorPicker2</a></div><div class="ttdoc">Imguiを用いたColorPickerクラス</div><div class="ttdef"><b>Definition:</b> ImguiFunction.h:53</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 構築: &#160;<a href="http://www.doxygen.org/index.html">

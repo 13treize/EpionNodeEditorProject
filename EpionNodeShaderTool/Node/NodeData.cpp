@@ -526,7 +526,7 @@ namespace	epion::NodeCustom
 						switch (l.get_output_type())
 						{
 						case	SLOT_TYPE::VECTOR1:	break;
-						case	SLOT_TYPE::VECTOR2:	m_input_slot_type[l.get_input_slot()] = l.get_output_type();break;
+						case	SLOT_TYPE::VECTOR2:	m_input_slot_type[l.get_input_slot()] = l.get_output_type();	break;
 						case	SLOT_TYPE::VECTOR3:	m_input_slot_type[l.get_input_slot()] = l.get_output_type();	break;
 						case	SLOT_TYPE::VECTOR4:	break;
 						}

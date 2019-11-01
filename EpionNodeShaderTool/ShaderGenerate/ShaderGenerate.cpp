@@ -97,11 +97,10 @@ namespace	epion::Shader
 	std::string	NodeShaderManager::CBuffer0Create()
 	{
 		return
-			"float Time_ =Time.x;\n"
-			"float Sin_Time_ =sin(Time.x);\n"
-			"float Cos_Time_ =cos(Time.x);\n";
+			"    float Time_ =Time.x;\n"
+			"    float Sin_Time_ =sin(Time.x);\n"
+			"    float Cos_Time_ =cos(Time.x);\n";
 	}
-
 
 	void	NodeShaderManager::node_create()
 	{

@@ -365,12 +365,12 @@ namespace	epion::NodeCustom
 
 	void	RoundedRectangleNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = "RoundedRectangle_out" + std::to_string(m_ID);
-
 		m_input_str[0] = "input.uv";
 		m_input_str[1] = std::to_string(Width);
 		m_input_str[2] = std::to_string(Height);
 		m_input_str[3] = std::to_string(Radius);
+
+		m_out_str[0] = "RoundedRectangle_out" + std::to_string(m_ID);
 
 		m_function_call_str = "    float " + m_out_str[0] + ";\n";
 		m_function_call_str += "    RoundedRectangle(";

@@ -72,7 +72,7 @@ namespace
 
 
 
-	std::string	name = "test.json";
+	std::string	name = "GenerateNodeJson\\test.json";
 
 	epion::math::FVector2 getFVec2(ImVec2& vec2)
 	{
@@ -623,7 +623,7 @@ namespace	epion::NodeCustom
 		return	m_offset;
 	}
 
-	int		NodeEditor::get_node_size()
+	int		NodeEditor::GetNodeSize()
 	{
 		return	static_cast<int>(nodes.size());
 	}

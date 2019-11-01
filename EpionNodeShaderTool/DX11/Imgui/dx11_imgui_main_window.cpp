@@ -159,7 +159,7 @@ namespace	epion
 		{
 			//Shader::NodeShaderManager::json_import("test.json");
 			//Shader::NodeShaderManager::generate(m_impl->node_shader_name);
-			Shader::NodeShaderManager::json_import("test.json");
+			Shader::NodeShaderManager::json_import("GenerateNodeJson\\test.json");
 
 			Shader::NodeShaderManager::generate("test.hlsl");
 
@@ -202,7 +202,7 @@ namespace	epion
 							NodeCustom::NodeEditor::Clear();
 							NodeCustom::NodeEditor::Init();
 							//		NodeCustom::ContextManager::init();
-							std::string path = "test.json";
+							std::string path = "GenerateNodeJson\\test.json";
 							NodeCustom::NodeEditor::import_node_data(path);
 						}
 						ImGui::SameLine();
@@ -302,7 +302,6 @@ namespace	epion
 					}
 					ImGui::Image(m_impl->tex_resouce[i]->ShaderResourceView.Get(), ImVec2(200, 200), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1, 1, 1, 1), ImVec4(1, 0, 0, 1));
 				}
-
 			}
 			ImGui::TreePop();
 		}
@@ -323,7 +322,7 @@ namespace	epion
 			NodeCustom::NodeEditor::Init();
 			NodeCustom::ContextManager::Init();
 			//m_impl->preview = std::make_unique<Square>();
-			TextureFile::SaveTexture("test2", ".jpg", Dxgi::back_buffer);
+			TextureFile::SaveTexture("GenerateTexture\\test", ".jpg", Dxgi::back_buffer);
 
 		}
 		m_impl->is_link_reset = ImGui::Button("LinkReset");
@@ -341,10 +340,10 @@ namespace	epion
 	bool	Preview::Init(std::wstring	ps_name)
 	{
 		ConstantBufferManager::Create();
-		m_vertex=std::make_unique<VertexShader>(L"HLSLShader\\square_vertex_shader.hlsl");
-		m_pixel = std::make_unique<PixelShader>(ps_name);
-		m_preview = std::make_unique<Square>(m_vertex->GetBlob());
-		time.x = 0.0f;
+		m_vertex	=std::make_unique<VertexShader>(L"HLSLShader\\square_vertex_shader.hlsl");
+		m_pixel		=std::make_unique<PixelShader>(ps_name);
+		m_preview	=std::make_unique<Square>(m_vertex->GetBlob());
+		time.x		=0.0f;
 		return true;
 	}
 	void	Preview::Render()
@@ -354,7 +353,7 @@ namespace	epion
 		ConstantBufferManager::UpdateCBuffer0(time,a);
 		m_vertex->SetState();
 		m_pixel->SetState();
-		m_preview->render(math::FVector2(1450, 650), math::FVector2(400, 400), 0, FixColor::Red);
+		m_preview->Render(math::FVector2(1450, 650), math::FVector2(400, 400), 0, FixColor::Red);
 	}
 
 }

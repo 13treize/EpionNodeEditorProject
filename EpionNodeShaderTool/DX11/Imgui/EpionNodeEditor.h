@@ -61,7 +61,7 @@ namespace	epion::NodeCustom
 		static	ImVec2&	get_scrolling();
 		static	ImVec2&	get_offset();
 
-		static	int		get_node_size();
+		static	int		GetNodeSize();
 		static	int		GetLinkSize();
 
 		static	std::vector<std::unique_ptr<NodeBase>>	nodes;

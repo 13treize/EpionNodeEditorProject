@@ -11,7 +11,7 @@ namespace	epion
 		~Cube();
 
 		void	Update();
-		void	render(
+		void	Render(
 			const	DirectX::XMFLOAT4X4& view,
 			const	DirectX::XMFLOAT4X4& projection,
 			const	math::FVector4&light);

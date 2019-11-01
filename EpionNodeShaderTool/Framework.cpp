@@ -53,7 +53,7 @@ namespace	epion
 		rasterizer->set_state(RASTER_STATE::SOLID);
 	}
 
-	void	FrameWork::render()
+	void	FrameWork::Render()
 	{
 		std::array<float, 4>	back_color
 		{

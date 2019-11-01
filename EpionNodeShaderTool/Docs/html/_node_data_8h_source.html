@@ -77,77 +77,77 @@ $(function() {
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cereal/types/vector.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include    &quot;../../../imgui\\imgui.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include    &quot;../epion.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include    &quot;../DX11/texture.h&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include    &quot;../DX11/square.h&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace   </span>epion::ImColor</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">namespace   </span>U32</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keyword">static</span> ImU32    RED = IM_COL32(250, 0, 0, 250);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keyword">static</span> ImU32    GREEN = IM_COL32(0, 250, 0, 250);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">static</span> ImU32    BLUE = IM_COL32(0, 0, 250, 250);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">static</span> ImU32    BLACK = IM_COL32(0, 0, 0, 250);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">static</span> ImU32    LAWNGREEN = IM_COL32(124, 252, 0, 250);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">static</span> ImU32    YELLOW = IM_COL32(255, 255, 0, 250);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keyword">static</span> ImU32    LIGHTBLUE = IM_COL32(0, 255, 255, 250);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">static</span> ImU32    REDPURPLE = IM_COL32(255, 0, 124, 250);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">namespace   </span>Vec4</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keyword">static</span> ImVec4   WHITE = { 255, 255, 255, 255 };</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include    &quot;../ImguiFunction.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace   </span>epion::ImColor</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">namespace   </span>U32</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keyword">static</span> ImU32    RED = IM_COL32(250, 0, 0, 250);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keyword">static</span> ImU32    GREEN = IM_COL32(0, 250, 0, 250);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keyword">static</span> ImU32    BLUE = IM_COL32(0, 0, 250, 250);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">static</span> ImU32    BLACK = IM_COL32(0, 0, 0, 250);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">static</span> ImU32    LAWNGREEN = IM_COL32(124, 252, 0, 250);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">static</span> ImU32    YELLOW = IM_COL32(255, 255, 0, 250);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">static</span> ImU32    LIGHTBLUE = IM_COL32(0, 255, 255, 250);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keyword">static</span> ImU32    REDPURPLE = IM_COL32(255, 0, 124, 250);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">namespace   </span>Vec4</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keyword">static</span> ImVec4   WHITE = { 255, 255, 255, 255 };</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">namespace   </span>epion::NodeCustom</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">static</span> constexpr    <span class="keywordtype">int</span> SLOT_POS = 10;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">static</span> constexpr    <span class="keywordtype">float</span>   SLOT_INPUT_RECT_X = -70.0f;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">int</span>    SLOT_INPUT_FLOAT = 8;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">const</span>   ImVec2      NODE_MIN_SIZE = { 80.0f, 50.0f};</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">float</span>  NODE_SIZE       =35.0f;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">float</span> SLOT_INPUT_POS_X = -60.0f;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">const</span>   ImVec2  SLOT_INPUT_POS = { SLOT_INPUT_POS_X, -static_cast&lt;float&gt;(SLOT_INPUT_FLOAT) };</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">static</span> constexpr    <span class="keywordtype">float</span>   NODE_SLOT_RADIUS = 5.0f;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">const</span>   ImVec2  NODE_FONT_POS = { 10.0f, 5.0f };</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">const</span> ImU32 RECT_COLOR = IM_COL32(60, 60, 60, 200);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="comment">//enum class Script</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">enum class</span> SLOT_TYPE</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        VECTOR1 = 1,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        VECTOR2,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        VECTOR3,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        VECTOR4,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        BOOLEAN,</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        TEXTURE2D,</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        POS,<span class="comment">//inputのみ、扱いはVECTOR3同じ</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        UV, <span class="comment">//inputのみ、扱いはVECTOR2同じ</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        COLOR,<span class="comment">//inputのみ、扱いはVECTOR3同じ</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    };</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classepion_1_1_node_custom_1_1_node_function.html">   79</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classepion_1_1_node_custom_1_1_node_function.html">NodeFunction</a></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    {</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="comment">//vectorをshader定義文字列に変換</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keyword">static</span> std::string SetInputToString(<span class="keywordtype">float</span> str);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keyword">static</span> std::string SetInputToString2(<a class="code" href="structepion_1_1math_1_1_vector2.html">math::FVector2</a> str);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keyword">static</span> std::string SetInputToString3(<a class="code" href="structepion_1_1math_1_1_vector3.html">math::FVector3</a> str);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keyword">static</span> std::string SetInputToString4(<a class="code" href="structepion_1_1math_1_1_vector4.html">math::FVector4</a> str);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">namespace   </span>epion::NodeCustom</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">static</span> constexpr    <span class="keywordtype">int</span> SLOT_POS = 10;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">static</span> constexpr    <span class="keywordtype">float</span>   SLOT_INPUT_RECT_X = -70.0f;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">float</span>  SLOT_INPUT_FLOAT = 8;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">const</span>   ImVec2      NODE_MIN_SIZE = { 80.0f, 50.0f };</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">float</span>  NODE_SIZE = 35.0f;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">float</span> SLOT_INPUT_POS_X = -60.0f;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">const</span>   ImVec2  SLOT_INPUT_POS = { SLOT_INPUT_POS_X, -SLOT_INPUT_FLOAT };</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">static</span> constexpr    <span class="keywordtype">float</span>   NODE_SLOT_RADIUS = 5.0f;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">const</span>   ImVec2  NODE_FONT_POS = { 10.0f, 5.0f };</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">const</span> ImU32 RECT_COLOR = IM_COL32(60, 60, 60, 200);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">//enum class Script</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">enum class</span> SLOT_TYPE</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        VECTOR1 = 1,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        VECTOR2,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        VECTOR3,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        VECTOR4,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        BOOLEAN,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        TEXTURE2D,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        POS,<span class="comment">//inputのみ、扱いはVECTOR3同じ</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        UV, <span class="comment">//inputのみ、扱いはVECTOR2同じ</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        COLOR,<span class="comment">//inputのみ、扱いはVECTOR3同じ</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    };</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classepion_1_1_node_custom_1_1_node_function.html">   78</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classepion_1_1_node_custom_1_1_node_function.html">NodeFunction</a></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="comment">//vectorの数値を文字列に変換</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keyword">static</span> std::string SetInputToString(<span class="keywordtype">float</span> str);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keyword">static</span> std::string SetInputToString2(<a class="code" href="structepion_1_1math_1_1_vector2.html">math::FVector2</a> str);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keyword">static</span> std::string SetInputToString3(<a class="code" href="structepion_1_1math_1_1_vector3.html">math::FVector3</a> str);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keyword">static</span> std::string SetInputToString4(<a class="code" href="structepion_1_1math_1_1_vector4.html">math::FVector4</a> str);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> SetInputSlotFloat(ImVec2&amp; set_cursor, <span class="keywordtype">float</span> x, std::string label, <span class="keywordtype">float</span>&amp; num);</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> SetInputSlotFloat2(ImVec2&amp; set_cursor, <a class="code" href="structepion_1_1math_1_1_vector2.html">math::FVector2</a>&amp; num, <span class="keywordtype">int</span> label_num = 0);</div>
@@ -155,293 +155,304 @@ $(function() {
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> SetInputSlotColor(ImVec2&amp; set_cursor, <span class="keywordtype">bool</span>&amp; popup, <a class="code" href="structepion_1_1math_1_1_vector3.html">math::FVector3</a>&amp; num, <span class="keywordtype">int</span> label_num = 0);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="comment">//最後の引数はImguiでのバグ誘発防止</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> SetInputSlotDynamic(ImVec2&amp; set_cursor, <a class="code" href="structepion_1_1math_1_1_vector4.html">math::FVector4</a>&amp; num, SLOT_TYPE type, <span class="keywordtype">int</span> label_num  =0);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> SetInputSlotDynamic(ImVec2&amp; set_cursor, <a class="code" href="structepion_1_1math_1_1_vector4.html">math::FVector4</a>&amp; num, SLOT_TYPE type, <span class="keywordtype">int</span> label_num = 0);</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> InputRectDraw(ImDrawList*   draw_list, ImVec2 pos, SLOT_TYPE type);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keyword">static</span> std::string get_type(SLOT_TYPE&amp; type);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keyword">static</span> std::string get_slot_type_name(SLOT_TYPE type);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> set_slot_data(<a class="code" href="structepion_1_1math_1_1_vector4.html">math::FVector4</a>&amp; data, std::string&amp; str, SLOT_TYPE type);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> NodeCircle(ImDrawList*  draw_list, <span class="keyword">const</span> ImVec2&amp; centre, <span class="keywordtype">float</span> radius, ImU32 color, SLOT_TYPE type = SLOT_TYPE::VECTOR1);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    };</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="comment">//引数にNodeのnameとid、nameに関してはDynamic時考慮</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keyword">static</span> std::string SetDefineOutName(std::string str,<span class="keywordtype">int</span> <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="comment">//out指定の引数を定義</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keyword">static</span> std::string SetDefineOutStr1(std::string str);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keyword">static</span> std::string SetDefineOutStr2(std::string str);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keyword">static</span> std::string SetDefineOutStr3(std::string str);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keyword">static</span> std::string SetDefineOutStr4(std::string str);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> InputRectDraw(ImDrawList*   draw_list, ImVec2 pos, SLOT_TYPE type);</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keyword">static</span> std::string GetType(SLOT_TYPE&amp; type);</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classepion_1_1_node_custom_1_1_input_slot_state.html">  109</a></span>&#160;    <span class="keyword">class   </span><a class="code" href="classepion_1_1_node_custom_1_1_input_slot_state.html">InputSlotState</a>  final</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    {</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <a class="code" href="classepion_1_1_node_custom_1_1_input_slot_state.html">InputSlotState</a>()</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        {</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        }</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="classepion_1_1_node_custom_1_1_input_slot_state.html">InputSlotState</a>(std::string name, <span class="keywordtype">int</span> no, SLOT_TYPE type)</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            :slot_name(name), slot_no(no), slot_type(type)</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        {</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        }</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        ~<a class="code" href="classepion_1_1_node_custom_1_1_input_slot_state.html">InputSlotState</a>()</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        {</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        }</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        std::string     slot_name;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>    slot_no;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        SLOT_TYPE       slot_type;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    };</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="structepion_1_1_node_custom_1_1_link_data.html">  128</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structepion_1_1_node_custom_1_1_link_data.html">LinkData</a></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    {</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keywordtype">int</span> id;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordtype">int</span> slot;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordtype">bool</span>    operator==(<span class="keyword">const</span>     <a class="code" href="structepion_1_1_node_custom_1_1_link_data.html">LinkData</a>&amp;  vec)<span class="keyword">const</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == vec.id    &amp;&amp; slot == vec.slot)</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            {</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                <span class="keywordflow">return</span>  <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            };</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <span class="keywordflow">return</span>  <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        }</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        <span class="keywordtype">bool</span>    operator!=(<span class="keyword">const</span>     <a class="code" href="structepion_1_1_node_custom_1_1_link_data.html">LinkData</a>&amp;  vec)<span class="keyword">const</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            <span class="keywordflow">if</span> (<span class="keywordtype">id</span> != vec.id    || slot != vec.slot)</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            {</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                <span class="keywordflow">return</span>  <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            };</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            <span class="keywordflow">return</span>  <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        }</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    };</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="comment">//ノードをつなげる、情報を保持</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keyword">class   </span><a class="code" href="classepion_1_1_node_custom_1_1_node_link.html">NodeLink</a></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    {</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        <a class="code" href="classepion_1_1_node_custom_1_1_node_link.html">NodeLink</a>();</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <a class="code" href="classepion_1_1_node_custom_1_1_node_link.html">NodeLink</a>(<span class="keywordtype">int</span> output_id, <span class="keywordtype">int</span> output_slot, <span class="keywordtype">int</span> input_id, <span class="keywordtype">int</span> input_slot);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keyword">static</span> std::string GetSlotTypeName(SLOT_TYPE type);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> SetSlotData(<a class="code" href="structepion_1_1math_1_1_vector4.html">math::FVector4</a>&amp; data, std::string&amp; str, SLOT_TYPE type);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> NodeCircle(ImDrawList*  draw_list, <span class="keyword">const</span> ImVec2&amp; centre, <span class="keywordtype">float</span> radius, ImU32 color, SLOT_TYPE type = SLOT_TYPE::VECTOR1);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    };</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="classepion_1_1_node_custom_1_1_input_slot_state.html">  118</a></span>&#160;    <span class="keyword">class   </span><a class="code" href="classepion_1_1_node_custom_1_1_input_slot_state.html">InputSlotState</a>  final</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    {</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <a class="code" href="classepion_1_1_node_custom_1_1_input_slot_state.html">InputSlotState</a>()</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        {</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <a class="code" href="classepion_1_1_node_custom_1_1_input_slot_state.html">InputSlotState</a>(std::string name, <span class="keywordtype">int</span> no, SLOT_TYPE type)</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            :slot_name(name), slot_no(no), slot_type(type)</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        {</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        }</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        ~<a class="code" href="classepion_1_1_node_custom_1_1_input_slot_state.html">InputSlotState</a>()</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        {</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        }</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        std::string     slot_name;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>    slot_no;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        SLOT_TYPE       slot_type;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    };</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="structepion_1_1_node_custom_1_1_link_data.html">  137</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structepion_1_1_node_custom_1_1_link_data.html">LinkData</a></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    {</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="keywordtype">int</span> id;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        <span class="keywordtype">int</span> slot;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keywordtype">bool</span>    operator==(<span class="keyword">const</span>     <a class="code" href="structepion_1_1_node_custom_1_1_link_data.html">LinkData</a>&amp;  vec)<span class="keyword">const</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == vec.id    &amp;&amp; slot == vec.slot)</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            {</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                <span class="keywordflow">return</span>  <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            };</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            <span class="keywordflow">return</span>  <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        }</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="keywordtype">bool</span>    operator!=(<span class="keyword">const</span>     <a class="code" href="structepion_1_1_node_custom_1_1_link_data.html">LinkData</a>&amp;  vec)<span class="keyword">const</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="keywordflow">if</span> (<span class="keywordtype">id</span> != vec.id || slot != vec.slot)</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            {</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                <span class="keywordflow">return</span>  <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            };</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <span class="keywordflow">return</span>  <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        }</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    };</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <a class="code" href="classepion_1_1_node_custom_1_1_node_link.html">NodeLink</a>(<span class="keywordtype">int</span> output_id, <span class="keywordtype">int</span> output_slot, SLOT_TYPE output_type, <span class="keywordtype">int</span> input_id, <span class="keywordtype">int</span> input_slot, SLOT_TYPE input_type);</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        ~<a class="code" href="classepion_1_1_node_custom_1_1_node_link.html">NodeLink</a>();</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">class</span> Archive&gt;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="keywordtype">void</span> serialize(Archive &amp; archive)</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        {</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            archive(CEREAL_NVP(m_input.id), CEREAL_NVP(m_input.slot), CEREAL_NVP(m_input_type),</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                CEREAL_NVP(m_output.id), CEREAL_NVP(m_output.slot), CEREAL_NVP(m_output_type));</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        };</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="comment">//ノードをつなげる、情報を保持</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keyword">class   </span><a class="code" href="classepion_1_1_node_custom_1_1_node_link.html">NodeLink</a></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    {</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <a class="code" href="classepion_1_1_node_custom_1_1_node_link.html">NodeLink</a>();</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <a class="code" href="classepion_1_1_node_custom_1_1_node_link.html">NodeLink</a>(<span class="keywordtype">int</span> output_id, <span class="keywordtype">int</span> output_slot, <span class="keywordtype">int</span> input_id, <span class="keywordtype">int</span> input_slot);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <a class="code" href="classepion_1_1_node_custom_1_1_node_link.html">NodeLink</a>(<span class="keywordtype">int</span> output_id, <span class="keywordtype">int</span> output_slot, SLOT_TYPE output_type, <span class="keywordtype">int</span> input_id, <span class="keywordtype">int</span> input_slot, SLOT_TYPE input_type);</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        ~<a class="code" href="classepion_1_1_node_custom_1_1_node_link.html">NodeLink</a>();</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <span class="keywordtype">int</span> get_output_id();</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <span class="keywordtype">int</span> get_output_slot();</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        SLOT_TYPE get_output_type();</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        <span class="keywordtype">void</span> set_output_type(SLOT_TYPE type);</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        <span class="comment">//right</span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <span class="keywordtype">int</span> get_input_id();</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <span class="keywordtype">int</span> get_input_slot();</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        SLOT_TYPE get_input_type();</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        <span class="keywordtype">void</span> set_input_type(SLOT_TYPE type);</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="keywordtype">bool</span>    operator==(<span class="keyword">const</span>    NodeLink&amp;   vec)<span class="keyword">const</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            <span class="keywordflow">if</span> (m_output.id == vec.m_output.id  &amp;&amp;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                m_output.slot == vec.m_output.slot  &amp;&amp;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                m_input.id == vec.m_input.id    &amp;&amp;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                m_input.slot == vec.m_input.slot)</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            {</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                <span class="keywordflow">return</span>  <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            };</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            <span class="keywordflow">return</span>  <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        }</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="keywordtype">bool</span>    operator!=(<span class="keyword">const</span>    NodeLink&amp;   vec)<span class="keyword">const</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            <span class="keywordflow">if</span> (m_output.id != vec.m_output.id ||</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                m_output.slot != vec.m_output.slot ||</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                m_input.id != vec.m_input.id ||</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                m_input.slot != vec.m_input.slot)</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            {</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                <span class="keywordflow">return</span>  <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            };</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            <span class="keywordflow">return</span>  <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        }</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        <span class="keywordtype">bool</span> m_is_hit;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        <span class="keywordtype">bool</span> m_is_delete;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        std::string StateStr();</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        <span class="comment">//left</span></div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        LinkData m_output;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        SLOT_TYPE m_output_type;</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        <span class="comment">//right</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        LinkData m_input;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        SLOT_TYPE m_input_type;</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    };</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="comment">//input, output</span></div>
-<div class="line"><a name="l00223"></a><span class="lineno"><a class="line" href="classepion_1_1_node_custom_1_1_node_states.html">  223</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classepion_1_1_node_custom_1_1_node_states.html">NodeStates</a></div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    {</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <a class="code" href="classepion_1_1_node_custom_1_1_node_states.html">NodeStates</a>();</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <a class="code" href="classepion_1_1_node_custom_1_1_node_states.html">NodeStates</a>(std::string  name, <a class="code" href="structepion_1_1math_1_1_vector2.html">math::FVector2</a>&amp;   pos, SLOT_TYPE type, ImU32  color);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">class</span> Archive&gt;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <span class="keywordtype">void</span> serialize(Archive &amp; archive)</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        {</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            archive(CEREAL_NVP(m_input.id), CEREAL_NVP(m_input.slot), CEREAL_NVP(m_input_type),</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                CEREAL_NVP(m_output.id), CEREAL_NVP(m_output.slot), CEREAL_NVP(m_output_type));</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        };</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        <span class="keywordtype">int</span> get_output_id();</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        <span class="keywordtype">int</span> get_output_slot();</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        SLOT_TYPE get_output_type();</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordtype">void</span> set_output_type(SLOT_TYPE type);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="comment">//right</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <span class="keywordtype">int</span> get_input_id();</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <span class="keywordtype">int</span> get_input_slot();</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        SLOT_TYPE get_input_type();</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <span class="keywordtype">void</span> set_input_type(SLOT_TYPE type);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <span class="keywordtype">bool</span>    operator==(<span class="keyword">const</span>    NodeLink&amp;   vec)<span class="keyword">const</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            <span class="keywordflow">if</span> (m_output.id == vec.m_output.id  &amp;&amp;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                m_output.slot == vec.m_output.slot  &amp;&amp;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                m_input.id == vec.m_input.id    &amp;&amp;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                m_input.slot == vec.m_input.slot)</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;            {</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                <span class="keywordflow">return</span>  <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            };</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            <span class="keywordflow">return</span>  <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        }</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="keywordtype">bool</span>    operator!=(<span class="keyword">const</span>    NodeLink&amp;   vec)<span class="keyword">const</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            <span class="keywordflow">if</span> (m_output.id != vec.m_output.id ||</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;                m_output.slot != vec.m_output.slot ||</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;                m_input.id != vec.m_input.id ||</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;                m_input.slot != vec.m_input.slot)</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            {</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;                <span class="keywordflow">return</span>  <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            };</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            <span class="keywordflow">return</span>  <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        }</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        <span class="keywordtype">bool</span> m_is_hit;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        <span class="keywordtype">bool</span> m_is_delete;</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        std::string StateStr();</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        <span class="comment">//left</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        LinkData m_output;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        SLOT_TYPE m_output_type;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        <span class="comment">//right</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        LinkData m_input;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        SLOT_TYPE m_input_type;</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        ~<a class="code" href="classepion_1_1_node_custom_1_1_node_states.html">NodeStates</a>();</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    };</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        std::string name;</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        <a class="code" href="structepion_1_1math_1_1_vector2.html">math::FVector2</a>  pos;</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        SLOT_TYPE   slot_type;</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        ImU32   color;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    };</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keyword">enum class</span> NODE_TYPE :unsigned char</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    {</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        NORMAL,</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        DYNAMIC,</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        MASTER,</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    };</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="comment">//ノード</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keyword">using</span> LinkVector = std::vector&lt;LinkData&gt;;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keyword">class   </span>NodeBase</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    {</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        NodeBase();</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        NodeBase(std::string name, <span class="keywordtype">int</span> <span class="keywordtype">id</span>, <span class="keyword">const</span> <a class="code" href="structepion_1_1math_1_1_vector2.html">math::FVector2</a>&amp; pos, <span class="keyword">const</span> ImVec2&amp; size, <span class="keywordtype">int</span> inputs_count, <span class="keywordtype">int</span> outputs_count);</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        <span class="keywordtype">void</span>    Update(ImVec2&amp; offset, ImDrawList*  draw_list);</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        <span class="keyword">virtual</span> ~NodeBase() {}</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span>    Init() = 0;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        <span class="keywordtype">void</span>    Update();</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span>    InputUpdate(ImVec2 offset, ImDrawList*  draw_list) = 0;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span>    OutputUpdate(ImVec2 offset, ImDrawList* draw_list) = 0;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span>    ShaderUpdate(std::vector&lt;std::unique_ptr&lt;NodeBase&gt;&gt;&amp;    nodes_ptr, std::vector&lt;NodeLink&gt;&amp;   links) = 0;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="comment">//input, output</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno"><a class="line" href="classepion_1_1_node_custom_1_1_node_states.html">  232</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classepion_1_1_node_custom_1_1_node_states.html">NodeStates</a></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    {</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        <a class="code" href="classepion_1_1_node_custom_1_1_node_states.html">NodeStates</a>();</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <a class="code" href="classepion_1_1_node_custom_1_1_node_states.html">NodeStates</a>(std::string  name, <a class="code" href="structepion_1_1math_1_1_vector2.html">math::FVector2</a>&amp;   pos, SLOT_TYPE type, ImU32  color);</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        ~<a class="code" href="classepion_1_1_node_custom_1_1_node_states.html">NodeStates</a>();</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        std::string name;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <a class="code" href="structepion_1_1math_1_1_vector2.html">math::FVector2</a>  pos;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        SLOT_TYPE   slot_type;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        ImU32   color;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    };</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keyword">enum class</span> NODE_TYPE :unsigned char</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    {</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        NORMAL,</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        DYNAMIC,</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        MASTER,</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    };</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="comment">//ノード</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="keyword">using</span> LinkVector = std::vector&lt;LinkData&gt;;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="keyword">class   </span>NodeBase</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    {</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        NodeBase();</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        NodeBase(std::string name, <span class="keywordtype">int</span> <span class="keywordtype">id</span>, <span class="keyword">const</span> <a class="code" href="structepion_1_1math_1_1_vector2.html">math::FVector2</a>&amp; pos, <span class="keyword">const</span> ImVec2&amp; size, <span class="keywordtype">int</span> inputs_count, <span class="keywordtype">int</span> outputs_count);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="keywordtype">void</span>    Update(ImVec2&amp; offset, ImDrawList*  draw_list);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <span class="keyword">virtual</span> ~NodeBase() {}</div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        std::string m_Name;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <span class="keywordtype">int</span>     m_ID;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        math::FVector2  m_Pos;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        ImVec2  m_Size;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        <span class="keywordtype">int</span> m_inputs_count;</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        <span class="keywordtype">int</span> m_outputs_count;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="comment">//inputに繋がってるlink data</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        LinkVector  m_input_links;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span>    Init() = 0;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="keywordtype">void</span>    Update();</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span>    InputUpdate(ImVec2 offset, ImDrawList*  draw_list) = 0;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span>    OutputUpdate(ImVec2 offset, ImDrawList* draw_list) = 0;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        <span class="comment">//毎フレームは必要ない</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span>    ShaderUpdate(std::vector&lt;std::unique_ptr&lt;NodeBase&gt;&gt;&amp;    nodes_ptr, std::vector&lt;NodeLink&gt;&amp;   links) = 0;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        <span class="comment">//outputに繋がってるlink data</span></div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        LinkVector  m_output_links;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        std::vector&lt;SLOT_TYPE&gt;  m_input_slot_type;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        std::vector&lt;SLOT_TYPE&gt;  m_output_slot_type;</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        std::vector&lt;ImU32&gt;  m_input_slot_color;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        std::vector&lt;ImU32&gt;  m_output_slot_color;</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <span class="comment">//inputslotにノードが刺さっているかどうか</span></div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        std::vector&lt;bool&gt;   m_is_input;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        ImVec2 GetInputSlotPos(<span class="keywordtype">int</span> slot_no) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        ImVec2 GetOutputSlotPos(<span class="keywordtype">int</span> slot_no) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; </div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">class</span> Archive&gt;</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <span class="keywordtype">void</span> serialize(Archive &amp; archive)</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        {</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;            archive(CEREAL_NVP(m_Name),</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                CEREAL_NVP(m_ID),</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                CEREAL_NVP(m_Pos),</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                <span class="comment">//CEREAL_NVP(m_input_slot_type),</span></div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                <span class="comment">//CEREAL_NVP(m_output_slot_type),</span></div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                CEREAL_NVP(m_dynamic_slot_type),</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                <span class="comment">//CEREAL_NVP(m_input_name),</span></div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                <span class="comment">//CEREAL_NVP(m_output_name),</span></div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                CEREAL_NVP(m_inputs_count),</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                CEREAL_NVP(m_outputs_count),</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                CEREAL_NVP(m_function_call_str));</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        }</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        <span class="comment">//com_ptr&lt;ID3D11DepthStencilView&gt; m_depth_view;</span></div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        <span class="comment">//std::unique_ptr&lt;Texture&gt;  m_resouce;</span></div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        <span class="comment">//std::unique_ptr&lt;Square&gt;       m_preview;</span></div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        <span class="keywordtype">void</span>    ResouceInit();</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        <span class="keywordtype">void</span>    ResouceRender(ImVec2&amp; offset, ImDrawList*   draw_list);</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        <span class="keywordtype">void</span>    ResouceCreate();</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        <span class="keywordtype">void</span>    function_call_update(std::string    func_name);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        std::string m_Name;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        <span class="keywordtype">int</span>     m_ID;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        math::FVector2  m_Pos;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        ImVec2  m_Size;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="keywordtype">int</span> m_inputs_count;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        <span class="keywordtype">int</span> m_outputs_count;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        <span class="comment">//inputに繋がってるlink data</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        LinkVector  m_input_links;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="comment">//outputに繋がってるlink data</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        LinkVector  m_output_links;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        std::vector&lt;SLOT_TYPE&gt;  m_input_slot_type;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        std::vector&lt;SLOT_TYPE&gt;  m_output_slot_type;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        std::vector&lt;ImU32&gt;  m_input_slot_color;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        std::vector&lt;ImU32&gt;  m_output_slot_color;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        <span class="comment">//inputslotにノードが刺さっているかどうか</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        std::vector&lt;bool&gt;   m_is_input;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        ImVec2 GetInputSlotPos(<span class="keywordtype">int</span> slot_no) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        ImVec2 GetOutputSlotPos(<span class="keywordtype">int</span> slot_no) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160; </div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">class</span> Archive&gt;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        <span class="keywordtype">void</span> serialize(Archive &amp; archive)</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        {</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            archive(CEREAL_NVP(m_Name),</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                CEREAL_NVP(m_ID),</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                CEREAL_NVP(m_Pos),</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                <span class="comment">//CEREAL_NVP(m_input_slot_type),</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                <span class="comment">//CEREAL_NVP(m_output_slot_type),</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                CEREAL_NVP(m_dynamic_slot_type),</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                <span class="comment">//CEREAL_NVP(m_input_name),</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                <span class="comment">//CEREAL_NVP(m_output_name),</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                CEREAL_NVP(m_inputs_count),</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;                CEREAL_NVP(m_outputs_count),</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;                CEREAL_NVP(m_function_call_str));</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        }</div>
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <span class="comment">//nodeに出す名前</span></div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        std::vector&lt;std::string&gt;    m_input_name;</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        std::vector&lt;std::string&gt;    m_output_name;</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        std::vector&lt;ImVec2&gt;         m_input_pos;</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        std::vector&lt;ImVec2&gt;         m_output_pos;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        <span class="comment">//com_ptr&lt;ID3D11DepthStencilView&gt; m_depth_view;</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <span class="comment">//std::unique_ptr&lt;Texture&gt;  m_resouce;</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        <span class="comment">//std::unique_ptr&lt;Square&gt;       m_preview;</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        <span class="keywordtype">void</span>    ResouceInit();</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        <span class="keywordtype">void</span>    ResouceRender(ImVec2&amp; offset, ImDrawList*   draw_list);</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        <span class="keywordtype">void</span>    ResouceCreate();</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keywordtype">void</span>    i_update(ImVec2 offset, ImDrawList* draw_list);</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        <span class="keywordtype">void</span>    o_update(ImVec2 offset, ImDrawList* draw_list);</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        <span class="keywordtype">void</span>    str_check(std::vector&lt;std::unique_ptr&lt;NodeBase&gt;&gt;&amp;   nodes_ptr, std::vector&lt;NodeLink&gt;&amp;   links);</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        NODE_TYPE   m_node_type;</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        <span class="comment">/*</span></div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment">        NodeがDynamicなら、こいつに合わせる</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment">        input slotに入っている引数の型が小さいほうに合わせる(VEC1は例外)</span></div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment">        */</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keywordtype">void</span>    function_call_update(std::string    func_name);</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        <span class="comment">//nodeに出す名前</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        std::vector&lt;std::string&gt;    m_input_name;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        std::vector&lt;std::string&gt;    m_output_name;</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        std::vector&lt;ImVec2&gt;         m_input_pos;</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        std::vector&lt;ImVec2&gt;         m_output_pos;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; </div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        SLOT_TYPE   m_dynamic_slot_type;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        std::string get_dynamic_type();</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        <span class="comment">/*</span></div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment">            hlsl生成</span></div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment">        */</span></div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        std::string     get_shader_str();</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; </div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        <span class="comment">//呼び出し関数定義及び実装</span></div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        <span class="keyword">virtual</span> std::string     get_function_def_str() = 0;</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; </div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        <span class="comment">//関数呼び出し</span></div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        std::string     get_function_call_str();</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        std::vector&lt;std::string&gt;&amp;   GetOutStr();</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        std::vector&lt;std::string&gt;&amp;   GetInputStr();</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        <span class="comment">//main内での呼び出し</span></div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        std::string m_function_call_str;</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; </div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        <span class="comment">//呼び出し関数定義及び実装</span></div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        std::string m_function_def_str;</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        <span class="comment">//派生先での変数</span></div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        std::vector&lt;std::string&gt;    m_out_str;</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; </div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;        <span class="comment">//派生先での引数</span></div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        std::vector&lt;std::string&gt;    m_input_str;</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; </div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        <span class="comment">//動的な型</span></div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        <span class="keywordtype">void</span> link_set(std::vector&lt;NodeLink&gt;&amp;    links);</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        <span class="keywordtype">void</span> type_set(std::vector&lt;std::unique_ptr&lt;NodeBase&gt;&gt;&amp;   nodes_ptr, std::vector&lt;NodeLink&gt;&amp;   links);</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        <span class="keywordtype">void</span>    i_update(ImVec2 offset, ImDrawList* draw_list);</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        <span class="keywordtype">void</span>    o_update(ImVec2 offset, ImDrawList* draw_list);</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        <span class="keywordtype">void</span>    str_check(std::vector&lt;std::unique_ptr&lt;NodeBase&gt;&gt;&amp;   nodes_ptr, std::vector&lt;NodeLink&gt;&amp;   links);</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        NODE_TYPE   m_node_type;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160; </div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        <span class="comment">/*</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment">        NodeがDynamicなら、こいつに合わせる</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment">        input slotに入っている引数の型が小さいほうに合わせる(VEC1は例外)</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment">        */</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        SLOT_TYPE   m_dynamic_slot_type;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        std::string get_dynamic_type();</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        <span class="comment">/*</span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="comment">            hlsl生成</span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment">        */</span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; </div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        std::string     get_shader_str();</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        <span class="comment">//呼び出し関数定義及び実装</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        <span class="keyword">virtual</span> std::string     GetFunctionDefStr() = 0;</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160; </div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; </div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        <span class="comment">//関数呼び出し</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        std::string     get_function_call_str();</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        std::vector&lt;std::string&gt;&amp;   GetOutStr();</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        std::vector&lt;std::string&gt;&amp;   GetInputStr();</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160; </div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        <span class="comment">//main内での呼び出し</span></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        std::string m_function_call_str;</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <span class="comment">//呼び出し関数定義及び実装</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        std::string m_function_def_str;</div>
 <div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; </div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        <span class="keywordtype">void</span> str_set(std::vector&lt;std::unique_ptr&lt;NodeBase&gt;&gt;&amp;    nodes_ptr, std::vector&lt;NodeLink&gt;&amp;   links);</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    };</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;}</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        <span class="comment">//派生先での変数</span></div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        std::vector&lt;std::string&gt;    m_out_str;</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; </div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        <span class="comment">//派生先での引数</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;        std::vector&lt;std::string&gt;    m_input_str;</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;        <span class="comment">//動的な型</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        <span class="keywordtype">void</span> link_set(std::vector&lt;NodeLink&gt;&amp;    links);</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160; </div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;        <span class="keywordtype">void</span> type_set(std::vector&lt;std::unique_ptr&lt;NodeBase&gt;&gt;&amp;   nodes_ptr, std::vector&lt;NodeLink&gt;&amp;   links);</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;        <span class="keywordtype">void</span> str_set(std::vector&lt;std::unique_ptr&lt;NodeBase&gt;&gt;&amp;    nodes_ptr, std::vector&lt;NodeLink&gt;&amp;   links);</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    };</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassepion_1_1_node_custom_1_1_node_states_html"><div class="ttname"><a href="classepion_1_1_node_custom_1_1_node_states.html">epion::NodeCustom::NodeStates</a></div><div class="ttdef"><b>Definition:</b> NodeData.h:223</div></div>
-<div class="ttc" id="aclassepion_1_1_node_custom_1_1_node_function_html"><div class="ttname"><a href="classepion_1_1_node_custom_1_1_node_function.html">epion::NodeCustom::NodeFunction</a></div><div class="ttdef"><b>Definition:</b> NodeData.h:79</div></div>
-<div class="ttc" id="aclassepion_1_1_node_custom_1_1_input_slot_state_html"><div class="ttname"><a href="classepion_1_1_node_custom_1_1_input_slot_state.html">epion::NodeCustom::InputSlotState</a></div><div class="ttdef"><b>Definition:</b> NodeData.h:109</div></div>
+<div class="ttc" id="aclassepion_1_1_node_custom_1_1_node_states_html"><div class="ttname"><a href="classepion_1_1_node_custom_1_1_node_states.html">epion::NodeCustom::NodeStates</a></div><div class="ttdef"><b>Definition:</b> NodeData.h:232</div></div>
+<div class="ttc" id="aclassepion_1_1_node_custom_1_1_node_function_html"><div class="ttname"><a href="classepion_1_1_node_custom_1_1_node_function.html">epion::NodeCustom::NodeFunction</a></div><div class="ttdef"><b>Definition:</b> NodeData.h:78</div></div>
+<div class="ttc" id="aclassepion_1_1_node_custom_1_1_input_slot_state_html"><div class="ttname"><a href="classepion_1_1_node_custom_1_1_input_slot_state.html">epion::NodeCustom::InputSlotState</a></div><div class="ttdef"><b>Definition:</b> NodeData.h:118</div></div>
 <div class="ttc" id="astructepion_1_1math_1_1_vector2_html"><div class="ttname"><a href="structepion_1_1math_1_1_vector2.html">epion::math::Vector2&lt; float &gt;</a></div></div>
-<div class="ttc" id="astructepion_1_1_node_custom_1_1_link_data_html"><div class="ttname"><a href="structepion_1_1_node_custom_1_1_link_data.html">epion::NodeCustom::LinkData</a></div><div class="ttdef"><b>Definition:</b> NodeData.h:128</div></div>
+<div class="ttc" id="astructepion_1_1_node_custom_1_1_link_data_html"><div class="ttname"><a href="structepion_1_1_node_custom_1_1_link_data.html">epion::NodeCustom::LinkData</a></div><div class="ttdef"><b>Definition:</b> NodeData.h:137</div></div>
 <div class="ttc" id="astructepion_1_1math_1_1_vector4_html"><div class="ttname"><a href="structepion_1_1math_1_1_vector4.html">epion::math::Vector4&lt; float &gt;</a></div></div>
 <div class="ttc" id="astructepion_1_1math_1_1_vector3_html"><div class="ttname"><a href="structepion_1_1math_1_1_vector3.html">epion::math::Vector3&lt; float &gt;</a></div></div>
 <div class="ttc" id="aclassepion_1_1_node_custom_1_1_node_link_html"><div class="ttname"><a href="classepion_1_1_node_custom_1_1_node_link.html">epion::NodeCustom::NodeLink</a></div><div class="ttdef"><b>Definition:</b> node_data.h:140</div></div>

@@ -73,6 +73,11 @@ $(function() {
 <div class="title">epion::NodeCustom::CheckerboardNode クラス<span class="mlabels"><span class="mlabel">final</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Checkerboard class  
+ <a href="classepion_1_1_node_custom_1_1_checkerboard_node.html#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="_procedural_node_8h_source.html">ProceduralNode.h</a>&gt;</code></p>
 <div class="dynheader">
 epion::NodeCustom::CheckerboardNode の継承関係図</div>
 <div class="dyncontent">
@@ -100,9 +105,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>OutputUpdate</b> (ImV
 <tr class="memitem:a7daa00768a08b18f6b61a18d018b26ca"><td class="memItemLeft" align="right" valign="top"><a id="a7daa00768a08b18f6b61a18d018b26ca"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ShaderUpdate</b> (std::vector&lt; std::unique_ptr&lt; <a class="el" href="classepion_1_1_node_custom_1_1_node_base.html">NodeBase</a> &gt;&gt; &amp;nodes_ptr, std::vector&lt; <a class="el" href="classepion_1_1_node_custom_1_1_node_link.html">NodeLink</a> &gt; &amp;links) override</td></tr>
 <tr class="separator:a7daa00768a08b18f6b61a18d018b26ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acefff8cf8f4952dd00863306469d2c7a"><td class="memItemLeft" align="right" valign="top"><a id="acefff8cf8f4952dd00863306469d2c7a"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>get_function_def_str</b> () override</td></tr>
-<tr class="separator:acefff8cf8f4952dd00863306469d2c7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff113ee7a547d2735245382834a2bd3c"><td class="memItemLeft" align="right" valign="top"><a id="aff113ee7a547d2735245382834a2bd3c"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetFunctionDefStr</b> () override</td></tr>
+<tr class="separator:aff113ee7a547d2735245382834a2bd3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0827922940179ec3679d841e811615ff"><td class="memTemplParams" colspan="2"><a id="a0827922940179ec3679d841e811615ff"></a>
 template&lt;class Archive &gt; </td></tr>
 <tr class="memitem:a0827922940179ec3679d841e811615ff"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>serialize</b> (Archive &amp;archive)</td></tr>
@@ -261,9 +266,15 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_input_str</b></td></tr>
 <tr class="separator:ac7fdf810fa2e66a791fee7f6c6e6a239 inherit pro_attribs_classepion_1_1_node_custom_1_1_node_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
-<li>Node/<a class="el" href="_checkerboard_node_8h_source.html">CheckerboardNode.h</a></li>
-<li>Node/CheckerboardNode.cpp</li>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock"><p>Checkerboard class </p>
+<p>InputSlot 0 UV(VECTOR2)</p>
+<p>InputSlot 1 ColorA(COLOR)</p>
+<p>InputSlot 2 ColorB(COLOR)</p>
+<p>InputSlot 3 Frequency(VECTOR2) </p>
+</div><hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>Node/<a class="el" href="_procedural_node_8h_source.html">ProceduralNode.h</a></li>
+<li>Node/ProceduralNode.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

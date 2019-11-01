@@ -95,7 +95,7 @@ $(function() {
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordtype">void</span>    InputUpdate(ImVec2 offset, ImDrawList*  draw_list)  <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordtype">void</span>    OutputUpdate(ImVec2 offset, ImDrawList* draw_list)  <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordtype">void</span>    ShaderUpdate(std::vector&lt;std::unique_ptr&lt;NodeBase&gt;&gt;&amp;    nodes_ptr, std::vector&lt;NodeLink&gt;&amp;   links)  <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        std::string get_function_def_str()  <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        std::string GetFunctionDefStr() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">class</span> Archive&gt;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordtype">void</span> serialize(Archive &amp; archive)</div>
@@ -119,7 +119,7 @@ $(function() {
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">void</span>    InputUpdate(ImVec2 offset, ImDrawList*  draw_list)  <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordtype">void</span>    OutputUpdate(ImVec2 offset, ImDrawList* draw_list)  <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">void</span>    ShaderUpdate(std::vector&lt;std::unique_ptr&lt;NodeBase&gt;&gt;&amp;    nodes_ptr, std::vector&lt;NodeLink&gt;&amp;   links)  <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        std::string get_function_def_str()  <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        std::string GetFunctionDefStr() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">class</span> Archive&gt;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">void</span> serialize(Archive &amp; archive)</div>
@@ -143,7 +143,7 @@ $(function() {
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordtype">void</span>    InputUpdate(ImVec2 offset, ImDrawList*  draw_list)  <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordtype">void</span>    OutputUpdate(ImVec2 offset, ImDrawList* draw_list)  <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordtype">void</span>    ShaderUpdate(std::vector&lt;std::unique_ptr&lt;NodeBase&gt;&gt;&amp;    nodes_ptr, std::vector&lt;NodeLink&gt;&amp;   links)  <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        std::string get_function_def_str()  <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        std::string GetFunctionDefStr() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">class</span> Archive&gt;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordtype">void</span> serialize(Archive &amp; archive)</div>
@@ -167,7 +167,7 @@ $(function() {
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordtype">void</span>    InputUpdate(ImVec2 offset, ImDrawList*  draw_list)  <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordtype">void</span>    OutputUpdate(ImVec2 offset, ImDrawList* draw_list)  <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordtype">void</span>    ShaderUpdate(std::vector&lt;std::unique_ptr&lt;NodeBase&gt;&gt;&amp;    nodes_ptr, std::vector&lt;NodeLink&gt;&amp;   links)  <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        std::string get_function_def_str()  <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        std::string GetFunctionDefStr() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">class</span> Archive&gt;</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keywordtype">void</span> serialize(Archive &amp; archive)</div>
@@ -190,7 +190,7 @@ $(function() {
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordtype">void</span>    InputUpdate(ImVec2 offset, ImDrawList*  draw_list)  <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keywordtype">void</span>    OutputUpdate(ImVec2 offset, ImDrawList* draw_list)  <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordtype">void</span>    ShaderUpdate(std::vector&lt;std::unique_ptr&lt;NodeBase&gt;&gt;&amp;    nodes_ptr, std::vector&lt;NodeLink&gt;&amp;   links)  <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        std::string get_function_def_str()  <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        std::string GetFunctionDefStr() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">class</span> Archive&gt;</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keywordtype">void</span> serialize(Archive &amp; archive)</div>
@@ -217,7 +217,7 @@ $(function() {
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <span class="keywordtype">void</span>    InputUpdate(ImVec2 offset, ImDrawList*  draw_list)  <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keywordtype">void</span>    OutputUpdate(ImVec2 offset, ImDrawList* draw_list)  <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keywordtype">void</span>    ShaderUpdate(std::vector&lt;std::unique_ptr&lt;NodeBase&gt;&gt;&amp;    nodes_ptr, std::vector&lt;NodeLink&gt;&amp;   links)  <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        std::string get_function_def_str()  <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        std::string GetFunctionDefStr() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">class</span> Archive&gt;</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="keywordtype">void</span> serialize(Archive &amp; archive)</div>

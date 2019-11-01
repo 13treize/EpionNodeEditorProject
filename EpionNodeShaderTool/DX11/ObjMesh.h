@@ -19,7 +19,7 @@ namespace	epion
 		ObjMesh(std::wstring	obj_filename_);
 
 		~ObjMesh() {};
-		void render(const DirectX::XMFLOAT4X4 &world_view_projection,
+		void Render(const DirectX::XMFLOAT4X4 &world_view_projection,
 			const DirectX::XMFLOAT4X4 &world,
 			const	math::FVector4 &light_direction,
 			const	Color&	material_color);
