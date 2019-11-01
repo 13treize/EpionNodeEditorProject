@@ -628,7 +628,7 @@ namespace	epion::NodeCustom
 		return	static_cast<int>(nodes.size());
 	}
 
-	int		NodeEditor::get_link_size()
+	int		NodeEditor::GetLinkSize()
 	{
 		return	static_cast<int>(links.size());
 	}

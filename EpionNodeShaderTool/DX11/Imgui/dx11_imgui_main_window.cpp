@@ -228,20 +228,20 @@ namespace	epion
 						if(ImGui::Button("Updatehlsl"))	Preview::Init(L"test.hlsl");
 						ImGui::EndTabItem();
 					}
-					//if (ImGui::BeginTabItem("Texture"))
-					//{
-					//	TextureUpdate();
-					//	ImGui::EndTabItem();
-					//}
+					if (ImGui::BeginTabItem("Texture"))
+					{
+						TextureUpdate();
+						ImGui::EndTabItem();
+					}
 					if (ImGui::BeginTabItem("Node"))
 					{
-						ImGui::Text("Node size %d", NodeCustom::NodeEditor::get_node_size());
+						ImGui::Text("Node size %d", NodeCustom::NodeEditor::GetNodeSize());
 						ImGui::EndTabItem();
 					}
 
 					if (ImGui::BeginTabItem("Link"))
 					{
-						ImGui::Text("Link size %d", NodeCustom::NodeEditor::get_link_size());
+						ImGui::Text("Link size %d", NodeCustom::NodeEditor::GetLinkSize());
 						if (ImGui::TreeNode("LinkState"))
 						{
 							for (auto & li : NodeCustom::NodeEditor::links)
@@ -281,7 +281,6 @@ namespace	epion
 		{
 			m_impl->tex_resouce[i] = std::make_unique<Texture>();
 			m_impl->tex_resouce[i]->Create(200, 200, DXGI_FORMAT_R16G16B16A16_FLOAT);
-
 		}
 	}
 	void	ImguiMain::TextureUpdate()

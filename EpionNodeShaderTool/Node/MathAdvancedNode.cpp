@@ -82,7 +82,7 @@ namespace	epion::NodeCustom
 
 		str_set(nodes_ptr, links);
 	}
-	std::string	AbsoluteNode::get_function_def_str()
+	std::string	AbsoluteNode::GetFunctionDefStr()
 	{
 		return
 			"void "+m_Name+"(" + NodeFunction::GetType(m_input_slot_type[0]) + " In, out " + NodeFunction::GetType(m_input_slot_type[0]) + " Out)\n"
@@ -156,7 +156,7 @@ namespace	epion::NodeCustom
 
 		str_set(nodes_ptr, links);
 	}
-	std::string	LengthNode::get_function_def_str()
+	std::string	LengthNode::GetFunctionDefStr()
 	{
 		return
 			"void " + m_Name + "(" + NodeFunction::GetType(m_input_slot_type[0]) + " In, out float Out)\n"
@@ -239,7 +239,7 @@ namespace	epion::NodeCustom
 
 		str_set(nodes_ptr, links);
 	}
-	std::string	ModuloNode::get_function_def_str()
+	std::string	ModuloNode::GetFunctionDefStr()
 	{
 		return
 			"void "+ m_Name +  "(" + NodeFunction::GetType(m_input_slot_type[0]) + " A," + NodeFunction::GetType(m_input_slot_type[0]) + " B, out " + NodeFunction::GetType(m_input_slot_type[0]) + " Out)\n"
@@ -313,7 +313,7 @@ namespace	epion::NodeCustom
 
 		str_set(nodes_ptr, links);
 	}
-	std::string	NegateNode::get_function_def_str()
+	std::string	NegateNode::GetFunctionDefStr()
 	{
 		return
 			"void " + m_Name + "(" + NodeFunction::GetType(m_input_slot_type[0]) + " In, out " + NodeFunction::GetType(m_input_slot_type[0]) + " Out)\n"
@@ -388,7 +388,7 @@ namespace	epion::NodeCustom
 		str_set(nodes_ptr, links);
 	}
 
-	std::string	NormalizeNode::get_function_def_str()
+	std::string	NormalizeNode::GetFunctionDefStr()
 	{
 		return
 			"void " + m_Name + "(" + NodeFunction::GetType(m_input_slot_type[0]) + " In, out " + NodeFunction::GetType(m_input_slot_type[0]) + " Out)\n"
@@ -471,7 +471,7 @@ namespace	epion::NodeCustom
 
 		str_set(nodes_ptr, links);
 	}
-	std::string	PosterizeNode::get_function_def_str()
+	std::string	PosterizeNode::GetFunctionDefStr()
 	{
 		return
 			"void " + m_Name + "(" + NodeFunction::GetType(m_input_slot_type[0]) + " In," + NodeFunction::GetType(m_input_slot_type[0]) + " Steps, out " + NodeFunction::GetType(m_input_slot_type[0]) + " Out)\n"
@@ -546,7 +546,7 @@ namespace	epion::NodeCustom
 		str_set(nodes_ptr, links);
 	}
 
-	std::string	ReciprocalSquareRootNode::get_function_def_str()
+	std::string	ReciprocalSquareRootNode::GetFunctionDefStr()
 	{
 		return
 			"void " + m_Name + "(" + NodeFunction::GetType(m_input_slot_type[0]) + " In, out " + NodeFunction::GetType(m_input_slot_type[0]) + " Out)\n"

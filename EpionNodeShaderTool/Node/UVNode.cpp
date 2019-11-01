@@ -112,7 +112,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += "    PolarCoordinates_float(";
 		str_set(nodes_ptr, links);
 	}
-	std::string	PolarCoordinatesNode::get_function_def_str()
+	std::string	PolarCoordinatesNode::GetFunctionDefStr()
 	{
 		return
 			"void PolarCoordinates_float(float2 UV, float2 Center, float RadialScale, float LengthScale, out float2 Out)\n"
@@ -197,7 +197,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += "    RadialShear(";
 		str_set(nodes_ptr, links);
 	}
-	std::string RadialShearNode::get_function_def_str()
+	std::string RadialShearNode::GetFunctionDefStr()
 	{
 		return
 			"void RadialShear(float2 UV, float2 Center, float2 Strength, float2 Offset, out float2 Out)\n"
@@ -289,7 +289,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += "    Spherize(";
 		str_set(nodes_ptr, links);
 	}
-	std::string	SpherizeNode::get_function_def_str()
+	std::string	SpherizeNode::GetFunctionDefStr()
 	{
 		return
 			"void Spherize(float2 UV, float2 Center, float Strength, float2 Offset, out float2 Out)\n"
@@ -376,7 +376,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += "    TilingAndOffset(";
 		str_set(nodes_ptr, links);
 	}
-	std::string	TilingAndOffsetNode::get_function_def_str()
+	std::string	TilingAndOffsetNode::GetFunctionDefStr()
 	{
 		return
 			"void TilingAndOffset(float2 UV, float2 Tiling, float2 Offset, out float2 Out)\n"
@@ -462,7 +462,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += "    Twirl(";
 		str_check(nodes_ptr, links);
 	}
-	std::string	TwirlNode::get_function_def_str()
+	std::string	TwirlNode::GetFunctionDefStr()
 	{
 		return
 			"void Twirl(float2 UV, float2 Center, float Strength, float2 Offset, out float2 Out)\n"
@@ -510,7 +510,7 @@ namespace	epion::NodeCustom
 	{
 		m_out_str[0] = "input.uv";
 	}
-	std::string UVNode::get_function_def_str()
+	std::string UVNode::GetFunctionDefStr()
 	{
 		return	"";
 	};

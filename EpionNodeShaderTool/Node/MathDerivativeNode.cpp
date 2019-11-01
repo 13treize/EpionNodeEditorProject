@@ -83,7 +83,7 @@ namespace	epion::NodeCustom
 
 		str_set(nodes_ptr, links);
 	}
-	std::string	DDXNode::get_function_def_str()
+	std::string	DDXNode::GetFunctionDefStr()
 	{
 		return
 			"void " + m_Name + "(" + NodeFunction::GetType(m_input_slot_type[0]) + " In, out " + NodeFunction::GetType(m_input_slot_type[0]) + " Out)\n"
@@ -157,7 +157,7 @@ namespace	epion::NodeCustom
 
 		str_set(nodes_ptr, links);
 	}
-	std::string	DDYNode::get_function_def_str()
+	std::string	DDYNode::GetFunctionDefStr()
 	{
 		return
 			"void " + m_Name + "(" + NodeFunction::GetType(m_input_slot_type[0]) + " In, out " + NodeFunction::GetType(m_input_slot_type[0]) + " Out)\n"
@@ -231,7 +231,7 @@ namespace	epion::NodeCustom
 
 		str_set(nodes_ptr, links);
 	}
-	std::string	DDXYNode::get_function_def_str()
+	std::string	DDXYNode::GetFunctionDefStr()
 	{
 		return
 			"void " + m_Name + "(" + NodeFunction::GetType(m_input_slot_type[0]) + " In, out " + NodeFunction::GetType(m_input_slot_type[0]) + " Out)\n"

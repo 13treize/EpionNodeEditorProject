@@ -94,7 +94,7 @@ namespace	epion::NodeCustom
 		m_dynamic_slot_type = m_input_slot_type[0];
 		str_check(nodes_ptr, links);
 	}
-	std::string	AddNode::get_function_def_str()
+	std::string	AddNode::GetFunctionDefStr()
 	{
 		return
 			"void Add_" + NodeFunction::GetType(m_dynamic_slot_type) + "(" + NodeFunction::GetType(m_dynamic_slot_type) + " A," + NodeFunction::GetType(m_dynamic_slot_type) + " B, out " + NodeFunction::GetType(m_dynamic_slot_type) + " Out)\n"
@@ -173,7 +173,7 @@ namespace	epion::NodeCustom
 		m_dynamic_slot_type = m_input_slot_type[0];
 		str_check(nodes_ptr, links);
 	}
-	std::string	SubtractNode::get_function_def_str()
+	std::string	SubtractNode::GetFunctionDefStr()
 	{
 		return
 			"void Subtract_" + NodeFunction::GetType(m_dynamic_slot_type) + "(" + NodeFunction::GetType(m_dynamic_slot_type) + " A," + NodeFunction::GetType(m_dynamic_slot_type) + " B, out " + NodeFunction::GetType(m_dynamic_slot_type) + " Out)\n"
@@ -252,7 +252,7 @@ namespace	epion::NodeCustom
 		m_dynamic_slot_type = m_input_slot_type[0];
 		str_check(nodes_ptr, links);
 	}
-	std::string	MultiplyNode::get_function_def_str()
+	std::string	MultiplyNode::GetFunctionDefStr()
 	{
 		return
 			"void Multiply_" + NodeFunction::GetType(m_dynamic_slot_type) + "(" + NodeFunction::GetType(m_dynamic_slot_type) + " A," + NodeFunction::GetType(m_dynamic_slot_type) + " B, out " + NodeFunction::GetType(m_dynamic_slot_type) + " Out)\n"
@@ -329,7 +329,7 @@ namespace	epion::NodeCustom
 		m_dynamic_slot_type = m_input_slot_type[0];
 		str_check(nodes_ptr, links);
 	}
-	std::string	DivideNode::get_function_def_str()
+	std::string	DivideNode::GetFunctionDefStr()
 	{
 		return
 			"void Divide_" + NodeFunction::GetType(m_dynamic_slot_type) + "(" + NodeFunction::GetType(m_dynamic_slot_type) + " A," + NodeFunction::GetType(m_dynamic_slot_type) + " B, out " + NodeFunction::GetType(m_dynamic_slot_type) + " Out)\n"
@@ -407,7 +407,7 @@ namespace	epion::NodeCustom
 		m_dynamic_slot_type = m_input_slot_type[0];
 		str_check(nodes_ptr, links);
 	}
-	std::string	PowerNode::get_function_def_str()
+	std::string	PowerNode::GetFunctionDefStr()
 	{
 		return
 			"void Power_" + NodeFunction::GetType(m_input_slot_type[0]) + "(" + NodeFunction::GetType(m_input_slot_type[0]) + " A," + NodeFunction::GetType(m_input_slot_type[0]) + " B, out " + NodeFunction::GetType(m_input_slot_type[0]) + " Out)\n"
@@ -477,7 +477,7 @@ namespace	epion::NodeCustom
 		m_dynamic_slot_type = m_input_slot_type[0];
 		str_check(nodes_ptr, links);
 	}
-	std::string	SquareRootNode::get_function_def_str()
+	std::string	SquareRootNode::GetFunctionDefStr()
 	{
 		return
 			"void SquareRoot_" + NodeFunction::GetType(m_dynamic_slot_type) + "(" + NodeFunction::GetType(m_dynamic_slot_type) + " In, out " + NodeFunction::GetType(m_dynamic_slot_type) + " Out)\n"

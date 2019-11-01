@@ -49,6 +49,7 @@ namespace	epion::NodeCustom
 			"Pos(3)","Color(3)","Alpha(1)","AlphaChipThreshold(1)"
 		};
 		m_function_call_str = "";
+		//
 		m_output_slot_type.clear();
 
 		m_node_type = NODE_TYPE::MASTER;
@@ -63,23 +64,9 @@ namespace	epion::NodeCustom
 			ImGui::SetCursorScreenPos(m_input_pos[0] + SLOT_INPUT_POS);
 			ImGui::SetNextItemWidth(30.0f);
 
-			if (!m_is_input[1])
-			{
-				NodeFunction::SetInputSlotColor(m_input_pos[1], open_popup, color,1);
-			}
-
-			if (!m_is_input[2])
-			{
-				ImGui::SetCursorScreenPos(m_input_pos[2] + SLOT_INPUT_POS);
-				ImGui::SetNextItemWidth(30.0f);
-				ImGui::InputFloat("   ", &Alpha, 0.0f, 1.0f, "%.2f");
-			}
-			if (!m_is_input[3])
-			{
-				ImGui::SetCursorScreenPos(m_input_pos[3] + SLOT_INPUT_POS);
-				ImGui::SetNextItemWidth(30.0f);
-				ImGui::InputFloat("    ", &AlphaChipThreshold, 0.0f, 1.0f, "%.2f");
-			}
+			if (!m_is_input[1])	NodeFunction::SetInputSlotColor(m_input_pos[1], open_popup, color,1);
+			if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], SLOT_INPUT_POS_X, StringConverter::get_space(2), Alpha);
+			if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], SLOT_INPUT_POS_X, StringConverter::get_space(3), AlphaChipThreshold);
 		}
 	}
 
@@ -103,7 +90,7 @@ namespace	epion::NodeCustom
 		str_check(nodes_ptr, links);
 	}
 
-	std::string	UnlitMasterNode::get_function_def_str()
+	std::string	UnlitMasterNode::GetFunctionDefStr()
 	{
 		return
 			"float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)\n"

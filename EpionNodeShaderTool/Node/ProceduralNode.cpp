@@ -96,7 +96,7 @@ namespace	epion::NodeCustom
 		str_set(nodes_ptr, links);
 	}
 
-	std::string	CheckerboardNode::get_function_def_str()
+	std::string	CheckerboardNode::GetFunctionDefStr()
 	{
 		return
 			"void Checkerboard(float2 UV, float3 ColorA, float3 ColorB, float2 Frequency, out float3 Out)\n"
@@ -185,7 +185,7 @@ namespace	epion::NodeCustom
 	//	float d = length((UV * 2 + pos - 1.5) / float2(Width, Height));
 	//	Out = saturate((1 - d) / fwidth(d));
 	//}
-	std::string	EllipseNode::get_function_def_str()
+	std::string	EllipseNode::GetFunctionDefStr()
 	{
 		return
 			"void Ellipse(float2 UV, float Width, float Height, out float Out)\n"
@@ -270,7 +270,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += "    Polygon(";
 		str_set(nodes_ptr, links);
 	}
-	std::string	PolygonNode::get_function_def_str()
+	std::string	PolygonNode::GetFunctionDefStr()
 	{
 		return
 			"void Polygon(float2 UV, float Sides, float Width, float Height, out float Out)\n"
@@ -376,7 +376,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += "    RoundedRectangle(";
 		str_check(nodes_ptr, links);
 	}
-	std::string	RoundedRectangleNode::get_function_def_str()
+	std::string	RoundedRectangleNode::GetFunctionDefStr()
 	{
 		return
 			"void RoundedRectangle(float2 UV, float Width, float Height, float Radius, out float Out)\n"

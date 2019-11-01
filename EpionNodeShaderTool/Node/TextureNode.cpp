@@ -54,7 +54,7 @@ namespace	epion::NodeCustom
 
 	}
 
-	std::string	Texture2DNode::get_function_def_str()
+	std::string	Texture2DNode::GetFunctionDefStr()
 	{
 		return "Texture2D "+m_Name+": register";
 	}

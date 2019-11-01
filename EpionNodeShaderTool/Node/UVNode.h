@@ -14,7 +14,7 @@ namespace	epion::NodeCustom
 		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
 		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 
-		std::string	get_function_def_str()	override;
+		std::string	GetFunctionDefStr()	override;
 
 		template<class Archive>
 		void serialize(Archive & archive)
@@ -47,7 +47,7 @@ namespace	epion::NodeCustom
 		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
 		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 
-		std::string	get_function_def_str()	override;
+		std::string	GetFunctionDefStr()	override;
 
 		template<class Archive>
 		void serialize(Archive & archive)
@@ -79,7 +79,7 @@ namespace	epion::NodeCustom
 		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
 		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 
-		std::string	get_function_def_str()	override;
+		std::string	GetFunctionDefStr()	override;
 		template<class Archive>
 		void serialize(Archive & archive)
 		{
@@ -112,7 +112,7 @@ namespace	epion::NodeCustom
 		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
 		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 
-		std::string	get_function_def_str()	override;
+		std::string	GetFunctionDefStr()	override;
 		template<class Archive>
 		void serialize(Archive & archive)
 		{
@@ -141,7 +141,7 @@ namespace	epion::NodeCustom
 		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
 		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 
-		std::string	get_function_def_str()	override;
+		std::string	GetFunctionDefStr()	override;
 		template<class Archive>
 		void serialize(Archive & archive)
 		{
@@ -173,7 +173,7 @@ namespace	epion::NodeCustom
 		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
 		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 
-		std::string	get_function_def_str()	override;
+		std::string	GetFunctionDefStr()	override;
 		template<class Archive>
 		void serialize(Archive & archive)
 		{

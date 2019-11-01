@@ -98,7 +98,7 @@ namespace epion::NodeCustom
 		str_set(nodes_ptr, links);
 	}
 
-	std::string	LerpNode::get_function_def_str()
+	std::string	LerpNode::GetFunctionDefStr()
 	{
 		return
 			"void " + m_Name + "(" + NodeFunction::GetType(m_input_slot_type[0]) + " A," + NodeFunction::GetType(m_input_slot_type[0]) + " B," + NodeFunction::GetType(m_input_slot_type[0]) + " T, out " + NodeFunction::GetType(m_input_slot_type[0]) + " Out)\n"

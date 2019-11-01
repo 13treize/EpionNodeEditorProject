@@ -90,7 +90,7 @@ namespace	epion::NodeCustom
 
 		str_check(nodes_ptr, links);
 	}
-	std::string	NoiseSineWaveNode::get_function_def_str()
+	std::string	NoiseSineWaveNode::GetFunctionDefStr()
 	{
 		return
 			"void NoiseSineWave_" + NodeFunction::GetType(m_output_slot_type[0]) + "(" + NodeFunction::GetType(m_input_slot_type[0]) + " In,  float2 MinMax, out " + NodeFunction::GetType(m_output_slot_type[0]) + " Out)\n"
@@ -166,7 +166,7 @@ namespace	epion::NodeCustom
 		//å^ÇçáÇÌÇπÇÈ
 		str_check(nodes_ptr, links);
 	}
-	std::string	SawtoothWaveNode::get_function_def_str()
+	std::string	SawtoothWaveNode::GetFunctionDefStr()
 	{
 		return
 			"void SawtoothWave_" + NodeFunction::GetType(m_output_slot_type[0]) + "(" + NodeFunction::GetType(m_input_slot_type[0]) + " In, out " + NodeFunction::GetType(m_output_slot_type[0]) + " Out)\n"

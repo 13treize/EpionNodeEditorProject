@@ -172,7 +172,7 @@ namespace	epion::Shader
 		{
 			if (typeid(*n) == typeid(NodeCustom::Texture2DNode))
 			{
-				function_str += n->get_function_def_str() + "(t" + std::to_string(texture2d_count) + ");\n";
+				function_str += n->GetFunctionDefStr() + "(t" + std::to_string(texture2d_count) + ");\n";
 				texture2d_count++;
 			}
 		}
@@ -189,7 +189,7 @@ namespace	epion::Shader
 			{
 				if (typeid(*n) != typeid(NodeCustom::Texture2DNode))
 				{
-					function_str += n->get_function_def_str() + "\n";
+					function_str += n->GetFunctionDefStr() + "\n";
 					shader_function.emplace(n->m_Name, 0);
 				}
 			}

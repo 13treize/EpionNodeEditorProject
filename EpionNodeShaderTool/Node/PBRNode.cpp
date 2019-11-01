@@ -115,7 +115,7 @@ namespace	epion::NodeCustom
 		m_input_str[8] = NodeFunction::SetInputToString(AlphaChipThreshold);
 
 	}
-	std::string	PBRMasterNode::get_function_def_str()
+	std::string	PBRMasterNode::GetFunctionDefStr()
 	{
 		return "";
 	}

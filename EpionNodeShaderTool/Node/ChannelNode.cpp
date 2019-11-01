@@ -89,7 +89,7 @@
 //		str_set(nodes_ptr, links);
 //	}
 //
-//	std::string	CombineNode::get_function_def_str()
+//	std::string	CombineNode::GetFunctionDefStr()
 //	{
 //		return
 //			"void Checkerboard_float(float2 UV, float3 ColorA, float3 ColorB, float2 Frequency, out float3 Out)\n"

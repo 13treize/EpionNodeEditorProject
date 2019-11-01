@@ -118,7 +118,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += "    Voronoi_float(";
 		str_set(nodes_ptr, links);
 	}
-	std::string	FlipbookNode::get_function_def_str()
+	std::string	FlipbookNode::GetFunctionDefStr()
 	{
 		return"";
 

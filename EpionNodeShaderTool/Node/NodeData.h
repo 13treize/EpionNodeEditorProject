@@ -354,7 +354,7 @@ namespace	epion::NodeCustom
 		std::string		get_shader_str();
 
 		//ŒÄ‚Ño‚µŠÖ”’è‹`‹y‚ÑÀ‘•
-		virtual	std::string		get_function_def_str() = 0;
+		virtual	std::string		GetFunctionDefStr() = 0;
 
 
 		//ŠÖ”ŒÄ‚Ño‚µ

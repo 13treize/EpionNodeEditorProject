@@ -81,7 +81,7 @@ namespace	epion::NodeCustom
 		m_function_call_str = "    float " + m_out_str[0]+"="+ m_input_str[0] + ";\n";
 	}
 
-	std::string	FloatNode::get_function_def_str()
+	std::string	FloatNode::GetFunctionDefStr()
 	{
 		return"";
 	}
@@ -153,7 +153,7 @@ namespace	epion::NodeCustom
 		m_function_call_str = "    float2 " + m_out_str[0] + "=" + "float2("+m_input_str[0] + "," + m_input_str[1]+");\n";
 	}
 
-	std::string	Vector2Node::get_function_def_str()
+	std::string	Vector2Node::GetFunctionDefStr()
 	{
 		return"";
 	}
@@ -234,7 +234,7 @@ namespace	epion::NodeCustom
 		m_function_call_str = "    float3 " + m_out_str[0] + "=" + "float3(" + m_input_str[0] + "," + m_input_str[1] + "," + m_input_str[2]+");\n";
 	}
 
-	std::string	Vector3Node::get_function_def_str()
+	std::string	Vector3Node::GetFunctionDefStr()
 	{
 		return"";
 	}
@@ -322,7 +322,7 @@ namespace	epion::NodeCustom
 		m_function_call_str = "    float4 " + m_out_str[0] + "=" + "float4(" + m_input_str[0] +","+ m_input_str[1] + "," + m_input_str[2] + "," + m_input_str[3] + ");\n";
 	}
 
-	std::string	Vector4Node::get_function_def_str()
+	std::string	Vector4Node::GetFunctionDefStr()
 	{
 		return"";
 	}
@@ -377,7 +377,7 @@ namespace	epion::NodeCustom
 		m_function_call_str = "    float4 " + m_out_str[0] + "=" + "float4(" + m_input_str[0] +");\n";
 	}
 
-	std::string	ColorNode::get_function_def_str()
+	std::string	ColorNode::GetFunctionDefStr()
 	{
 		return"";
 	}
@@ -430,7 +430,7 @@ namespace	epion::NodeCustom
 		m_out_str[2] = "Cos_Time_";
 	}
 
-	std::string	TimeNode::get_function_def_str()
+	std::string	TimeNode::GetFunctionDefStr()
 	{
 		return"";
 	}

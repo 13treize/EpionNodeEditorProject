@@ -94,7 +94,7 @@ namespace	epion::NodeCustom
 		str_set(nodes_ptr, links);
 
 	}
-	std::string	FBMNode::get_function_def_str()
+	std::string	FBMNode::GetFunctionDefStr()
 	{
 		return
 		"float fbm_rand(float2 n)\n"
@@ -193,7 +193,7 @@ namespace	epion::NodeCustom
 		str_set(nodes_ptr, links);
 
 	}
-	std::string	GradientNoiseNode::get_function_def_str()
+	std::string	GradientNoiseNode::GetFunctionDefStr()
 	{
 		return
 			"float2 gradientNoise_dir(float2 p)\n"
@@ -289,7 +289,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += "    SimpleNoise(";
 		str_set(nodes_ptr, links);
 	}
-	std::string	SimpleNoiseNode::get_function_def_str()
+	std::string	SimpleNoiseNode::GetFunctionDefStr()
 	{
 		return
 			"inline float noise_randomValue(float2 uv)\n"
@@ -423,7 +423,7 @@ namespace	epion::NodeCustom
 		//å^ÇçáÇÌÇπÇÈ
 		str_set(nodes_ptr, links);
 	}
-	std::string	VoronoiNode::get_function_def_str()
+	std::string	VoronoiNode::GetFunctionDefStr()
 	{
 		return
 			"inline float2 voronoi_noise_randomVector(float2 UV, float offset)\n"
