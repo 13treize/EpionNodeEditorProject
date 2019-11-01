@@ -5,8 +5,23 @@ namespace	epion
 	class	ColorPicker2;
 }
 
+/**
+ * @file ProceduralNode.h
+ * @brief ê}å`
+ * @author treize
+ * @date 2019/11/1
+ */
+
 namespace	epion::NodeCustom
 {
+	/**
+	* @brief Checkerboard	class
+	* @details	InputSlot 0 UV(VECTOR2)
+	* @details	InputSlot 1 ColorA(COLOR)
+	* @details	InputSlot 2 ColorB(COLOR)
+	* @details	InputSlot 3 Frequency(VECTOR2)
+	*/
+
 	class	CheckerboardNode	final :public	NodeBase
 	{
 	public:

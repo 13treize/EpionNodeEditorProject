@@ -242,26 +242,10 @@ namespace	epion::NodeCustom
 
 		if (m_inputs_count != 0)
 		{
-
-			if (!m_is_input[0])
-			{
-				NodeFunction::SetInputSlotUV(m_input_pos[0]);
-			}
-
-			if (!m_is_input[1])
-			{
-				NodeFunction::SetInputSlotFloat(m_input_pos[1], SLOT_INPUT_POS_X, StringConverter::get_space(1), Sides);
-			}
-
-			if (!m_is_input[2])
-			{
-				NodeFunction::SetInputSlotFloat(m_input_pos[2], SLOT_INPUT_POS_X, StringConverter::get_space(2), Width);
-			}
-
-			if (!m_is_input[3])
-			{
-				NodeFunction::SetInputSlotFloat(m_input_pos[3], SLOT_INPUT_POS_X, StringConverter::get_space(3), Height);
-			}
+			if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+			if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], SLOT_INPUT_POS_X, StringConverter::get_space(1), Sides);
+			if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], SLOT_INPUT_POS_X, StringConverter::get_space(2), Width);
+			if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], SLOT_INPUT_POS_X, StringConverter::get_space(3), Height);
 		}
 	}
 
@@ -275,12 +259,12 @@ namespace	epion::NodeCustom
 
 	void	PolygonNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = "Polygon_out" + std::to_string(m_ID);
-
 		m_input_str[0] = "input.uv";
 		m_input_str[1] = std::to_string(Sides);
 		m_input_str[2] = std::to_string(Width);
 		m_input_str[3] = std::to_string(Height);
+
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 
 		m_function_call_str = "    float " + m_out_str[0] + ";\n";
 		m_function_call_str += "    Polygon(";
