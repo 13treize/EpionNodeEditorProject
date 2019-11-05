@@ -37,13 +37,13 @@ namespace	epion::NodeCustom
 
 	void FBMNode::Init()
 	{
-		UV = { 0, 0 };
-		Amplitude = 0.5f;
-		Frequency = 2.0f;
+		m_uv = { 0, 0 };
+		m_amplitude = 0.5f;
+		m_frequency = 2.0f;
 
 		m_input_slot_type =
 		{
-			SLOT_TYPE::UV, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1,
+			SLOT_TYPE::m_uv, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1,
 		};
 		m_input_name =
 		{
@@ -59,8 +59,8 @@ namespace	epion::NodeCustom
 
 		draw_list->ChannelsSetCurrent(1);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), Amplitude);
-		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), Frequency);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_amplitude);
+		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_frequency);
 	}
 
 	void	FBMNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -74,8 +74,8 @@ namespace	epion::NodeCustom
 	void	FBMNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_input_str[0] = "input.uv";
-		m_input_str[1] = std::to_string(Amplitude);
-		m_input_str[2] = std::to_string(Frequency);
+		m_input_str[1] = std::to_string(m_amplitude);
+		m_input_str[2] = std::to_string(m_frequency);
 
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
@@ -134,10 +134,10 @@ namespace	epion::NodeCustom
 
 	void GradientNoiseNode::Init()
 	{
-		UV = { 0,0 };
+		m_uv = { 0,0 };
 		m_input_slot_type =
 		{
-			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR1,
+			SLOT_TYPE::m_uv,	SLOT_TYPE::VECTOR1,
 		};
 		m_input_name =
 		{
@@ -153,7 +153,7 @@ namespace	epion::NodeCustom
 
 		draw_list->ChannelsSetCurrent(1);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), Scale);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_scale);
 	}
 
 	void	GradientNoiseNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -167,7 +167,7 @@ namespace	epion::NodeCustom
 	void	GradientNoiseNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_input_str[0] = "input.uv";
-		m_input_str[1] = std::to_string(Scale);
+		m_input_str[1] = std::to_string(m_scale);
 
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
@@ -223,11 +223,11 @@ namespace	epion::NodeCustom
 
 	void	SimpleNoiseNode::Init()
 	{
-		UV = { 0,0 };
-		Scale = 500.0f;
+		m_uv = { 0,0 };
+		m_scale = 500.0f;
 		m_input_slot_type =
 		{
-			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR1,
+			SLOT_TYPE::m_uv,	SLOT_TYPE::VECTOR1,
 		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		//node	slot name
@@ -236,22 +236,15 @@ namespace	epion::NodeCustom
 			"UV","Scale"
 		};
 		m_output_name.push_back("Out");
+		m_node_type = NODE_TYPE::NORMAL;
 	}
 
 	void	SimpleNoiseNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		i_update(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
-
-		if (!m_is_input[0])
-		{
-			NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		}
-
-		if (!m_is_input[1])
-		{
-			NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), Scale);
-		}
+		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_scale);
 	}
 
 	void	SimpleNoiseNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -265,7 +258,7 @@ namespace	epion::NodeCustom
 	void	SimpleNoiseNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_input_str[0] = "input.uv";
-		m_input_str[1] = std::to_string(Scale);
+		m_input_str[1] = std::to_string(m_scale);
 
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
@@ -339,16 +332,16 @@ namespace	epion::NodeCustom
 
 	void	VoronoiNode::Init()
 	{
-		UV = { 0,0 };
-		AngleOffset = 1.0f;
-		CellDensity = 1.0f;
+		m_uv = { 0,0 };
+		m_angleoffset = 1.0f;
+		m_celldensity = 1.0f;
 		m_input_name =
 		{
 			"UV",	"AngleOffset",	"CellDensity"
 		};
 		m_input_slot_type =
 		{
-			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR1
+			SLOT_TYPE::m_uv,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR1
 		};
 		m_output_name =
 		{
@@ -368,8 +361,8 @@ namespace	epion::NodeCustom
 		i_update(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), AngleOffset);
-		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), CellDensity);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_angleoffset);
+		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_celldensity);
 	}
 
 	void	VoronoiNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -380,8 +373,8 @@ namespace	epion::NodeCustom
 	void	VoronoiNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_input_str[0] = "input.uv";
-		m_input_str[1] = std::to_string(AngleOffset);
-		m_input_str[2] = std::to_string(CellDensity);
+		m_input_str[1] = std::to_string(m_angleoffset);
+		m_input_str[2] = std::to_string(m_celldensity);
 
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name + "Out", m_ID);
 		m_out_str[1] = NodeFunction::SetDefineOutName(m_Name + "Cell", m_ID);

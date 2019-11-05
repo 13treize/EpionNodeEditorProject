@@ -39,13 +39,13 @@ namespace	epion::NodeCustom
 
 	void	PolarCoordinatesNode::Init()
 	{
-		UV = { 0,0 };
+		m_uv = { 0,0 };
 		Center = { 0.5,0.5 };
 		RadialScale = 1.0f;
 		LengthScale = 1.0f;
 		m_input_slot_type =
 		{
-			SLOT_TYPE::UV,SLOT_TYPE::VECTOR2,SLOT_TYPE::VECTOR1,SLOT_TYPE::VECTOR1
+			SLOT_TYPE::m_uv,SLOT_TYPE::VECTOR2,SLOT_TYPE::VECTOR1,SLOT_TYPE::VECTOR1
 		};
 
 		m_input_name =
@@ -138,13 +138,13 @@ namespace	epion::NodeCustom
 	}
 	void RadialShearNode::Init()
 	{
-		UV = { 0,0 };
+		m_uv = { 0,0 };
 		Center = { 0.5,0.5 };
 		Strength = { 10,10 };
 		Offset = { 0,0 };
 		m_input_slot_type =
 		{
-			SLOT_TYPE::UV,SLOT_TYPE::VECTOR2,SLOT_TYPE::VECTOR2,SLOT_TYPE::VECTOR2
+			SLOT_TYPE::m_uv,SLOT_TYPE::VECTOR2,SLOT_TYPE::VECTOR2,SLOT_TYPE::VECTOR2
 		};
 		m_input_name =
 		{
@@ -226,13 +226,13 @@ namespace	epion::NodeCustom
 
 	void	SpherizeNode::Init()
 	{
-		UV = { 0,0 };
+		m_uv = { 0,0 };
 		Center = { 0.5,0.5 };
 		Strength = 10;
 		Offset = { 0,0 };
 		m_input_slot_type =
 		{
-			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR2,
+			SLOT_TYPE::m_uv,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR2,
 		};
 
 		m_input_name =
@@ -320,12 +320,12 @@ namespace	epion::NodeCustom
 
 	void	TilingAndOffsetNode::Init()
 	{
-		UV = { 0,0 };
+		m_uv = { 0,0 };
 		Tiling = { 1.0f,1.0f };
 		Offset = { 0,0 };
 		m_input_slot_type =
 		{
-			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR2,
+			SLOT_TYPE::m_uv,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR2,
 		};
 		m_input_name =
 		{
@@ -403,13 +403,13 @@ namespace	epion::NodeCustom
 
 	void	TwirlNode::Init()
 	{
-		UV = { 0,0 };
+		m_uv = { 0,0 };
 		Center = { 0.5,0.5 };
 		Strength = 10;
 		Offset = { 0,0 };
 		m_input_slot_type=
 		{
-			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR2,
+			SLOT_TYPE::m_uv,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR2,
 		};
 		m_input_name =
 		{

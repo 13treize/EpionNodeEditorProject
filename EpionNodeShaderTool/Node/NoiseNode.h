@@ -40,15 +40,15 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				CEREAL_NVP(UV),
-				CEREAL_NVP(Amplitude),
-				CEREAL_NVP(Frequency));
+				CEREAL_NVP(m_uv),
+				CEREAL_NVP(m_amplitude),
+				CEREAL_NVP(m_frequency));
 		};
 
 	private:
-		math::FVector2	UV;
-		float Amplitude;
-		float Frequency;
+		math::FVector2	m_uv;
+		float m_amplitude;
+		float m_frequency;
 	};
 
 	/**
@@ -76,13 +76,13 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				CEREAL_NVP(UV),
-				CEREAL_NVP(Scale));
+				CEREAL_NVP(m_uv),
+				CEREAL_NVP(m_scale));
 		};
 
 	private:
-		math::FVector2	UV;
-		float Scale;
+		math::FVector2	m_uv;
+		float m_scale;
 	};
 
 	/**
@@ -110,13 +110,13 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				CEREAL_NVP(UV),
-				CEREAL_NVP(Scale));
+				CEREAL_NVP(m_uv),
+				CEREAL_NVP(m_scale));
 		};
 
 	private:
-		math::FVector2	UV;
-		float Scale;
+		math::FVector2	m_uv;
+		float m_scale;
 	};
 	/**
 	* @brief Voronoi	class
@@ -145,14 +145,14 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				CEREAL_NVP(UV),
-				CEREAL_NVP(AngleOffset),
-				CEREAL_NVP(CellDensity));
+				CEREAL_NVP(m_uv),
+				CEREAL_NVP(m_angleoffset),
+				CEREAL_NVP(m_celldensity));
 		};
 
 	private:
-		math::FVector2	UV;
-		float AngleOffset;
-		float CellDensity;
+		math::FVector2	m_uv;
+		float m_angleoffset;
+		float m_celldensity;
 	};
 }

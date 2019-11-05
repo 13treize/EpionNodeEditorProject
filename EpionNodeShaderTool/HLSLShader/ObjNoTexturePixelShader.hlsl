@@ -5,7 +5,7 @@ struct VS_OUT
 {
     float4 position : SV_POSITION;
     float4 normal : NORMAL;
-    float2 uv : UV;
+    float2 uv : m_uv;
 };
 
 

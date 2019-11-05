@@ -21,7 +21,7 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				CEREAL_NVP(UV),
+				CEREAL_NVP(m_uv),
 				CEREAL_NVP(Center),
 				CEREAL_NVP(RadialScale),
 				CEREAL_NVP(LengthScale));
@@ -30,7 +30,7 @@ namespace	epion::NodeCustom
 
 	private:
 		//	input
-		math::FVector2	UV;
+		math::FVector2	m_uv;
 		math::FVector2	Center;
 		float RadialScale;
 		float LengthScale;
@@ -54,13 +54,13 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				CEREAL_NVP(UV),
+				CEREAL_NVP(m_uv),
 				CEREAL_NVP(Center),
 				CEREAL_NVP(Strength),
 				CEREAL_NVP(Offset));
 		};
 	private:
-		math::FVector2	UV;
+		math::FVector2	m_uv;
 		math::FVector2	Center;
 		math::FVector2	Strength;
 		math::FVector2	Offset;
@@ -85,14 +85,14 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				CEREAL_NVP(UV),
+				CEREAL_NVP(m_uv),
 				CEREAL_NVP(Center),
 				CEREAL_NVP(Strength),
 				CEREAL_NVP(Offset));
 		};
 
 	private:
-		math::FVector2	UV;
+		math::FVector2	m_uv;
 		math::FVector2	Center;
 		float	Strength;
 		math::FVector2	Offset;
@@ -118,13 +118,13 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				CEREAL_NVP(UV),
+				CEREAL_NVP(m_uv),
 				CEREAL_NVP(Tiling),
 				CEREAL_NVP(Offset));
 		};
 
 	private:
-		math::FVector2	UV;
+		math::FVector2	m_uv;
 		math::FVector2	Tiling;
 		math::FVector2	Offset;
 	};
@@ -147,14 +147,14 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				CEREAL_NVP(UV),
+				CEREAL_NVP(m_uv),
 				CEREAL_NVP(Center),
 				CEREAL_NVP(Strength),
 				CEREAL_NVP(Offset));
 		};
 
 	private:
-		math::FVector2	UV;
+		math::FVector2	m_uv;
 		math::FVector2	Center;
 		float	Strength;
 		math::FVector2	Offset;

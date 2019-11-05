@@ -21,7 +21,6 @@ CEREAL_REGISTER_TYPE(epion::NodeCustom::RoundedRectangleNode)
 
 namespace	epion::NodeCustom
 {
-	//îsñké“ÇÃÉRÅ[Éh
 #pragma region Checkerboard
 	CheckerboardNode::CheckerboardNode()
 	{
@@ -46,7 +45,7 @@ namespace	epion::NodeCustom
 
 		m_input_slot_type =
 		{
-			SLOT_TYPE::UV, SLOT_TYPE::COLOR, SLOT_TYPE::COLOR, SLOT_TYPE::VECTOR2,
+			SLOT_TYPE::m_uv, SLOT_TYPE::COLOR, SLOT_TYPE::COLOR, SLOT_TYPE::VECTOR2,
 		};
 		m_input_name =
 		{
@@ -135,7 +134,7 @@ namespace	epion::NodeCustom
 
 		m_input_slot_type =
 		{
-			SLOT_TYPE::UV, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1
+			SLOT_TYPE::m_uv, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1
 		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 
@@ -215,7 +214,7 @@ namespace	epion::NodeCustom
 		m_scale = 1.0f;
 		m_input_slot_type =
 		{
-			SLOT_TYPE::UV, SLOT_TYPE::VECTOR1
+			SLOT_TYPE::m_uv, SLOT_TYPE::VECTOR1
 		};
 		m_output_slot_type =
 		{
@@ -323,7 +322,7 @@ namespace	epion::NodeCustom
 		m_height = 1.0f;
 		m_input_slot_type =
 		{
-			SLOT_TYPE::UV, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1
+			SLOT_TYPE::m_uv, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1
 		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 
@@ -415,7 +414,7 @@ namespace	epion::NodeCustom
 
 		m_input_slot_type =
 		{
-			SLOT_TYPE::UV, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR2, SLOT_TYPE::VECTOR1
+			SLOT_TYPE::m_uv, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR2, SLOT_TYPE::VECTOR1
 		};
 
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
@@ -500,7 +499,7 @@ namespace	epion::NodeCustom
 
 		m_input_slot_type =
 		{
-			SLOT_TYPE::UV, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1
+			SLOT_TYPE::m_uv, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1
 		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 

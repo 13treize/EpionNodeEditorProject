@@ -3,7 +3,6 @@
 #include	<cereal/types/polymorphic.hpp>
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
-#include	"NodeParam.h"
 #include	"NodeData.h"
 #include	"InputBasicNode.h"
 #include	"../epion_string.h"
@@ -26,10 +25,12 @@ CEREAL_REGISTER_TYPE(epion::NodeCustom::FloatNode)
 CEREAL_REGISTER_TYPE(epion::NodeCustom::Vector2Node)
 CEREAL_REGISTER_TYPE(epion::NodeCustom::Vector3Node)
 CEREAL_REGISTER_TYPE(epion::NodeCustom::Vector4Node)
+CEREAL_REGISTER_TYPE(epion::NodeCustom::ColorNode)
 CEREAL_REGISTER_TYPE(epion::NodeCustom::TimeNode)
 
 namespace	epion::NodeCustom
 {
+#pragma region Float
 	FloatNode::FloatNode()
 	{
 		Init();
@@ -45,10 +46,10 @@ namespace	epion::NodeCustom
 	}
 	void FloatNode::Init()
 	{
-		input_num = 1.0f;
+		m_num = 1.0f;
 
 		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-		m_input_name.push_back(vec_str[0]);
+		m_input_name.push_back("x");
 
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
@@ -56,10 +57,7 @@ namespace	epion::NodeCustom
 	void	FloatNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		i_update(offset, draw_list);
-		if (!m_is_input[0])
-		{
-			NodeFunction::SetInputSlotFloat(m_input_pos[0], SLOT_INPUT_POS_X, StringConverter::get_space(0), input_num);
-		}
+		if (!m_is_input[0])	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::get_space(0), m_num);
 	}
 
 	void	FloatNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -72,21 +70,19 @@ namespace	epion::NodeCustom
 
 	void	FloatNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = "Float_num" + std::to_string(m_ID);
-
-		m_input_str[0] = std::to_string(input_num);
-
+		m_input_str[0] = std::to_string(m_num);
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		str_set(nodes_ptr, links);
-
-		m_function_call_str = "    float " + m_out_str[0]+"="+ m_input_str[0] + ";\n";
+		m_function_call_str = NodeFunction::SetVarFloat(m_input_str[0], m_out_str[0]);
 	}
 
 	std::string	FloatNode::GetFunctionDefStr()
 	{
 		return"";
 	}
+#pragma endregion
 
-
+#pragma region Vector2
 	Vector2Node::Vector2Node()
 	{
 		Init();
@@ -101,32 +97,25 @@ namespace	epion::NodeCustom
 	}
 	void Vector2Node::Init()
 	{
-		input_num = { 1.0f, 1.0f };
-		for (int i = 0; i < m_inputs_count; i++)
+		m_num = { 1.0f, 1.0f };
+		m_input_slot_type =
 		{
-			m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-			m_input_name.push_back(vec_str[i]);
-		}
-		m_output_name.push_back("Out");
+			SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1
+		};
+		m_input_name =
+		{
+			"x","y"
+		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR2);
+		m_output_name.push_back("Out");
+
 	}
 
 	void	Vector2Node::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		i_update(offset, draw_list);
-
-		if (!m_is_input[0])
-		{
-			ImGui::SetCursorScreenPos(m_input_pos[0] + SLOT_INPUT_POS);
-			ImGui::SetNextItemWidth(30.0f);
-			ImGui::InputFloat(" ", &input_num.x, 0.0f, 1.0f, "%.2f");
-		}
-		if (!m_is_input[1])
-		{
-			ImGui::SetCursorScreenPos(m_input_pos[1] + SLOT_INPUT_POS);
-			ImGui::SetNextItemWidth(30.0f);
-			ImGui::InputFloat("  ", &input_num.y, 0.0f, 1.0f, "%.2f");
-		}
+		if (!m_is_input[0])	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::get_space(0), m_num.x);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_num.y);
 	}
 
 	void	Vector2Node::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -139,17 +128,10 @@ namespace	epion::NodeCustom
 
 	void	Vector2Node::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = "Vector2_num" + std::to_string(m_ID);
-		m_input_str[0] = std::to_string(input_num.x);
-		m_input_str[1] = std::to_string(input_num.y);
-		for (auto& l : links)
-		{
-			if (m_ID == l.get_input_id())
-			{
-				m_is_input[l.get_input_slot()] = true;
-				m_input_str[l.get_input_slot()] = nodes_ptr[l.get_output_id()]->GetOutStr()[l.get_output_slot()];
-			}
-		}
+		m_input_str[0] = std::to_string(m_num.x);
+		m_input_str[1] = std::to_string(m_num.y);
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		str_check(nodes_ptr, links);
 		m_function_call_str = "    float2 " + m_out_str[0] + "=" + "float2("+m_input_str[0] + "," + m_input_str[1]+");\n";
 	}
 
@@ -157,13 +139,14 @@ namespace	epion::NodeCustom
 	{
 		return"";
 	}
+#pragma endregion
 
 	Vector3Node::Vector3Node()
 	{
 		Init();
 	}
 	Vector3Node::Vector3Node(int id, const math::FVector2& pos)
-		:NodeBase("Vector3Node", id, pos, size, 3, 1)
+		:NodeBase("Vector3", id, pos, size, 3, 1)
 	{
 		Init();
 	}
@@ -172,7 +155,7 @@ namespace	epion::NodeCustom
 	}
 	void	Vector3Node::Init()
 	{
-		input_num = { 1.0f, 1.0f, 1.0f };
+		m_num = { 1.0f, 1.0f, 1.0f };
 		for (int i = 0; i < m_inputs_count; i++)
 		{
 			m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
@@ -180,31 +163,15 @@ namespace	epion::NodeCustom
 		}
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR3);
 		m_output_name.push_back("Out");
-
+		m_node_type = NODE_TYPE::NORMAL;
 
 	}
 	void	Vector3Node::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		i_update(offset, draw_list);
-
-		if (!m_is_input[0])
-		{
-			ImGui::SetCursorScreenPos(m_input_pos[0] + SLOT_INPUT_POS);
-			ImGui::SetNextItemWidth(30.0f);
-			ImGui::InputFloat(" ", &input_num.x, 0.0f, 1.0f, "%.2f");
-		}
-		if (!m_is_input[1])
-		{
-			ImGui::SetCursorScreenPos(m_input_pos[1] + SLOT_INPUT_POS);
-			ImGui::SetNextItemWidth(30.0f);
-			ImGui::InputFloat("  ", &input_num.y, 0.0f, 1.0f, "%.2f");
-		}
-		if (!m_is_input[2])
-		{
-			ImGui::SetCursorScreenPos(m_input_pos[2] + SLOT_INPUT_POS);
-			ImGui::SetNextItemWidth(30.0f);
-			ImGui::InputFloat("   ", &input_num.z, 0.0f, 1.0f, "%.2f");
-		}
+		if (!m_is_input[0])	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::get_space(0), m_num.x);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_num.y);
+		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_num.z);
 
 	}
 
@@ -218,19 +185,11 @@ namespace	epion::NodeCustom
 
 	void	Vector3Node::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = "Vector3_num" + std::to_string(m_ID);
-		m_input_str[0] = std::to_string(input_num.x);
-		m_input_str[1] = std::to_string(input_num.y);
-		m_input_str[2] = std::to_string(input_num.z);
-
-		for (auto& l : links)
-		{
-			if (m_ID == l.get_input_id())
-			{
-				m_is_input[l.get_input_slot()] = true;
-				m_input_str[l.get_input_slot()] = nodes_ptr[l.get_output_id()]->GetOutStr()[l.get_output_slot()];
-			}
-		}
+		m_input_str[0] = std::to_string(m_num.x);
+		m_input_str[1] = std::to_string(m_num.y);
+		m_input_str[2] = std::to_string(m_num.z);
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		str_check(nodes_ptr, links);
 		m_function_call_str = "    float3 " + m_out_str[0] + "=" + "float3(" + m_input_str[0] + "," + m_input_str[1] + "," + m_input_str[2]+");\n";
 	}
 
@@ -245,7 +204,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	Vector4Node::Vector4Node(int id, const math::FVector2& pos)
-		:NodeBase("Vector4Node", id, pos, size, 4, 1)
+		:NodeBase("Vector4", id, pos, size, 4, 1)
 	{
 		Init();
 	}
@@ -255,7 +214,7 @@ namespace	epion::NodeCustom
 
 	void	Vector4Node::Init()
 	{
-		input_num = { 1.0f, 1.0f, 1.0f, 1.0f };
+		m_num = { 1.0f, 1.0f, 1.0f, 1.0f };
 		for (int i = 0; i < m_inputs_count; i++)
 		{
 			m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
@@ -267,32 +226,10 @@ namespace	epion::NodeCustom
 	void	Vector4Node::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		i_update(offset, draw_list);
-
-		if (!m_is_input[0])
-		{
-			ImGui::SetCursorScreenPos(m_input_pos[0] + SLOT_INPUT_POS);
-			ImGui::SetNextItemWidth(30.0f);
-			ImGui::InputFloat(" ", &input_num.x, 0.0f, 1.0f, "%.2f");
-		}
-		if (!m_is_input[1])
-		{
-			ImGui::SetCursorScreenPos(m_input_pos[1] + SLOT_INPUT_POS);
-			ImGui::SetNextItemWidth(30.0f);
-			ImGui::InputFloat("  ", &input_num.y, 0.0f, 1.0f, "%.2f");
-		}
-		if (!m_is_input[2])
-		{
-			ImGui::SetCursorScreenPos(m_input_pos[2] + SLOT_INPUT_POS);
-			ImGui::SetNextItemWidth(30.0f);
-			ImGui::InputFloat("   ", &input_num.z, 0.0f, 1.0f, "%.2f");
-		}
-		if (!m_is_input[3])
-		{
-			ImGui::SetCursorScreenPos(m_input_pos[3] + SLOT_INPUT_POS);
-			ImGui::SetNextItemWidth(30.0f);
-			ImGui::InputFloat("    ", &input_num.w, 0.0f, 1.0f, "%.2f");
-		}
-
+		if (!m_is_input[0])	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::get_space(0), m_num.x);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_num.y);
+		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_num.z);
+		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::get_space(3), m_num.w);
 	}
 
 	void	Vector4Node::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -305,20 +242,12 @@ namespace	epion::NodeCustom
 
 	void	Vector4Node::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = "Vector4_num" + std::to_string(m_ID);
-		m_input_str[0] = std::to_string(input_num.x);
-		m_input_str[1] = std::to_string(input_num.y);
-		m_input_str[2] = std::to_string(input_num.z);
-		m_input_str[3] = std::to_string(input_num.w);
-
-		for (auto& l : links)
-		{
-			if (m_ID == l.get_input_id())
-			{
-				m_is_input[l.get_input_slot()] = true;
-				m_input_str[l.get_input_slot()] = nodes_ptr[l.get_output_id()]->GetOutStr()[l.get_output_slot()];
-			}
-		}
+		m_input_str[0] = std::to_string(m_num.x);
+		m_input_str[1] = std::to_string(m_num.y);
+		m_input_str[2] = std::to_string(m_num.z);
+		m_input_str[3] = std::to_string(m_num.w);
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		str_check(nodes_ptr, links);
 		m_function_call_str = "    float4 " + m_out_str[0] + "=" + "float4(" + m_input_str[0] +","+ m_input_str[1] + "," + m_input_str[2] + "," + m_input_str[3] + ");\n";
 	}
 
@@ -332,7 +261,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	ColorNode::ColorNode(int id, const math::FVector2& pos)
-		:NodeBase("ColorNode", id, pos, size, 1, 1)
+		:NodeBase("Color", id, pos, size, 1, 1)
 	{
 		Init();
 	}
@@ -341,19 +270,21 @@ namespace	epion::NodeCustom
 	}
 	void ColorNode::Init()
 	{
-		color = { 1.0f, 1.0f, 1.0f, 1.0f };
+		m_color = { 1.0f, 1.0f, 1.0f};
 		m_input_slot_type.push_back(SLOT_TYPE::COLOR);
 		m_input_name.push_back("In");
-		m_output_slot_type.push_back(SLOT_TYPE::COLOR);
+		m_output_slot_type.push_back(SLOT_TYPE::VECTOR3);
 		m_output_name.push_back("Out");
 
+		m_color_picker[0].Init("1", "Color");
+		m_open_popup[0] = false;
+		m_node_type = NODE_TYPE::VARIABLE;
 	}
 	void	ColorNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		if (m_inputs_count != 0)
-		{
-			i_update(offset, draw_list);
-		}
+		i_update(offset, draw_list);
+		if (!m_is_input[0])	m_color_picker[0].SetInputSlotColor2(m_input_pos[0], m_open_popup[0], m_color,0);
+
 	}
 
 	void	ColorNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -363,18 +294,12 @@ namespace	epion::NodeCustom
 
 	void	ColorNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = "color_num" + std::to_string(m_ID);
-		m_input_str[0] = std::to_string(color.x)+ "," + std::to_string(color.y)+ "," + std::to_string(color.z)+ "," + std::to_string(color.w);
+		m_input_str[0] = NodeFunction::SetInputToString3(m_color);
 
-		for (auto& l : links)
-		{
-			if (m_ID == l.get_input_id())
-			{
-				m_is_input[l.get_input_slot()] = true;
-				m_input_str[l.get_input_slot()] = nodes_ptr[l.get_output_id()]->GetOutStr()[l.get_output_slot()];
-			}
-		}
-		m_function_call_str = "    float4 " + m_out_str[0] + "=" + "float4(" + m_input_str[0] +");\n";
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+
+		str_check(nodes_ptr, links);
+		m_function_call_str = "    float3 " + m_out_str[0] + "="+ m_input_str[0] +";\n";
 	}
 
 	std::string	ColorNode::GetFunctionDefStr()

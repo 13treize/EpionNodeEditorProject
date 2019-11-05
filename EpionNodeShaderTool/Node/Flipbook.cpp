@@ -25,9 +25,9 @@ namespace
 	};
 	enum	NUM :unsigned char
 	{
-		UV,
-		AngleOffset,
-		CellDensity,
+		m_uv,
+		m_angleoffset,
+		m_celldensity,
 	};
 }
 

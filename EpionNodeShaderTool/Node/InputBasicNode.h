@@ -30,10 +30,10 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				CEREAL_NVP(input_num));
+				CEREAL_NVP(m_num));
 		};
 	private:
-		float	input_num;
+		float	m_num;
 	};
 
 	class	Vector2Node final :public	NodeBase
@@ -54,10 +54,10 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				CEREAL_NVP(input_num));
+				CEREAL_NVP(m_num));
 		};
 	private:
-		math::FVector2	input_num;
+		math::FVector2	m_num;
 	};
 
 	class	Vector3Node final :public	NodeBase
@@ -78,10 +78,10 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				CEREAL_NVP(input_num));
+				CEREAL_NVP(m_num));
 		};
 	private:
-	math::FVector3	input_num;
+	math::FVector3	m_num;
 	};
 
 	class	Vector4Node final :public	NodeBase
@@ -102,10 +102,10 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				CEREAL_NVP(input_num));
+				CEREAL_NVP(m_num));
 		};
 	private:
-		math::FVector4	input_num;
+		math::FVector4	m_num;
 	};
 	class	ColorNode final :public	NodeBase
 	{
@@ -125,10 +125,10 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				CEREAL_NVP(color));
+				CEREAL_NVP(m_color));
 		};
 	private:
-		math::FVector4	color;
+		math::FVector3	m_color;
 	};
 
 	/*

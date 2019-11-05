@@ -24,15 +24,11 @@ namespace
 
 namespace	epion::NodeCustom
 {
-	NodeStates::NodeStates()
-	{}
-	NodeStates::NodeStates(std::string	name, math::FVector2&	pos, SLOT_TYPE type, ImU32	color)
-		:name(name), pos(pos), slot_type(type), color(color)
-	{
-	}
-	NodeStates::~NodeStates()
-	{
-	}
+	std::string	NodeFunction::SetVarFloat(const std::string& in, const std::string& out) {return "    float " + out + "=" + in + ";\n";}
+	std::string	NodeFunction::SetVarFloat2(const std::string& in_x, const std::string& in_y, const std::string& out) { return"    float2 " + out + "=" + "float2(" + in_x + "," + in_y + ");\n";}
+	std::string	NodeFunction::SetVarFloat3(const std::string& in, const std::string& out) { return ""; }
+	std::string	NodeFunction::SetVarFloat4(const std::string& in, const std::string& out) { return ""; }
+
 	std::string	NodeFunction::SetInputToString(float str) { return std::to_string(str);}
 	std::string	NodeFunction::SetInputToString2(math::FVector2 str) { return "float2(" + StringConverter::to_string2(str, ",") + ")";}
 	std::string	NodeFunction::SetInputToString3(math::FVector3 str) { return "float3(" + StringConverter::to_string3(str, ",") + ")";}
@@ -107,7 +103,7 @@ namespace	epion::NodeCustom
 		{
 		default:
 		case epion::NodeCustom::SLOT_TYPE::VECTOR1:
-		case epion::NodeCustom::SLOT_TYPE::UV:
+		case epion::NodeCustom::SLOT_TYPE::m_uv:
 			draw_list->AddRectFilled(pos + ImVec2(SLOT_INPUT_RECT_X, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), IM_COL32(60, 60, 60, 255), 2.0f);
 			draw_list->AddRect(pos + ImVec2(SLOT_INPUT_RECT_X, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), ImColor::U32::GREEN, 2.0f);
 			break;
@@ -154,7 +150,7 @@ namespace	epion::NodeCustom
 		{
 		case SLOT_TYPE::VECTOR1:	ret_str = "(1)";	break;
 		case SLOT_TYPE::VECTOR2:
-		case SLOT_TYPE::UV:			ret_str = "(2)";	break;
+		case SLOT_TYPE::m_uv:			ret_str = "(2)";	break;
 		case SLOT_TYPE::VECTOR3:	ret_str = "(3)";	break;
 		case SLOT_TYPE::VECTOR4:	ret_str = "(4)";	break;
 		case SLOT_TYPE::COLOR:	break;
@@ -182,7 +178,7 @@ namespace	epion::NodeCustom
 		{
 		case SLOT_TYPE::VECTOR1:	color = ImColor::U32::LIGHTBLUE;	break;
 		case SLOT_TYPE::VECTOR2:
-		case SLOT_TYPE::UV:			color = ImColor::U32::LAWNGREEN;	break;
+		case SLOT_TYPE::m_uv:			color = ImColor::U32::LAWNGREEN;	break;
 		case SLOT_TYPE::VECTOR3:
 		case SLOT_TYPE::COLOR:		color = ImColor::U32::YELLOW;	break;
 		case SLOT_TYPE::VECTOR4:	color = ImColor::U32::REDPURPLE;	break;
@@ -409,6 +405,7 @@ namespace	epion::NodeCustom
 		switch (m_node_type)
 		{
 		case NODE_TYPE::NORMAL:
+		case NODE_TYPE::VARIABLE:
 			str_set(nodes_ptr, links);
 			break;
 		case NODE_TYPE::DYNAMIC:
@@ -525,17 +522,8 @@ namespace	epion::NodeCustom
 			{
 				if (m_input_slot_type[i] != m_input_slot_type[j])
 				{
-					if (m_input_slot_type[i] == SLOT_TYPE::VECTOR1)
-					{
-						m_input_slot_type[i] = m_input_slot_type[j];
-						break;
-					}
-					if (m_input_slot_type[j] == SLOT_TYPE::VECTOR1)
-					{
-						m_input_slot_type[j] = m_input_slot_type[i];
-						break;
-					}
-
+					if (m_input_slot_type[i] == SLOT_TYPE::VECTOR1)	m_input_slot_type[i] = m_input_slot_type[j];	break;
+					if (m_input_slot_type[j] == SLOT_TYPE::VECTOR1)	m_input_slot_type[j] = m_input_slot_type[i];	break;
 
 					if (static_cast<int>(m_input_slot_type[i]) < static_cast<int>(m_input_slot_type[j]))
 					{
@@ -572,11 +560,9 @@ namespace	epion::NodeCustom
 				{
 					switch (m_input_slot_type[l.get_input_slot()])
 					{
-					case	SLOT_TYPE::VECTOR1:
-						m_input_str[l.get_input_slot()] += ".x";
-						break;
+					case	SLOT_TYPE::VECTOR1:	m_input_str[l.get_input_slot()] += ".x";	break;
 					case	SLOT_TYPE::VECTOR2:
-					case	SLOT_TYPE::UV:
+					case	SLOT_TYPE::m_uv:
 						switch (l.get_output_type())
 						{
 						case	SLOT_TYPE::VECTOR1:	break;
@@ -624,12 +610,10 @@ namespace	epion::NodeCustom
 	{
 		for (auto& l : links)
 		{
-			if (m_ID == l.get_output_id())
-			{
-				l.set_output_type(m_dynamic_slot_type);
-			}
+			if (m_ID == l.get_output_id())	l.set_output_type(m_dynamic_slot_type);
 		}
 	}
+
 
 	//NodeLink
 

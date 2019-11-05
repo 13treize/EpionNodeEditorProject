@@ -31,13 +31,18 @@ namespace	epion::NodeCustom
 		BOOLEAN,
 		TEXTURE2D,
 		POS,//inputのみ、扱いはVECTOR3同じ
-		UV,	//inputのみ、扱いはVECTOR2同じ
+		m_uv,	//inputのみ、扱いはVECTOR2同じ
 		COLOR,//inputのみ、扱いはVECTOR3同じ
 	};
 
 	class NodeFunction
 	{
 	public:
+		static std::string SetVarFloat(const std::string& in, const std::string& out);
+		static std::string SetVarFloat2(const std::string& in_x, const std::string& in_y, const std::string& out);
+		static std::string SetVarFloat3(const std::string& in, const std::string& out);
+		static std::string SetVarFloat4(const std::string& in, const std::string& out);
+
 		//vectorの数値を文字列に変換
 		static std::string SetInputToString(float str);
 		static std::string SetInputToString2(math::FVector2 str);
@@ -102,18 +107,12 @@ namespace	epion::NodeCustom
 		int slot;
 		bool	operator==(const	 LinkData&	vec)const
 		{
-			if (id == vec.id	&& slot == vec.slot)
-			{
-				return	true;
-			};
+			if (id == vec.id	&& slot == vec.slot)	return	true;
 			return	false;
 		}
 		bool	operator!=(const	 LinkData&	vec)const
 		{
-			if (id != vec.id || slot != vec.slot)
-			{
-				return	true;
-			};
+			if (id != vec.id || slot != vec.slot)	return	true;
 			return	false;
 		}
 
@@ -191,24 +190,12 @@ namespace	epion::NodeCustom
 	};
 
 	//input, output
-	class NodeStates
-	{
-	public:
-		NodeStates();
-		NodeStates(std::string	name, math::FVector2&	pos, SLOT_TYPE type, ImU32	color);
-
-		~NodeStates();
-
-		std::string	name;
-		math::FVector2	pos;
-		SLOT_TYPE	slot_type;
-		ImU32	color;
-	};
 	enum class NODE_TYPE :unsigned char
 	{
 		NORMAL,
 		DYNAMIC,
 		MASTER,
+		VARIABLE,
 	};
 	//ノード
 	using LinkVector = std::vector<LinkData>;
@@ -345,5 +332,6 @@ namespace	epion::NodeCustom
 		void link_set(std::vector<NodeLink>&	links);
 		void type_set(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links);
 		void str_set(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links);
+
 	};
 }
