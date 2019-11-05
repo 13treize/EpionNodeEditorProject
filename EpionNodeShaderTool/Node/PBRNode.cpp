@@ -5,6 +5,7 @@
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
 
+#include	"NodeParam.h"
 #include	"NodeData.h"
 #include	"PBRNode.h"
 

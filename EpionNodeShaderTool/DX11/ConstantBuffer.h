@@ -23,8 +23,7 @@ namespace	epion
 		math::FVector4	AmbientColor;	//環境光
 	};
 	/**
-	* @brief ConstantBufferManager	class
-	* @details	このエディタで規定されてる定数バッファの管理
+	* @brief	このエディタで規定されてる定数バッファの管理
 	* @details	TODO ユーザー側に提供するときの考慮
 	*/
 

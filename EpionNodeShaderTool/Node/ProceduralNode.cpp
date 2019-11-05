@@ -10,7 +10,6 @@
 namespace
 {
 	const ImVec2	size(0, 0);
-	bool open_popup[2];
 }
 
 //TODO repplenode
@@ -43,10 +42,10 @@ namespace	epion::NodeCustom
 	}
 	void CheckerboardNode::Init()
 	{
-		UV = { 0,0 };
-		ColorA = { 0,0,0 };
-		ColorB = { 1,1,1 };
-		Frequency = { 1,	1 };
+		m_uv = { 0,0 };
+		m_colora = { 0,0,0 };
+		m_colorb = { 1,1,1 };
+		m_frequency = { 1,	1 };
 
 		m_input_slot_type =
 		{
@@ -60,8 +59,13 @@ namespace	epion::NodeCustom
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR3);
 		m_output_name.push_back("Out");
 
+		m_color_picker.resize(2);
 		m_color_picker[0].Init("1", "ColorA");
 		m_color_picker[1].Init("2", "ColorB");
+		m_open_popup =
+		{
+			false, false
+		};
 
 		m_node_type = NODE_TYPE::NORMAL;
 	}
@@ -69,12 +73,11 @@ namespace	epion::NodeCustom
 	{
 		i_update(offset, draw_list);
 
-		ImVec2	rect_pos[sizeof(m_inputs_count)];
 		draw_list->ChannelsSetCurrent(1);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		if (!m_is_input[1])	m_color_picker[0].SetInputSlotColor2(m_input_pos[1], open_popup[0], ColorA, 1);
-		if (!m_is_input[2])	m_color_picker[1].SetInputSlotColor2(m_input_pos[2], open_popup[1], ColorB, 2);
-		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], Frequency, 3);
+		if (!m_is_input[1])	m_color_picker[0].SetInputSlotColor2(m_input_pos[1], m_open_popup[0] , m_colora, 1);
+		if (!m_is_input[2])	m_color_picker[1].SetInputSlotColor2(m_input_pos[2], m_open_popup[1], m_colorb, 2);
+		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], m_frequency, 3);
 	}
 
 	void	CheckerboardNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -85,10 +88,9 @@ namespace	epion::NodeCustom
 	void	CheckerboardNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_input_str[0] = "input.uv";
-		m_input_str[1] = NodeFunction::SetInputToString3(ColorA);
-		m_input_str[2] = NodeFunction::SetInputToString3(ColorB);
-		m_input_str[3] = NodeFunction::SetInputToString2(Frequency);
-
+		m_input_str[1] = NodeFunction::SetInputToString3(m_colora);
+		m_input_str[2] = NodeFunction::SetInputToString3(m_colorb);
+		m_input_str[3] = NodeFunction::SetInputToString2(m_frequency);
 
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr3(m_out_str[0]);

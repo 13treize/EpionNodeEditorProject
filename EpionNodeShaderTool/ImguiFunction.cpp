@@ -167,7 +167,7 @@ namespace epion
 		m_ret_color.z = m_color.z;
 	}
 
-	void	ColorPicker2::SetInputSlotColor2(ImVec2& set_cursor, bool& popup, math::FVector3& num, int label_num)
+	void	ColorPicker2::SetInputSlotColor2(ImVec2& set_cursor, bool popup, math::FVector3& num, int label_num)
 	{
 		m_edit_flags |= ImGuiColorEditFlags_AlphaBar;
 		m_edit_flags |= ImGuiColorEditFlags_NoSidePreview;

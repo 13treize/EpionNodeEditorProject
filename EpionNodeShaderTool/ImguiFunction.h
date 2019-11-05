@@ -66,7 +66,7 @@ namespace	epion
 		*/
 		void Activate(bool is_popup, math::FVector3& color);
 
-		void SetInputSlotColor2(ImVec2& set_cursor, bool& popup, math::FVector3& num, int label_num = 0);
+		void SetInputSlotColor2(ImVec2& set_cursor, bool popup, math::FVector3& num, int label_num = 0);
 
 	private:
 		ImGuiColorEditFlags m_edit_flags;

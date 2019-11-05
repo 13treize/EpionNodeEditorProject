@@ -3,6 +3,7 @@
 #include	<cereal/types/polymorphic.hpp>
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
+#include	"NodeParam.h"
 #include	"NodeData.h"
 #include	"MathWaveNode.h"
 #include	"../epion_string.h"

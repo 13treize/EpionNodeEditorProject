@@ -3,6 +3,8 @@
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
 
+#include	"NodeParam.h"
+
 #include	"NodeData.h"
 #include	"../epion_physics/epion_collider.h"
 #include	"../epion_string.h"
@@ -10,13 +12,14 @@
 #include	"../DX11/dx11_device.h"
 #include	"../DX11/dx11_dxgi.h"
 #include	"../DX11/RenderTarget.h"
+#include	"../DX11/texture.h"
+#include	"../DX11/square.h"
 
 #include	"../ShaderGenerate/ShaderGenerate.h"
 #include	"../ImguiFunction.h"
 
 namespace
 {
-
 }
 
 namespace	epion::NodeCustom
@@ -243,48 +246,48 @@ namespace	epion::NodeCustom
 
 	void	NodeBase::ResouceInit()
 	{
-		//m_resouce = std::make_unique<Texture>();
-		//m_preview = std::make_unique<Square>(L"test.hlsl");
+		//	m_resouce = std::make_unique<Texture>();
+		//	m_preview = std::make_unique<Square>(L"test.hlsl");
 
-		//com_ptr<ID3D11Texture2D>	depth_stencil_buffer;
+		//	com_ptr<ID3D11Texture2D>	depth_stencil_buffer;
 
-		//D3D11_TEXTURE2D_DESC	texture_desc;
+		//	D3D11_TEXTURE2D_DESC	texture_desc;
 
-		//texture_desc.Width=static_cast<UINT>(m_Size.x);
-		//texture_desc.Height = static_cast<UINT>(m_Size.x);
-		//texture_desc.MipLevels = 1;
-		//texture_desc.ArraySize = 1;
-		//texture_desc.Format = DXGI_FORMAT::DXGI_FORMAT_D24_UNORM_S8_UINT;
-		//texture_desc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
-		//texture_desc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
-		//texture_desc.CPUAccessFlags = 0;
-		//texture_desc.MiscFlags = 0;
+		//	texture_desc.Width=static_cast<UINT>(m_Size.x);
+		//	texture_desc.Height = static_cast<UINT>(m_Size.x);
+		//	texture_desc.MipLevels = 1;
+		//	texture_desc.ArraySize = 1;
+		//	texture_desc.Format = DXGI_FORMAT::DXGI_FORMAT_D24_UNORM_S8_UINT;
+		//	texture_desc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
+		//	texture_desc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
+		//	texture_desc.CPUAccessFlags = 0;
+		//	texture_desc.MiscFlags = 0;
 
-		//Device::get_device()->CreateTexture2D(&texture_desc,
-		//	nullptr,
-		//	depth_stencil_buffer.ReleaseAndGetAddressOf());
+		//	Device::GetDevice()->CreateTexture2D(&texture_desc,
+		//		nullptr,
+		//		depth_stencil_buffer.ReleaseAndGetAddressOf());
 
-		//D3D11_DEPTH_STENCIL_VIEW_DESC	depth_stincil_view;
-		//depth_stincil_view.Format = texture_desc.Format;
-		//depth_stincil_view.ViewDimension = D3D11_DSV_DIMENSION::D3D11_DSV_DIMENSION_TEXTURE2DMS;
-		//depth_stincil_view.Flags = 0;
-		//depth_stincil_view.Texture2D.MipSlice = 0;
+		//	D3D11_DEPTH_STENCIL_VIEW_DESC	depth_stincil_view;
+		//	depth_stincil_view.Format = texture_desc.Format;
+		//	depth_stincil_view.ViewDimension = D3D11_DSV_DIMENSION::D3D11_DSV_DIMENSION_TEXTURE2DMS;
+		//	depth_stincil_view.Flags = 0;
+		//	depth_stincil_view.Texture2D.MipSlice = 0;
 
-		//Device::get_device()->CreateDepthStencilView(depth_stencil_buffer.Get(),
-		//	&depth_stincil_view,
-		//	m_depth_view.ReleaseAndGetAddressOf());
+		//	Device::GetDevice()->CreateDepthStencilView(depth_stencil_buffer.Get(),
+		//		&depth_stincil_view,
+		//		m_depth_view.ReleaseAndGetAddressOf());
 
-		//m_resouce->Create(static_cast<u_int>(m_Size.x), static_cast<u_int>(m_Size.x), DXGI_FORMAT_R16G16B16A16_FLOAT);
+		//	m_resouce->Create(static_cast<u_int>(m_Size.x), static_cast<u_int>(m_Size.x), DXGI_FORMAT_R16G16B16A16_FLOAT);
+		//}
 	}
-
 	void	NodeBase::ResouceRender(ImVec2& offset, ImDrawList*	draw_list)
 	{
-		//Device::get_context()->OMSetRenderTargets(1, m_resouce->RenderTargetView.GetAddressOf(), Dxgi::get_dsv().Get());
+		//Device::GetContext()->OMSetRenderTargets(1, m_resouce->RenderTargetView.GetAddressOf(), Dxgi::get_dsv().Get());
 		//float color[4] = { 1,0,0,0 };
-		//Device::get_context()->ClearRenderTargetView(m_resouce->RenderTargetView.Get(), color);
-		//Device::get_context()->ClearDepthStencilView(Dxgi::get_dsv().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-		//Device::get_context()->PSSetShaderResources(0, 1, m_resouce->ShaderResourceView.GetAddressOf());
-		//m_preview->render(0, math::FVector2(0, 0), math::FVector2(m_Size.x, m_Size.x), 0, FixColor::Red);
+		//Device::GetContext()->ClearRenderTargetView(m_resouce->RenderTargetView.Get(), color);
+		//Device::GetContext()->ClearDepthStencilView(Dxgi::get_dsv().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+		//Device::GetContext()->PSSetShaderResources(0, 1, m_resouce->ShaderResourceView.GetAddressOf());
+		//m_preview->Render(math::FVector2(0, 0), math::FVector2(m_Size.x, m_Size.x),0, FixColor::Red);
 		//draw_list->ChannelsSetCurrent(4); // input_slot
 		//ImGui::SetCursorScreenPos(ImVec2(m_Pos.x + offset.x, m_Pos.y + m_Size.y + offset.y));
 		//ImGui::Image(m_resouce->ShaderResourceView.Get(), ImVec2(m_Size.x, m_Size.x), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1, 1, 1, 1), ImVec4(0, 0, 0, 1));
@@ -331,7 +334,7 @@ namespace	epion::NodeCustom
 			m_Size = { 55.0f*m_inputs_count ,55.0f*m_inputs_count };
 		}
 
-		//ResouceInit();
+		ResouceInit();
 	}
 	void	NodeBase::Update(ImVec2& offset, ImDrawList*	draw_list)
 	{
@@ -356,7 +359,7 @@ namespace	epion::NodeCustom
 		ImGui::SetWindowFontScale(1.0f);
 		ImGui::TextColored(ImColor::Vec4::WHITE, "%s", m_Name.c_str());
 
-	//	ResouceRender( offset, 	draw_list);
+	ResouceRender( offset, 	draw_list);
 	//	RenderTarget::set(m_resouce->RenderTargetView, Dxgi::get_dsv());
 	////			Device::get_context()->PSSetShaderResources(0, 1, m_resouce->ShaderResourceView.GetAddressOf());
 	//	m_preview->render(0, math::FVector2(0, 0), math::FVector2(m_Size.x, m_Size.x), 0, FixColor::Red);

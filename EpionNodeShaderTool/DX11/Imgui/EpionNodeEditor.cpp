@@ -15,6 +15,7 @@
 
 #include	"grid.h"
 #include	"../../ImguiFunction.h"
+#include	"../../Node/NodeParam.h"
 #include	"../../Node/NodeData.h"
 #include	"../../Node/MasterNode.h"
 #include	"../../Node/PBRNode.h"

@@ -3,7 +3,7 @@
 #include	<cereal/types/polymorphic.hpp>
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
-
+#include	"NodeParam.h"
 #include	"NodeData.h"
 #include	"InputBasicNode.h"
 #include	"../epion_string.h"
@@ -401,10 +401,9 @@ namespace	epion::NodeCustom
 		{
 			m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		}
-		m_output_name.push_back("Time(1)");
-
-		m_output_name.push_back("Sin Time(1)");
-		m_output_name.push_back("Cos Time(1)");
+		m_output_name.push_back("Time");
+		m_output_name.push_back("Sin Time");
+		m_output_name.push_back("Cos Time");
 		//m_output_name.push_back("Sin Time(1)");
 		//m_output_name.push_back("Sin Time(1)");
 

@@ -1,9 +1,9 @@
-#include	<string>
-#include	<utility>
+#include	"../All.h"
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
 #include	<cereal/cereal.hpp>
 #include	<cereal/types/polymorphic.hpp>
+#include	"NodeParam.h"
 #include	"NodeData.h"
 #include	"MathDerivativeNode.h"
 #include	"../epion_string.h"

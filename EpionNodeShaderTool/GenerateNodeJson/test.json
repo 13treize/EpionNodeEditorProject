@@ -2,75 +2,21 @@
     "node_param": [
         {
             "polymorphic_id": 2147483649,
-            "polymorphic_name": "epion::NodeCustom::Vector3Node",
-            "ptr_wrapper": {
-                "valid": 1,
-                "data": {
-                    "value0": {
-                        "m_Name": "Vector3Node",
-                        "m_ID": 0,
-                        "m_Pos": {
-                            "x": 696,
-                            "y": 500
-                        },
-                        "m_dynamic_slot_type": 1,
-                        "m_inputs_count": 3,
-                        "m_outputs_count": 1,
-                        "m_function_call_str": "    float3 Vector3_num0=float3(1.000000,1.000000,1.000000);\n"
-                    },
-                    "input_num": {
-                        "cereal_class_version": 0,
-                        "x": 1,
-                        "y": 1,
-                        "z": 1
-                    }
-                }
-            }
-        },
-        {
-            "polymorphic_id": 2147483650,
-            "polymorphic_name": "epion::NodeCustom::VoronoiNode",
-            "ptr_wrapper": {
-                "valid": 1,
-                "data": {
-                    "value0": {
-                        "m_Name": "Voronoi",
-                        "m_ID": 1,
-                        "m_Pos": {
-                            "x": 466,
-                            "y": 266
-                        },
-                        "m_dynamic_slot_type": 1,
-                        "m_inputs_count": 3,
-                        "m_outputs_count": 3,
-                        "m_function_call_str": "    float Volonoi_out1;\n    float Volonoi_cell1;\n    float Volonoi_line1;\n    Voronoi(Twirl_out3,8.000000,9.000000,Volonoi_out1,Volonoi_cell1,Volonoi_line1);\n"
-                    },
-                    "UV": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "AngleOffset": 8,
-                    "CellDensity": 9
-                }
-            }
-        },
-        {
-            "polymorphic_id": 2147483651,
             "polymorphic_name": "epion::NodeCustom::UnlitMasterNode",
             "ptr_wrapper": {
                 "valid": 1,
                 "data": {
                     "value0": {
                         "m_Name": "Unlit Master",
-                        "m_ID": 2,
+                        "m_ID": 0,
                         "m_Pos": {
-                            "x": 783,
-                            "y": 236
+                            "x": 989,
+                            "y": 248
                         },
                         "m_dynamic_slot_type": 1,
                         "m_inputs_count": 4,
                         "m_outputs_count": 0,
-                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000, 0.0),Volonoi_out1,1.000000,0.000000);\n"
+                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000, 0.0),SimpleNoise_out1,1.000000,0.000000);\n"
                     },
                     "Pos": {
                         "cereal_class_version": 0,
@@ -80,6 +26,7 @@
                         "w": 0
                     },
                     "color": {
+                        "cereal_class_version": 0,
                         "x": 0,
                         "y": 0,
                         "z": 0
@@ -90,56 +37,40 @@
             }
         },
         {
-            "polymorphic_id": 2147483652,
-            "polymorphic_name": "epion::NodeCustom::TwirlNode",
+            "polymorphic_id": 2147483650,
+            "polymorphic_name": "epion::NodeCustom::SimpleNoiseNode",
             "ptr_wrapper": {
                 "valid": 1,
                 "data": {
                     "value0": {
-                        "m_Name": "Twirl",
-                        "m_ID": 3,
+                        "m_Name": "SimpleNoise",
+                        "m_ID": 1,
                         "m_Pos": {
-                            "x": 120,
-                            "y": 149
+                            "x": 532,
+                            "y": 435
                         },
                         "m_dynamic_slot_type": 1,
-                        "m_inputs_count": 4,
+                        "m_inputs_count": 2,
                         "m_outputs_count": 1,
-                        "m_function_call_str": "    float2 Twirl_out3;\n    Twirl(input.uv,float2(0.500000,0.500000),10.000000,float2(0.000000,0.000000),Twirl_out3);\n"
+                        "m_function_call_str": "    float SimpleNoise_out1;\n    SimpleNoise(input.uv,500.000000,SimpleNoise_out1);\n"
                     },
                     "UV": {
                         "x": 0,
                         "y": 0
                     },
-                    "Center": {
-                        "x": 0.5,
-                        "y": 0.5
-                    },
-                    "Strength": 10,
-                    "Offset": {
-                        "x": 0,
-                        "y": 0
-                    }
+                    "Scale": 500
                 }
             }
         }
     ],
     "link_param": [
         {
-            "m_input.id": 2,
+            "m_input.id": 0,
             "m_input.slot": 1,
             "m_input_type": 9,
             "m_output.id": 1,
             "m_output.slot": 0,
             "m_output_type": 1
-        },
-        {
-            "m_input.id": 1,
-            "m_input.slot": 0,
-            "m_input_type": 8,
-            "m_output.id": 3,
-            "m_output.slot": 0,
-            "m_output_type": 2
         }
     ]
 }

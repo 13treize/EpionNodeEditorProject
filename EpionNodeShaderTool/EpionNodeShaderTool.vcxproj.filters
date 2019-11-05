@@ -503,6 +503,9 @@
     <ClInclude Include="Node\ChannelNode.h">
       <Filter>ヘッダー ファイル\Node\Channel</Filter>
     </ClInclude>
+    <ClInclude Include="Node\NodeParam.h">
+      <Filter>ヘッダー ファイル\Node</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

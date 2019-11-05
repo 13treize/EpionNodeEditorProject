@@ -4,6 +4,8 @@
 #include	"../../../imgui\\imgui_internal.h"
 #include	<cereal/cereal.hpp>
 #include	<cereal/types/polymorphic.hpp>
+#include	"NodeParam.h"
+
 #include	"NodeData.h"
 #include	"MathInterpolation.h"
 #include	"../epion_string.h"

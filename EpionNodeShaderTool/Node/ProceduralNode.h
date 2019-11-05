@@ -41,18 +41,17 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				CEREAL_NVP(UV),
-				CEREAL_NVP(ColorA),
-				CEREAL_NVP(ColorB),
-				CEREAL_NVP(Frequency));
+				CEREAL_NVP(m_uv),
+				CEREAL_NVP(m_colora),
+				CEREAL_NVP(m_colorb),
+				CEREAL_NVP(m_frequency));
 		};
 	private:
-		ColorPicker2	m_color_picker[2];
 		//	input
-		math::FVector2	UV;
-		math::FVector3	ColorA;
-		math::FVector3	ColorB;
-		math::FVector2	Frequency;
+		math::FVector2	m_uv;
+		math::FVector3	m_colora;
+		math::FVector3	m_colorb;
+		math::FVector2	m_frequency;
 	};
 
 	/**
@@ -158,7 +157,5 @@ namespace	epion::NodeCustom
 		float	Width;
 		float	Height;
 		float	Radius;
-
 	};
-
 }

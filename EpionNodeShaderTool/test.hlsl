@@ -10,66 +10,52 @@ cbuffer TimeCBuffer : register(b0)
     float2 ScreenSize;
     float2 Dummy0;
 };
-
-inline float2 voronoi_noise_randomVector(float2 UV, float offset)
-{
-    float2x2 m = float2x2(15.27, 47.63, 99.41, 89.98);
-    UV = frac(sin(mul(UV, m)) * 46839.32);
-    return float2(sin(UV.y * +offset) * 0.5 + 0.5, cos(UV.x * offset) * 0.5 + 0.5);
-}
-void Voronoi(float2 UV, float AngleOffset, float CellDensity, out float Out, out float Cells, out float Lines)
-{
-    float2 g = floor(UV * CellDensity);
-    float2 f = frac(UV * CellDensity);
-    float3 res = float3(8.0, 0.0, 0.0);
-    float2 res2 = float2(8.0, 8.0);
-    for (int y = -1; y <= 1; y++)
-    {
-        for (int x = -1; x <= 1; x++)
-        {
-            float2 lattice = float2(x, y);
-            float2 offset = voronoi_noise_randomVector(lattice + g, AngleOffset);
-            float d = distance(lattice + offset, f);
-            float2 r = lattice +offset -f;
-            float d2 = dot(r,r);
-            if (d < res.x)
-            {
-                res = float3(d, offset.x, offset.y);
-                Out = res.x;
-                Cells = res.y;
-            }
-            else if (d < res.y)
-            {
-                res.y = d; 
-            }
-            if (d2 < res2.x)
-            {
-                res2.y = res2.x;
-                res2.x = d2;
-            }
-            else if (d2 < res2.y)
-            {
-                res2.y = d2; 
-            }
-        }
-    }
-    float2 c = sqrt(res2);
-    Lines = 1.-smoothstep(0.0, 0.1, c.y-c.x);
-}
-
 float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)
 {
     float4 ret_color = float4(Color, Alpha);
     return ret_color;
 };
 
-void Twirl(float2 UV, float2 Center, float Strength, float2 Offset, out float2 Out)
+inline float noise_randomValue(float2 uv)
 {
-    float2 delta = UV - Center;
-    float angle = Strength * length(delta);
-    float x = cos(angle) * delta.x - sin(angle) * delta.y;
-    float y = sin(angle) * delta.x + cos(angle) * delta.y;
-    Out = float2(x + Center.x + Offset.x, y + Center.y + Offset.y);
+    return frac(sin(dot(uv, float2(12.9898, 78.233)))*43758.5453);
+}
+inline float noise_interpolate(float a, float b, float t)
+{
+    return (1.0 - t)*a + (t*b);
+}
+inline float valueNoise(float2 uv)
+{
+    float2 i = floor(uv);
+    float2 f = frac(uv);
+    f = f * f * (3.0 - 2.0 * f);
+    uv = abs(frac(uv) - 0.5);
+    float2 c0 = i + float2(0.0, 0.0);
+    float2 c1 = i + float2(1.0, 0.0);
+    float2 c2 = i + float2(0.0, 1.0);
+    float2 c3 = i + float2(1.0, 1.0);
+    float r0 = noise_randomValue(c0);
+    float r1 = noise_randomValue(c1);
+    float r2 = noise_randomValue(c2);
+    float r3 = noise_randomValue(c3);
+    float bottomOfGrid =noise_interpolate(r0, r1, f.x);
+    float topOfGrid = noise_interpolate(r2, r3, f.x);
+    float t =noise_interpolate(bottomOfGrid, topOfGrid, f.y);
+    return t;
+}
+void SimpleNoise(float2 UV, float Scale, out float Out)
+{
+    float t = 0.0;
+    float freq = pow(2.0, float(0));
+    float amp = pow(0.5, float(3 - 0));
+    t += valueNoise(float2(UV.x*Scale / freq, UV.y*Scale / freq))*amp;
+    freq = pow(2.0, float(1));
+    amp = pow(0.5, float(3 - 1));
+    t += valueNoise(float2(UV.x*Scale / freq, UV.y*Scale / freq))*amp;
+    freq = pow(2.0, float(2));
+    amp = pow(0.5, float(3 - 2));
+    t += valueNoise(float2(UV.x*Scale / freq, UV.y*Scale / freq))*amp;
+    Out = t;
 }
 
 float4 PS(PSInput input) : SV_TARGET
@@ -77,14 +63,9 @@ float4 PS(PSInput input) : SV_TARGET
     float Time_ =Time.x;
     float Sin_Time_ =sin(Time.x);
     float Cos_Time_ =cos(Time.x);
-    float2 Twirl_out3;
-    Twirl(input.uv,float2(0.500000,0.500000),10.000000,float2(0.000000,0.000000),Twirl_out3);
+    float SimpleNoise_out1;
+    SimpleNoise(input.uv,500.000000,SimpleNoise_out1);
 
-    float Volonoi_out1;
-    float Volonoi_cell1;
-    float Volonoi_line1;
-    Voronoi(Twirl_out3,8.000000,9.000000,Volonoi_out1,Volonoi_cell1,Volonoi_line1);
-
-    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000, 0.0),Volonoi_out1,1.000000,0.000000);
+    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000, 0.0),SimpleNoise_out1,1.000000,0.000000);
     return flag_color;
 }

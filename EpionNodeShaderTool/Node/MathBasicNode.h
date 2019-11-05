@@ -9,8 +9,7 @@
 namespace	epion::NodeCustom
 {
 	/**
-	* @brief Add	class
-	* @details ‘«‚µŽZ
+	* @brief +
 	*/
 
 	class	AddNode final :public NodeBase
@@ -40,6 +39,10 @@ namespace	epion::NodeCustom
 		math::FVector4	Num[2];
 	};
 
+	/**
+	* @brief -
+	*/
+
 	class	SubtractNode final :public NodeBase
 	{
 	public:
@@ -67,6 +70,10 @@ namespace	epion::NodeCustom
 		math::FVector4	Num[2];
 	};
 
+	/**
+	* @brief *
+	*/
+
 	class	MultiplyNode final :public NodeBase
 	{
 	public:
@@ -93,6 +100,10 @@ namespace	epion::NodeCustom
 	private:
 		math::FVector4	Num[2];
 	};
+
+	/**
+	* @brief /
+	*/
 
 	class	DivideNode final :public NodeBase
 	{

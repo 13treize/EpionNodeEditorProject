@@ -3,6 +3,7 @@
 #include	<cereal/types/polymorphic.hpp>
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
+#include	"NodeParam.h"
 #include	"NodeData.h"
 #include	"MasterNode.h"
 #include	"../epion_string.h"
@@ -81,8 +82,8 @@ namespace	epion::NodeCustom
 	{
 		std::string set_up_str = "";
 
-		m_input_str[0] = "float4(" + std::to_string(Pos.x) + "," + std::to_string(Pos.y) + "," + std::to_string(Pos.z) + ", 0.0)";
-		m_input_str[1] = "float3(" + std::to_string(color.x) + "," + std::to_string(color.y) + "," + std::to_string(color.z) + ")";
+		m_input_str[0] = NodeFunction::SetInputToString4(Pos);
+		m_input_str[1] = NodeFunction::SetInputToString3(color);
 		m_input_str[2] = std::to_string(Alpha);
 		m_input_str[3] = std::to_string(AlphaChipThreshold);
 
