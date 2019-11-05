@@ -59,16 +59,17 @@ namespace	epion::NodeCustom
 		static std::string SetDefineOutName(std::string	str,int id);
 
 		//ŠÖ”’è‹`
-		static std::string SetRetVar(const std::string& str);
+		static std::string SetFuncCall(const std::string& str);
 
 		//outw’è‚Ìˆø”‚ğ’è‹`
 		static std::string SetDefineOutStr1(const std::string& str);
 		static std::string SetDefineOutStr2(const std::string& str);
 		static std::string SetDefineOutStr3(const std::string& str);
 		static std::string SetDefineOutStr4(const std::string& str);
+		static std::string SetDefineOutDynamic(const std::string& str, SLOT_TYPE type);
 
 		static void InputRectDraw(ImDrawList*	draw_list, ImVec2 pos, SLOT_TYPE type);
-		static std::string GetType(SLOT_TYPE& type);
+		static std::string GetType(SLOT_TYPE type);
 		static std::string GetSlotTypeName(SLOT_TYPE type);
 		static void SetSlotData(math::FVector4& data, std::string& str, SLOT_TYPE type);
 		static void NodeCircle(ImDrawList*	draw_list, const ImVec2& centre, float radius, ImU32 color, SLOT_TYPE type = SLOT_TYPE::VECTOR1);

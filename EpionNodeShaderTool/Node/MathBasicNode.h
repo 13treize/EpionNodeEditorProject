@@ -31,12 +31,12 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("A", Num[0]),
-				cereal::make_nvp("B", Num[1]));
+				cereal::make_nvp("A", m_num[0]),
+				cereal::make_nvp("B", m_num[1]));
 		};
 
 	private:
-		math::FVector4	Num[2];
+		math::FVector4	m_num[2];
 	};
 
 	/**
@@ -62,12 +62,12 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("A", Num[0]),
-				cereal::make_nvp("B", Num[1]));
+				cereal::make_nvp("A", m_num[0]),
+				cereal::make_nvp("B", m_num[1]));
 		};
 
 	private:
-		math::FVector4	Num[2];
+		math::FVector4	m_num[2];
 	};
 
 	/**
@@ -93,12 +93,12 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("A", Num[0]),
-				cereal::make_nvp("B", Num[1]));
+				cereal::make_nvp("A", m_num[0]),
+				cereal::make_nvp("B", m_num[1]));
 		};
 
 	private:
-		math::FVector4	Num[2];
+		math::FVector4	m_num[2];
 	};
 
 	/**
@@ -124,12 +124,12 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("A", Num[0]),
-				cereal::make_nvp("B", Num[1]));
+				cereal::make_nvp("A", m_num[0]),
+				cereal::make_nvp("B", m_num[1]));
 		};
 
 	private:
-		math::FVector4	Num[2];
+		math::FVector4	m_num[2];
 	};
 
 	class	PowerNode	final :public NodeBase
@@ -151,12 +151,12 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("A", Num[0]),
-				cereal::make_nvp("B", Num[1]));
+				cereal::make_nvp("A", m_num[0]),
+				cereal::make_nvp("B", m_num[1]));
 		};
 
 	private:
-		math::FVector4	Num[2];
+		math::FVector4	m_num[2];
 	};
 
 	class	SquareRootNode	final :public NodeBase
@@ -178,11 +178,11 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("In", In));
+				cereal::make_nvp("In", m_in));
 		};
 
 	private:
-		math::FVector4	In;
+		math::FVector4	m_in;
 	};
 
 }

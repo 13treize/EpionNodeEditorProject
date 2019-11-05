@@ -33,9 +33,9 @@ namespace epion::NodeCustom
 
 	void	LerpNode::Init()
 	{
-		Num[0] = { 0.0,0.0 ,0.0 ,0.0 };
-		Num[1] = { 0.0,0.0 ,0.0 ,0.0 };
-		Num[2] = { 0.0,0.0 ,0.0 ,0.0 };
+		m_num[0] = { 0.0,0.0 ,0.0 ,0.0 };
+		m_num[1] = { 0.0,0.0 ,0.0 ,0.0 };
+		m_num[2] = { 0.0,0.0 ,0.0 ,0.0 };
 
 		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
@@ -65,10 +65,10 @@ namespace epion::NodeCustom
 			{
 				switch (m_input_slot_type[i])
 				{
-				case SLOT_TYPE::VECTOR4:	NodeFunction::SetInputSlotFloat(m_input_pos[i], (static_cast<float>(m_input_slot_type[i]) - 3)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[i]) + i * 4), Num[i].w);
-				case SLOT_TYPE::VECTOR3:	NodeFunction::SetInputSlotFloat(m_input_pos[i], (static_cast<float>(m_input_slot_type[i]) - 2)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[i]) - 1 + i * 4), Num[i].z);
-				case SLOT_TYPE::VECTOR2:	NodeFunction::SetInputSlotFloat(m_input_pos[i], (static_cast<float>(m_input_slot_type[i]) - 1)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[i]) - 2 + i * 4), Num[i].y);
-				case SLOT_TYPE::VECTOR1:	NodeFunction::SetInputSlotFloat(m_input_pos[i], (static_cast<float>(m_input_slot_type[i]))		*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[i]) - 3 + i * 4), Num[i].x);
+				case SLOT_TYPE::VECTOR4:	NodeFunction::SetInputSlotFloat(m_input_pos[i], (static_cast<float>(m_input_slot_type[i]) - 3)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[i]) + i * 4), m_num[i].w);
+				case SLOT_TYPE::VECTOR3:	NodeFunction::SetInputSlotFloat(m_input_pos[i], (static_cast<float>(m_input_slot_type[i]) - 2)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[i]) - 1 + i * 4), m_num[i].z);
+				case SLOT_TYPE::VECTOR2:	NodeFunction::SetInputSlotFloat(m_input_pos[i], (static_cast<float>(m_input_slot_type[i]) - 1)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[i]) - 2 + i * 4), m_num[i].y);
+				case SLOT_TYPE::VECTOR1:	NodeFunction::SetInputSlotFloat(m_input_pos[i], (static_cast<float>(m_input_slot_type[i]))		*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[i]) - 3 + i * 4), m_num[i].x);
 					break;
 				}
 			}
@@ -88,9 +88,9 @@ namespace epion::NodeCustom
 		m_Name = "Lerp_" + NodeFunction::GetType(m_input_slot_type[0]);
 		m_out_str[0] = "Lerp_out" + std::to_string(m_ID);
 
-		NodeFunction::SetSlotData(Num[0], m_input_str[0], m_input_slot_type[0]);
-		NodeFunction::SetSlotData(Num[1], m_input_str[1], m_input_slot_type[1]);
-		NodeFunction::SetSlotData(Num[2], m_input_str[2], m_input_slot_type[2]);
+		NodeFunction::SetSlotData(m_num[0], m_input_str[0], m_input_slot_type[0]);
+		NodeFunction::SetSlotData(m_num[1], m_input_str[1], m_input_slot_type[1]);
+		NodeFunction::SetSlotData(m_num[2], m_input_str[2], m_input_slot_type[2]);
 
 		type_set(nodes_ptr, links);
 		m_output_slot_type[0] = m_input_slot_type[0];

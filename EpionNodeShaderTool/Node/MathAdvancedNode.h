@@ -69,12 +69,12 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("A", Num[0]),
-				cereal::make_nvp("B", Num[1]));
+				cereal::make_nvp("A", m_num[0]),
+				cereal::make_nvp("B", m_num[1]));
 		};
 
 	private:
-		math::FVector4	Num[2];
+		math::FVector4	m_num[2];
 	};
 
 	class	NegateNode	final :public NodeBase
@@ -144,12 +144,12 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("In", Num[0]),
-				cereal::make_nvp("Step", Num[1]));
+				cereal::make_nvp("In", m_num[0]),
+				cereal::make_nvp("Step", m_num[1]));
 		};
 
 	private:
-		math::FVector4	Num[2];
+		math::FVector4	m_num[2];
 	};
 
 

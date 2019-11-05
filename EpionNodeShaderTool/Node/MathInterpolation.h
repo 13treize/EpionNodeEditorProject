@@ -19,13 +19,13 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("A", Num[0]),
-				cereal::make_nvp("B", Num[1]),
-				cereal::make_nvp("T", Num[2]));
+				cereal::make_nvp("A", m_num[0]),
+				cereal::make_nvp("B", m_num[1]),
+				cereal::make_nvp("T", m_num[2]));
 		};
 
 	private:
-		math::FVector4	Num[3];
+		math::FVector4	m_num[3];
 	};
 
 }

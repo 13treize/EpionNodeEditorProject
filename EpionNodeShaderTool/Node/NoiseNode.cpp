@@ -287,7 +287,7 @@ namespace	epion::NodeCustom
 		m_input_str[1] = std::to_string(Scale);
 
 		m_function_call_str = "    float " + m_out_str[0] + ";\n";
-		m_function_call_str += NodeFunction::SetRetVar(m_Name);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 		str_set(nodes_ptr, links);
 	}
 	std::string	SimpleNoiseNode::GetFunctionDefStr()

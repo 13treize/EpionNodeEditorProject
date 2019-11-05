@@ -92,12 +92,13 @@ namespace	epion::NodeCustom
 		return str+"_out" + std::to_string(id);
 	}
 
-	std::string NodeFunction::SetRetVar(const std::string& str)	{	return "    " + str + "(";	}
+	std::string NodeFunction::SetFuncCall(const std::string& str)	{	return "    " + str + "(";	}
 
 	std::string NodeFunction::SetDefineOutStr1(const std::string& str){	return	"    float1 " + str + ";\n";}
 	std::string NodeFunction::SetDefineOutStr2(const std::string& str){	return	"    float2 " + str + ";\n";}
 	std::string NodeFunction::SetDefineOutStr3(const std::string& str){	return	"    float3 " + str + ";\n";}
 	std::string NodeFunction::SetDefineOutStr4(const std::string& str){	return	"    float4 " + str + ";\n";}
+	std::string NodeFunction::SetDefineOutDynamic(const std::string& str, SLOT_TYPE type){	return	"    "+ GetType(type)+" " + str + ";\n";}
 
 
 	void NodeFunction::InputRectDraw(ImDrawList*	draw_list, ImVec2 pos, SLOT_TYPE type)
@@ -130,7 +131,7 @@ namespace	epion::NodeCustom
 		}
 
 	}
-	std::string	NodeFunction::GetType(SLOT_TYPE& type)
+	std::string	NodeFunction::GetType(SLOT_TYPE type)
 	{
 		std::string	ret_str = "";
 		switch (type)

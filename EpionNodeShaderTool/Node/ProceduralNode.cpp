@@ -88,7 +88,7 @@ namespace	epion::NodeCustom
 
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr3(m_out_str[0]);
-		m_function_call_str += NodeFunction::SetRetVar(m_Name);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 		str_set(nodes_ptr, links);
 	}
 
@@ -174,7 +174,7 @@ namespace	epion::NodeCustom
 
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
-		m_function_call_str += NodeFunction::SetRetVar(m_Name);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 		str_check(nodes_ptr, links);
 	}
 	//void Ellipse(float2 UV, float2 pos, float Width, float Height, out float Out)
@@ -193,6 +193,7 @@ namespace	epion::NodeCustom
 	}
 #pragma endregion
 
+//TODO Ç±Ç¢Ç¬êRãc
 #pragma region Hexagon
 	HexagonNode::HexagonNode()
 	{
@@ -268,7 +269,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetDefineOutStr2(m_out_str[2]);
 		m_function_call_str += NodeFunction::SetDefineOutStr2(m_out_str[3]);
 
-		m_function_call_str += NodeFunction::SetRetVar(m_Name);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 		str_set(nodes_ptr, links);
 	}
 	std::string	HexagonNode::GetFunctionDefStr()
@@ -277,7 +278,7 @@ namespace	epion::NodeCustom
 			"void Hexagon(float2 UV, float Scale, out float Out, out float2 Pos, out float2 oUV, out float2 Index)\n"
 			"{\n"
 			"    float2 p = UV * Scale;\n"
-			"    p.x *= 1.15470053838;\n"
+	//		"    p.x *= 1.15470053838;\n"
 			"    float isTwo = frac(floor(p.x) / 2.0) * 2.0;\n"
 			"    float isOne = 1.0 - isTwo;\n"
 			"    p.y += isTwo * 0.5;\n"
@@ -368,7 +369,7 @@ namespace	epion::NodeCustom
 
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
-		m_function_call_str += NodeFunction::SetRetVar(m_Name);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 		str_set(nodes_ptr, links);
 	}
 	std::string	PolygonNode::GetFunctionDefStr()
@@ -460,7 +461,7 @@ namespace	epion::NodeCustom
 
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
-		m_function_call_str += NodeFunction::SetRetVar(m_Name);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 		str_check(nodes_ptr, links);
 	}
 	std::string	RippleNode::GetFunctionDefStr()
@@ -543,7 +544,7 @@ namespace	epion::NodeCustom
 
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
-		m_function_call_str += NodeFunction::SetRetVar(m_Name);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 		str_check(nodes_ptr, links);
 	}
 	std::string	RoundedRectangleNode::GetFunctionDefStr()

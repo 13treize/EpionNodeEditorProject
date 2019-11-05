@@ -212,7 +212,6 @@ namespace	epion::NodeCustom
 		float m_scale;
 	};
 
-
 	/**
 	* @brief RoundedRectangle	class
 	* @details	InputSlot 0 UV(VECTOR2)

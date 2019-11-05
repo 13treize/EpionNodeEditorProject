@@ -3,7 +3,6 @@
 #include	"../../../imgui\\imgui_internal.h"
 #include	<cereal/cereal.hpp>
 #include	<cereal/types/polymorphic.hpp>
-//#include	"NodeParam.h"
 #include	"NodeData.h"
 #include	"MathBasicNode.h"
 #include	"../epion_string.h"
@@ -22,6 +21,7 @@ CEREAL_REGISTER_TYPE(epion::NodeCustom::SquareRootNode)
 
 namespace	epion::NodeCustom
 {
+#pragma region Add
 	AddNode::AddNode()
 	{
 		Init();
@@ -39,18 +39,20 @@ namespace	epion::NodeCustom
 
 	void	AddNode::Init()
 	{
-		Num[0] = { 0.0,0.0 ,0.0 ,0.0 };
-		Num[1] = { 0.0,0.0 ,0.0 ,0.0 };
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
+		m_num[0] = { 0.0,0.0 ,0.0 ,0.0 };
+		m_num[1] = { 0.0,0.0 ,0.0 ,0.0 };
+		m_input_slot_type =
+		{
+			SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1
+		};
 
-		m_input_name.push_back("A");
-		m_input_name.push_back("B");
-
+		m_input_name =
+		{
+			"A", "B"
+		};
 
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
-
 		m_node_type = NODE_TYPE::DYNAMIC;
 	}
 
@@ -58,8 +60,8 @@ namespace	epion::NodeCustom
 	{
 		i_update(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
-		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], Num[0], m_input_slot_type[0],	0);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], Num[1], m_input_slot_type[1], 1);
+		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_num[0], m_input_slot_type[0],	0);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_num[1], m_input_slot_type[1], 1);
 	}
 
 	void	AddNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -73,14 +75,14 @@ namespace	epion::NodeCustom
 	void	AddNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_Name = "Add_" + NodeFunction::GetType(m_input_slot_type[0]);
-		m_out_str[0] = "Add_out" + std::to_string(m_ID);
 
-		NodeFunction::SetSlotData(Num[0], m_input_str[0], m_input_slot_type[0]);
-		NodeFunction::SetSlotData(Num[1], m_input_str[1], m_input_slot_type[1]);
+		NodeFunction::SetSlotData(m_num[0], m_input_str[0], m_input_slot_type[0]);
+		NodeFunction::SetSlotData(m_num[1], m_input_str[1], m_input_slot_type[1]);
 
 		m_output_slot_type[0] = m_input_slot_type[0];
-		m_function_call_str = "    " + NodeFunction::GetType(m_output_slot_type[0]) + " " + m_out_str[0] + ";\n";
-		m_function_call_str += "    Add_" + NodeFunction::GetType(m_input_slot_type[0]) + "(";
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutDynamic(m_out_str[0], m_output_slot_type[0]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
 		str_check(nodes_ptr, links);
@@ -93,8 +95,9 @@ namespace	epion::NodeCustom
 			"	Out = A + B;\n"
 			"}\n";
 	};
+#pragma endregion
 
-
+#pragma region Subtract
 	SubtractNode::SubtractNode()
 	{
 		Init();
@@ -110,14 +113,17 @@ namespace	epion::NodeCustom
 
 	void	SubtractNode::Init()
 	{
-		Num[0] = { 0.0,0.0 ,0.0 ,0.0 };
-		Num[1] = { 0.0,0.0 ,0.0 ,0.0 };
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
+		m_num[0] = { 0.0,0.0 ,0.0 ,0.0 };
+		m_num[1] = { 0.0,0.0 ,0.0 ,0.0 };
+		m_input_slot_type =
+		{
+			SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1
+		};
 
-		m_input_name.push_back("A");
-		m_input_name.push_back("B");
-
+		m_input_name =
+		{
+			"A", "B"
+		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
 
@@ -128,21 +134,12 @@ namespace	epion::NodeCustom
 	{
 		i_update(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
-		m_input_name[0] = "A" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
-		m_input_name[1] = "B" + NodeFunction::GetSlotTypeName(m_input_slot_type[1]);
-
-		for (int i = 0; i < m_inputs_count; i++)
-		{
-			if (!m_is_input[i])
-			{
-				NodeFunction::SetInputSlotDynamic(m_input_pos[i], Num[i], m_input_slot_type[i], i);
-			}
-		}
+		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_num[0], m_input_slot_type[0], 0);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_num[1], m_input_slot_type[1], 1);
 	}
 
 	void	SubtractNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
 		if (m_outputs_count != 0)
 		{
 			o_update(offset, draw_list);
@@ -152,14 +149,14 @@ namespace	epion::NodeCustom
 	void	SubtractNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_Name = "Subtract_" + NodeFunction::GetType(m_input_slot_type[0]);
-		m_out_str[0] = "Subtract_out" + std::to_string(m_ID);
 
-		NodeFunction::SetSlotData(Num[0], m_input_str[0], m_input_slot_type[0]);
-		NodeFunction::SetSlotData(Num[1], m_input_str[1], m_input_slot_type[1]);
+		NodeFunction::SetSlotData(m_num[0], m_input_str[0], m_input_slot_type[0]);
+		NodeFunction::SetSlotData(m_num[1], m_input_str[1], m_input_slot_type[1]);
 
 		m_output_slot_type[0] = m_input_slot_type[0];
-		m_function_call_str = "    " + NodeFunction::GetType(m_output_slot_type[0]) + " " + m_out_str[0] + ";\n";
-		m_function_call_str += "    Subtract_" + NodeFunction::GetType(m_input_slot_type[0]) + "(";
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutDynamic(m_out_str[0], m_output_slot_type[0]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
 		str_check(nodes_ptr, links);
@@ -172,7 +169,9 @@ namespace	epion::NodeCustom
 			"	Out = A - B;\n"
 			"}\n";
 	};
+#pragma endregion
 
+#pragma region Multiply
 	MultiplyNode::MultiplyNode()
 	{
 		Init();
@@ -188,14 +187,17 @@ namespace	epion::NodeCustom
 
 	void	MultiplyNode::Init()
 	{
-		Num[0] = { 0.0,0.0 ,0.0 ,0.0 };
-		Num[1] = { 0.0,0.0 ,0.0 ,0.0 };
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
+		m_num[0] = { 0.0,0.0 ,0.0 ,0.0 };
+		m_num[1] = { 0.0,0.0 ,0.0 ,0.0 };
+		m_input_slot_type =
+		{
+			SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1
+		};
 
-		m_input_name.push_back("A");
-		m_input_name.push_back("B");
-
+		m_input_name =
+		{
+			"A", "B"
+		};
 
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
@@ -207,17 +209,8 @@ namespace	epion::NodeCustom
 	{
 		i_update(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
-		m_input_name[0] = "A" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
-		m_input_name[1] = "B" + NodeFunction::GetSlotTypeName(m_input_slot_type[1]);
-		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
-
-		for (int i = 0; i < m_inputs_count; i++)
-		{
-			if (!m_is_input[i])
-			{
-				NodeFunction::SetInputSlotDynamic(m_input_pos[i], Num[i], m_input_slot_type[i], i);
-			}
-		}
+		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_num[0], m_input_slot_type[0], 0);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_num[1], m_input_slot_type[1], 1);
 	}
 
 	void	MultiplyNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -231,14 +224,14 @@ namespace	epion::NodeCustom
 	void	MultiplyNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_Name = "Multiply_" + NodeFunction::GetType(m_input_slot_type[0]);
-		m_out_str[0] = "Multiply_out" + std::to_string(m_ID);
 
-		NodeFunction::SetSlotData(Num[0], m_input_str[0], m_input_slot_type[0]);
-		NodeFunction::SetSlotData(Num[1], m_input_str[1], m_input_slot_type[1]);
+		NodeFunction::SetSlotData(m_num[0], m_input_str[0], m_input_slot_type[0]);
+		NodeFunction::SetSlotData(m_num[1], m_input_str[1], m_input_slot_type[1]);
 
 		m_output_slot_type[0] = m_input_slot_type[0];
-		m_function_call_str = "    " + NodeFunction::GetType(m_output_slot_type[0]) + " " + m_out_str[0] + ";\n";
-		m_function_call_str += "    Multiply_" + NodeFunction::GetType(m_input_slot_type[0]) + "(";
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutDynamic(m_out_str[0], m_output_slot_type[0]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
 		str_check(nodes_ptr, links);
@@ -251,13 +244,15 @@ namespace	epion::NodeCustom
 			"	Out = A * B;\n"
 			"}\n";
 	};
+#pragma endregion
 
+#pragma region Divide
 	DivideNode::DivideNode()
 	{
 		Init();
 	}
 	DivideNode::DivideNode(int id, const math::FVector2& pos)
-		:NodeBase("Divide_", id, pos, size, 2, 1)
+		:NodeBase("Divide", id, pos, size, 2, 1)
 	{
 		Init();
 	}
@@ -266,13 +261,17 @@ namespace	epion::NodeCustom
 	}
 	void	DivideNode::Init()
 	{
-		Num[0] = { 0.0,0.0 ,0.0 ,0.0 };
-		Num[1] = { 0.0,0.0 ,0.0 ,0.0 };
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
+		m_num[0] = { 0.0,0.0 ,0.0 ,0.0 };
+		m_num[1] = { 0.0,0.0 ,0.0 ,0.0 };
+		m_input_slot_type =
+		{
+			SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1
+		};
 
-		m_input_name.push_back("A");
-		m_input_name.push_back("B");
+		m_input_name =
+		{
+			"A", "B"
+		};
 
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
@@ -284,17 +283,8 @@ namespace	epion::NodeCustom
 	{
 		i_update(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
-		m_input_name[0] = "A" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
-		m_input_name[1] = "B" + NodeFunction::GetSlotTypeName(m_input_slot_type[1]);
-		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
-
-		for (int i = 0; i < m_inputs_count; i++)
-		{
-			if (!m_is_input[i])
-			{
-				NodeFunction::SetInputSlotDynamic(m_input_pos[i], Num[i], m_input_slot_type[i], i);
-			}
-		}
+		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_num[0], m_input_slot_type[0], 0);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_num[1], m_input_slot_type[1], 1);
 	}
 
 	void	DivideNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -308,14 +298,14 @@ namespace	epion::NodeCustom
 	void	DivideNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_Name = "Divide_" + NodeFunction::GetType(m_input_slot_type[0]);
-		m_out_str[0] = "Divide_out" + std::to_string(m_ID);
 
-		NodeFunction::SetSlotData(Num[0], m_input_str[0], m_input_slot_type[0]);
-		NodeFunction::SetSlotData(Num[1], m_input_str[1], m_input_slot_type[1]);
+		NodeFunction::SetSlotData(m_num[0], m_input_str[0], m_input_slot_type[0]);
+		NodeFunction::SetSlotData(m_num[1], m_input_str[1], m_input_slot_type[1]);
 
 		m_output_slot_type[0] = m_input_slot_type[0];
-		m_function_call_str = "    " + NodeFunction::GetType(m_output_slot_type[0]) + " " + m_out_str[0] + ";\n";
-		m_function_call_str += "    Divide_" + NodeFunction::GetType(m_input_slot_type[0]) + "(";
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutDynamic(m_out_str[0], m_output_slot_type[0]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
 		str_check(nodes_ptr, links);
@@ -328,13 +318,16 @@ namespace	epion::NodeCustom
 			"	Out = A / B;\n"
 			"}\n";
 	};
+#pragma endregion
+
+#pragma region Power
 
 	PowerNode::PowerNode()
 	{
 		Init();
 	}
 	PowerNode::PowerNode(int id, const math::FVector2& pos)
-		:NodeBase("Power_float", id, pos, size, 2, 1)
+		:NodeBase("Power", id, pos, size, 2, 1)
 	{
 		Init();
 	}
@@ -343,13 +336,17 @@ namespace	epion::NodeCustom
 	}
 	void	PowerNode::Init()
 	{
-		Num[0] = { 0.0,0.0 ,0.0 ,0.0 };
-		Num[1] = { 0.0,0.0 ,0.0 ,0.0 };
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
+		m_num[0] = { 0.0,0.0 ,0.0 ,0.0 };
+		m_num[1] = { 0.0,0.0 ,0.0 ,0.0 };
+		m_input_slot_type =
+		{
+			SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1
+		};
 
-		m_input_name.push_back("A");
-		m_input_name.push_back("B");
+		m_input_name =
+		{
+			"A", "B"
+		};
 
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
@@ -361,17 +358,9 @@ namespace	epion::NodeCustom
 	{
 		i_update(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
-		m_input_name[0] = "A" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
-		m_input_name[1] = "B" + NodeFunction::GetSlotTypeName(m_input_slot_type[1]);
-		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
 
-		for (int i = 0; i < m_inputs_count; i++)
-		{
-			if (!m_is_input[i])
-			{
-				NodeFunction::SetInputSlotDynamic(m_input_pos[i], Num[i], m_input_slot_type[i], i);
-			}
-		}
+		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_num[0], m_input_slot_type[0], 0);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_num[1], m_input_slot_type[1], 1);
 	}
 
 	void	PowerNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -384,20 +373,20 @@ namespace	epion::NodeCustom
 
 	void	PowerNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_Name = "PowerNode_" + NodeFunction::GetType(m_input_slot_type[0]);
-		m_out_str[0] = "PowerNode_out" + std::to_string(m_ID);
+		m_Name = "Power_" + NodeFunction::GetType(m_input_slot_type[0]);
 
-		NodeFunction::SetSlotData(Num[0], m_input_str[0], m_input_slot_type[0]);
-		NodeFunction::SetSlotData(Num[1], m_input_str[1], m_input_slot_type[1]);
+		NodeFunction::SetSlotData(m_num[0], m_input_str[0], m_input_slot_type[0]);
+		NodeFunction::SetSlotData(m_num[1], m_input_str[1], m_input_slot_type[1]);
 
-		type_set(nodes_ptr, links);
 		m_output_slot_type[0] = m_input_slot_type[0];
-		m_function_call_str = "    " + NodeFunction::GetType(m_output_slot_type[0]) + " " + m_out_str[0] + ";\n";
-		m_function_call_str += "    Power_" + NodeFunction::GetType(m_input_slot_type[0]) + "(";
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutDynamic(m_out_str[0], m_output_slot_type[0]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
 		str_check(nodes_ptr, links);
 	}
+
 	std::string	PowerNode::GetFunctionDefStr()
 	{
 		return
@@ -406,14 +395,16 @@ namespace	epion::NodeCustom
 			"	Out = pow(A, B);\n"
 			"}\n";
 	};
+#pragma endregion
 
+#pragma region SquareRoot
 
 	SquareRootNode::SquareRootNode()
 	{
 		Init();
 	}
 	SquareRootNode::SquareRootNode(int id, const math::FVector2& pos)
-		:NodeBase("SquareRoot_float", id, pos, size, 1, 1)
+		:NodeBase("SquareRoot", id, pos, size, 1, 1)
 	{
 		Init();
 	}
@@ -422,7 +413,7 @@ namespace	epion::NodeCustom
 	}
 	void	SquareRootNode::Init()
 	{
-		In = { 0.0,0.0 ,0.0 ,0.0 };
+		m_in = { 0.0,0.0 ,0.0 ,0.0 };
 
 		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_input_name.push_back("In");
@@ -437,13 +428,8 @@ namespace	epion::NodeCustom
 	{
 		i_update(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
-		m_input_name[0] = "In" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
-		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
+		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0]);
 
-		if (!m_is_input[0])
-		{
-			NodeFunction::SetInputSlotDynamic(m_input_pos[0], In, m_input_slot_type[0]);
-		}
 	}
 
 	void	SquareRootNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -457,16 +443,17 @@ namespace	epion::NodeCustom
 	void	SquareRootNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_Name = "SquareRoot_" + NodeFunction::GetType(m_input_slot_type[0]);
-		m_out_str[0] = "SquareRoot_out" + std::to_string(m_ID);
 
-		NodeFunction::SetSlotData(In, m_input_str[0], m_input_slot_type[0]);
+		NodeFunction::SetSlotData(m_in, m_input_str[0], m_input_slot_type[0]);
 
 		m_output_slot_type[0] = m_input_slot_type[0];
-		m_function_call_str = "    " + NodeFunction::GetType(m_output_slot_type[0]) + " " + m_out_str[0] + ";\n";
-		m_function_call_str += "    SquareRoot_" + NodeFunction::GetType(m_input_slot_type[0]) + "(";
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutDynamic(m_out_str[0], m_output_slot_type[0]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
 		str_check(nodes_ptr, links);
+
 	}
 	std::string	SquareRootNode::GetFunctionDefStr()
 	{
@@ -476,4 +463,6 @@ namespace	epion::NodeCustom
 			"	Out = sqrt(In);\n"
 			"}\n";
 	};
+#pragma endregion
+
 }
