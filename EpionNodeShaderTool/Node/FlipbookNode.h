@@ -22,16 +22,16 @@ namespace	epion::NodeCustom
 			archive(
 				cereal::base_class<NodeBase>(this),
 				CEREAL_NVP(UV),
-				CEREAL_NVP(Width),
-				CEREAL_NVP(Height),
+				CEREAL_NVP(m_width),
+				CEREAL_NVP(m_height),
 				CEREAL_NVP(Tile),
 				CEREAL_NVP(Invert));
 		};
 
 	private:
 		math::FVector2	UV;
-		float	Width;
-		float	Height;
+		float	m_width;
+		float	m_height;
 		float	Tile;
 		math::FVector2	Invert;
 

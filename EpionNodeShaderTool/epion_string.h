@@ -13,18 +13,18 @@ namespace	epion
 		static void to_char(const wchar_t* str, char* ret, unsigned int	max_size = 256);
 
 		//string → wstring
-		static	std::wstring	to_wstring(std::string	str);
+		static	std::wstring	to_wstring(const std::string&	str);
 
 		//wstring → string
 		static void to_string(std::wstring str, std::string ret, unsigned int	max_size = 256);
 
 		//	引数からファイルパスを取得
-		static	std::string		get_file_path(std::string	file_name);
-		static	std::wstring	get_file_path(std::wstring	file_name);
+		static	std::string		get_file_path(const std::string&	file_name);
+		static	std::wstring	get_file_path(const std::wstring&	file_name);
 
 
 		//	引数の拡張子を取得
-		static	std::string	get_extension(std::string	str_);
+		static	std::string	get_extension(const std::string&	str_);
 
 		//std::to_string FVector2
 		static	std::string		to_string2(epion::math::FVector2&	vec2, std::string	str = ",");

@@ -3,7 +3,7 @@
 #include	"../../../imgui\\imgui_internal.h"
 #include	<cereal/cereal.hpp>
 #include	<cereal/types/polymorphic.hpp>
-#include	"NodeParam.h"
+//#include	"NodeParam.h"
 #include	"NodeData.h"
 #include	"MathBasicNode.h"
 #include	"../epion_string.h"
@@ -58,22 +58,12 @@ namespace	epion::NodeCustom
 	{
 		i_update(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
-		m_input_name[0] = "A" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
-		m_input_name[1] = "B" + NodeFunction::GetSlotTypeName(m_input_slot_type[1]);
-
-
-		for (int i = 0; i < m_inputs_count; i++)
-		{
-			if (!m_is_input[i])
-			{
-				NodeFunction::SetInputSlotDynamic(m_input_pos[i], Num[i], m_input_slot_type[i],	i);
-			}
-		}
+		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], Num[0], m_input_slot_type[0],	0);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], Num[1], m_input_slot_type[1], 1);
 	}
 
 	void	AddNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
 		if (m_outputs_count != 0)
 		{
 			o_update(offset, draw_list);

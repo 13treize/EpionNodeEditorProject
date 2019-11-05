@@ -45,7 +45,9 @@ namespace	epion::NodeCustom
 		static std::string SetInputToString4(math::FVector4 str);
 
 
-		static void SetInputSlotFloat(ImVec2& set_cursor, float x, std::string label, float& num);
+		static void SetInputSlotFloat(ImVec2& set_cursor, const std::string& label, float& num);
+		static void SetInputSlotFloat(ImVec2& set_cursor, float x, const std::string& label, float& num);
+
 		static void SetInputSlotFloat2(ImVec2& set_cursor, math::FVector2& num, int label_num = 0);
 		static void SetInputSlotUV(ImVec2& set_cursor);
 		static void SetInputSlotColor(ImVec2& set_cursor, bool& popup, math::FVector3& num, int label_num = 0);
@@ -56,20 +58,19 @@ namespace	epion::NodeCustom
 		//引数にNodeのnameとid、nameに関してはDynamic時考慮
 		static std::string SetDefineOutName(std::string	str,int id);
 
+		//関数定義
+		static std::string SetRetVar(const std::string& str);
+
 		//out指定の引数を定義
-		static std::string SetDefineOutStr1(std::string	str);
-		static std::string SetDefineOutStr2(std::string	str);
-		static std::string SetDefineOutStr3(std::string	str);
-		static std::string SetDefineOutStr4(std::string	str);
+		static std::string SetDefineOutStr1(const std::string& str);
+		static std::string SetDefineOutStr2(const std::string& str);
+		static std::string SetDefineOutStr3(const std::string& str);
+		static std::string SetDefineOutStr4(const std::string& str);
 
 		static void InputRectDraw(ImDrawList*	draw_list, ImVec2 pos, SLOT_TYPE type);
-
 		static std::string GetType(SLOT_TYPE& type);
-
 		static std::string GetSlotTypeName(SLOT_TYPE type);
-
 		static void SetSlotData(math::FVector4& data, std::string& str, SLOT_TYPE type);
-
 		static void NodeCircle(ImDrawList*	draw_list, const ImVec2& centre, float radius, ImU32 color, SLOT_TYPE type = SLOT_TYPE::VECTOR1);
 	};
 
@@ -305,9 +306,10 @@ namespace	epion::NodeCustom
 
 		/*
 			ColorPicker
+			//ポインタやstlにするとエラー,CheckerboardでMax2つ使用の暫定処置
 		*/
-		std::vector<ColorPicker2>	m_color_picker;
-		std::vector<bool>			m_open_popup;
+		ColorPicker2	m_color_picker[2];
+		bool			m_open_popup[2];
 		/*
 		hlsl生成
 		*/

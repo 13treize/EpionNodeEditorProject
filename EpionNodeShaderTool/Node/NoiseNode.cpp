@@ -189,7 +189,7 @@ namespace	epion::NodeCustom
 		m_input_str[1] = std::to_string(Scale);
 
 		m_function_call_str = "    float " + m_out_str[0] + ";\n";
-		m_function_call_str += "    GradientNoise_float(";
+		m_function_call_str += "    GradientNoise(";
 
 		str_set(nodes_ptr, links);
 
@@ -216,7 +216,7 @@ namespace	epion::NodeCustom
 			"    fp = fp * fp * fp * (fp * (fp * 6 - 15) + 10);\n"
 			"    return lerp(lerp(d00, d01, fp.y), lerp(d10, d11, fp.y), fp.x);\n"
 			"}\n"
-			"void GradientNoise_float(float2 UV, float Scale, out float Out)\n"
+			"void GradientNoise(float2 UV, float Scale, out float Out)\n"
 			"{\n"
 			"    Out = gradientNoise(UV * Scale) + 0.5;\n"
 			"}\n";
@@ -287,7 +287,7 @@ namespace	epion::NodeCustom
 		m_input_str[1] = std::to_string(Scale);
 
 		m_function_call_str = "    float " + m_out_str[0] + ";\n";
-		m_function_call_str += "    SimpleNoise(";
+		m_function_call_str += NodeFunction::SetRetVar(m_Name);
 		str_set(nodes_ptr, links);
 	}
 	std::string	SimpleNoiseNode::GetFunctionDefStr()

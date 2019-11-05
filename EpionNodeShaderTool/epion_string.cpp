@@ -32,7 +32,7 @@ namespace	epion
 	}
 
 	//string → wstring
-	std::wstring	StringConverter::to_wstring(std::string str)
+	std::wstring	StringConverter::to_wstring(const std::string&	str)
 	{
 		std::filesystem::path	get_str = str;
 		return	get_str.wstring();
@@ -48,14 +48,14 @@ namespace	epion
 	}
 
 	//	引数からファイルパスを取得
-	std::string	StringConverter::get_file_path(std::string	file_name)
+	std::string	StringConverter::get_file_path(const std::string&	file_name)
 	{
 		std::filesystem::path	file_path = file_name;
 		file_path.remove_filename();
 		return	file_path.string();
 	}
 
-	std::wstring	StringConverter::get_file_path(std::wstring	file_name)
+	std::wstring	StringConverter::get_file_path(const std::wstring&	file_name)
 	{
 		std::filesystem::path	file_path = file_name;
 		file_path.remove_filename();
@@ -63,7 +63,7 @@ namespace	epion
 	}
 
 	//	引数の拡張子を取得
-	std::string	StringConverter::get_extension(std::string	str_)
+	std::string	StringConverter::get_extension(const std::string&	str_)
 	{
 		std::filesystem::path	file_extension = str_;
 		auto	ext_str = file_extension.extension();

@@ -33,28 +33,19 @@ namespace	epion::NodeCustom
 	NodeStates::~NodeStates()
 	{
 	}
-	std::string	NodeFunction::SetInputToString(float str)
-	{
-		return	 std::to_string(str);
+	std::string	NodeFunction::SetInputToString(float str) { return std::to_string(str);}
+	std::string	NodeFunction::SetInputToString2(math::FVector2 str) { return "float2(" + StringConverter::to_string2(str, ",") + ")";}
+	std::string	NodeFunction::SetInputToString3(math::FVector3 str) { return "float3(" + StringConverter::to_string3(str, ",") + ")";}
+	std::string	NodeFunction::SetInputToString4(math::FVector4 str) { return "float4(" + StringConverter::to_string4(str, ",") + ")";}
 
+	void NodeFunction::SetInputSlotFloat(ImVec2& set_cursor, const std::string& label, float& num)
+	{
+		ImGui::SetCursorScreenPos(set_cursor + ImVec2(SLOT_INPUT_POS_X, -SLOT_INPUT_FLOAT));
+		ImGui::SetNextItemWidth(30.0f);
+		ImGui::InputFloat(label.c_str(), &num, 0.0f, 1.0f, "%.2f");
 	}
 
-	std::string	NodeFunction::SetInputToString2(math::FVector2 str)
-	{
-		return	 "float2(" + StringConverter::to_string2(str, ",") + ")";
-	}
-
-	std::string	NodeFunction::SetInputToString3(math::FVector3 str)
-	{
-		return	 "float3(" + StringConverter::to_string3(str, ",") + ")";
-	}
-
-	std::string	NodeFunction::SetInputToString4(math::FVector4 str)
-	{
-		return	 "float4(" + StringConverter::to_string4(str, ",") + ")";
-	}
-
-	void NodeFunction::SetInputSlotFloat(ImVec2& set_cursor, float x, std::string label, float& num)
+	void NodeFunction::SetInputSlotFloat(ImVec2& set_cursor, float x, const std::string& label, float& num)
 	{
 		ImGui::SetCursorScreenPos(set_cursor + ImVec2(x, -SLOT_INPUT_FLOAT));
 		ImGui::SetNextItemWidth(30.0f);
@@ -101,23 +92,12 @@ namespace	epion::NodeCustom
 		return str+"_out" + std::to_string(id);
 	}
 
-	std::string NodeFunction::SetDefineOutStr1(std::string	str)
-	{
-		return	"    float1 " + str + ";\n";
-	}
-	std::string NodeFunction::SetDefineOutStr2(std::string	str)
-	{
-		return	"    float2 " + str + ";\n";
-	}
-	std::string NodeFunction::SetDefineOutStr3(std::string	str)
-	{
-		return	"    float3 " + str + ";\n";
-	}
-	std::string NodeFunction::SetDefineOutStr4(std::string	str)
-	{
-		return	"    float4 " + str + ";\n";
-	}
+	std::string NodeFunction::SetRetVar(const std::string& str)	{	return "    " + str + "(";	}
 
+	std::string NodeFunction::SetDefineOutStr1(const std::string& str){	return	"    float1 " + str + ";\n";}
+	std::string NodeFunction::SetDefineOutStr2(const std::string& str){	return	"    float2 " + str + ";\n";}
+	std::string NodeFunction::SetDefineOutStr3(const std::string& str){	return	"    float3 " + str + ";\n";}
+	std::string NodeFunction::SetDefineOutStr4(const std::string& str){	return	"    float4 " + str + ";\n";}
 
 
 	void NodeFunction::InputRectDraw(ImDrawList*	draw_list, ImVec2 pos, SLOT_TYPE type)

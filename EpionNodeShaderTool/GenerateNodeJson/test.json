@@ -10,13 +10,13 @@
                         "m_Name": "Unlit Master",
                         "m_ID": 0,
                         "m_Pos": {
-                            "x": 989,
-                            "y": 248
+                            "x": 959,
+                            "y": 303
                         },
                         "m_dynamic_slot_type": 1,
                         "m_inputs_count": 4,
                         "m_outputs_count": 0,
-                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000, 0.0),SimpleNoise_out1,1.000000,0.000000);\n"
+                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),SimpleNoise_out1,1.000000,0.000000);\n"
                     },
                     "Pos": {
                         "cereal_class_version": 0,
@@ -46,29 +46,174 @@
                         "m_Name": "SimpleNoise",
                         "m_ID": 1,
                         "m_Pos": {
-                            "x": 532,
-                            "y": 435
+                            "x": 737,
+                            "y": 345
                         },
                         "m_dynamic_slot_type": 1,
                         "m_inputs_count": 2,
                         "m_outputs_count": 1,
-                        "m_function_call_str": "    float SimpleNoise_out1;\n    SimpleNoise(input.uv,500.000000,SimpleNoise_out1);\n"
+                        "m_function_call_str": "    float SimpleNoise_out1;\n    SimpleNoise(HexagonPos_out2,Add_out4,SimpleNoise_out1);\n"
                     },
                     "UV": {
                         "x": 0,
                         "y": 0
                     },
-                    "Scale": 500
+                    "Scale": 6
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483651,
+            "polymorphic_name": "epion::NodeCustom::HexagonNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Hexagon",
+                        "m_ID": 2,
+                        "m_Pos": {
+                            "x": 391,
+                            "y": 55
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_inputs_count": 2,
+                        "m_outputs_count": 4,
+                        "m_function_call_str": "    float1 HexagonOut_out2;\n    float2 HexagonPos_out2;\n    float2 HexagonScale_out2;\n    float2 HexagonIndex_out2;\n    Hexagon(input.uv,10.000000,HexagonOut_out2,HexagonPos_out2,HexagonScale_out2,HexagonIndex_out2);\n"
+                    },
+                    "m_uv": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "m_scale": 10
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483652,
+            "polymorphic_name": "epion::NodeCustom::TimeNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "TimeNode",
+                        "m_ID": 3,
+                        "m_Pos": {
+                            "x": -16,
+                            "y": 299
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_inputs_count": 0,
+                        "m_outputs_count": 3,
+                        "m_function_call_str": ""
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483653,
+            "polymorphic_name": "epion::NodeCustom::AddNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Add_float",
+                        "m_ID": 4,
+                        "m_Pos": {
+                            "x": 531,
+                            "y": 337
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_inputs_count": 2,
+                        "m_outputs_count": 1,
+                        "m_function_call_str": "    float Add_out4;\n    Add_float(400.000000,Multiply_out5,Add_out4);\n"
+                    },
+                    "A": {
+                        "x": 400,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "B": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483654,
+            "polymorphic_name": "epion::NodeCustom::MultiplyNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Multiply_float",
+                        "m_ID": 5,
+                        "m_Pos": {
+                            "x": 304,
+                            "y": 404
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_inputs_count": 2,
+                        "m_outputs_count": 1,
+                        "m_function_call_str": "    float Multiply_out5;\n    Multiply_float(100.000000,Cos_Time_,Multiply_out5);\n"
+                    },
+                    "A": {
+                        "x": 100,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "B": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    }
                 }
             }
         }
     ],
     "link_param": [
         {
+            "m_input.id": 1,
+            "m_input.slot": 0,
+            "m_input_type": 8,
+            "m_output.id": 2,
+            "m_output.slot": 1,
+            "m_output_type": 2
+        },
+        {
             "m_input.id": 0,
             "m_input.slot": 1,
             "m_input_type": 9,
             "m_output.id": 1,
+            "m_output.slot": 0,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 1,
+            "m_input.slot": 1,
+            "m_input_type": 1,
+            "m_output.id": 4,
+            "m_output.slot": 0,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 5,
+            "m_input.slot": 1,
+            "m_input_type": 1,
+            "m_output.id": 3,
+            "m_output.slot": 2,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 4,
+            "m_input.slot": 1,
+            "m_input_type": 1,
+            "m_output.id": 5,
             "m_output.slot": 0,
             "m_output_type": 1
         }

@@ -12,20 +12,17 @@ namespace
 	const ImVec2	size(0, 0);
 }
 
-//TODO repplenode
-//float2 p = (input.uv * 2.0 - 1.0);
-//float3 col = float3(1.0,1.0,1.0);
-//float2 centre = float2(0.0, 0.0);
-//float s = sin(10.0 * distance(p, centre));
-//float3 c =s;
-//col = c;
 CEREAL_REGISTER_TYPE(epion::NodeCustom::CheckerboardNode)
 CEREAL_REGISTER_TYPE(epion::NodeCustom::EllipseNode)
+CEREAL_REGISTER_TYPE(epion::NodeCustom::HexagonNode)
 CEREAL_REGISTER_TYPE(epion::NodeCustom::PolygonNode)
+CEREAL_REGISTER_TYPE(epion::NodeCustom::RippleNode)
 CEREAL_REGISTER_TYPE(epion::NodeCustom::RoundedRectangleNode)
 
 namespace	epion::NodeCustom
 {
+//”s–kŽÒ‚ÌƒR[ƒh
+#pragma region Checkerboard
 	CheckerboardNode::CheckerboardNode()
 	{
 		Init();
@@ -59,13 +56,10 @@ namespace	epion::NodeCustom
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR3);
 		m_output_name.push_back("Out");
 
-		m_color_picker.resize(2);
 		m_color_picker[0].Init("1", "ColorA");
 		m_color_picker[1].Init("2", "ColorB");
-		m_open_popup =
-		{
-			false, false
-		};
+		m_open_popup[0] = false;
+		m_open_popup[1] = false;
 
 		m_node_type = NODE_TYPE::NORMAL;
 	}
@@ -94,7 +88,7 @@ namespace	epion::NodeCustom
 
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr3(m_out_str[0]);
-		m_function_call_str += "    Checkerboard(";
+		m_function_call_str += NodeFunction::SetRetVar(m_Name);
 		str_set(nodes_ptr, links);
 	}
 
@@ -115,7 +109,9 @@ namespace	epion::NodeCustom
 			"    Out = lerp(ColorA, ColorB, alpha.xxx);\n"
 			"}\n";
 	}
+#pragma endregion
 
+#pragma region Ellipse
 	EllipseNode::EllipseNode()
 	{
 		Init();
@@ -133,22 +129,22 @@ namespace	epion::NodeCustom
 
 	void	EllipseNode::Init()
 	{
-		UV = { 0,0 };
-		Width = 1.0f;
-		Height = 1.0f;
+		m_uv = { 0,0 };
+		m_width = 1.0f;
+		m_height = 1.0f;
 
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR2);
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-
+		m_input_slot_type=
+		{
+			SLOT_TYPE::UV, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1
+		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 
 		//node	slot name
-		m_input_name.push_back("UV(2)");
-		m_input_name.push_back("Width(1)");
-		m_input_name.push_back("Height(1)");
-
-		m_output_name.push_back("Out(1)");
+		m_input_name =
+		{
+			"UV", "Width", "Height"
+		};
+		m_output_name.push_back("Out");
 
 		m_node_type = NODE_TYPE::NORMAL;
 	}
@@ -158,8 +154,8 @@ namespace	epion::NodeCustom
 		i_update(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], SLOT_INPUT_POS_X, StringConverter::get_space(1), Width);
-		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], SLOT_INPUT_POS_X, StringConverter::get_space(2), Height);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_width);
+		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_height);
 	}
 
 	void	EllipseNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -172,14 +168,13 @@ namespace	epion::NodeCustom
 
 	void	EllipseNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
-
 		m_input_str[0] = "input.uv";
-		m_input_str[1] = std::to_string(Width);
-		m_input_str[2] = std::to_string(Height);
+		m_input_str[1] = std::to_string(m_width);
+		m_input_str[2] = std::to_string(m_height);
 
-		m_function_call_str = "    float " + m_out_str[0] + ";\n";
-		m_function_call_str += "    Ellipse(";
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
+		m_function_call_str += NodeFunction::SetRetVar(m_Name);
 		str_check(nodes_ptr, links);
 	}
 	//void Ellipse(float2 UV, float2 pos, float Width, float Height, out float Out)
@@ -196,7 +191,115 @@ namespace	epion::NodeCustom
 			"    Out = saturate((1 - d) / fwidth(d));\n"
 			"}\n";
 	}
+#pragma endregion
 
+#pragma region Hexagon
+	HexagonNode::HexagonNode()
+	{
+		Init();
+	}
+	HexagonNode::HexagonNode(int id, const math::FVector2& pos)
+		:NodeBase("Hexagon", id, pos, size, 2, 4)
+	{
+		Init();
+	}
+
+	HexagonNode::~HexagonNode()
+	{
+	}
+
+	void	HexagonNode::Init()
+	{
+		m_uv = { 0,0 };
+		m_scale = 1.0f;
+		m_input_slot_type =
+		{
+			SLOT_TYPE::UV, SLOT_TYPE::VECTOR1
+		};
+		m_output_slot_type =
+		{
+			SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR2,
+		};
+
+		//node	slot name
+		m_input_name =
+		{
+			"UV", "Scale"
+		};
+		m_output_name=
+		{
+			"Out","Pos","UV","Index"
+		};
+
+		m_node_type = NODE_TYPE::NORMAL;
+	}
+
+	void	HexagonNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	{
+		i_update(offset, draw_list);
+		draw_list->ChannelsSetCurrent(1);
+
+		if (m_inputs_count != 0)
+		{
+			if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+			if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_scale);
+		}
+	}
+
+	void	HexagonNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	{
+		if (m_outputs_count > 0)
+		{
+			o_update(offset, draw_list);
+		}
+	}
+
+	void	HexagonNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
+	{
+		m_input_str[0] = "input.uv";
+		m_input_str[1] = std::to_string(m_scale);
+
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name+"Out", m_ID);
+		m_out_str[1] = NodeFunction::SetDefineOutName(m_Name+"Pos", m_ID);
+		m_out_str[2] = NodeFunction::SetDefineOutName(m_Name+"Scale", m_ID);
+		m_out_str[3] = NodeFunction::SetDefineOutName(m_Name+"Index", m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
+		m_function_call_str += NodeFunction::SetDefineOutStr2(m_out_str[1]);
+		m_function_call_str += NodeFunction::SetDefineOutStr2(m_out_str[2]);
+		m_function_call_str += NodeFunction::SetDefineOutStr2(m_out_str[3]);
+
+		m_function_call_str += NodeFunction::SetRetVar(m_Name);
+		str_set(nodes_ptr, links);
+	}
+	std::string	HexagonNode::GetFunctionDefStr()
+	{
+		return
+			"void Hexagon(float2 UV, float Scale, out float Out, out float2 Pos, out float2 oUV, out float2 Index)\n"
+			"{\n"
+			"    float2 p = UV * Scale;\n"
+			"    p.x *= 1.15470053838;\n"
+			"    float isTwo = frac(floor(p.x) / 2.0) * 2.0;\n"
+			"    float isOne = 1.0 - isTwo;\n"
+			"    p.y += isTwo * 0.5;\n"
+			"    float2 rectUV = frac(p);\n"
+			"    float2 grid = floor(p);\n"
+			"    p = frac(p) - 0.5;\n"
+			"    float2 s = sign(p);\n"
+			"    p = abs(p);\n"
+			"    Out = abs(max(p.x * 1.5 + p.y, p.y * 2.0) - 1.0);\n"
+			"    float isInHex = step(p.x * 1.5 + p.y, 1.0);\n"
+			"    float isOutHex = 1.0 - isInHex;\n"
+			"    float2 grid2 = float2(0, 0);\n"
+			"    grid2 = lerp(float2(s.x, +step(0.0, s.y)), float2(s.x, -step(s.y, 0.0)), isTwo) *isOutHex;\n"
+			"    Index = grid + grid2;\n"
+			"    Pos = Index / Scale;\n"
+			"    oUV = lerp(rectUV, rectUV - s * float2(1.0, 0.5), isOutHex);\n"
+			"}\n";
+	}
+
+#pragma endregion
+
+#pragma region Polygon
 	PolygonNode::PolygonNode()
 	{
 		Init();
@@ -214,25 +317,22 @@ namespace	epion::NodeCustom
 
 	void	PolygonNode::Init()
 	{
-		UV = { 0,0 };
-		Sides = 4.0f;
-		Width = 1.0f;
-		Height = 1.0f;
-
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR2);
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-
+		m_uv = { 0,0 };
+		m_sides = 4.0f;
+		m_width = 1.0f;
+		m_height = 1.0f;
+		m_input_slot_type =
+		{
+			SLOT_TYPE::UV, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1
+		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 
 		//node	slot name
-		m_input_name.push_back("UV(2)");
-		m_input_name.push_back("Sides(1)");
-		m_input_name.push_back("Width(1)");
-		m_input_name.push_back("Height(1)");
-
-		m_output_name.push_back("Out(1)");
+		m_input_name =
+		{
+			"UV"," Sides", "Width", "Height"
+		};
+		m_output_name.push_back("Out");
 
 		m_node_type = NODE_TYPE::NORMAL;
 	}
@@ -245,9 +345,9 @@ namespace	epion::NodeCustom
 		if (m_inputs_count != 0)
 		{
 			if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-			if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], SLOT_INPUT_POS_X, StringConverter::get_space(1), Sides);
-			if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], SLOT_INPUT_POS_X, StringConverter::get_space(2), Width);
-			if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], SLOT_INPUT_POS_X, StringConverter::get_space(3), Height);
+			if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1],StringConverter::get_space(1), m_sides);
+			if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2],StringConverter::get_space(2), m_width);
+			if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3],StringConverter::get_space(3), m_height);
 		}
 	}
 
@@ -262,14 +362,13 @@ namespace	epion::NodeCustom
 	void	PolygonNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_input_str[0] = "input.uv";
-		m_input_str[1] = std::to_string(Sides);
-		m_input_str[2] = std::to_string(Width);
-		m_input_str[3] = std::to_string(Height);
+		m_input_str[1] = std::to_string(m_sides);
+		m_input_str[2] = std::to_string(m_width);
+		m_input_str[3] = std::to_string(m_height);
 
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
-
-		m_function_call_str = "    float " + m_out_str[0] + ";\n";
-		m_function_call_str += "    Polygon(";
+		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
+		m_function_call_str += NodeFunction::SetRetVar(m_Name);
 		str_set(nodes_ptr, links);
 	}
 	std::string	PolygonNode::GetFunctionDefStr()
@@ -288,7 +387,95 @@ namespace	epion::NodeCustom
 			"    Out = saturate((1 - distance) / fwidth(distance));\n"
 			"}\n";
 	}
+#pragma endregion
 
+#pragma region Ripple
+	RippleNode::RippleNode()
+	{
+		Init();
+	}
+
+	RippleNode::RippleNode(int id, const math::FVector2& pos)
+		:NodeBase("Ripple", id, pos, size, 5, 1)
+	{
+		Init();
+	}
+
+	RippleNode::~RippleNode()
+	{
+	}
+
+	void	RippleNode::Init()
+	{
+		m_uv = { 0,0 };
+		m_width = 1.0f;
+		m_height = 1.0f;
+		m_center = {0,0};
+		m_scale=1.0f;
+
+		m_input_slot_type =
+		{
+			SLOT_TYPE::UV, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR2, SLOT_TYPE::VECTOR1
+		};
+
+		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
+
+		m_input_name =
+		{
+			"UV", "Width", "Height", "Center", "Scale"
+		};
+
+		m_output_name.push_back("Out");
+
+		m_node_type = NODE_TYPE::NORMAL;
+	}
+
+	void	RippleNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	{
+		i_update(offset, draw_list);
+		draw_list->ChannelsSetCurrent(1);
+
+		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_width);
+		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_height);
+		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3],m_center,3);
+		if (!m_is_input[4])	NodeFunction::SetInputSlotFloat(m_input_pos[4], StringConverter::get_space(4), m_scale);
+	}
+
+	void	RippleNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	{
+		if (m_outputs_count > 0)
+		{
+			o_update(offset, draw_list);
+		}
+	}
+
+	void	RippleNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
+	{
+		m_input_str[0] = "input.uv";
+		m_input_str[1] = std::to_string(m_width);
+		m_input_str[2] = std::to_string(m_height);
+		m_input_str[3] = NodeFunction::SetInputToString2(m_center);
+		m_input_str[4] = std::to_string(m_scale);
+
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
+		m_function_call_str += NodeFunction::SetRetVar(m_Name);
+		str_check(nodes_ptr, links);
+	}
+	std::string	RippleNode::GetFunctionDefStr()
+	{
+		return
+		"void Ripple(float2 UV, float Width, float Height, float2 Center, float Scale, out float Out)\n"
+		"{\n"
+		"    float2 p = (UV * 2.0 - 1.0) / float2(Width, Height);\n"
+		"    Out = sin(Scale * distance(p, Center));\n"
+		"}\n";
+	}
+
+#pragma endregion
+
+#pragma region RoundedRectangle
 	RoundedRectangleNode::RoundedRectangleNode()
 	{
 		Init();
@@ -306,25 +493,24 @@ namespace	epion::NodeCustom
 
 	void	RoundedRectangleNode::Init()
 	{
-		UV = { 0,0 };
-		Width = 1.0f;
-		Height = 1.0f;
-		Radius = 1.0f;
+		m_uv = { 0,0 };
+		m_width = 1.0f;
+		m_height = 1.0f;
+		m_radius = 1.0f;
 
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR2);
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-
+		m_input_slot_type=
+		{
+			SLOT_TYPE::UV, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1
+		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 
 		//node	slot name
-		m_input_name.push_back("UV(2)");
-		m_input_name.push_back("Width(1)");
-		m_input_name.push_back("Height(1)");
-		m_input_name.push_back("Radius(1)");
+		m_input_name=
+		{
+			"UV", "Width", "Height", "Radius"
+		};
 
-		m_output_name.push_back("Out(1)");
+		m_output_name.push_back("Out");
 
 		m_node_type = NODE_TYPE::NORMAL;
 	}
@@ -334,27 +520,10 @@ namespace	epion::NodeCustom
 		i_update(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
 
-		if (!m_is_input[0])
-		{
-			NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		}
-
-		if (!m_is_input[1])
-		{
-			NodeFunction::SetInputSlotFloat(m_input_pos[1], SLOT_INPUT_POS_X, StringConverter::get_space(1), Width);
-		}
-
-		if (!m_is_input[2])
-		{
-			NodeFunction::SetInputSlotFloat(m_input_pos[2], SLOT_INPUT_POS_X, StringConverter::get_space(2), Height);
-		}
-
-		if (!m_is_input[3])
-		{
-			NodeFunction::SetInputSlotFloat(m_input_pos[3], SLOT_INPUT_POS_X, StringConverter::get_space(3), Radius);
-		}
-
-
+		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_width);
+		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_height);
+		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::get_space(3), m_radius);
 	}
 
 	void	RoundedRectangleNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -368,14 +537,13 @@ namespace	epion::NodeCustom
 	void	RoundedRectangleNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_input_str[0] = "input.uv";
-		m_input_str[1] = std::to_string(Width);
-		m_input_str[2] = std::to_string(Height);
-		m_input_str[3] = std::to_string(Radius);
+		m_input_str[1] = std::to_string(m_width);
+		m_input_str[2] = std::to_string(m_height);
+		m_input_str[3] = std::to_string(m_radius);
 
-		m_out_str[0] = "RoundedRectangle_out" + std::to_string(m_ID);
-
-		m_function_call_str = "    float " + m_out_str[0] + ";\n";
-		m_function_call_str += "    RoundedRectangle(";
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
+		m_function_call_str += NodeFunction::SetRetVar(m_Name);
 		str_check(nodes_ptr, links);
 	}
 	std::string	RoundedRectangleNode::GetFunctionDefStr()
@@ -389,5 +557,6 @@ namespace	epion::NodeCustom
 			"    Out = saturate((1 - d) / fwidth(d));\n"
 			"}\n";
 	}
+#pragma endregion
 
 }

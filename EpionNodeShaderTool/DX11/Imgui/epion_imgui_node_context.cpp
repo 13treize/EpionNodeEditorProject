@@ -317,17 +317,12 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("ProceduralMenu"))
 			{
-				if (ImGui::MenuItem("Checkerboard"))
-				{
-					NodeEditor::nodes.push_back(std::make_unique<CheckerboardNode>(m_create_count, math::FVector2(m_offfset.x, m_offfset.y)));
-					m_create_count++;
-					m_is_open_menu[Procedural] = false;
-				}
-
-				//MenuCreateNode<CheckerboardNode>("Checkerboard", m_offfset, m_create_count, m_is_open_menu[Procedural]);
+				MenuCreateNode<CheckerboardNode>("Checkerboard", m_offfset, m_create_count, m_is_open_menu[Procedural]);
 				MenuCreateNode<EllipseNode>("Ellipse", m_offfset, m_create_count, m_is_open_menu[Procedural]);
-				MenuCreateNode<RoundedRectangleNode>("RoundedRectangle", m_offfset, m_create_count, m_is_open_menu[Procedural]);
+				MenuCreateNode<HexagonNode>("Hexagon", m_offfset, m_create_count, m_is_open_menu[Procedural]);
 				MenuCreateNode<PolygonNode>("Polygon", m_offfset, m_create_count, m_is_open_menu[Procedural]);
+				MenuCreateNode<RippleNode>("Ripple", m_offfset, m_create_count, m_is_open_menu[Procedural]);
+				MenuCreateNode<RoundedRectangleNode>("RoundedRectangle", m_offfset, m_create_count, m_is_open_menu[Procedural]);
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
