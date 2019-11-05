@@ -10,13 +10,13 @@
                         "m_Name": "Unlit Master",
                         "m_ID": 0,
                         "m_Pos": {
-                            "x": 910,
-                            "y": 486
+                            "x": 716,
+                            "y": 363
                         },
                         "m_dynamic_slot_type": 1,
                         "m_inputs_count": 4,
                         "m_outputs_count": 0,
-                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),HexagonOut_out1,1.000000,0.000000);\n"
+                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),VoronoiCell_out1,1.000000,0.000000);\n"
                     },
                     "Pos": {
                         "cereal_class_version": 0,
@@ -38,27 +38,28 @@
         },
         {
             "polymorphic_id": 2147483650,
-            "polymorphic_name": "epion::NodeCustom::HexagonNode",
+            "polymorphic_name": "epion::NodeCustom::VoronoiNode",
             "ptr_wrapper": {
                 "valid": 1,
                 "data": {
                     "value0": {
-                        "m_Name": "Hexagon",
+                        "m_Name": "Voronoi",
                         "m_ID": 1,
                         "m_Pos": {
-                            "x": 366,
-                            "y": 444
+                            "x": 196,
+                            "y": 371
                         },
                         "m_dynamic_slot_type": 1,
-                        "m_inputs_count": 2,
-                        "m_outputs_count": 4,
-                        "m_function_call_str": "    float1 HexagonOut_out1;\n    float2 HexagonPos_out1;\n    float2 HexagonScale_out1;\n    float2 HexagonIndex_out1;\n    Hexagon(input.uv,2.000000,HexagonOut_out1,HexagonPos_out1,HexagonScale_out1,HexagonIndex_out1);\n"
+                        "m_inputs_count": 3,
+                        "m_outputs_count": 3,
+                        "m_function_call_str": "    float1 VoronoiOut_out1;\n    float1 VoronoiCell_out1;\n    float1 VoronoiLine_out1;\n    Voronoi(input.uv,6.000000,5.000000,VoronoiOut_out1,VoronoiCell_out1,VoronoiLine_out1);\n"
                     },
-                    "m_uv": {
+                    "UV": {
                         "x": 0,
                         "y": 0
                     },
-                    "m_scale": 2
+                    "AngleOffset": 6,
+                    "CellDensity": 5
                 }
             }
         }
@@ -69,7 +70,7 @@
             "m_input.slot": 1,
             "m_input_type": 9,
             "m_output.id": 1,
-            "m_output.slot": 0,
+            "m_output.slot": 1,
             "m_output_type": 1
         }
     ]

@@ -3,7 +3,6 @@
 #include	<cereal/types/polymorphic.hpp>
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
-#include	"NodeParam.h"
 #include	"NodeData.h"
 #include	"NoiseNode.h"
 #include	"../epion_string.h"
@@ -20,6 +19,7 @@ CEREAL_REGISTER_TYPE(epion::NodeCustom::VoronoiNode)
 
 namespace	epion::NodeCustom
 {
+#pragma region FBM
 	FBMNode::FBMNode()
 	{
 		Init();
@@ -37,17 +37,17 @@ namespace	epion::NodeCustom
 
 	void FBMNode::Init()
 	{
-		UV = { 0,0 };
-		Amplitude=0.5f;
-		Frequency=2.0f;
+		UV = { 0, 0 };
+		Amplitude = 0.5f;
+		Frequency = 2.0f;
 
 		m_input_slot_type =
 		{
-			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR1,SLOT_TYPE::VECTOR1,
+			SLOT_TYPE::UV, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1,
 		};
 		m_input_name =
 		{
-			"UV(2)","Amplitude(1)","Frequency(1)",
+			"UV","Amplitude","Frequency",
 		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
@@ -58,19 +58,9 @@ namespace	epion::NodeCustom
 		i_update(offset, draw_list);
 
 		draw_list->ChannelsSetCurrent(1);
-		if (!m_is_input[0])
-		{
-			NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		}
-		if (!m_is_input[1])
-		{
-			NodeFunction::SetInputSlotFloat(m_input_pos[1], SLOT_INPUT_POS_X, StringConverter::get_space(1),Amplitude);
-		}
-		if (!m_is_input[2])
-		{
-			NodeFunction::SetInputSlotFloat(m_input_pos[2], SLOT_INPUT_POS_X, StringConverter::get_space(2), Frequency);
-		}
-
+		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), Amplitude);
+		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), Frequency);
 	}
 
 	void	FBMNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -83,36 +73,33 @@ namespace	epion::NodeCustom
 
 	void	FBMNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = "FBM_out" + std::to_string(m_ID);
-
 		m_input_str[0] = "input.uv";
 		m_input_str[1] = std::to_string(Amplitude);
 		m_input_str[2] = std::to_string(Frequency);
 
-		m_function_call_str = "    float " + m_out_str[0] + ";\n";
-		m_function_call_str += "    fbm(";
-
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 		str_set(nodes_ptr, links);
-
 	}
 	std::string	FBMNode::GetFunctionDefStr()
 	{
 		return
-		"float fbm_rand(float2 n)\n"
-		"{\n"
-		"    return frac(sin(dot(n, float2(12.9898, 4.1414))) * 43758.5453);\n"
-		"}\n"
-		"float fbm_noise(float2 p)\n"
-		"{\n"
-		"    float2 ip = floor(p);\n"
-		"    float2 u = frac(p);\n"
-		"    u = u * u * (3.0 - 2.0 * u);\n"
-		"    float res = lerp(\n"
-		"        lerp(fbm_rand(ip), fbm_rand(ip + float2(1.0, 0.0)), u.x),\n"
-		"        lerp(fbm_rand(ip + float2(0.0, 1.0)), fbm_rand(ip + float2(1.0, 1.0)), u.x), u.y);\n"
-		"    return res * res;\n"
-		"}\n"
-			"void fbm(float2 uv, float amplitude, float frequency, out float Out)\n"
+			"float fbm_rand(float2 n)\n"
+			"{\n"
+			"    return frac(sin(dot(n, float2(12.9898, 4.1414))) * 43758.5453);\n"
+			"}\n"
+			"float fbm_noise(float2 p)\n"
+			"{\n"
+			"    float2 ip = floor(p);\n"
+			"    float2 u = frac(p);\n"
+			"    u = u * u * (3.0 - 2.0 * u);\n"
+			"    float res = lerp(\n"
+			"        lerp(fbm_rand(ip), fbm_rand(ip + float2(1.0, 0.0)), u.x),\n"
+			"        lerp(fbm_rand(ip + float2(0.0, 1.0)), fbm_rand(ip + float2(1.0, 1.0)), u.x), u.y);\n"
+			"    return res * res;\n"
+			"}\n"
+			"void FBM(float2 uv, float amplitude, float frequency, out float Out)\n"
 			"{\n"
 			"    float2 p = (uv * 2.0 - 1.0);\n"
 			"    float result = 0.;\n"
@@ -127,7 +114,9 @@ namespace	epion::NodeCustom
 			"    Out = result;\n"
 			"}\n";
 	}
+#pragma endregion
 
+#pragma region GradientNoise
 	GradientNoiseNode::GradientNoiseNode()
 	{
 		Init();
@@ -152,7 +141,7 @@ namespace	epion::NodeCustom
 		};
 		m_input_name =
 		{
-			"UV(2)","Scale(1)",
+			"UV","Scale",
 		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
@@ -163,14 +152,8 @@ namespace	epion::NodeCustom
 		i_update(offset, draw_list);
 
 		draw_list->ChannelsSetCurrent(1);
-		if (!m_is_input[0])
-		{
-			NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		}
-		if (!m_is_input[1])
-		{
-			NodeFunction::SetInputSlotFloat(m_input_pos[1], SLOT_INPUT_POS_X, StringConverter::get_space(1), Scale);
-		}
+		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), Scale);
 	}
 
 	void	GradientNoiseNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -183,15 +166,13 @@ namespace	epion::NodeCustom
 
 	void	GradientNoiseNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = "Gradient_out" + std::to_string(m_ID);
-
 		m_input_str[0] = "input.uv";
 		m_input_str[1] = std::to_string(Scale);
 
-		m_function_call_str = "    float " + m_out_str[0] + ";\n";
-		m_function_call_str += "    GradientNoise(";
-
-		str_set(nodes_ptr, links);
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
+		str_check(nodes_ptr, links);
 
 	}
 	std::string	GradientNoiseNode::GetFunctionDefStr()
@@ -205,7 +186,7 @@ namespace	epion::NodeCustom
 			"    x = frac(x / 41) * 2 - 1;\n"
 			"    return normalize(float2(x - floor(x + 0.5), abs(x) - 0.5));\n"
 			"}\n"
-			"float gradientNoise(float2 p)\n"
+			"float gradient_noise(float2 p)\n"
 			"{\n"
 			"    float2 ip = floor(p);\n"
 			"    float2 fp = frac(p);\n"
@@ -218,10 +199,12 @@ namespace	epion::NodeCustom
 			"}\n"
 			"void GradientNoise(float2 UV, float Scale, out float Out)\n"
 			"{\n"
-			"    Out = gradientNoise(UV * Scale) + 0.5;\n"
+			"    Out = gradient_noise(UV * Scale) + 0.5;\n"
 			"}\n";
 	}
+#pragma endregion
 
+#pragma region SimpleNoise
 	SimpleNoiseNode::SimpleNoiseNode()
 	{
 		Init();
@@ -241,17 +224,18 @@ namespace	epion::NodeCustom
 	void	SimpleNoiseNode::Init()
 	{
 		UV = { 0,0 };
-		Scale = 500;
-		m_input_slot_type.push_back(SLOT_TYPE::UV);
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-
+		Scale = 500.0f;
+		m_input_slot_type =
+		{
+			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR1,
+		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		//node	slot name
-		m_input_name.push_back("UV(2)");
-		m_input_name.push_back("Scale(1)");
-
-		m_output_name.push_back("Out(1)");
-
+		m_input_name =
+		{
+			"UV","Scale"
+		};
+		m_output_name.push_back("Out");
 	}
 
 	void	SimpleNoiseNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -266,7 +250,7 @@ namespace	epion::NodeCustom
 
 		if (!m_is_input[1])
 		{
-			NodeFunction::SetInputSlotFloat(m_input_pos[1], SLOT_INPUT_POS_X, StringConverter::get_space(1), Scale);
+			NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), Scale);
 		}
 	}
 
@@ -280,15 +264,13 @@ namespace	epion::NodeCustom
 
 	void	SimpleNoiseNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = "SimpleNoise_out" + std::to_string(m_ID);
-
-
 		m_input_str[0] = "input.uv";
 		m_input_str[1] = std::to_string(Scale);
 
-		m_function_call_str = "    float " + m_out_str[0] + ";\n";
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_set(nodes_ptr, links);
+		str_check(nodes_ptr, links);
 	}
 	std::string	SimpleNoiseNode::GetFunctionDefStr()
 	{
@@ -335,6 +317,10 @@ namespace	epion::NodeCustom
 			"    Out = t;\n"
 			"}\n";
 	}
+#pragma endregion
+
+	//TODO êRãc
+#pragma region Voronoi
 
 	VoronoiNode::VoronoiNode()
 	{
@@ -358,7 +344,7 @@ namespace	epion::NodeCustom
 		CellDensity = 1.0f;
 		m_input_name =
 		{
-			"UV(2)",	"AngleOffset(1)",	"CellDensity(1)"
+			"UV",	"AngleOffset",	"CellDensity"
 		};
 		m_input_slot_type =
 		{
@@ -366,10 +352,10 @@ namespace	epion::NodeCustom
 		};
 		m_output_name =
 		{
-			"Out(1)",	"Cells(1)",	"Lines(1)"
+			"Out",	"Cells",	"Lines"
 		};
 
-		m_output_slot_type=
+		m_output_slot_type =
 		{
 			SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR1
 		};
@@ -381,21 +367,9 @@ namespace	epion::NodeCustom
 	{
 		i_update(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
-
-		if (!m_is_input[0])
-		{
-			NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		}
-
-		if (!m_is_input[1])
-		{
-			NodeFunction::SetInputSlotFloat(m_input_pos[1], SLOT_INPUT_POS_X, StringConverter::get_space(1), AngleOffset);
-		}
-
-		if (!m_is_input[2])
-		{
-			NodeFunction::SetInputSlotFloat(m_input_pos[2], SLOT_INPUT_POS_X, StringConverter::get_space(2), CellDensity);
-		}
+		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), AngleOffset);
+		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), CellDensity);
 	}
 
 	void	VoronoiNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -405,24 +379,18 @@ namespace	epion::NodeCustom
 
 	void	VoronoiNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = "Volonoi_out" + std::to_string(m_ID);
-		m_out_str[1] = "Volonoi_cell" + std::to_string(m_ID);
-		m_out_str[2] = "Volonoi_line" + std::to_string(m_ID);
-
-
 		m_input_str[0] = "input.uv";
 		m_input_str[1] = std::to_string(AngleOffset);
 		m_input_str[2] = std::to_string(CellDensity);
 
-		//outéwíËÇ…ëŒÇ∑ÇÈíËã`
-		m_function_call_str = "    float " + m_out_str[0] + ";\n";
-		m_function_call_str += "    float " + m_out_str[1] + ";\n";
-		m_function_call_str += "    float " + m_out_str[2] + ";\n";
-
-		//call
-		m_function_call_str += "    Voronoi(";
-		//å^ÇçáÇÌÇπÇÈ
-		str_set(nodes_ptr, links);
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name + "Out", m_ID);
+		m_out_str[1] = NodeFunction::SetDefineOutName(m_Name + "Cell", m_ID);
+		m_out_str[2] = NodeFunction::SetDefineOutName(m_Name + "Line", m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
+		m_function_call_str += NodeFunction::SetDefineOutStr1(m_out_str[1]);
+		m_function_call_str += NodeFunction::SetDefineOutStr1(m_out_str[2]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
+		str_check(nodes_ptr, links);
 	}
 	std::string	VoronoiNode::GetFunctionDefStr()
 	{
@@ -477,4 +445,6 @@ namespace	epion::NodeCustom
 			"    Lines = 1.-smoothstep(0.0, 0.1, c.y-c.x);\n"
 			"}\n";
 	}
+#pragma endregion
+
 }

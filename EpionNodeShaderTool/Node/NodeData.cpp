@@ -94,7 +94,7 @@ namespace	epion::NodeCustom
 
 	std::string NodeFunction::SetFuncCall(const std::string& str)	{	return "    " + str + "(";	}
 
-	std::string NodeFunction::SetDefineOutStr1(const std::string& str){	return	"    float1 " + str + ";\n";}
+	std::string NodeFunction::SetDefineOutStr1(const std::string& str){	return	"    float " + str + ";\n";}
 	std::string NodeFunction::SetDefineOutStr2(const std::string& str){	return	"    float2 " + str + ";\n";}
 	std::string NodeFunction::SetDefineOutStr3(const std::string& str){	return	"    float3 " + str + ";\n";}
 	std::string NodeFunction::SetDefineOutStr4(const std::string& str){	return	"    float4 " + str + ";\n";}
