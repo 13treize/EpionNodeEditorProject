@@ -149,11 +149,42 @@ namespace	epion
 		return true;
 	}
 
-	bool TextureFile::SaveTexture(std::string name,	std::string ext, com_ptr<ID3D11Texture2D>& texture)
+	bool TextureFile::SaveTexture(std::string name, com_ptr<ID3D11Texture2D>& texture)
+	{
+		HRESULT hr = {};
+		//出力画像
+		DirectX::ScratchImage output_image = {};
+		GUID guid;
+
+		std::filesystem::path	file_extension	=name;
+		//ファイル拡張子を取得
+		auto	ext_str = file_extension.extension();
+
+		//png
+		if (ext_str == ".png")
+			guid = GUID_ContainerFormatPng;
+		//jpg
+		else if (ext_str == ".jpg")
+		{
+			guid = GUID_ContainerFormatJpeg;
+		}
+		//読み込み失敗
+		else
+		{
+			return false;
+		}
+		hr = DirectX::CaptureTexture(Device::GetDevice().Get(), Device::GetContext().Get(), texture.Get(), output_image);
+		if (FAILED(hr)) return false;
+		hr = DirectX::SaveToWICFile(*output_image.GetImages(), 0, guid, StringConverter::to_wstring(name).c_str());
+		if (FAILED(hr)) return false;
+		return true;
+	}
+
+	bool TextureFile::SaveTexture(std::string name, std::string ext, com_ptr<ID3D11Texture2D>& texture)
 	{
 		HRESULT hr = {};
 		DirectX::ScratchImage output_image = {};//出力画像
-		GUID guid;//ファイル拡張子に対応したやつ、よくわからん
+		GUID guid;
 		Extension extension = ExtensionGet(ext);
 
 		switch (extension)
@@ -163,7 +194,9 @@ namespace	epion
 		}
 		std::string tex = name + ext;
 		hr = DirectX::CaptureTexture(Device::GetDevice().Get(), Device::GetContext().Get(), texture.Get(), output_image);
+		if (FAILED(hr)) return false;
 		hr = DirectX::SaveToWICFile(*output_image.GetImages(), 0, guid, StringConverter::to_wstring(tex).c_str());
+		if (FAILED(hr)) return false;
 		return true;
 	}
 	Extension TextureFile::ExtensionGet(std::string extension)
@@ -172,7 +205,6 @@ namespace	epion
 		else if (extension == ".jpg")return Extension::JPG;
 
 		return Extension::NONE;
-
 	}
 
 	math::Vector2<float>	Texture::get_mata_data()

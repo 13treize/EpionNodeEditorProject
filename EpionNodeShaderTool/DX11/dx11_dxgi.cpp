@@ -118,7 +118,7 @@ namespace	epion
 		Device::GetContext()->ClearDepthStencilView(depth_stencil_view.Get(), D3D11_CLEAR_FLAG::D3D11_CLEAR_DEPTH | D3D11_CLEAR_FLAG::D3D11_CLEAR_STENCIL, 1.0f, 0);
 	}
 
-	void	epion::Dxgi::end()
+	void	epion::Dxgi::End()
 	{
 		gi_swapchain->Present(0, 0);
 	}

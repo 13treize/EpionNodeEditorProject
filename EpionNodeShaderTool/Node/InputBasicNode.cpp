@@ -132,7 +132,7 @@ namespace	epion::NodeCustom
 		m_input_str[1] = std::to_string(m_num.y);
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		str_check(nodes_ptr, links);
-		m_function_call_str = "    float2 " + m_out_str[0] + "=" + "float2("+m_input_str[0] + "," + m_input_str[1]+");\n";
+		m_function_call_str = NodeFunction::SetVarFloat2(m_input_str[0], m_input_str[1], m_out_str[0]);
 	}
 
 	std::string	Vector2Node::GetFunctionDefStr()

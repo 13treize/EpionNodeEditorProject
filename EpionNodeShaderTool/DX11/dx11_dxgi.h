@@ -49,7 +49,7 @@ namespace	epion
 	public:
 		static	void	set(math::FVector2&	win_size_);
 		static	void	begin(std::array<float, 4>&	colordata_);
-		static	void	end();
+		static	void	End();
 
 		static	ViewPort&	get_view_port()
 		{

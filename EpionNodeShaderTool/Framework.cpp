@@ -64,7 +64,7 @@ namespace	epion
 		ImguiMain::get_inst().Render();
 
 		ImguiManager::end();
-		Dxgi::end();
+		Dxgi::End();
 
 	}
 

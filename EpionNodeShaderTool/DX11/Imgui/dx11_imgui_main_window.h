@@ -35,6 +35,8 @@ namespace	epion
 
 
 		std::unique_ptr<Texture>	m_preview_resouce;
+		bool	is_reset;
+
 	};
 
 	class	Preview	final

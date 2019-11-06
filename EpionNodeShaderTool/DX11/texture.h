@@ -49,11 +49,10 @@ namespace	epion
 	class	TextureFile	final
 	{
 	public:
-		static	bool	LoadTexture(
-			std::wstring	load_texture,
-			DirectX::TexMetadata&	metadata,
-			DirectX::ScratchImage&	image,
-			com_ptr<ID3D11ShaderResourceView>& srv);
+		static	bool	LoadTexture(std::wstring load_texture, DirectX::TexMetadata& metadata, DirectX::ScratchImage& image, com_ptr<ID3D11ShaderResourceView>& srv);
+
+
+		static bool	SaveTexture(std::string name, com_ptr<ID3D11Texture2D>& texture);
 
 		static bool	SaveTexture(std::string name, std::string extension, com_ptr<ID3D11Texture2D>& texture);
 	private:

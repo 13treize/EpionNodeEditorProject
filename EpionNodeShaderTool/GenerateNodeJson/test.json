@@ -10,13 +10,13 @@
                         "m_Name": "Unlit Master",
                         "m_ID": 0,
                         "m_Pos": {
-                            "x": 821,
-                            "y": 353
+                            "x": 680,
+                            "y": 272
                         },
                         "m_dynamic_slot_type": 1,
                         "m_inputs_count": 4,
                         "m_outputs_count": 0,
-                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Float_out1,1.000000,0.000000);\n"
+                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),float3(PolarCoordinates_out1, 0.0),1.000000,0.000000);\n"
                     },
                     "Pos": {
                         "cereal_class_version": 0,
@@ -38,49 +38,32 @@
         },
         {
             "polymorphic_id": 2147483650,
-            "polymorphic_name": "epion::NodeCustom::FloatNode",
+            "polymorphic_name": "epion::NodeCustom::PolarCoordinatesNode",
             "ptr_wrapper": {
                 "valid": 1,
                 "data": {
                     "value0": {
-                        "m_Name": "Float",
+                        "m_Name": "PolarCoordinates",
                         "m_ID": 1,
                         "m_Pos": {
-                            "x": 508,
-                            "y": 386
+                            "x": 124,
+                            "y": 268
                         },
                         "m_dynamic_slot_type": 1,
-                        "m_inputs_count": 1,
+                        "m_inputs_count": 4,
                         "m_outputs_count": 1,
-                        "m_function_call_str": "    float Float_out1=Color_out2.x;\n"
+                        "m_function_call_str": "    float2 PolarCoordinates_out1;\n    PolarCoordinates(input.uv,float2(0.500000,0.500000),1.000000,1.000000,PolarCoordinates_out1);\n"
                     },
-                    "m_num": 1
-                }
-            }
-        },
-        {
-            "polymorphic_id": 2147483651,
-            "polymorphic_name": "epion::NodeCustom::ColorNode",
-            "ptr_wrapper": {
-                "valid": 1,
-                "data": {
-                    "value0": {
-                        "m_Name": "Color",
-                        "m_ID": 2,
-                        "m_Pos": {
-                            "x": 125,
-                            "y": 295
-                        },
-                        "m_dynamic_slot_type": 1,
-                        "m_inputs_count": 1,
-                        "m_outputs_count": 1,
-                        "m_function_call_str": "    float3 Color_out2=float3(0.562130,0.236161,0.236161);\n"
+                    "m_uv": {
+                        "x": 0,
+                        "y": 0
                     },
-                    "m_color": {
-                        "x": 0.56213021278381348,
-                        "y": 0.23616120219230652,
-                        "z": 0.23616120219230652
-                    }
+                    "Center": {
+                        "x": 0.5,
+                        "y": 0.5
+                    },
+                    "RadialScale": 1,
+                    "LengthScale": 1
                 }
             }
         }
@@ -92,15 +75,7 @@
             "m_input_type": 9,
             "m_output.id": 1,
             "m_output.slot": 0,
-            "m_output_type": 1
-        },
-        {
-            "m_input.id": 1,
-            "m_input.slot": 0,
-            "m_input_type": 1,
-            "m_output.id": 2,
-            "m_output.slot": 0,
-            "m_output_type": 3
+            "m_output_type": 2
         }
     ]
 }

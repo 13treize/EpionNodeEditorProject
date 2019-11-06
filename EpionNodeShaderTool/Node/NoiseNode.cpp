@@ -43,7 +43,7 @@ namespace	epion::NodeCustom
 
 		m_input_slot_type =
 		{
-			SLOT_TYPE::m_uv, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1,
+			SLOT_TYPE::UV, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1,
 		};
 		m_input_name =
 		{
@@ -137,7 +137,7 @@ namespace	epion::NodeCustom
 		m_uv = { 0,0 };
 		m_input_slot_type =
 		{
-			SLOT_TYPE::m_uv,	SLOT_TYPE::VECTOR1,
+			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR1,
 		};
 		m_input_name =
 		{
@@ -227,7 +227,7 @@ namespace	epion::NodeCustom
 		m_scale = 500.0f;
 		m_input_slot_type =
 		{
-			SLOT_TYPE::m_uv,	SLOT_TYPE::VECTOR1,
+			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR1,
 		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		//node	slot name
@@ -341,7 +341,7 @@ namespace	epion::NodeCustom
 		};
 		m_input_slot_type =
 		{
-			SLOT_TYPE::m_uv,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR1
+			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR1
 		};
 		m_output_name =
 		{

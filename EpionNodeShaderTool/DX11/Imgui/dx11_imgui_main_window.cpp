@@ -51,8 +51,6 @@ namespace	epion
 
 		bool	is_unlit_setting;
 
-
-		bool	is_reset;
 		bool	is_link_reset;
 
 		bool	is_shader_reset;
@@ -87,7 +85,7 @@ namespace	epion
 
 
 		m_impl->is_hlsl_export = false;
-		m_impl->is_reset = false;
+		is_reset = false;
 		m_impl->is_shader_reset = false;
 
 		m_impl->json_name = "";
@@ -110,7 +108,7 @@ namespace	epion
 		m_impl->is_update_node = true;
 		m_impl->is_show_node_window = true;
 		m_impl->is_hlsl_export = false;
-		m_impl->is_reset = false;
+		is_reset = false;
 		m_impl->is_link_reset = false;
 
 		m_impl->is_shader_reset = false;
@@ -315,14 +313,14 @@ namespace	epion
 	}
 	void	ImguiMain::ResetEvent()
 	{
-		m_impl->is_reset = ImGui::Button("Reset");
-		if (m_impl->is_reset)
+		is_reset = ImGui::Button("Reset");
+		if (is_reset)
 		{
 			NodeCustom::NodeEditor::Clear();
 			NodeCustom::NodeEditor::Init();
 			NodeCustom::ContextManager::Init();
 			//m_impl->preview = std::make_unique<Square>();
-			TextureFile::SaveTexture("GenerateTexture\\test", ".jpg", Dxgi::back_buffer);
+			TextureFile::SaveTexture("GenerateTexture\\out", ".jpg", Dxgi::back_buffer);
 
 		}
 		m_impl->is_link_reset = ImGui::Button("LinkReset");

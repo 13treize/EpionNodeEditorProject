@@ -31,7 +31,7 @@ namespace	epion::NodeCustom
 		BOOLEAN,
 		TEXTURE2D,
 		POS,//inputのみ、扱いはVECTOR3同じ
-		m_uv,	//inputのみ、扱いはVECTOR2同じ
+		UV,	//inputのみ、扱いはVECTOR2同じ
 		COLOR,//inputのみ、扱いはVECTOR3同じ
 	};
 

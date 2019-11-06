@@ -13,6 +13,7 @@ namespace
 {
 	ImVec2	size(0, 0);
 	bool open_popup;
+
 }
 
 CEREAL_REGISTER_TYPE(epion::NodeCustom::UnlitMasterNode)

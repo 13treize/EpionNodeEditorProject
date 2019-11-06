@@ -3,7 +3,6 @@
 #include	<cereal/types/polymorphic.hpp>
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
-#include	"NodeParam.h"
 #include	"NodeData.h"
 #include	"UVNode.h"
 #include	"../epion_string.h"
@@ -22,6 +21,7 @@ CEREAL_REGISTER_TYPE(epion::NodeCustom::UVNode)
 
 namespace	epion::NodeCustom
 {
+#pragma region PolarCoordinates
 	PolarCoordinatesNode::PolarCoordinatesNode()
 	{
 		Init();
@@ -40,20 +40,20 @@ namespace	epion::NodeCustom
 	void	PolarCoordinatesNode::Init()
 	{
 		m_uv = { 0,0 };
-		Center = { 0.5,0.5 };
-		RadialScale = 1.0f;
-		LengthScale = 1.0f;
+		m_center = { 0.5,0.5 };
+		m_radialscale = 1.0f;
+		m_lengthscale = 1.0f;
 		m_input_slot_type =
 		{
-			SLOT_TYPE::m_uv,SLOT_TYPE::VECTOR2,SLOT_TYPE::VECTOR1,SLOT_TYPE::VECTOR1
+			SLOT_TYPE::UV,SLOT_TYPE::VECTOR2,SLOT_TYPE::VECTOR1,SLOT_TYPE::VECTOR1
 		};
 
 		m_input_name =
 		{
-			"UV(2)","Center(2)","RadialScale(1)","LengthScale(1)"
+			"UV", "Center", "RadialScale", "LengthScale"
 		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR2);
-		m_output_name.push_back("Out(2)");
+		m_output_name.push_back("Out");
 	}
 
 	void	PolarCoordinatesNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -61,62 +61,34 @@ namespace	epion::NodeCustom
 		i_update(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
 
-		if (!m_is_input[0])
-		{
-			NodeFunction::SetInputSlotUV(m_input_pos[1]);
-		}
-
-		if (!m_is_input[1])
-		{
-			NodeFunction::SetInputSlotFloat2(m_input_pos[1], Center, 1);
-		}
-
-		if (!m_is_input[2])
-		{
-			NodeFunction::SetInputSlotFloat(m_input_pos[2], SLOT_INPUT_POS_X, StringConverter::get_space(2), RadialScale);
-		}
-
-		if (!m_is_input[3])
-		{
-			NodeFunction::SetInputSlotFloat(m_input_pos[3], SLOT_INPUT_POS_X, StringConverter::get_space(3), LengthScale);
-		}
-
+		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[1]);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], m_center, 1);
+		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_radialscale);
+		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::get_space(3), m_lengthscale);
 	}
 
 	void	PolarCoordinatesNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
-		}
+		o_update(offset, draw_list);
 	}
 
 	void	PolarCoordinatesNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = "PolarCoordinatesNode" + std::to_string(m_ID);
-
 		m_input_str[0] = "input.uv";
-		m_input_str[1] = "float2(" + StringConverter::to_string2(Center, ",") + ")";
-		m_input_str[2] = std::to_string(RadialScale);
-		m_input_str[3] = std::to_string(LengthScale);
+		m_input_str[1] = NodeFunction::SetInputToString2(m_center);
+		m_input_str[2] = std::to_string(m_radialscale);
+		m_input_str[3] = std::to_string(m_lengthscale);
 
-		for (auto& l : links)
-		{
-			if (m_ID == l.get_input_id())
-			{
-				m_is_input[l.get_input_slot()] = true;
-				m_input_str[l.get_input_slot()] = nodes_ptr[l.get_output_id()]->GetOutStr()[l.get_output_slot()];
-			}
-		}
-
-		m_function_call_str = "    float2 " + m_out_str[0] + ";\n";
-		m_function_call_str += "    PolarCoordinates_float(";
-		str_set(nodes_ptr, links);
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutStr2(m_out_str[0]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
+		str_check(nodes_ptr, links);
 	}
+
 	std::string	PolarCoordinatesNode::GetFunctionDefStr()
 	{
 		return
-			"void PolarCoordinates_float(float2 UV, float2 Center, float RadialScale, float LengthScale, out float2 Out)\n"
+			"void PolarCoordinates(float2 UV, float2 Center, float RadialScale, float LengthScale, out float2 Out)\n"
 			"{\n"
 			"    float2 delta = UV - Center;\n"
 			"    float radius = length(delta) * 2 * RadialScale;\n"
@@ -124,6 +96,10 @@ namespace	epion::NodeCustom
 			"    Out = float2(radius, angle);\n"
 			"}\n";
 	}
+#pragma endregion
+
+#pragma region RadialShear
+
 	RadialShearNode::RadialShearNode()
 	{
 		Init();
@@ -139,64 +115,48 @@ namespace	epion::NodeCustom
 	void RadialShearNode::Init()
 	{
 		m_uv = { 0,0 };
-		Center = { 0.5,0.5 };
-		Strength = { 10,10 };
-		Offset = { 0,0 };
+		m_center = { 0.5,0.5 };
+		m_strength = { 10,10 };
+		m_offset = { 0,0 };
 		m_input_slot_type =
 		{
-			SLOT_TYPE::m_uv,SLOT_TYPE::VECTOR2,SLOT_TYPE::VECTOR2,SLOT_TYPE::VECTOR2
+			SLOT_TYPE::UV, SLOT_TYPE::VECTOR2, SLOT_TYPE::VECTOR2, SLOT_TYPE::VECTOR2
 		};
 		m_input_name =
 		{
-			"UV(2)","Center(2)","Strength(2)","Offset(2)"
+			"UV", "Center", "Strength", "Offset"
 		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR2);
-		m_output_name.push_back("Out(2)");
+		m_output_name.push_back("Out");
 	}
 	void	RadialShearNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		i_update(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
 
-		if (!m_is_input[0])
-		{
-			NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		}
-
-		if (!m_is_input[1])
-		{
-			NodeFunction::SetInputSlotFloat2(m_input_pos[1], Center);
-		}
-		if (!m_is_input[2])
-		{
-			NodeFunction::SetInputSlotFloat2(m_input_pos[2], Strength, 1);
-		}
-		if (!m_is_input[3])
-		{
-			NodeFunction::SetInputSlotFloat2(m_input_pos[3], Offset, 2);
-		}
+		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], m_center);
+		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat2(m_input_pos[2], m_strength, 1);
+		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], m_offset, 2);
 	}
 
 	void	RadialShearNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
-		}
+		o_update(offset, draw_list);
 	}
 
 	void	RadialShearNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = "RadialShear_out" + std::to_string(m_ID);
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 
 		m_input_str[0] = "input.uv";
-		m_input_str[1] = "float2(" + StringConverter::to_string2(Center, ",") + ")";
-		m_input_str[2] = "float2(" + StringConverter::to_string2(Strength, ",") + ")";
-		m_input_str[3] = "float2(" + StringConverter::to_string2(Offset, ",") + ")";
+		m_input_str[1] = NodeFunction::SetInputToString2(m_center);
+		m_input_str[2] = NodeFunction::SetInputToString2(m_strength);
+		m_input_str[3] = NodeFunction::SetInputToString2(m_offset);
 
-		m_function_call_str = "    float2 " + m_out_str[0] + ";\n";
-		m_function_call_str += "    RadialShear(";
-		str_set(nodes_ptr, links);
+		m_function_call_str = NodeFunction::SetDefineOutStr2(m_out_str[0]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
+		str_check(nodes_ptr, links);
 	}
 	std::string RadialShearNode::GetFunctionDefStr()
 	{
@@ -209,6 +169,8 @@ namespace	epion::NodeCustom
 			"    Out = UV + float2(delta.y, -delta.x) * delta_offset + Offset;\n"
 			"}\n";
 	}
+#pragma endregion
+
 	SpherizeNode::SpherizeNode()
 	{
 		Init();
@@ -232,7 +194,7 @@ namespace	epion::NodeCustom
 		Offset = { 0,0 };
 		m_input_slot_type =
 		{
-			SLOT_TYPE::m_uv,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR2,
+			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR2,
 		};
 
 		m_input_name =
@@ -261,7 +223,7 @@ namespace	epion::NodeCustom
 		}
 		if (!m_is_input[2])
 		{
-			NodeFunction::SetInputSlotFloat(m_input_pos[2], SLOT_INPUT_POS_X, StringConverter::get_space(2), Strength);
+			NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), Strength);
 		}
 		if (!m_is_input[3])
 		{
@@ -325,7 +287,7 @@ namespace	epion::NodeCustom
 		Offset = { 0,0 };
 		m_input_slot_type =
 		{
-			SLOT_TYPE::m_uv,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR2,
+			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR2,
 		};
 		m_input_name =
 		{
@@ -409,7 +371,7 @@ namespace	epion::NodeCustom
 		Offset = { 0,0 };
 		m_input_slot_type=
 		{
-			SLOT_TYPE::m_uv,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR2,
+			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR2,
 		};
 		m_input_name =
 		{
