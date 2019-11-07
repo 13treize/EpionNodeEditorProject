@@ -335,11 +335,7 @@ namespace	epion::NodeCustom
 		draw_list->ChannelsSetCurrent(1);
 		draw_list->AddRectFilled(node_rect_min, node_rect_max, RECT_COLOR, 2.0f);
 
-		if (m_node_type == NODE_TYPE::MASTER)
-		{
-			draw_list->AddRectFilled(node_rect_min, node_rect_max, RECT_COLOR, 2.0f);
-		}
-		else
+		if (m_node_type != NODE_TYPE::MASTER)
 		{
 			draw_list->AddRectFilled(node_rect_min, node_rect_max2, RECT_COLOR, 2.0f);
 		}
@@ -397,16 +393,11 @@ namespace	epion::NodeCustom
 			}
 
 
-			ImU32	FillRectColor;
+			draw_list->ChannelsSetCurrent(1);
 			if (physics::Collider2D::sphere_and_sphere(math::FVector2(m_input_pos[i].x, m_input_pos[i].y), math::FVector2(ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y), NODE_SLOT_RADIUS, 2.0f))
 			{
-				FillRectColor = ImColor::U32::GREEN;
+				draw_list->AddCircleFilled(m_input_pos[i], NODE_SLOT_RADIUS - 2, ImColor::U32::GREEN);
 			}
-			else
-			{
-				FillRectColor = ImColor::U32::BLACK;
-			}
-			draw_list->AddCircleFilled(m_input_pos[i], NODE_SLOT_RADIUS - 2, FillRectColor);
 		}
 	}
 
@@ -417,8 +408,12 @@ namespace	epion::NodeCustom
 			m_output_pos[i] = offset + this->GetOutputSlotPos(i);
 			m_output_pos[i].y += 10.0f;
 
+			//float x = m_output_name[i].size()*10.0f;
+			//x=std::clamp(x, 0.0f, 30.0f);
 			draw_list->ChannelsSetCurrent(1); // input_slot
 			ImGui::SetCursorScreenPos(m_output_pos[i] + ImVec2(-60.0f, -SLOT_INPUT_FLOAT));
+
+			//ImGui::SetCursorScreenPos(m_output_pos[i] + ImVec2(-60.0f+x, -SLOT_INPUT_FLOAT));
 			ImGui::SetWindowFontScale(0.9f);
 			ImGui::TextColored(ImColor::Vec4::WHITE, "%s", m_output_name[i].c_str());
 			NodeFunction::NodeCircle(draw_list, m_output_pos[i], NODE_SLOT_RADIUS, m_output_slot_color[i], m_output_slot_type[i]);

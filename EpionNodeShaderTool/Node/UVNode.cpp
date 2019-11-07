@@ -59,9 +59,7 @@ namespace	epion::NodeCustom
 	void	PolarCoordinatesNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		i_update(offset, draw_list);
-		draw_list->ChannelsSetCurrent(1);
-
-		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[1]);
+		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], m_center, 1);
 		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_radialscale);
 		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::get_space(3), m_lengthscale);
@@ -132,8 +130,6 @@ namespace	epion::NodeCustom
 	void	RadialShearNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		i_update(offset, draw_list);
-		draw_list->ChannelsSetCurrent(1);
-
 		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], m_center);
 		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat2(m_input_pos[2], m_strength, 1);
@@ -171,6 +167,7 @@ namespace	epion::NodeCustom
 	}
 #pragma endregion
 
+#pragma region Spherize
 	SpherizeNode::SpherizeNode()
 	{
 		Init();
@@ -189,9 +186,9 @@ namespace	epion::NodeCustom
 	void	SpherizeNode::Init()
 	{
 		m_uv = { 0,0 };
-		Center = { 0.5,0.5 };
-		Strength = 10;
-		Offset = { 0,0 };
+		m_center = { 0.5,0.5 };
+		m_strength = 10;
+		m_offset = { 0,0 };
 		m_input_slot_type =
 		{
 			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR2,
@@ -199,58 +196,40 @@ namespace	epion::NodeCustom
 
 		m_input_name =
 		{
-			"UV(2)","Center(2)","Strength(1)","Offset(2)"
+			"UV", "Center", "Strength", "Offset"
 		};
 
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR2);
-		m_output_name.push_back("Out(2)");
+		m_output_name.push_back("Out");
 
 	}
 
 	void	SpherizeNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		i_update(offset, draw_list);
-		draw_list->ChannelsSetCurrent(1);
-
-		if (!m_is_input[0])
-		{
-			NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		}
-
-		if (!m_is_input[1])
-		{
-			NodeFunction::SetInputSlotFloat2(m_input_pos[1], Center, 1);
-		}
-		if (!m_is_input[2])
-		{
-			NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), Strength);
-		}
-		if (!m_is_input[3])
-		{
-			NodeFunction::SetInputSlotFloat2(m_input_pos[3], Offset, 3);
-		}
+		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], m_center, 1);
+		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_strength);
+		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], m_offset, 3);
 	}
 
 	void	SpherizeNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
-		}
+		o_update(offset, draw_list);
 	}
 
 	void	SpherizeNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = "Spherize_out" + std::to_string(m_ID);
-
 		m_input_str[0] = "input.uv";
-		m_input_str[1] = NodeFunction::SetInputToString2(Center);
-		m_input_str[2] = std::to_string(Strength);
-		m_input_str[3] = NodeFunction::SetInputToString2(Offset);
+		m_input_str[1] = NodeFunction::SetInputToString2(m_center);
+		m_input_str[2] = std::to_string(m_strength);
+		m_input_str[3] = NodeFunction::SetInputToString2(m_offset);
 
-		m_function_call_str = "    float2 " + m_out_str[0] + ";\n";
-		m_function_call_str += "    Spherize(";
-		str_set(nodes_ptr, links);
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+
+		m_function_call_str = NodeFunction::SetDefineOutStr2(m_out_str[0]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
+		str_check(nodes_ptr, links);
 	}
 	std::string	SpherizeNode::GetFunctionDefStr()
 	{
@@ -264,7 +243,9 @@ namespace	epion::NodeCustom
 			"    Out = UV + delta * delta_offset + Offset;\n"
 			"}\n";
 	};
+#pragma endregion
 
+#pragma region TilingAndOffset
 	TilingAndOffsetNode::TilingAndOffsetNode()
 	{
 		Init();
@@ -291,53 +272,37 @@ namespace	epion::NodeCustom
 		};
 		m_input_name =
 		{
-			"UV(2)",	"Tiling(2)",	"Offset(2)"
+			"UV", "Tiling", "Offset"
 		};
 
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR2);
-		m_output_name.push_back("Out(2)");
+		m_output_name.push_back("Out");
 
 	}
 
 	void	TilingAndOffsetNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		i_update(offset, draw_list);
-		draw_list->ChannelsSetCurrent(1);
-
-		if (!m_is_input[0])
-		{
-			NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		}
-
-		if (!m_is_input[1])
-		{
-			NodeFunction::SetInputSlotFloat2(m_input_pos[1], Tiling, 1);
-		}
-		if (!m_is_input[2])
-		{
-			NodeFunction::SetInputSlotFloat2(m_input_pos[2], Offset, 2);
-		}
+		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], Tiling, 1);
+		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat2(m_input_pos[2], Offset, 2);
 	}
 
 	void	TilingAndOffsetNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
-		}
+		o_update(offset, draw_list);
 	}
 
 	void	TilingAndOffsetNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = "TilingAndOffset_out" + std::to_string(m_ID);
-
 		m_input_str[0] = "input.uv";
 		m_input_str[1] = NodeFunction::SetInputToString2(Tiling);
 		m_input_str[2] = NodeFunction::SetInputToString2(Offset);
 
-		m_function_call_str = "    float2 " + m_out_str[0] + ";\n";
-		m_function_call_str += "    TilingAndOffset(";
-		str_set(nodes_ptr, links);
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutStr2(m_out_str[0]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
+		str_check(nodes_ptr, links);
 	}
 	std::string	TilingAndOffsetNode::GetFunctionDefStr()
 	{
@@ -347,7 +312,9 @@ namespace	epion::NodeCustom
 			"    Out = UV * Tiling + Offset;\n"
 			"}\n";
 	};
+#pragma endregion
 
+#pragma region Twirl
 	TwirlNode::TwirlNode()
 	{
 		Init();
@@ -386,25 +353,10 @@ namespace	epion::NodeCustom
 	void	TwirlNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		i_update(offset, draw_list);
-		draw_list->ChannelsSetCurrent(1);
-
-		if (!m_is_input[0])
-		{
-			NodeFunction::SetInputSlotUV(m_input_pos[1]);
-		}
-
-		if (!m_is_input[1])
-		{
-			NodeFunction::SetInputSlotFloat2(m_input_pos[1],Center,1);
-		}
-		if (!m_is_input[2])
-		{
-			NodeFunction::SetInputSlotFloat(m_input_pos[2], -60,"   ", Strength);
-		}
-		if (!m_is_input[3])
-		{
-			NodeFunction::SetInputSlotFloat2(m_input_pos[3], Offset, 3);
-		}
+		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[1]);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1],Center,1);
+		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2],"   ", Strength);
+		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], Offset, 3);
 	}
 
 	void	TwirlNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -414,15 +366,14 @@ namespace	epion::NodeCustom
 
 	void	TwirlNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
-		m_out_str[0] = "Twirl_out" + std::to_string(m_ID);
-
 		m_input_str[0] = "input.uv";
 		m_input_str[1] = NodeFunction::SetInputToString2(Center);
 		m_input_str[2] = std::to_string(Strength);
 		m_input_str[3] = NodeFunction::SetInputToString2(Offset);
 
-		m_function_call_str = "    float2 " + m_out_str[0] + ";\n";
-		m_function_call_str += "    Twirl(";
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutStr2(m_out_str[0]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 		str_check(nodes_ptr, links);
 	}
 	std::string	TwirlNode::GetFunctionDefStr()
@@ -437,7 +388,9 @@ namespace	epion::NodeCustom
 			"    Out = float2(x + Center.x + Offset.x, y + Center.y + Offset.y);\n"
 			"}\n";
 	};
+#pragma endregion
 
+#pragma region UV
 	UVNode::UVNode()
 	{
 		Init();
@@ -456,7 +409,7 @@ namespace	epion::NodeCustom
 	void	UVNode::Init()
 	{
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR2);
-		m_output_name.push_back("Out(2)");
+		m_output_name.push_back("Out");
 	}
 
 	void	UVNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
@@ -477,4 +430,6 @@ namespace	epion::NodeCustom
 	{
 		return	"";
 	};
+#pragma endregion
+
 }

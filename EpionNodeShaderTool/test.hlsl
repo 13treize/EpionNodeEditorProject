@@ -16,12 +16,18 @@ float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)
     return ret_color;
 };
 
-void PolarCoordinates(float2 UV, float2 Center, float RadialScale, float LengthScale, out float2 Out)
+void Checkerboard(float2 UV, float3 ColorA, float3 ColorB, float2 Frequency, out float3 Out)
 {
-    float2 delta = UV - Center;
-    float radius = length(delta) * 2 * RadialScale;
-    float angle = atan2(delta.x, delta.y) * 1.0 / 6.28 * LengthScale;
-    Out = float2(radius, angle);
+    UV = (UV.xy + 0.5) * Frequency;
+    float4 derivatives = float4(ddx(UV), ddy(UV));
+    float2 duv_length = sqrt(float2(dot(derivatives.xz, derivatives.xz), dot(derivatives.yw, derivatives.yw)));
+    float width = 1.0;
+    float2 distance3 = 4.0 * abs(frac(UV + 0.25) - 0.5) - width;
+    float2 scale = 0.35 / duv_length.xy;
+    float freqLimiter = sqrt(clamp(1.1f - max(duv_length.x, duv_length.y), 0.0, 1.0));
+    float2 vector_alpha = clamp(distance3 * scale.xy, -1.0, 1.0);
+    float alpha = saturate(0.5f + 0.5f * vector_alpha.x * vector_alpha.y * freqLimiter);
+    Out = lerp(ColorA, ColorB, alpha.xxx);
 }
 
 float4 PS(PSInput input) : SV_TARGET
@@ -29,9 +35,9 @@ float4 PS(PSInput input) : SV_TARGET
     float Time_ =Time.x;
     float Sin_Time_ =sin(Time.x);
     float Cos_Time_ =cos(Time.x);
-    float2 PolarCoordinates_out1;
-    PolarCoordinates(input.uv,float2(0.500000,0.500000),1.000000,1.000000,PolarCoordinates_out1);
+    float3 Checkerboard_out1;
+    Checkerboard(input.uv,float3(0.893491,0.074017,0.074017),float3(0.000000,0.000000,0.000000),float2(1.000000,1.000000),Checkerboard_out1);
 
-    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),float3(PolarCoordinates_out1, 0.0),1.000000,0.000000);
+    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Checkerboard_out1,1.000000,0.000000);
     return flag_color;
 }

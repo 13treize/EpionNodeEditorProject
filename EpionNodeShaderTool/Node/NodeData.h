@@ -257,8 +257,8 @@ namespace	epion::NodeCustom
 				CEREAL_NVP(m_dynamic_slot_type),
 				//CEREAL_NVP(m_input_name),
 				//CEREAL_NVP(m_output_name),
-				CEREAL_NVP(m_inputs_count),
-				CEREAL_NVP(m_outputs_count),
+				//CEREAL_NVP(m_inputs_count),
+				//CEREAL_NVP(m_outputs_count),
 				CEREAL_NVP(m_function_call_str));
 		}
 

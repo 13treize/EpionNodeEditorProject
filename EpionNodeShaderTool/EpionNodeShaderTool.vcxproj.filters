@@ -294,6 +294,9 @@
     <ClCompile Include="Node\ChannelNode.cpp">
       <Filter>ソース ファイル\Node\Channel</Filter>
     </ClCompile>
+    <ClCompile Include="DX11\SamplerState.cpp">
+      <Filter>ソース ファイル\Dx11</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -505,6 +508,9 @@
     </ClInclude>
     <ClInclude Include="Node\NodeParam.h">
       <Filter>ヘッダー ファイル\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\SamplerState.h">
+      <Filter>ヘッダー ファイル\Dx11</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

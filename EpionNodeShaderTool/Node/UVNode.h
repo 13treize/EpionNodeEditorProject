@@ -22,18 +22,18 @@ namespace	epion::NodeCustom
 			archive(
 				cereal::base_class<NodeBase>(this),
 				CEREAL_NVP(m_uv),
-				CEREAL_NVP(Center),
-				CEREAL_NVP(RadialScale),
-				CEREAL_NVP(LengthScale));
+				CEREAL_NVP(m_center),
+				CEREAL_NVP(m_radialscale),
+				CEREAL_NVP(m_lengthscale));
 		};
 
 
 	private:
 		//	input
 		math::FVector2	m_uv;
-		math::FVector2	Center;
-		float RadialScale;
-		float LengthScale;
+		math::FVector2	m_center;
+		float m_radialscale;
+		float m_lengthscale;
 	};
 	class RadialShearNode final :public	NodeBase
 	{
@@ -55,15 +55,15 @@ namespace	epion::NodeCustom
 			archive(
 				cereal::base_class<NodeBase>(this),
 				CEREAL_NVP(m_uv),
-				CEREAL_NVP(Center),
-				CEREAL_NVP(Strength),
-				CEREAL_NVP(Offset));
+				CEREAL_NVP(m_center),
+				CEREAL_NVP(m_strength),
+				CEREAL_NVP(m_offset));
 		};
 	private:
 		math::FVector2	m_uv;
-		math::FVector2	Center;
-		math::FVector2	Strength;
-		math::FVector2	Offset;
+		math::FVector2	m_center;
+		math::FVector2	m_strength;
+		math::FVector2	m_offset;
 	};
 
 
@@ -86,16 +86,16 @@ namespace	epion::NodeCustom
 			archive(
 				cereal::base_class<NodeBase>(this),
 				CEREAL_NVP(m_uv),
-				CEREAL_NVP(Center),
-				CEREAL_NVP(Strength),
-				CEREAL_NVP(Offset));
+				CEREAL_NVP(m_center),
+				CEREAL_NVP(m_strength),
+				CEREAL_NVP(m_offset));
 		};
 
 	private:
 		math::FVector2	m_uv;
-		math::FVector2	Center;
-		float	Strength;
-		math::FVector2	Offset;
+		math::FVector2	m_center;
+		float	m_strength;
+		math::FVector2	m_offset;
 	};
 
 

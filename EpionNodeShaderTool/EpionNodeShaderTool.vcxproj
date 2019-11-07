@@ -163,6 +163,7 @@
     <ClCompile Include="DX11\rasterizer.cpp" />
     <ClCompile Include="DX11\Renderer.cpp" />
     <ClCompile Include="DX11\RenderTarget.cpp" />
+    <ClCompile Include="DX11\SamplerState.cpp" />
     <ClCompile Include="DX11\ShaderManager.cpp" />
     <ClCompile Include="DX11\shader_reflection.cpp" />
     <ClCompile Include="DX11\square.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="DX11\rasterizer.h" />
     <ClInclude Include="DX11\Renderer.h" />
     <ClInclude Include="DX11\RenderTarget.h" />
+    <ClInclude Include="DX11\SamplerState.h" />
     <ClInclude Include="DX11\ShaderManager.h" />
     <ClInclude Include="DX11\shader_reflection.h" />
     <ClInclude Include="DX11\square.h" />

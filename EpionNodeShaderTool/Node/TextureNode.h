@@ -22,7 +22,21 @@ namespace	epion::NodeCustom
 		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 
 		std::string	GetFunctionDefStr()	override;
+	};
 
+	class	SamplerStateNode final :public	NodeBase
+	{
+	public:
+		SamplerStateNode();
+		SamplerStateNode(int id, const math::FVector2& pos);
+		~SamplerStateNode();
+
+	private:
+		template<class Archive>
+		void serialize(Archive & archive)
+		{
+			archive(cereal::base_class<NodeBase>(this));
+		};
 
 	};
 }
