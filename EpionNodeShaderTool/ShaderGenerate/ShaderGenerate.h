@@ -4,6 +4,9 @@
 
 namespace	epion::Shader
 {
+	/*
+		¶¬ŠÇ—
+	*/
 	class	NodeShaderManager	final
 	{
 	public:

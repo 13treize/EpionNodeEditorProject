@@ -9,7 +9,6 @@
 #include	"../epion_string.h"
 namespace
 {
-	const ImVec2	size(0, 0);
 }
 
 CEREAL_REGISTER_TYPE(epion::NodeCustom::DDXNode)
@@ -23,7 +22,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	DDXNode::DDXNode(int id, const math::FVector2& pos)
-		:NodeBase("DDX_float", id, pos, size, 1, 1)
+		:NodeBase("DDX_float", id, pos, 1, 1)
 	{
 		Init();
 	}
@@ -97,7 +96,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	DDYNode::DDYNode(int id, const math::FVector2& pos)
-		:NodeBase("DDY_float", id, pos, size, 1, 1)
+		:NodeBase("DDY_float", id, pos, 1, 1)
 	{
 		Init();
 	}
@@ -171,7 +170,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	DDXYNode::DDXYNode(int id, const math::FVector2& pos)
-		:NodeBase("DDXY_float", id, pos, size, 1, 1)
+		:NodeBase("DDXY_float", id, pos, 1, 1)
 	{
 		Init();
 	}

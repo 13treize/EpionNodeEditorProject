@@ -28,7 +28,7 @@ namespace	epion::NodeCustom
 	}
 
 	PolarCoordinatesNode::PolarCoordinatesNode(int id, const math::FVector2& pos)
-		:NodeBase("PolarCoordinates", id, pos, size, 4, 1)
+		:NodeBase("PolarCoordinates", id, pos, 4, 1)
 	{
 		Init();
 	}
@@ -103,7 +103,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	RadialShearNode::RadialShearNode(int id, const math::FVector2& pos)
-		:NodeBase("RadialShear", id, pos, size, 4, 1)
+		:NodeBase("RadialShear", id, pos, 4, 1)
 	{
 		Init();
 	}
@@ -174,7 +174,7 @@ namespace	epion::NodeCustom
 	}
 
 	SpherizeNode::SpherizeNode(int id, const math::FVector2& pos)
-		:NodeBase("Spherize", id, pos, size, 4, 1)
+		:NodeBase("Spherize", id, pos, 4, 1)
 	{
 		Init();
 	}
@@ -252,7 +252,7 @@ namespace	epion::NodeCustom
 	}
 
 	TilingAndOffsetNode::TilingAndOffsetNode(int id, const math::FVector2& pos)
-		:NodeBase("TilingAndOffset", id, pos, size, 3, 1)
+		:NodeBase("TilingAndOffset", id, pos, 3, 1)
 	{
 		Init();
 	}
@@ -321,7 +321,7 @@ namespace	epion::NodeCustom
 	}
 
 	TwirlNode::TwirlNode(int id, const math::FVector2& pos)
-		:NodeBase("Twirl", id, pos, size, 4, 1)
+		:NodeBase("Twirl", id, pos, 4, 1)
 	{
 		Init();
 	}
@@ -342,11 +342,11 @@ namespace	epion::NodeCustom
 		};
 		m_input_name =
 		{
-			"UV(2)","Center(2)","Strength(1)","Offset(2)"
+			"UV","Center","Strength","Offset"
 		};
 
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR2);
-		m_output_name.push_back("Out(2)");
+		m_output_name.push_back("Out");
 
 	}
 
@@ -397,7 +397,7 @@ namespace	epion::NodeCustom
 	}
 
 	UVNode::UVNode(int id, const math::FVector2& pos)
-		:NodeBase("UV", id, pos, size, 0, 1)
+		:NodeBase("UV", id, pos, 0, 1)
 	{
 		Init();
 	}

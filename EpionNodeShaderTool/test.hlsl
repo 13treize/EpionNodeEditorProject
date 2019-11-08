@@ -16,18 +16,22 @@ float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)
     return ret_color;
 };
 
-void Checkerboard(float2 UV, float3 ColorA, float3 ColorB, float2 Frequency, out float3 Out)
+void TilingAndOffset(float2 UV, float2 Tiling, float2 Offset, out float2 Out)
 {
-    UV = (UV.xy + 0.5) * Frequency;
-    float4 derivatives = float4(ddx(UV), ddy(UV));
-    float2 duv_length = sqrt(float2(dot(derivatives.xz, derivatives.xz), dot(derivatives.yw, derivatives.yw)));
-    float width = 1.0;
-    float2 distance3 = 4.0 * abs(frac(UV + 0.25) - 0.5) - width;
-    float2 scale = 0.35 / duv_length.xy;
-    float freqLimiter = sqrt(clamp(1.1f - max(duv_length.x, duv_length.y), 0.0, 1.0));
-    float2 vector_alpha = clamp(distance3 * scale.xy, -1.0, 1.0);
-    float alpha = saturate(0.5f + 0.5f * vector_alpha.x * vector_alpha.y * freqLimiter);
-    Out = lerp(ColorA, ColorB, alpha.xxx);
+    Out = UV * Tiling + Offset;
+}
+
+void Polygon(float2 UV, float Sides, float Width, float Height, out float Out)
+{
+    float pi = 3.14159265359;
+    float aWidth = Width * cos(pi / Sides);
+    float aHeight = Height * cos(pi / Sides);
+    float2 uv = (UV * 2 - 1) / float2(aWidth, aHeight);
+    uv.y *= -1;
+    float pCoord = atan2(uv.x, uv.y);
+    float r = 2 * pi / Sides;
+    float distance = cos(floor(0.5 + pCoord / r) * r - pCoord) * length(uv);
+    Out = saturate((1 - distance) / fwidth(distance));
 }
 
 float4 PS(PSInput input) : SV_TARGET
@@ -35,9 +39,9 @@ float4 PS(PSInput input) : SV_TARGET
     float Time_ =Time.x;
     float Sin_Time_ =sin(Time.x);
     float Cos_Time_ =cos(Time.x);
-    float3 Checkerboard_out1;
-    Checkerboard(input.uv,float3(0.893491,0.074017,0.074017),float3(0.000000,0.000000,0.000000),float2(1.000000,1.000000),Checkerboard_out1);
+    float Polygon_out2;
+    Polygon(input.uv,4.000000,1.000000,1.000000,Polygon_out2);
 
-    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Checkerboard_out1,1.000000,0.000000);
+    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Polygon_out2,1.000000,0.000000);
     return flag_color;
 }

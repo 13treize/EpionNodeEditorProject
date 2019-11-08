@@ -14,13 +14,8 @@
  * @date 2019/10/25
  */
 
-
-
-
 namespace	epion::NodeCustom
 {
-
-
 	//enum class Script
 	enum class SLOT_TYPE
 	{
@@ -30,6 +25,7 @@ namespace	epion::NodeCustom
 		VECTOR4,
 		BOOLEAN,
 		TEXTURE2D,
+		SAMPLERSTATE,
 		POS,//inputÇÃÇ›ÅAàµÇ¢ÇÕVECTOR3ìØÇ∂
 		UV,	//inputÇÃÇ›ÅAàµÇ¢ÇÕVECTOR2ìØÇ∂
 		COLOR,//inputÇÃÇ›ÅAàµÇ¢ÇÕVECTOR3ìØÇ∂
@@ -55,6 +51,8 @@ namespace	epion::NodeCustom
 
 		static void SetInputSlotFloat2(ImVec2& set_cursor, math::FVector2& num, int label_num = 0);
 		static void SetInputSlotUV(ImVec2& set_cursor);
+		static void SetInputSlotTexture2D(ImVec2& set_cursor);
+		static void SetInputSlotSamplerState(ImVec2& set_cursor);
 		static void SetInputSlotColor(ImVec2& set_cursor, bool& popup, math::FVector3& num, int label_num = 0);
 
 		//ç≈å„ÇÃà¯êîÇÕImguiÇ≈ÇÃÉoÉOóUî≠ñhé~
@@ -71,6 +69,8 @@ namespace	epion::NodeCustom
 		static std::string SetDefineOutStr2(const std::string& str);
 		static std::string SetDefineOutStr3(const std::string& str);
 		static std::string SetDefineOutStr4(const std::string& str);
+		static std::string SetDefineOutSamplerState(const std::string& str,int num);
+
 		static std::string SetDefineOutDynamic(const std::string& str, SLOT_TYPE type);
 
 		static void InputRectDraw(ImDrawList*	draw_list, ImVec2 pos, SLOT_TYPE type);
@@ -203,7 +203,7 @@ namespace	epion::NodeCustom
 	{
 	public:
 		NodeBase();
-		NodeBase(std::string name, int id, const math::FVector2& pos, const ImVec2& size, int inputs_count, int outputs_count);
+		NodeBase(std::string name, int id, const math::FVector2& pos, int inputs_count, int outputs_count);
 
 		void	Update(ImVec2& offset, ImDrawList*	draw_list);
 
@@ -257,8 +257,8 @@ namespace	epion::NodeCustom
 				CEREAL_NVP(m_dynamic_slot_type),
 				//CEREAL_NVP(m_input_name),
 				//CEREAL_NVP(m_output_name),
-				//CEREAL_NVP(m_inputs_count),
-				//CEREAL_NVP(m_outputs_count),
+				CEREAL_NVP(m_inputs_count),
+				CEREAL_NVP(m_outputs_count),
 				CEREAL_NVP(m_function_call_str));
 		}
 

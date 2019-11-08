@@ -36,7 +36,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	FloatNode::FloatNode(int id, const math::FVector2& pos)
-		:NodeBase("Float", id, pos, size, 1, 1)
+		:NodeBase("Float", id, pos, 1, 1)
 	{
 		Init();
 	}
@@ -88,7 +88,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	Vector2Node::Vector2Node(int id, const math::FVector2& pos)
-		:NodeBase("Vector2", id, pos, size, 2, 1)
+		:NodeBase("Vector2", id, pos, 2, 1)
 	{
 		Init();
 	}
@@ -146,7 +146,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	Vector3Node::Vector3Node(int id, const math::FVector2& pos)
-		:NodeBase("Vector3", id, pos, size, 3, 1)
+		:NodeBase("Vector3", id, pos, 3, 1)
 	{
 		Init();
 	}
@@ -204,7 +204,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	Vector4Node::Vector4Node(int id, const math::FVector2& pos)
-		:NodeBase("Vector4", id, pos, size, 4, 1)
+		:NodeBase("Vector4", id, pos, 4, 1)
 	{
 		Init();
 	}
@@ -261,7 +261,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	ColorNode::ColorNode(int id, const math::FVector2& pos)
-		:NodeBase("Color", id, pos, size, 1, 1)
+		:NodeBase("Color", id, pos, 1, 1)
 	{
 		Init();
 	}
@@ -312,7 +312,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	TimeNode::TimeNode(int id, const math::FVector2& pos)
-		:NodeBase("TimeNode", id, pos, size, 0, 3)
+		:NodeBase("TimeNode", id, pos, 0, 3)
 	{
 		Init();
 	}

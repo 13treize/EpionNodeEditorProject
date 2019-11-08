@@ -39,7 +39,7 @@ namespace	epion::NodeCustom
 	}
 
 	FlipbookNode::FlipbookNode(int id, const math::FVector2& pos)
-		:NodeBase("Flipbook", id, pos, size, 5, 1)
+		:NodeBase("Flipbook", id, pos, 5, 1)
 	{
 		Init();
 

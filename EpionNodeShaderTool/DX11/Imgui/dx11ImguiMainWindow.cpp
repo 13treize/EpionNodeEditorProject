@@ -9,8 +9,7 @@
 #include	"dx11_imgui_main_window.h"
 #include	"../dx11_dxgi.h"
 
-#include	"../ConstantBuffer.h"
-
+#include	"../../Node/NodeParamDx11.h"
 #include	"EpionNodeEditor.h"
 #include	"epion_imgui_node_context.h"
 
@@ -138,6 +137,7 @@ namespace	epion
 		NodeCustom::NodeEditor::Init();
 		ColorPicker::Init();
 		Preview::Init(L"test.hlsl");
+		m_tex_resouce.Init();
 	}
 
 	void	ImguiMain::impl_update()
@@ -231,6 +231,12 @@ namespace	epion
 						TextureUpdate();
 						ImGui::EndTabItem();
 					}
+					if (ImGui::BeginTabItem("TexParam"))
+					{
+						m_tex_resouce.Update();
+						ImGui::EndTabItem();
+					}
+
 					if (ImGui::BeginTabItem("Node"))
 					{
 						ImGui::Text("Node size %d", NodeCustom::NodeEditor::GetNodeSize());
@@ -289,7 +295,7 @@ namespace	epion
 			{
 				if (ImGui::Button(m_impl->tex_name[i].c_str()))
 				{
-					TextureFile::LoadTexture(StringConverter::to_wstring(m_impl->tex_name[i]), m_impl->tex_resouce[i]->metadata, m_impl->tex_resouce[i]->image, m_impl->tex_resouce[i]->ShaderResourceView);
+					TextureFileIO::LoadTexture(StringConverter::to_wstring(m_impl->tex_name[i]), m_impl->tex_resouce[i]->metadata, m_impl->tex_resouce[i]->image, m_impl->tex_resouce[i]->ShaderResourceView);
 					m_impl->is_tex[i] = true;
 				}
 				if (m_impl->is_tex[i])
@@ -309,7 +315,7 @@ namespace	epion
 	{
 		ImGui::Text("Preview");
 		//ImGui::Image(m_preview_resouce->ShaderResourceView.Get(), ImVec2(400,400), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1, 1, 1, 1), ImVec4(0, 0, 0, 0));
-		//TextureFile::SaveTexture("test3", ".jpg", m_preview_resouce->Texture2D);
+		//TextureFileIO::SaveTexture("test3", ".jpg", m_preview_resouce->Texture2D);
 	}
 	void	ImguiMain::ResetEvent()
 	{
@@ -320,7 +326,7 @@ namespace	epion
 			NodeCustom::NodeEditor::Init();
 			NodeCustom::ContextManager::Init();
 			//m_impl->preview = std::make_unique<Square>();
-			TextureFile::SaveTexture("GenerateTexture\\out", ".jpg", Dxgi::back_buffer);
+			TextureFileIO::SaveTexture("GenerateTexture\\out", ".jpg", Dxgi::back_buffer);
 
 		}
 		m_impl->is_link_reset = ImGui::Button("LinkReset");
@@ -330,17 +336,81 @@ namespace	epion
 		}
 	}
 
+	void	TextureResouce::Init()
+	{
+		directory_name = "Assets\\";
+		for (auto& x : std::filesystem::directory_iterator("Assets"))
+		{
+			m_file_names.push_back(x.path().string());
+		}
+	}
+
+	void	TextureResouce::Update()
+	{
+		std::string_view path = "resouce path:    ";
+		ImGui::InputText("Directory", directory_input_name, CHAR_MAX);
+		ImGui::Text(directory_name.c_str());
+		ImGui::InputText("ShaderName", tex_input_name, CHAR_MAX);
+		if (ImGui::Button("PushBack"))
+		{
+			m_tex_names.push_back("");
+
+			if (m_tex_names.size() > m_tex_display_str.size())
+			{
+				m_tex_display_str.push_back("Texture Name" + StringConverter::get_space(m_tex_names.size()));
+				m_tex_title.push_back("Slot " + std::to_string(m_tex_names.size() -1));
+				m_current_file_name.push_back("");
+			}
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("PopBack")&& !m_tex_names.empty())
+		{
+			m_tex_names.pop_back();
+		}
+
+		for (int i=0;i<m_tex_names.size();i++)
+		{
+			if (ImGui::TreeNode(m_tex_title[i].c_str()))
+			{
+				if (ImGui::BeginCombo("TextureName", m_current_file_name[i].c_str()))
+				{
+					for (int j = 0; j < m_file_names.size(); j++)
+					{
+						bool is_selected = (m_current_file_name[i] == m_file_names[j]);
+						if (ImGui::Selectable(m_file_names[j].c_str(), is_selected))
+						{
+							m_current_file_name[i] = m_file_names[j];
+						}
+						if (is_selected)
+						{
+							ImGui::SetItemDefaultFocus();
+						}
+					}
+					ImGui::EndCombo();
+				}
+				ImGui::TreePop();
+			}
+			ImGui::Separator();
+		}
+	}
+
 	std::unique_ptr<Square>			Preview::m_preview;
 	std::unique_ptr<VertexShader>	Preview::m_vertex;
 	std::unique_ptr<PixelShader>	Preview::m_pixel;
+	std::unique_ptr<Texture>		Preview::m_preview_tex[D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT];
+
 	math::FVector4					Preview::time;
 
 	bool	Preview::Init(std::wstring	ps_name)
 	{
-		ConstantBufferManager::Create();
+		NodeCustom::Dx11::ConstantBufferManager::Create();
 		m_vertex	=std::make_unique<VertexShader>(L"HLSLShader\\square_vertex_shader.hlsl");
 		m_pixel		=std::make_unique<PixelShader>(ps_name);
 		m_preview	=std::make_unique<Square>(m_vertex->GetBlob());
+		NodeCustom::Dx11::SamplerStateManager::Create(0, D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_WRAP);
+		m_preview_tex[0] = std::make_unique<Texture>();
+		TextureFileIO::LoadTexture(L"Assets\\hlslpan.jpg", m_preview_tex[0]->metadata, m_preview_tex[0]->image, m_preview_tex[0]->ShaderResourceView);
+
 		time.x		=0.0f;
 		return true;
 	}
@@ -348,9 +418,11 @@ namespace	epion
 	{
 		time.x += 0.01f;
 		math::FVector2 a = {1920,1080};
-		ConstantBufferManager::UpdateCBuffer0(time,a);
+		NodeCustom::Dx11::ConstantBufferManager::UpdateCBuffer0(time,a);
 		m_vertex->SetState();
 		m_pixel->SetState();
+		Device::GetContext()->PSSetShaderResources(0, 1, m_preview_tex[0]->ShaderResourceView.GetAddressOf());
+		NodeCustom::Dx11::SamplerStateManager::SetState(0);
 		m_preview->Render(math::FVector2(1450, 650), math::FVector2(400, 400), 0, FixColor::Red);
 	}
 

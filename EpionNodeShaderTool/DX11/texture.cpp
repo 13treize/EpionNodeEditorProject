@@ -19,44 +19,7 @@ namespace	epion
 	{}
 	Texture::~Texture()
 	{}
-	void	Texture::load_file(com_ptr<ID3D11ShaderResourceView>	&shader_resource_view)
-	{
-		HRESULT	hr = S_OK;
-		hr = LoadFromWICFile(texture_name.c_str(), 0, &metadata, image);
-		if (FAILED(hr))
-		{
-			//throw	std::runtime_error("画像の読み込みに失敗しました");
-		};
 
-		//	画像からシェーダリソースを生成
-		hr = CreateShaderResourceView(Device::GetDevice().Get(),
-			image.GetImages(),
-			image.GetImageCount(),
-			metadata,
-			shader_resource_view.ReleaseAndGetAddressOf());
-	}
-
-	void	Texture::load_file(com_ptr<ID3D11ShaderResourceView>	&shader_resource_view,
-		com_ptr<ID3D11UnorderedAccessView>	&unordered_access_view)
-	{
-		HRESULT	hr = S_OK;
-		hr = LoadFromWICFile(texture_name.c_str(), 0, &metadata, image);
-		if (FAILED(hr))
-		{
-			//throw	std::runtime_error("画像の読み込みに失敗しました");
-		};
-
-		//	画像からシェーダリソースを生成
-		hr = CreateShaderResourceView(Device::GetDevice().Get(),
-			image.GetImages(),
-			image.GetImageCount(),
-			metadata,
-			shader_resource_view.ReleaseAndGetAddressOf());
-		//if(FAILED(hr))
-		//{
-		//	throw	"シェーダーリソース生成に失敗しました";
-		//};
-	}
 	bool Texture::Create(u_int width, u_int height, DXGI_FORMAT format)
 	{
 		HRESULT hr = S_OK;
@@ -101,34 +64,10 @@ namespace	epion
 		{
 			return false;
 		}
-
-
-		//	サンプラステート作成
-		D3D11_SAMPLER_DESC sd = {};
-		sd.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-		sd.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
-		sd.AddressV = D3D11_TEXTURE_ADDRESS_BORDER;
-		sd.AddressW = D3D11_TEXTURE_ADDRESS_BORDER;
-		sd.ComparisonFunc = D3D11_COMPARISON_NEVER;
-		//ボーダーカラー
-		sd.BorderColor[0] = 1.0f;
-		sd.BorderColor[1] = 1.0f;
-		sd.BorderColor[2] = 1.0f;
-		sd.BorderColor[3] = 1.0f;
-
-		sd.MinLOD = 0;
-		sd.MaxLOD = D3D11_FLOAT32_MAX;
-
-		hr = Device::GetDevice()->CreateSamplerState(&sd, sampler.ReleaseAndGetAddressOf());
-		if (FAILED(hr))
-		{
-			return false;
-		}
-
 		return true;
 	}
 
-	bool TextureFile::LoadTexture(std::wstring	load_texture, DirectX::TexMetadata&	metadata, DirectX::ScratchImage&	image, com_ptr<ID3D11ShaderResourceView>& srv)
+	bool TextureFileIO::LoadTexture(std::wstring	load_texture, DirectX::TexMetadata&	metadata, DirectX::ScratchImage&	image, com_ptr<ID3D11ShaderResourceView>& srv)
 	{
 		HRESULT	hr = S_OK;
 		hr = LoadFromWICFile(load_texture.c_str(), 0, &metadata, image);
@@ -149,7 +88,7 @@ namespace	epion
 		return true;
 	}
 
-	bool TextureFile::SaveTexture(std::string name, com_ptr<ID3D11Texture2D>& texture)
+	bool TextureFileIO::SaveTexture(std::string name, com_ptr<ID3D11Texture2D>& texture)
 	{
 		HRESULT hr = {};
 		//出力画像
@@ -180,7 +119,7 @@ namespace	epion
 		return true;
 	}
 
-	bool TextureFile::SaveTexture(std::string name, std::string ext, com_ptr<ID3D11Texture2D>& texture)
+	bool TextureFileIO::SaveTexture(std::string name, std::string ext, com_ptr<ID3D11Texture2D>& texture)
 	{
 		HRESULT hr = {};
 		DirectX::ScratchImage output_image = {};//出力画像
@@ -199,7 +138,7 @@ namespace	epion
 		if (FAILED(hr)) return false;
 		return true;
 	}
-	Extension TextureFile::ExtensionGet(std::string extension)
+	Extension TextureFileIO::ExtensionGet(std::string extension)
 	{
 		if (extension == ".png")return Extension::PNG;
 		else if (extension == ".jpg")return Extension::JPG;

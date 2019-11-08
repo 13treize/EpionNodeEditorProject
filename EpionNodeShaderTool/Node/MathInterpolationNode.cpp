@@ -23,7 +23,7 @@ namespace epion::NodeCustom
 		Init();
 	}
 	LerpNode::LerpNode(int id, const math::FVector2& pos)
-		:NodeBase("Lerp_float", id, pos, size, 3, 1)
+		:NodeBase("Lerp_float", id, pos, 3, 1)
 	{
 		Init();
 	}

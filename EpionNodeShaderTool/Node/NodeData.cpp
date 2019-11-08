@@ -68,6 +68,16 @@ namespace	epion::NodeCustom
 		ImGui::SetCursorScreenPos(set_cursor + ImVec2(-50, -SLOT_INPUT_FLOAT));
 		ImGui::TextColored(ImColor::Vec4::WHITE, "%s", "uv");
 	}
+	void NodeFunction::SetInputSlotTexture2D(ImVec2& set_cursor)
+	{
+		ImGui::SetCursorScreenPos(set_cursor + ImVec2(-50, -SLOT_INPUT_FLOAT));
+		ImGui::TextColored(ImColor::Vec4::WHITE, "%s", "tex");
+	}
+	void NodeFunction::SetInputSlotSamplerState(ImVec2& set_cursor)
+	{
+		ImGui::SetCursorScreenPos(set_cursor + ImVec2(-50, -SLOT_INPUT_FLOAT));
+		ImGui::TextColored(ImColor::Vec4::WHITE, "%s", "ss");
+	}
 
 	void NodeFunction::SetInputSlotColor(ImVec2& set_cursor,bool& popup, math::FVector3& num, int label_num)
 	{
@@ -114,6 +124,8 @@ namespace	epion::NodeCustom
 		default:
 		case epion::NodeCustom::SLOT_TYPE::VECTOR1:
 		case epion::NodeCustom::SLOT_TYPE::UV:
+		case epion::NodeCustom::SLOT_TYPE::TEXTURE2D:
+		case epion::NodeCustom::SLOT_TYPE::SAMPLERSTATE:
 			draw_list->AddRectFilled(pos + ImVec2(SLOT_INPUT_RECT_X, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), IM_COL32(60, 60, 60, 255), 2.0f);
 			draw_list->AddRect(pos + ImVec2(SLOT_INPUT_RECT_X, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), ImColor::U32::GREEN, 2.0f);
 			break;
@@ -133,7 +145,6 @@ namespace	epion::NodeCustom
 			draw_list->AddRectFilled(pos + ImVec2(SLOT_INPUT_RECT_X * 1.8 + 30.0f, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), IM_COL32(60, 60, 60, 255), 2.0f);
 			draw_list->AddRect(pos + ImVec2(SLOT_INPUT_RECT_X * 1.8 + 30.0f, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), ImColor::U32::GREEN, 2.0f);
 			break;
-
 		}
 
 	}
@@ -191,12 +202,10 @@ namespace	epion::NodeCustom
 		case SLOT_TYPE::UV:			color = ImColor::U32::LAWNGREEN;	break;
 		case SLOT_TYPE::VECTOR3:
 		case SLOT_TYPE::COLOR:		color = ImColor::U32::YELLOW;	break;
-		case SLOT_TYPE::VECTOR4:	color = ImColor::U32::REDPURPLE;	break;
+		case SLOT_TYPE::VECTOR4:	color = ImColor::U32::PURPLE;	break;
 		case SLOT_TYPE::TEXTURE2D:	color = ImColor::U32::RED;	break;
-
-			break;
-		case SLOT_TYPE::BOOLEAN:
-			break;
+		case SLOT_TYPE::SAMPLERSTATE:	color = ImColor::U32::WHITE;	break;
+		case SLOT_TYPE::BOOLEAN:	break;
 		}
 		draw_list->AddCircle(centre, NODE_SLOT_RADIUS, color);
 	}
@@ -287,11 +296,10 @@ namespace	epion::NodeCustom
 	{
 	}
 
-	NodeBase::NodeBase(std::string name, int id, const epion::math::FVector2& pos, const ImVec2& size, int inputs_count, int outputs_count)
+	NodeBase::NodeBase(std::string name, int id, const epion::math::FVector2& pos, int inputs_count, int outputs_count)
 		:m_Name(name),
 		m_ID(id),
 		m_Pos(pos),
-		m_Size(size),
 		m_inputs_count(inputs_count),
 		m_outputs_count(outputs_count),
 		m_function_call_str(""),
@@ -359,7 +367,7 @@ namespace	epion::NodeCustom
 	}
 	if (is_save)
 	{
-		TextureFile::SaveTexture("ts", ".jpg", m_resouce->Texture2D);
+		TextureFileIO::SaveTexture("ts", ".jpg", m_resouce->Texture2D);
 	}
 #endif
 	//	RenderTarget::set(m_resouce->RenderTargetView, Dxgi::get_dsv());

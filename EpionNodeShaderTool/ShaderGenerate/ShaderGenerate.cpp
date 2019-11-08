@@ -167,26 +167,36 @@ namespace	epion::Shader
 	{
 		function_str = "";
 		//texture
+		//for (auto&n : nodes)
+		//{
+		//	if (typeid(*n) == typeid(NodeCustom::SamplerTexture2DNode))
+		//	{
+		//		function_str += n->GetFunctionDefStr() + "(t" + std::to_string(texture2d_count) + ");\n";
+		//		texture2d_count++;
+		//	}
+		//}
+
+		//Sampler State
 		for (auto&n : nodes)
 		{
-			if (typeid(*n) == typeid(NodeCustom::Texture2DNode))
+			if (typeid(*n) == typeid(NodeCustom::SamplerStateNode))
 			{
-				function_str += n->GetFunctionDefStr() + "(t" + std::to_string(texture2d_count) + ");\n";
-				texture2d_count++;
+				function_str += n->GetFunctionDefStr() + "\n";
 			}
 		}
 
 		//function
 		for (auto& n : nodes)
 		{
-			auto	it = shader_function.find(n->m_Name);
+			auto it = shader_function.find(n->m_Name);
 			if (it != shader_function.end())
 			{
 				continue;
 			}
 			else
 			{
-				if (typeid(*n) != typeid(NodeCustom::Texture2DNode))
+				//if (typeid(*n) != typeid(NodeCustom::SamplerTexture2DNode))
+				if (typeid(*n) != typeid(NodeCustom::SamplerStateNode))
 				{
 					function_str += n->GetFunctionDefStr() + "\n";
 					shader_function.emplace(n->m_Name, 0);
@@ -279,7 +289,7 @@ namespace	epion::Shader
 
 	std::string	NodeShaderManager::ReturnEvent(std::string retuern_color_str)
 	{
-		std::string		ret_str = space + "return " + retuern_color_str + ";\n";
+		std::string	ret_str = space + "return " + retuern_color_str + ";\n";
 		return	ret_str;
 	}
 

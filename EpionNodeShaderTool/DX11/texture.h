@@ -13,12 +13,6 @@ namespace	epion
 		Texture(std::wstring	load_texture);
 		~Texture();
 
-		//ÉtÉ@ÉCÉãñºÇÕì«Ç›çûÇ›çœÇ›
-		void	load_file(com_ptr<ID3D11ShaderResourceView>	&shader_resource_view);
-
-		void	load_file(com_ptr<ID3D11ShaderResourceView>	&shader_resource_view,
-			com_ptr<ID3D11UnorderedAccessView>	&unordered_access_view);
-
 		bool Create(u_int width, u_int height, DXGI_FORMAT format);
 
 
@@ -29,7 +23,6 @@ namespace	epion
 		DirectX::ScratchImage	image = {};
 		com_ptr<ID3D11RenderTargetView> RenderTargetView;
 		com_ptr<ID3D11ShaderResourceView> ShaderResourceView;
-		com_ptr<ID3D11SamplerState> sampler;
 		com_ptr<ID3D11Texture2D> Texture2D;
 
 		D3D11_TEXTURE2D_DESC texture_desc;
@@ -46,7 +39,7 @@ namespace	epion
 	};
 
 	//TextureExport
-	class	TextureFile	final
+	class	TextureFileIO	final
 	{
 	public:
 		static	bool	LoadTexture(std::wstring load_texture, DirectX::TexMetadata& metadata, DirectX::ScratchImage& image, com_ptr<ID3D11ShaderResourceView>& srv);

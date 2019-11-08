@@ -13,6 +13,9 @@ namespace	epion::ImColor
 		static ImU32	YELLOW = IM_COL32(255, 255, 0, 250);
 		static ImU32	LIGHTBLUE = IM_COL32(0, 255, 255, 250);
 		static ImU32	REDPURPLE = IM_COL32(255, 0, 124, 250);
+		static ImU32	PURPLE = IM_COL32(255, 0, 255, 250);
+		static ImU32	WHITE = IM_COL32(255, 255, 255, 250);
+
 	}
 
 	namespace	Vec4

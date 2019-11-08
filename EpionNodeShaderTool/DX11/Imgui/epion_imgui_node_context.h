@@ -55,6 +55,7 @@ namespace	epion::NodeCustom
 
 		//input
 		static	bool	m_is_open_input_basic_menu;
+		static	bool	m_is_open_input_texture_menu;
 
 		static	bool	m_is_open_math_basic_menu;
 		static	bool	m_is_open_math_advanced_menu;
@@ -67,7 +68,7 @@ namespace	epion::NodeCustom
 
 		static	inline	void	artistic_context();
 		static	inline	void	channel_context();
-		static	inline	void	input_context();
+		static	inline	void	InputContext();
 		static	inline	void	master_context();
 		static	inline	void	math_context();
 		static	inline	void	procedura_context();

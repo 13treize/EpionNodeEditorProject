@@ -27,7 +27,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	AbsoluteNode::AbsoluteNode(int id, const math::FVector2& pos)
-		:NodeBase("Absolute_float", id, pos, size, 1, 1)
+		:NodeBase("Absolute_float", id, pos, 1, 1)
 	{
 		Init();
 	}
@@ -98,7 +98,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	LengthNode::LengthNode(int id, const math::FVector2& pos)
-		:NodeBase("Length_float", id, pos, size, 1, 1)
+		:NodeBase("Length_float", id, pos, 1, 1)
 	{
 		Init();
 	}
@@ -119,9 +119,6 @@ namespace	epion::NodeCustom
 	void	LengthNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		i_update(offset, draw_list);
-		draw_list->ChannelsSetCurrent(1);
-		m_input_name[0] = "In" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
-		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
 
 		if (!m_is_input[0])
 		{
@@ -138,10 +135,7 @@ namespace	epion::NodeCustom
 
 	void	LengthNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
-		}
+		o_update(offset, draw_list);
 	}
 
 	void	LengthNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -172,7 +166,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	ModuloNode::ModuloNode(int id, const math::FVector2& pos)
-		:NodeBase("Modulo_float", id, pos, size, 2, 1)
+		:NodeBase("Modulo_float", id, pos, 2, 1)
 	{
 		Init();
 	}
@@ -255,7 +249,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	NegateNode::NegateNode(int id, const math::FVector2& pos)
-		:NodeBase("Negate_float", id, pos, size, 1, 1)
+		:NodeBase("Negate_float", id, pos, 1, 1)
 	{
 		Init();
 	}
@@ -329,7 +323,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	NormalizeNode::NormalizeNode(int id, const math::FVector2& pos)
-		:NodeBase("Normalize_float", id, pos, size, 1, 1)
+		:NodeBase("Normalize_float", id, pos, 1, 1)
 	{
 		Init();
 	}
@@ -404,7 +398,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	PosterizeNode::PosterizeNode(int id, const math::FVector2& pos)
-		:NodeBase("Posterize_float", id, pos, size, 2, 1)
+		:NodeBase("Posterize_float", id, pos, 2, 1)
 	{
 		Init();
 	}
@@ -487,7 +481,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	ReciprocalSquareRootNode::ReciprocalSquareRootNode(int id, const math::FVector2& pos)
-		:NodeBase("ReciprocalSquareRoot_float", id, pos, size, 1, 1)
+		:NodeBase("ReciprocalSquareRoot_float", id, pos, 1, 1)
 	{
 		Init();
 	}

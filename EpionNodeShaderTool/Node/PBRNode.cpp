@@ -36,7 +36,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	PBRMasterNode::PBRMasterNode(int id, const math::FVector2& pos)
-		:NodeBase("PBR Master", id, pos, size, 9, 0)
+		:NodeBase("PBR Master", id, pos, 9, 0)
 	{
 		Init();
 	}

@@ -1,12 +1,20 @@
 #pragma once
 namespace	epion::NodeCustom
 {
-	class	Texture2DNode final :public	NodeBase
+	class	SamplerTexture2DNode final :public	NodeBase
 	{
 	public:
-		Texture2DNode();
-		Texture2DNode(int id, const math::FVector2& pos);
-		~Texture2DNode();
+		SamplerTexture2DNode();
+		SamplerTexture2DNode(int id, const math::FVector2& pos);
+		~SamplerTexture2DNode();
+
+		void	Init()override;
+
+		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
+
+		std::string	GetFunctionDefStr()	override;
 
 		template<class Archive>
 		void serialize(Archive & archive)
@@ -15,13 +23,6 @@ namespace	epion::NodeCustom
 		};
 
 	private:
-		void	Init()override;
-
-		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
-
-		std::string	GetFunctionDefStr()	override;
 	};
 
 	class	SamplerStateNode final :public	NodeBase
@@ -31,12 +32,22 @@ namespace	epion::NodeCustom
 		SamplerStateNode(int id, const math::FVector2& pos);
 		~SamplerStateNode();
 
-	private:
+		void	Init()override;
+
+		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
+
+		std::string	GetFunctionDefStr()	override;
+
 		template<class Archive>
 		void serialize(Archive & archive)
 		{
-			archive(cereal::base_class<NodeBase>(this));
+			archive(cereal::base_class<NodeBase>(this),
+				CEREAL_NVP(m_slot_no));
 		};
 
+	private:
+		float m_slot_no;
 	};
 }

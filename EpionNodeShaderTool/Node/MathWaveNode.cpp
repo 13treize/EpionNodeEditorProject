@@ -24,7 +24,7 @@ namespace	epion::NodeCustom
 	}
 
 	NoiseSineWaveNode::NoiseSineWaveNode(int id, const math::FVector2& pos)
-		:NodeBase("NoiseSineWave", id, pos, size, 2, 1)
+		:NodeBase("NoiseSineWave", id, pos, 2, 1)
 	{
 		Init();
 	}
@@ -111,7 +111,7 @@ namespace	epion::NodeCustom
 	}
 
 	SawtoothWaveNode::SawtoothWaveNode(int id, const math::FVector2& pos)
-		:NodeBase("SawtoothWave", id, pos, size, 1, 1)
+		:NodeBase("SawtoothWave", id, pos, 1, 1)
 	{
 		Init();
 	}

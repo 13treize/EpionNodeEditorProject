@@ -27,7 +27,7 @@ namespace	epion::NodeCustom
 
 	//Position‚ÍŒã‚Å’Ç‰Á
 	UnlitMasterNode::UnlitMasterNode(int id, const epion::math::FVector2& pos)
-		:NodeBase("Unlit Master", id, pos, size, 4, 0)
+		:NodeBase("Unlit Master", id, pos, 4, 0)
 	{
 		Init();
 	}

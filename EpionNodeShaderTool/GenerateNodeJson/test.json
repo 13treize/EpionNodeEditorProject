@@ -10,11 +10,13 @@
                         "m_Name": "Unlit Master",
                         "m_ID": 0,
                         "m_Pos": {
-                            "x": 792,
-                            "y": 328
+                            "x": 830,
+                            "y": 315
                         },
                         "m_dynamic_slot_type": 1,
-                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Checkerboard_out1,1.000000,0.000000);\n"
+                        "m_inputs_count": 4,
+                        "m_outputs_count": 0,
+                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Polygon_out2,1.000000,0.000000);\n"
                     },
                     "Pos": {
                         "cereal_class_version": 0,
@@ -36,38 +38,62 @@
         },
         {
             "polymorphic_id": 2147483650,
-            "polymorphic_name": "epion::NodeCustom::CheckerboardNode",
+            "polymorphic_name": "epion::NodeCustom::TilingAndOffsetNode",
             "ptr_wrapper": {
                 "valid": 1,
                 "data": {
                     "value0": {
-                        "m_Name": "Checkerboard",
+                        "m_Name": "TilingAndOffset",
                         "m_ID": 1,
                         "m_Pos": {
-                            "x": 390,
-                            "y": 287
+                            "x": 228,
+                            "y": 470
                         },
                         "m_dynamic_slot_type": 1,
-                        "m_function_call_str": "    float3 Checkerboard_out1;\n    Checkerboard(input.uv,float3(0.893491,0.074017,0.074017),float3(0.000000,0.000000,0.000000),float2(1.000000,1.000000),Checkerboard_out1);\n"
+                        "m_inputs_count": 3,
+                        "m_outputs_count": 1,
+                        "m_function_call_str": "    float2 TilingAndOffset_out1;\n    TilingAndOffset(input.uv,float2(1.000000,1.000000),float2(0.000000,0.000000),TilingAndOffset_out1);\n"
                     },
                     "m_uv": {
                         "x": 0,
                         "y": 0
                     },
-                    "m_colora": {
-                        "x": 0.89349114894866943,
-                        "y": 0.074017040431499481,
-                        "z": 0.074017040431499481
-                    },
-                    "m_colorb": {
-                        "x": 0,
-                        "y": 0,
-                        "z": 0
-                    },
-                    "m_frequency": {
+                    "Tiling": {
                         "x": 1,
                         "y": 1
+                    },
+                    "Offset": {
+                        "x": 0,
+                        "y": 0
                     }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483651,
+            "polymorphic_name": "epion::NodeCustom::PolygonNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Polygon",
+                        "m_ID": 2,
+                        "m_Pos": {
+                            "x": 450,
+                            "y": 80
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_inputs_count": 4,
+                        "m_outputs_count": 1,
+                        "m_function_call_str": "    float Polygon_out2;\n    Polygon(input.uv,4.000000,1.000000,1.000000,Polygon_out2);\n"
+                    },
+                    "m_uv": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "m_sides": 4,
+                    "m_width": 1,
+                    "m_height": 1
                 }
             }
         }
@@ -76,10 +102,10 @@
         {
             "m_input.id": 0,
             "m_input.slot": 1,
-            "m_input_type": 9,
-            "m_output.id": 1,
+            "m_input_type": 10,
+            "m_output.id": 2,
             "m_output.slot": 0,
-            "m_output_type": 3
+            "m_output_type": 1
         }
     ]
 }

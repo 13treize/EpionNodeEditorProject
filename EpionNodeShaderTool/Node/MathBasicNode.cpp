@@ -28,7 +28,7 @@ namespace	epion::NodeCustom
 	}
 
 	AddNode::AddNode(int id, const math::FVector2& pos)
-		:NodeBase("Add", id, pos, size, 2, 1)
+		:NodeBase("Add", id, pos, 2, 1)
 	{
 		Init();
 	}
@@ -103,7 +103,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	SubtractNode::SubtractNode(int id, const math::FVector2& pos)
-		:NodeBase("Subtract", id, pos, size, 2, 1)
+		:NodeBase("Subtract", id, pos, 2, 1)
 	{
 		Init();
 	}
@@ -177,7 +177,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	MultiplyNode::MultiplyNode(int id, const math::FVector2& pos)
-		:NodeBase("Multiply", id, pos, size, 2, 1)
+		:NodeBase("Multiply", id, pos, 2, 1)
 	{
 		Init();
 	}
@@ -252,7 +252,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	DivideNode::DivideNode(int id, const math::FVector2& pos)
-		:NodeBase("Divide", id, pos, size, 2, 1)
+		:NodeBase("Divide", id, pos, 2, 1)
 	{
 		Init();
 	}
@@ -327,7 +327,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	PowerNode::PowerNode(int id, const math::FVector2& pos)
-		:NodeBase("Power", id, pos, size, 2, 1)
+		:NodeBase("Power", id, pos, 2, 1)
 	{
 		Init();
 	}
@@ -404,7 +404,7 @@ namespace	epion::NodeCustom
 		Init();
 	}
 	SquareRootNode::SquareRootNode(int id, const math::FVector2& pos)
-		:NodeBase("SquareRoot", id, pos, size, 1, 1)
+		:NodeBase("SquareRoot", id, pos, 1, 1)
 	{
 		Init();
 	}
@@ -427,17 +427,13 @@ namespace	epion::NodeCustom
 	void	SquareRootNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		i_update(offset, draw_list);
-		draw_list->ChannelsSetCurrent(1);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0]);
 
 	}
 
 	void	SquareRootNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
-		}
+		o_update(offset, draw_list);
 	}
 
 	void	SquareRootNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)

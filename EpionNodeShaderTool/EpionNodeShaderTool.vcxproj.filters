@@ -123,12 +123,6 @@
     <ClCompile Include="win_core.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="DX11\Imgui\dx11_imgui_main_window.cpp">
-      <Filter>ソース ファイル\Dx11\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="DX11\Imgui\dx11_imgui_manager.cpp">
-      <Filter>ソース ファイル\Dx11\Imgui</Filter>
-    </ClCompile>
     <ClCompile Include="Framework.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -285,17 +279,20 @@
     <ClCompile Include="Node\NodeData.cpp">
       <Filter>ソース ファイル\Node</Filter>
     </ClCompile>
-    <ClCompile Include="DX11\ConstantBuffer.cpp">
-      <Filter>ソース ファイル\Dx11</Filter>
-    </ClCompile>
     <ClCompile Include="Node\ArtisticNormalNode.cpp">
       <Filter>ソース ファイル\Node\Artistic</Filter>
     </ClCompile>
     <ClCompile Include="Node\ChannelNode.cpp">
       <Filter>ソース ファイル\Node\Channel</Filter>
     </ClCompile>
-    <ClCompile Include="DX11\SamplerState.cpp">
-      <Filter>ソース ファイル\Dx11</Filter>
+    <ClCompile Include="DX11\Imgui\dx11ImguiMainWindow.cpp">
+      <Filter>ソース ファイル\Dx11\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\Imgui\dx11ImguiManager.cpp">
+      <Filter>ソース ファイル\Dx11\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\NodeParamDx11.cpp">
+      <Filter>ソース ファイル\Node</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -497,9 +494,6 @@
     <ClInclude Include="Node\NodeData.h">
       <Filter>ヘッダー ファイル\Node</Filter>
     </ClInclude>
-    <ClInclude Include="DX11\ConstantBuffer.h">
-      <Filter>ヘッダー ファイル\Dx11</Filter>
-    </ClInclude>
     <ClInclude Include="Node\ArtisticNormalNode.h">
       <Filter>ヘッダー ファイル\Node\Artistic</Filter>
     </ClInclude>
@@ -509,8 +503,8 @@
     <ClInclude Include="Node\NodeParam.h">
       <Filter>ヘッダー ファイル\Node</Filter>
     </ClInclude>
-    <ClInclude Include="DX11\SamplerState.h">
-      <Filter>ヘッダー ファイル\Dx11</Filter>
+    <ClInclude Include="Node\NodeParamDx11.h">
+      <Filter>ヘッダー ファイル\Node</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

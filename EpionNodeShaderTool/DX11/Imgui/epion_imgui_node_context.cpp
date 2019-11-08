@@ -62,6 +62,7 @@ namespace	epion::NodeCustom
 	ImVec2	ContextManager::m_offfset;
 
 	bool	ContextManager::m_is_open_input_basic_menu;
+	bool	ContextManager::m_is_open_input_texture_menu;
 
 	bool	ContextManager::m_is_open_math_basic_menu;
 	bool	ContextManager::m_is_open_math_advanced_menu;
@@ -110,7 +111,7 @@ namespace	epion::NodeCustom
 		click_add();
 		artistic_context();
 		channel_context();
-		input_context();
+		InputContext();
 		master_context();
 		math_context();
 		procedura_context();
@@ -196,7 +197,7 @@ namespace	epion::NodeCustom
 
 	}
 
-	void	ContextManager::input_context()
+	void	ContextManager::InputContext()
 	{
 		if (m_is_open_menu[Input])
 		{
@@ -204,17 +205,51 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("InputMenu"))
 			{
-				MenuCreateNode<FloatNode>("Float",m_offfset, m_create_count, m_is_open_menu[Input], m_is_open_input_basic_menu);
-				MenuCreateNode<Vector2Node>("Vector2", m_offfset, m_create_count, m_is_open_menu[Input], m_is_open_input_basic_menu);
-				MenuCreateNode<Vector3Node>("Vector3", m_offfset, m_create_count, m_is_open_menu[Input], m_is_open_input_basic_menu);
-				MenuCreateNode<Vector4Node>("Vector4", m_offfset, m_create_count, m_is_open_menu[Input], m_is_open_input_basic_menu);
-				MenuCreateNode<ColorNode>("Color", m_offfset, m_create_count, m_is_open_menu[Input], m_is_open_input_basic_menu);
-				MenuCreateNode<TimeNode>("Time", m_offfset, m_create_count, m_is_open_menu[Input], m_is_open_input_basic_menu);
-				MenuCreateNode<Texture2DNode>("Texture2D", m_offfset, m_create_count, m_is_open_menu[Input], m_is_open_input_basic_menu);
+				if (ImGui::MenuItem("Basic"))
+				{
+					m_is_open_input_basic_menu = true;
+					m_is_open_menu[Input] = false;
+				}
+
+				if (ImGui::MenuItem("Texture"))
+				{
+					m_is_open_input_texture_menu = true;
+					m_is_open_menu[Input] = false;
+				}
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
 		}
+		if (m_is_open_input_basic_menu)
+		{
+			ImGui::OpenPopup("InputBasicMenu");
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
+			if (ImGui::BeginPopup("InputBasicMenu"))
+			{
+				MenuCreateNode<FloatNode>("Float", m_offfset, m_create_count, m_is_open_input_basic_menu);
+				MenuCreateNode<Vector2Node>("Vector2", m_offfset, m_create_count, m_is_open_input_basic_menu);
+				MenuCreateNode<Vector3Node>("Vector3", m_offfset, m_create_count, m_is_open_input_basic_menu);
+				MenuCreateNode<Vector4Node>("Vector4", m_offfset, m_create_count, m_is_open_input_basic_menu);
+				MenuCreateNode<ColorNode>("Color", m_offfset, m_create_count, m_is_open_input_basic_menu);
+				MenuCreateNode<TimeNode>("Time", m_offfset, m_create_count, m_is_open_input_basic_menu);
+			}
+			ImGui::PopStyleVar();
+			ImGui::EndPopup();
+		}
+		if (m_is_open_input_texture_menu)
+		{
+			ImGui::OpenPopup("InputTextureMenu");
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
+			if (ImGui::BeginPopup("InputTextureMenu"))
+			{
+				MenuCreateNode<SamplerTexture2DNode>("Texture2D", m_offfset, m_create_count, m_is_open_input_texture_menu);
+				MenuCreateNode<SamplerStateNode>("SamplerState", m_offfset, m_create_count, m_is_open_input_texture_menu);
+			}
+			ImGui::PopStyleVar();
+			ImGui::EndPopup();
+		}
+
+
 	}
 
 	void	ContextManager::master_context()
@@ -247,7 +282,6 @@ namespace	epion::NodeCustom
 					m_is_open_math_advanced_menu = true;
 					m_is_open_menu[Math] = false;
 				}
-
 				if (ImGui::MenuItem("Basic")) 
 				{
 					m_is_open_math_basic_menu = true;
