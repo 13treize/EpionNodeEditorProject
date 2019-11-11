@@ -1,4 +1,5 @@
-#include "../All.h"
+#include	"../All.h"
+#include	"../epion.h"
 
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
@@ -7,7 +8,6 @@
 
 #include	"NodeData.h"
 #include	"../epion_physics/epion_collider.h"
-#include	"../epion_string.h"
 
 #include	"../DX11/dx11_device.h"
 #include	"../DX11/dx11_dxgi.h"
@@ -445,11 +445,11 @@ namespace	epion::NodeCustom
 		float color[4] = { 1,0,0,0 };
 		Device::GetContext()->ClearRenderTargetView(m_resouce->RenderTargetView.Get(), color);
 		Device::GetContext()->ClearDepthStencilView(Dxgi::get_dsv().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-		Device::GetContext()->PSSetShaderResources(0, 1, m_resouce->ShaderResourceView.GetAddressOf());
+		Device::GetContext()->PSSetShaderResources(0, 1, m_resouce->m_shader_resource.GetAddressOf());
 		m_preview->Render(math::FVector2(0, 0), math::FVector2(m_Size.x, m_Size.x), 0, FixColor::Red);
 		draw_list->ChannelsSetCurrent(4); // input_slot
 		ImGui::SetCursorScreenPos(ImVec2(m_Pos.x + offset.x, m_Pos.y + m_Size.y + offset.y));
-		ImGui::Image(m_resouce->ShaderResourceView.Get(), ImVec2(m_Size.x, m_Size.x), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1, 1, 1, 1), ImVec4(0, 0, 0, 1));
+		ImGui::Image(m_resouce->m_shader_resource.Get(), ImVec2(m_Size.x, m_Size.x), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1, 1, 1, 1), ImVec4(0, 0, 0, 1));
 	}
 
 	void	NodeBase::ResouceCreate()

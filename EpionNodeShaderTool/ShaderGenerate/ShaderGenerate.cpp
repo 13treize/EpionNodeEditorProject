@@ -179,7 +179,8 @@ namespace	epion::Shader
 		//Sampler State
 		for (auto&n : nodes)
 		{
-			if (typeid(*n) == typeid(NodeCustom::SamplerStateNode))
+			if (typeid(*n) == typeid(NodeCustom::SamplerStateNode) ||
+				typeid(*n) == typeid(NodeCustom::Texture2DNode))
 			{
 				n->ShaderUpdate(nodes,links);
 				function_str += n->GetFunctionDefStr() + "\n";
@@ -190,18 +191,16 @@ namespace	epion::Shader
 		for (auto& n : nodes)
 		{
 			auto it = shader_function.find(n->m_Name);
-			if (it != shader_function.end())
+			if (it != shader_function.end()||
+				typeid(*n) == typeid(NodeCustom::SamplerStateNode) ||
+				typeid(*n) == typeid(NodeCustom::Texture2DNode))
 			{
 				continue;
 			}
 			else
 			{
-				//if (typeid(*n) != typeid(NodeCustom::SamplerTexture2DNode))
-				if (typeid(*n) != typeid(NodeCustom::SamplerStateNode))
-				{
 					function_str += n->GetFunctionDefStr() + "\n";
 					shader_function.emplace(n->m_Name, 0);
-				}
 			}
 		}
 		return	function_str;

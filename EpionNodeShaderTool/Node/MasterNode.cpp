@@ -1,4 +1,5 @@
 #include	"../All.h"
+#include	"../epion.h"
 #include	<cereal/cereal.hpp>
 #include	<cereal/types/polymorphic.hpp>
 #include	"../../../imgui\\imgui.h"
@@ -6,7 +7,6 @@
 #include	"NodeParam.h"
 #include	"NodeData.h"
 #include	"MasterNode.h"
-#include	"../epion_string.h"
 #include "../ImguiFunction.h"
 
 namespace

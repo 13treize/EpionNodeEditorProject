@@ -154,6 +154,8 @@
     <ClCompile Include="DX11\Imgui\epion_imgui_node_context.cpp" />
     <ClCompile Include="DX11\Imgui\EpionNodeEditor.cpp" />
     <ClCompile Include="DX11\Imgui\grid.cpp" />
+    <ClCompile Include="DX11\Imgui\PreviewWindow.cpp" />
+    <ClCompile Include="DX11\Imgui\TextureResouce.cpp" />
     <ClCompile Include="DX11\InputLayout.cpp" />
     <ClCompile Include="DX11\NodeResult.cpp" />
     <ClCompile Include="DX11\ObjLoader.cpp" />
@@ -169,7 +171,7 @@
     <ClCompile Include="DX11\viewport.cpp" />
     <ClCompile Include="epion_math\epion_random.cpp" />
     <ClCompile Include="epion_physics\epion_collider.cpp" />
-    <ClCompile Include="epion_string.cpp" />
+    <ClCompile Include="epion_string\epion_string.cpp" />
     <ClCompile Include="FileIO\Fileio_json.cpp" />
     <ClCompile Include="Framework.cpp" />
     <ClCompile Include="ImguiFunction.cpp" />
@@ -220,6 +222,8 @@
     <ClInclude Include="DX11\Imgui\epion_imgui_node_context.h" />
     <ClInclude Include="DX11\Imgui\EpionNodeEditor.h" />
     <ClInclude Include="DX11\Imgui\grid.h" />
+    <ClInclude Include="DX11\Imgui\PreviewWindow.h" />
+    <ClInclude Include="DX11\Imgui\TextureResouce.h" />
     <ClInclude Include="DX11\InputLayout.h" />
     <ClInclude Include="DX11\NodeResult.h" />
     <ClInclude Include="DX11\ObjLoader.h" />
@@ -241,7 +245,7 @@
     <ClInclude Include="epion_math\epion_vector3.h" />
     <ClInclude Include="epion_math\epion_vector4.h" />
     <ClInclude Include="epion_physics\epion_collider.h" />
-    <ClInclude Include="epion_string.h" />
+    <ClInclude Include="epion_string\epion_string.h" />
     <ClInclude Include="FileIO\Fileio_json.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="ImguiFunction.h" />

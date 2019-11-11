@@ -18,10 +18,10 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("In", In));
+				cereal::make_nvp("In", m_in));
 		};
 	private:
-		math::FVector4	In;
+		math::FVector4	m_in;
 	};
 
 	class	DDYNode	final :public NodeBase
@@ -41,10 +41,10 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("In", In));
+				cereal::make_nvp("In", m_in));
 		};
 	private:
-		math::FVector4	In;
+		math::FVector4	m_in;
 	};
 
 	class	DDXYNode	final :public NodeBase
@@ -64,10 +64,10 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("In", In));
+				cereal::make_nvp("In", m_in));
 		};
 	private:
-		math::FVector4	In;
+		math::FVector4	m_in;
 	};
 
 }

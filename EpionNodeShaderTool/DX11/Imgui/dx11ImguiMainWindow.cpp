@@ -7,20 +7,16 @@
 #include	"../../ImguiFunction.h"
 
 #include	"dx11_imgui_main_window.h"
+#include	"PreviewWindow.h"
 #include	"../dx11_dxgi.h"
 
-#include	"../../Node/NodeParamDx11.h"
 #include	"EpionNodeEditor.h"
 #include	"epion_imgui_node_context.h"
 
 #include	"../../Node/NodeData.h"
-#include	"../../ImguiFunction.h"
 
 #include	"../../ShaderGenerate/ShaderGenerate.h"
-#include	"../square.h"
 #include	"../texture.h"
-
-#include	"../../epion_string.h"
 
 #pragma warning(disable:4996)
 
@@ -122,8 +118,8 @@ namespace	epion
 		m_impl->preview_resouce = std::make_unique<Texture>();
 		m_impl->preview_resouce->Create(400, 400, DXGI_FORMAT_R16G16B16A16_FLOAT);
 
-		m_preview_resouce = std::make_unique<Texture>();
-		m_preview_resouce->Create(400, 400, DXGI_FORMAT_R16G16B16A16_FLOAT);
+		//m_preview_resouce = std::make_unique<Texture>();
+		//m_preview_resouce->Create(400, 400, DXGI_FORMAT_R16G16B16A16_FLOAT);
 
 		m_impl->window_flags |= ImGuiWindowFlags_NoTitleBar;
 		m_impl->window_flags |= ImGuiWindowFlags_MenuBar;
@@ -131,13 +127,13 @@ namespace	epion
 		m_impl->window_flags |= ImGuiWindowFlags_NoResize;
 
 
-		//TextureInit();
+		TextureInit();
 		NodeCustom::ContextManager::Init();
 		ImGui::StyleColorsDark();
 		NodeCustom::NodeEditor::Init();
 		ColorPicker::Init();
-		Preview::Init(L"test.hlsl");
 		m_tex_resouce.Init();
+		Preview::Init(L"test.hlsl",m_tex_resouce.GetTexNames(),1);
 	}
 
 	void	ImguiMain::impl_update()
@@ -223,7 +219,7 @@ namespace	epion
 						ImGui::InputText("ShaderName", m_impl->node_shader_name, CHAR_MAX);
 
 						//reset_shader
-						if(ImGui::Button("Updatehlsl"))	Preview::Init(L"test.hlsl");
+						if(ImGui::Button("Updatehlsl"))	Preview::Init(L"test.hlsl", m_tex_resouce.GetTexNames());
 						ImGui::EndTabItem();
 					}
 					if (ImGui::BeginTabItem("Texture"))
@@ -284,7 +280,7 @@ namespace	epion
 		for (int i = 0; i < m_impl->tex_num; i++)
 		{
 			m_impl->tex_resouce[i] = std::make_unique<Texture>();
-			m_impl->tex_resouce[i]->Create(200, 200, DXGI_FORMAT_R16G16B16A16_FLOAT);
+			TextureFileIO::LoadTexture(StringConverter::to_wstring(m_impl->tex_name[i]), m_impl->tex_resouce[i]->m_metadata, m_impl->tex_resouce[i]->m_image, m_impl->tex_resouce[i]->m_shader_resource);
 		}
 	}
 	void	ImguiMain::TextureUpdate()
@@ -295,7 +291,6 @@ namespace	epion
 			{
 				if (ImGui::Button(m_impl->tex_name[i].c_str()))
 				{
-					TextureFileIO::LoadTexture(StringConverter::to_wstring(m_impl->tex_name[i]), m_impl->tex_resouce[i]->metadata, m_impl->tex_resouce[i]->image, m_impl->tex_resouce[i]->ShaderResourceView);
 					m_impl->is_tex[i] = true;
 				}
 				if (m_impl->is_tex[i])
@@ -304,7 +299,7 @@ namespace	epion
 					{
 						m_impl->is_tex[i] = false;
 					}
-					ImGui::Image(m_impl->tex_resouce[i]->ShaderResourceView.Get(), ImVec2(200, 200), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1, 1, 1, 1), ImVec4(1, 0, 0, 1));
+					ImGui::Image(m_impl->tex_resouce[i]->m_shader_resource.Get(), ImVec2(200, 200), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1, 1, 1, 1), ImVec4(1, 0, 0, 1));
 				}
 			}
 			ImGui::TreePop();
@@ -336,94 +331,5 @@ namespace	epion
 		}
 	}
 
-	void	TextureResouce::Init()
-	{
-		directory_name = "Assets\\";
-		for (auto& x : std::filesystem::directory_iterator("Assets"))
-		{
-			m_file_names.push_back(x.path().string());
-		}
-	}
-
-	void	TextureResouce::Update()
-	{
-		std::string_view path = "resouce path:    ";
-		ImGui::InputText("Directory", directory_input_name, CHAR_MAX);
-		ImGui::Text(directory_name.c_str());
-		ImGui::InputText("ShaderName", tex_input_name, CHAR_MAX);
-		if (ImGui::Button("PushBack"))
-		{
-			m_tex_names.push_back("");
-
-			if (m_tex_names.size() > m_tex_display_str.size())
-			{
-				m_tex_display_str.push_back("Texture Name" + StringConverter::get_space(m_tex_names.size()));
-				m_tex_title.push_back("Slot " + std::to_string(m_tex_names.size() -1));
-				m_current_file_name.push_back("");
-			}
-		}
-		ImGui::SameLine();
-		if (ImGui::Button("PopBack")&& !m_tex_names.empty())
-		{
-			m_tex_names.pop_back();
-		}
-
-		for (int i=0;i<m_tex_names.size();i++)
-		{
-			if (ImGui::TreeNode(m_tex_title[i].c_str()))
-			{
-				if (ImGui::BeginCombo("TextureName", m_current_file_name[i].c_str()))
-				{
-					for (int j = 0; j < m_file_names.size(); j++)
-					{
-						bool is_selected = (m_current_file_name[i] == m_file_names[j]);
-						if (ImGui::Selectable(m_file_names[j].c_str(), is_selected))
-						{
-							m_current_file_name[i] = m_file_names[j];
-						}
-						if (is_selected)
-						{
-							ImGui::SetItemDefaultFocus();
-						}
-					}
-					ImGui::EndCombo();
-				}
-				ImGui::TreePop();
-			}
-			ImGui::Separator();
-		}
-	}
-
-	std::unique_ptr<Square>			Preview::m_preview;
-	std::unique_ptr<VertexShader>	Preview::m_vertex;
-	std::unique_ptr<PixelShader>	Preview::m_pixel;
-	std::unique_ptr<Texture>		Preview::m_preview_tex[D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT];
-
-	math::FVector4					Preview::time;
-
-	bool	Preview::Init(std::wstring	ps_name)
-	{
-		NodeCustom::Dx11::ConstantBufferManager::Create();
-		m_vertex	=std::make_unique<VertexShader>(L"HLSLShader\\square_vertex_shader.hlsl");
-		m_pixel		=std::make_unique<PixelShader>(ps_name);
-		m_preview	=std::make_unique<Square>(m_vertex->GetBlob());
-		NodeCustom::Dx11::SamplerStateManager::Create(0, D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_WRAP);
-		m_preview_tex[0] = std::make_unique<Texture>();
-		TextureFileIO::LoadTexture(L"Assets\\hlslpan.jpg", m_preview_tex[0]->metadata, m_preview_tex[0]->image, m_preview_tex[0]->ShaderResourceView);
-
-		time.x		=0.0f;
-		return true;
-	}
-	void	Preview::Render()
-	{
-		time.x += 0.01f;
-		math::FVector2 a = {1920,1080};
-		NodeCustom::Dx11::ConstantBufferManager::UpdateCBuffer0(time,a);
-		m_vertex->SetState();
-		m_pixel->SetState();
-		Device::GetContext()->PSSetShaderResources(0, 1, m_preview_tex[0]->ShaderResourceView.GetAddressOf());
-		NodeCustom::Dx11::SamplerStateManager::SetState(0);
-		m_preview->Render(math::FVector2(1450, 650), math::FVector2(400, 400), 0, FixColor::Red);
-	}
 
 }

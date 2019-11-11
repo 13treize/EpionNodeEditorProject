@@ -1,11 +1,11 @@
 #include	"../All.h"
+#include	"../epion.h"
 #include	<cereal/cereal.hpp>
 #include	<cereal/types/polymorphic.hpp>
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
 #include	"NodeData.h"
 #include	"UVNode.h"
-#include	"../epion_string.h"
 namespace
 {
 	const ImVec2	size(0, 0);
@@ -235,6 +235,7 @@ namespace	epion::NodeCustom
 
 #pragma region TilingAndOffset
 	TilingAndOffsetNode::TilingAndOffsetNode()
+		:NodeBase( 3, 1)
 	{
 		Init();
 	}
@@ -299,6 +300,7 @@ namespace	epion::NodeCustom
 
 #pragma region Twirl
 	TwirlNode::TwirlNode()
+		:NodeBase(4, 1)
 	{
 		Init();
 	}
@@ -370,6 +372,7 @@ namespace	epion::NodeCustom
 
 #pragma region UV
 	UVNode::UVNode()
+		:NodeBase(0, 1)
 	{
 		Init();
 	}

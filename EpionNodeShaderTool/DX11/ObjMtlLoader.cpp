@@ -1,8 +1,5 @@
-#include	<fstream>
-#include	<string>
-#include	<vector>
+#include	"../All.h"
 #include	"../epion.h"
-#include	"../epion_string.h"
 #include	"ObjLoader.h"
 #include	"ObjMtlLoader.h"
 

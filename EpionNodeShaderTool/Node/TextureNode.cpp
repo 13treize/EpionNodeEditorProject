@@ -1,24 +1,73 @@
 #include	"../All.h"
+#include	"../epion.h"
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
 #include	<cereal/cereal.hpp>
 #include	<cereal/types/polymorphic.hpp>
 #include	"NodeData.h"
 #include	"TextureNode.h"
-#include	"../epion_string.h"
 
 namespace
 {
 	const ImVec2	size(0, 0);
 }
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::SamplerTexture2DNode)
 CEREAL_REGISTER_TYPE(epion::NodeCustom::SamplerStateNode)
+CEREAL_REGISTER_TYPE(epion::NodeCustom::SamplerTexture2DNode)
+CEREAL_REGISTER_TYPE(epion::NodeCustom::Texture2DNode)
 
 namespace	epion::NodeCustom
 {
+#pragma region SamplerState
+	SamplerStateNode::SamplerStateNode()
+		: NodeBase(1, 1)
+	{
+		Init();
+	}
+
+	SamplerStateNode::SamplerStateNode(int id, const math::FVector2& pos)
+		: NodeBase("SamplerState", id, pos, 1, 1)
+	{
+		Init();
+	}
+
+	SamplerStateNode::~SamplerStateNode()
+	{
+	}
+	void SamplerStateNode::Init()
+	{
+		m_slot_no = 0;
+		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
+		m_input_name.push_back("Slot");
+
+		m_output_slot_type.push_back(SLOT_TYPE::SAMPLERSTATE);
+		m_output_name.push_back("Out");
+
+		m_node_type = NODE_TYPE::VARIABLE;
+	}
+	void SamplerStateNode::Update(ImVec2 offset, ImDrawList*	draw_list)
+	{
+		DrawUpdate(offset, draw_list);
+	}
+
+	void SamplerStateNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
+	{
+		m_input_str[0] = std::to_string(static_cast<int>(m_slot_no));
+		m_out_str[0] = "SamplerStates" + m_input_str[0];
+		//m_function_call_str = m_out_str[0];
+		//m_function_call_str += NodeFunction::SetFuncCall(m_Name);
+		//str_check(nodes_ptr, links);
+	}
+
+	std::string SamplerStateNode::GetFunctionDefStr()
+	{
+		return "SamplerState " + m_out_str[0] + " : register(s" + m_input_str[0] + ");\n";
+	}
+#pragma endregion
+
 #pragma region SamplerTexture2D
 	SamplerTexture2DNode::SamplerTexture2DNode()
+		:NodeBase( 3, 1)
 	{
 		Init();
 	}
@@ -78,54 +127,48 @@ namespace	epion::NodeCustom
 	}
 #pragma endregion
 
-#pragma region SamplerState
-	SamplerStateNode::SamplerStateNode()
-		:NodeBase("SamplerState", 35, math::FVector2(0,0), 1, 1)
-
+#pragma region Texture2D
+	Texture2DNode::Texture2DNode()
+		: NodeBase(1, 1)
 	{
 		Init();
 	}
 
-	SamplerStateNode::SamplerStateNode(int id, const math::FVector2& pos)
-		:NodeBase("SamplerState", id, pos, 1, 1)
+	Texture2DNode::Texture2DNode(int id, const math::FVector2& pos)
+		: NodeBase("Texture2D", id, pos, 1, 1)
 	{
 		Init();
 	}
 
-	SamplerStateNode::~SamplerStateNode()
+	Texture2DNode::~Texture2DNode()
 	{
 	}
-	void SamplerStateNode::Init()
+	void Texture2DNode::Init()
 	{
 		m_slot_no = 0;
 		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_input_name.push_back("Slot");
 
-		m_output_slot_type.push_back(SLOT_TYPE::SAMPLERSTATE);
+		m_output_slot_type.push_back(SLOT_TYPE::TEXTURE2D);
 		m_output_name.push_back("Out");
 
 		m_node_type = NODE_TYPE::VARIABLE;
 	}
-	void SamplerStateNode::Update(ImVec2 offset, ImDrawList*	draw_list)
+	void Texture2DNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
 	}
 
-	void SamplerStateNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
+	void Texture2DNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_input_str[0] = std::to_string(static_cast<int>(m_slot_no));
-		m_out_str[0] ="SamplerStates"+ m_input_str[0];
-		//m_function_call_str = m_out_str[0];
-		//m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		//str_check(nodes_ptr, links);
+		m_out_str[0] = "tex" + m_input_str[0];
 	}
 
-	std::string SamplerStateNode::GetFunctionDefStr()
+	std::string Texture2DNode::GetFunctionDefStr()
 	{
-		int a = 0;
-		//std::string a = "SamplerState SamplerStates" + m_input_str[0] + " : register(s" + m_input_str[0] + ");\n";
-		//return a;
-		return "SamplerState "+ m_out_str[0]+" : register(s" + m_input_str[0] + ");\n";
+		return "Texture2D " + m_out_str[0] + " : register(t" + m_input_str[0] + ");\n";
 	}
 #pragma endregion
+
 }

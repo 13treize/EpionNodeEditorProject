@@ -1,4 +1,5 @@
 #include	"../All.h"
+#include	"../epion.h"
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
 #include	<cereal/cereal.hpp>
@@ -7,7 +8,6 @@
 
 #include	"NodeData.h"
 #include	"MathAdvancedNode.h"
-#include	"../epion_string.h"
 namespace
 {
 	const ImVec2	size(0, 0);
@@ -37,7 +37,7 @@ namespace	epion::NodeCustom
 	}
 	void	AbsoluteNode::Init()
 	{
-		In = { 0.0,0.0 ,0.0 ,0.0 };
+		m_in = { 0.0,0.0 ,0.0 ,0.0 };
 
 		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_input_name.push_back("In");
@@ -53,14 +53,14 @@ namespace	epion::NodeCustom
 	void	AbsoluteNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		NodeFunction::SetInputSlotDynamic(m_input_pos[0], In, m_input_slot_type[0], 0);
+		NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0], 0);
 	}
 
 	void	AbsoluteNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_Name = "Absolute_" + NodeFunction::GetType(m_input_slot_type[0]);
 
-		NodeFunction::SetSlotData(In, m_input_str[0], m_input_slot_type[0]);
+		NodeFunction::SetSlotData(m_in, m_input_str[0], m_input_slot_type[0]);
 
 		m_output_slot_type[0] = m_input_slot_type[0];
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
@@ -94,7 +94,7 @@ namespace	epion::NodeCustom
 	}
 	void	LengthNode::Init()
 	{
-		In = { 0.0,0.0 ,0.0 ,0.0 };
+		m_in = { 0.0,0.0 ,0.0 ,0.0 };
 
 		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_input_name.push_back("In");
@@ -111,10 +111,10 @@ namespace	epion::NodeCustom
 		{
 			switch (m_input_slot_type[0])
 			{
-			case SLOT_TYPE::VECTOR4:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 3)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0])), In.w);
-			case SLOT_TYPE::VECTOR3:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 2)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 1), In.z);
-			case SLOT_TYPE::VECTOR2:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 1)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 2), In.y);
-			case SLOT_TYPE::VECTOR1:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]))		*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 3), In.x);
+			case SLOT_TYPE::VECTOR4:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 3)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0])), m_in.w);
+			case SLOT_TYPE::VECTOR3:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 2)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 1), m_in.z);
+			case SLOT_TYPE::VECTOR2:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 1)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 2), m_in.y);
+			case SLOT_TYPE::VECTOR1:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]))		*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 3), m_in.x);
 				break;
 			}
 		}
@@ -125,7 +125,7 @@ namespace	epion::NodeCustom
 		m_Name = "Length_" + NodeFunction::GetType(m_input_slot_type[0]);
 		m_out_str[0] = m_Name + "_out" + std::to_string(m_ID);
 
-		NodeFunction::SetSlotData(In, m_input_str[0], m_input_slot_type[0]);
+		NodeFunction::SetSlotData(m_in, m_input_str[0], m_input_slot_type[0]);
 
 		type_set(nodes_ptr, links);
 		m_output_slot_type[0] =SLOT_TYPE::VECTOR1;
@@ -232,7 +232,7 @@ namespace	epion::NodeCustom
 	}
 	void	NegateNode::Init()
 	{
-		In = { 0.0,0.0 ,0.0 ,0.0 };
+		m_in = { 0.0,0.0 ,0.0 ,0.0 };
 
 		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_input_name.push_back("In");
@@ -252,10 +252,10 @@ namespace	epion::NodeCustom
 		{
 			switch (m_input_slot_type[0])
 			{
-			case SLOT_TYPE::VECTOR4:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 3)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0])), In.w);
-			case SLOT_TYPE::VECTOR3:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 2)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 1), In.z);
-			case SLOT_TYPE::VECTOR2:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 1)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 2), In.y);
-			case SLOT_TYPE::VECTOR1:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]))		*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 3), In.x);
+			case SLOT_TYPE::VECTOR4:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 3)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0])), m_in.w);
+			case SLOT_TYPE::VECTOR3:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 2)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 1), m_in.z);
+			case SLOT_TYPE::VECTOR2:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 1)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 2), m_in.y);
+			case SLOT_TYPE::VECTOR1:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]))		*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 3), m_in.x);
 				break;
 			}
 		}
@@ -266,7 +266,7 @@ namespace	epion::NodeCustom
 		m_Name = "Negate_" + NodeFunction::GetType(m_input_slot_type[0]);
 		m_out_str[0] = m_Name + "_out" + std::to_string(m_ID);
 
-		NodeFunction::SetSlotData(In, m_input_str[0], m_input_slot_type[0]);
+		NodeFunction::SetSlotData(m_in, m_input_str[0], m_input_slot_type[0]);
 
 		type_set(nodes_ptr, links);
 		m_output_slot_type[0] = m_input_slot_type[0];
@@ -298,7 +298,7 @@ namespace	epion::NodeCustom
 	}
 	void	NormalizeNode::Init()
 	{
-		In = { 0.0,0.0 ,0.0 ,0.0 };
+		m_in = { 0.0,0.0 ,0.0 ,0.0 };
 
 		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_input_name.push_back("In");
@@ -318,10 +318,10 @@ namespace	epion::NodeCustom
 		{
 			switch (m_input_slot_type[0])
 			{
-			case SLOT_TYPE::VECTOR4:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 3)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0])), In.w);
-			case SLOT_TYPE::VECTOR3:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 2)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 1), In.z);
-			case SLOT_TYPE::VECTOR2:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 1)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 2), In.y);
-			case SLOT_TYPE::VECTOR1:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]))		*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 3), In.x);
+			case SLOT_TYPE::VECTOR4:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 3)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0])), m_in.w);
+			case SLOT_TYPE::VECTOR3:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 2)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 1), m_in.z);
+			case SLOT_TYPE::VECTOR2:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 1)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 2), m_in.y);
+			case SLOT_TYPE::VECTOR1:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]))		*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 3), m_in.x);
 				break;
 			}
 		}
@@ -332,7 +332,7 @@ namespace	epion::NodeCustom
 		m_Name = "Negate_" + NodeFunction::GetType(m_input_slot_type[0]);
 		m_out_str[0] = m_Name + "_out" + std::to_string(m_ID);
 
-		NodeFunction::SetSlotData(In, m_input_str[0], m_input_slot_type[0]);
+		NodeFunction::SetSlotData(m_in, m_input_str[0], m_input_slot_type[0]);
 
 		type_set(nodes_ptr, links);
 		m_output_slot_type[0] = m_input_slot_type[0];
@@ -440,7 +440,7 @@ namespace	epion::NodeCustom
 	}
 	void	ReciprocalSquareRootNode::Init()
 	{
-		In = { 0.0,0.0 ,0.0 ,0.0 };
+		m_in = { 0.0,0.0 ,0.0 ,0.0 };
 
 		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_input_name.push_back("In");
@@ -460,10 +460,10 @@ namespace	epion::NodeCustom
 		{
 			switch (m_input_slot_type[0])
 			{
-			case SLOT_TYPE::VECTOR4:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 3)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0])), In.w);
-			case SLOT_TYPE::VECTOR3:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 2)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 1), In.z);
-			case SLOT_TYPE::VECTOR2:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 1)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 2), In.y);
-			case SLOT_TYPE::VECTOR1:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]))		*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 3), In.x);
+			case SLOT_TYPE::VECTOR4:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 3)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0])), m_in.w);
+			case SLOT_TYPE::VECTOR3:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 2)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 1), m_in.z);
+			case SLOT_TYPE::VECTOR2:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]) - 1)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 2), m_in.y);
+			case SLOT_TYPE::VECTOR1:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]))		*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 3), m_in.x);
 				break;
 			}
 		}
@@ -474,7 +474,7 @@ namespace	epion::NodeCustom
 		m_Name = "ReciprocalSquareRootNode_" + NodeFunction::GetType(m_input_slot_type[0]);
 		m_out_str[0] = m_Name + "_out" + std::to_string(m_ID);
 
-		NodeFunction::SetSlotData(In, m_input_str[0], m_input_slot_type[0]);
+		NodeFunction::SetSlotData(m_in, m_input_str[0], m_input_slot_type[0]);
 
 		type_set(nodes_ptr, links);
 		m_output_slot_type[0] = m_input_slot_type[0];

@@ -1,9 +1,8 @@
 #include	"../All.h"
-#include	<wincodec.h>
 #include	"../epion.h"
+#include	<wincodec.h>
 #include	"Texture.h"
 #include	"dx11_device.h"
-#include	"../epion_string.h"
 
 namespace
 {
@@ -59,7 +58,7 @@ namespace	epion
 		srvd.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 		srvd.Texture2D.MostDetailedMip = 0;
 		srvd.Texture2D.MipLevels = 1;
-		hr = Device::GetDevice()->CreateShaderResourceView(Texture2D.Get(), &srvd, ShaderResourceView.ReleaseAndGetAddressOf());
+		hr = Device::GetDevice()->CreateShaderResourceView(Texture2D.Get(), &srvd, m_shader_resource.ReleaseAndGetAddressOf());
 		if (FAILED(hr))
 		{
 			return false;
@@ -67,24 +66,59 @@ namespace	epion
 		return true;
 	}
 
-	bool TextureFileIO::LoadTexture(std::wstring	load_texture, DirectX::TexMetadata&	metadata, DirectX::ScratchImage&	image, com_ptr<ID3D11ShaderResourceView>& srv)
+	Texture2D::Texture2D()
+	{}
+	Texture2D::~Texture2D()
+	{}
+	bool Texture2D::Init(u_int width, u_int height, DXGI_FORMAT format)
 	{
-		HRESULT	hr = S_OK;
-		hr = LoadFromWICFile(load_texture.c_str(), 0, &metadata, image);
+		m_metadata = {};
+		m_image = {};
+		HRESULT hr = S_OK;
+		//	テクスチャ作成
+		m_texture_desc = {};
+		m_texture_desc.Width = width;
+		m_texture_desc.Height = height;
+		m_texture_desc.MipLevels = 1;
+		m_texture_desc.ArraySize = 1;
+		m_texture_desc.Format = format;
+		m_texture_desc.SampleDesc.Count = 1;
+		m_texture_desc.Usage = D3D11_USAGE_DEFAULT;
+		m_texture_desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		m_texture_desc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+
+		hr = Device::GetDevice()->CreateTexture2D(&m_texture_desc, nullptr, m_texture2d.ReleaseAndGetAddressOf());
 		if (FAILED(hr))
 		{
 			return false;
-		};
-		hr = CreateShaderResourceView(Device::GetDevice().Get(),
-			image.GetImages(),
-			image.GetImageCount(),
-			metadata,
-			srv.GetAddressOf());
-		//if (FAILED(hr))
-		//{
-		//	return false;
-		//};
+		}
+		return true;
+	}
 
+	DirectX::TexMetadata& Texture2D::GetMata()
+	{
+		return m_metadata;
+	}
+	DirectX::ScratchImage& Texture2D::GetImage()
+	{
+		return m_image;
+	}
+	com_ptr<ID3D11ShaderResourceView>& Texture2D::GetShaderResouce()
+	{
+		return m_shader_resource;
+	}
+
+	bool TextureFileIO::LoadTexture(std::wstring	load_texture, DirectX::TexMetadata&	m_metadata, DirectX::ScratchImage&	m_image, com_ptr<ID3D11ShaderResourceView>& srv)
+	{
+		HRESULT	hr = S_OK;
+		hr = LoadFromWICFile(load_texture.c_str(), 0, &m_metadata, m_image);
+		if (FAILED(hr))	return false;
+		hr = CreateShaderResourceView(Device::GetDevice().Get(),
+			m_image.GetImages(),
+			m_image.GetImageCount(),
+			m_metadata,
+			srv.GetAddressOf());
+		if (FAILED(hr))	return false;
 		return true;
 	}
 
@@ -150,8 +184,8 @@ namespace	epion
 	{
 		math::Vector2<float>	tex_size =
 		{
-			static_cast<float>(metadata.width),
-			static_cast<float>(metadata.height),
+			static_cast<float>(m_metadata.width),
+			static_cast<float>(m_metadata.height),
 		};
 		return	tex_size;
 	}

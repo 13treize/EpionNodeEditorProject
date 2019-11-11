@@ -14,5 +14,6 @@
 #include	"common.h"
 #include	"epion_math//epion_math.h"
 #include	"epion_physics//epion_collider.h"
+#include	"epion_string//epion_string.h"
 
 #include	"win_core.h"

@@ -1,10 +1,6 @@
-#include	<fstream>
-#include	<vector>
+#include	"../All.h"
 #include	"../epion.h"
 #include	"ObjLoader.h"
-
-#include	"../epion_string.h"
-#include	<filesystem>
 namespace	epion
 {
 	//第1引数からファイルパスを取得、第2引数に付与する

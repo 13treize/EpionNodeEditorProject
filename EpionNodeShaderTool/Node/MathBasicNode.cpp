@@ -1,11 +1,11 @@
 #include	"../All.h"
+#include	"../epion.h"
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
 #include	<cereal/cereal.hpp>
 #include	<cereal/types/polymorphic.hpp>
 #include	"NodeData.h"
 #include	"MathBasicNode.h"
-#include	"../epion_string.h"
 namespace
 {
 	const ImVec2	size(0, 0);
@@ -60,7 +60,6 @@ namespace	epion::NodeCustom
 	void	AddNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		draw_list->ChannelsSetCurrent(1);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_num[0], m_input_slot_type[0],	0);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_num[1], m_input_slot_type[1], 1);
 	}
@@ -127,7 +126,6 @@ namespace	epion::NodeCustom
 	void	SubtractNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		draw_list->ChannelsSetCurrent(1);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_num[0], m_input_slot_type[0], 0);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_num[1], m_input_slot_type[1], 1);
 	}
@@ -195,7 +193,6 @@ namespace	epion::NodeCustom
 	void	MultiplyNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		draw_list->ChannelsSetCurrent(1);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_num[0], m_input_slot_type[0], 0);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_num[1], m_input_slot_type[1], 1);
 	}
@@ -262,7 +259,6 @@ namespace	epion::NodeCustom
 	void	DivideNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		draw_list->ChannelsSetCurrent(1);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_num[0], m_input_slot_type[0], 0);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_num[1], m_input_slot_type[1], 1);
 	}
@@ -293,7 +289,6 @@ namespace	epion::NodeCustom
 #pragma endregion
 
 #pragma region Power
-
 	PowerNode::PowerNode()
 		:NodeBase(2, 1)
 	{
@@ -330,8 +325,6 @@ namespace	epion::NodeCustom
 	void	PowerNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		draw_list->ChannelsSetCurrent(1);
-
 		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_num[0], m_input_slot_type[0], 0);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_num[1], m_input_slot_type[1], 1);
 	}
@@ -363,7 +356,6 @@ namespace	epion::NodeCustom
 #pragma endregion
 
 #pragma region SquareRoot
-
 	SquareRootNode::SquareRootNode()
 		:NodeBase(1, 1)
 	{

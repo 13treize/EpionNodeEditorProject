@@ -18,10 +18,10 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("In", In));
+				cereal::make_nvp("In", m_in));
 		};
 	private:
-		math::FVector4	In;
+		math::FVector4	m_in;
 	};
 
 	class	LengthNode	final :public NodeBase
@@ -40,10 +40,10 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("In", In));
+				cereal::make_nvp("In", m_in));
 		};
 	private:
-		math::FVector4	In;
+		math::FVector4	m_in;
 	};
 
 	class	ModuloNode	final :public NodeBase
@@ -88,10 +88,10 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("In", In));
+				cereal::make_nvp("In", m_in));
 		};
 	private:
-		math::FVector4	In;
+		math::FVector4	m_in;
 	};
 
 	class	NormalizeNode	final :public NodeBase
@@ -111,10 +111,10 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("In", In));
+				cereal::make_nvp("In", m_in));
 		};
 	private:
-		math::FVector4	In;
+		math::FVector4	m_in;
 	};
 
 	class	PosterizeNode	final :public NodeBase
@@ -160,10 +160,10 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("In", In));
+				cereal::make_nvp("In", m_in));
 		};
 	private:
-		math::FVector4	In;
+		math::FVector4	m_in;
 	};
 
 

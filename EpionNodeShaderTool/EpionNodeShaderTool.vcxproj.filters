@@ -115,6 +115,12 @@
     <Filter Include="ソース ファイル\Node\Channel">
       <UniqueIdentifier>{b2bf32ce-493a-43f7-a2d4-e3a0cdcb4989}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\epion_string">
+      <UniqueIdentifier>{8f642033-04bf-459f-8916-863c784e7fb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\epion_string">
+      <UniqueIdentifier>{afacaa0b-d83a-42a9-bb3d-4b0024e7a3f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Winmain.cpp">
@@ -180,9 +186,6 @@
     <ClCompile Include="DX11\ObjLoader.cpp">
       <Filter>ソース ファイル\Dx11</Filter>
     </ClCompile>
-    <ClCompile Include="epion_string.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="DX11\ObjMtlLoader.cpp">
       <Filter>ソース ファイル\Dx11</Filter>
     </ClCompile>
@@ -243,9 +246,6 @@
     <ClCompile Include="Node\ProceduralNode.cpp">
       <Filter>ソース ファイル\Node\Procedural</Filter>
     </ClCompile>
-    <ClCompile Include="Node\TextureNode.cpp">
-      <Filter>ソース ファイル\Node</Filter>
-    </ClCompile>
     <ClCompile Include="Node\NodeProgressTex.cpp">
       <Filter>ソース ファイル\Node</Filter>
     </ClCompile>
@@ -293,6 +293,18 @@
     </ClCompile>
     <ClCompile Include="Node\NodeParamDx11.cpp">
       <Filter>ソース ファイル\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\TextureNode.cpp">
+      <Filter>ソース ファイル\Node\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\Imgui\PreviewWindow.cpp">
+      <Filter>ソース ファイル\Dx11\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\Imgui\TextureResouce.cpp">
+      <Filter>ソース ファイル\Dx11\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="epion_string\epion_string.cpp">
+      <Filter>ソース ファイル\epion_string</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -389,9 +401,6 @@
     <ClInclude Include="DX11\ObjLoader.h">
       <Filter>ヘッダー ファイル\Dx11</Filter>
     </ClInclude>
-    <ClInclude Include="epion_string.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="DX11\ObjMtlLoader.h">
       <Filter>ヘッダー ファイル\Dx11</Filter>
     </ClInclude>
@@ -455,9 +464,6 @@
     <ClInclude Include="Node\ProceduralNode.h">
       <Filter>ヘッダー ファイル\Node\Procedural</Filter>
     </ClInclude>
-    <ClInclude Include="Node\TextureNode.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="ImguiFunction.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -505,6 +511,18 @@
     </ClInclude>
     <ClInclude Include="Node\NodeParamDx11.h">
       <Filter>ヘッダー ファイル\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\TextureNode.h">
+      <Filter>ヘッダー ファイル\Node\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\Imgui\PreviewWindow.h">
+      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\Imgui\TextureResouce.h">
+      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="epion_string\epion_string.h">
+      <Filter>ヘッダー ファイル\epion_string</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

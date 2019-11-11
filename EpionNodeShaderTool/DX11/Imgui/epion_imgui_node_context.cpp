@@ -242,8 +242,10 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("InputTextureMenu"))
 			{
-				MenuCreateNode<SamplerTexture2DNode>("Texture2D", m_offfset, m_create_count, m_is_open_input_texture_menu);
 				MenuCreateNode<SamplerStateNode>("SamplerState", m_offfset, m_create_count, m_is_open_input_texture_menu);
+				MenuCreateNode<SamplerTexture2DNode>("Sampler Texture2D", m_offfset, m_create_count, m_is_open_input_texture_menu);
+				MenuCreateNode<Texture2DNode>("Texture2D", m_offfset, m_create_count, m_is_open_input_texture_menu);
+
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();

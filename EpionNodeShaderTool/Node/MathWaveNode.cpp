@@ -1,4 +1,5 @@
 #include	"../All.h"
+#include	"../epion.h"
 #include	<cereal/cereal.hpp>
 #include	<cereal/types/polymorphic.hpp>
 #include	"../../../imgui\\imgui.h"
@@ -6,7 +7,6 @@
 #include	"NodeParam.h"
 #include	"NodeData.h"
 #include	"MathWaveNode.h"
-#include	"../epion_string.h"
 
 namespace
 {
@@ -19,6 +19,7 @@ CEREAL_REGISTER_TYPE(epion::NodeCustom::SawtoothWaveNode)
 namespace	epion::NodeCustom
 {
 	NoiseSineWaveNode::NoiseSineWaveNode()
+		:NodeBase(2, 1)
 	{
 		Init();
 	}
@@ -35,56 +36,45 @@ namespace	epion::NodeCustom
 
 	void	NoiseSineWaveNode::Init()
 	{
-		In = { 0,0,0,0 };
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-		m_input_name.push_back("In");
-		m_input_slot_type.push_back(SLOT_TYPE::VECTOR2);
-		m_input_name.push_back("MinMax");
+		m_in = { 0,0,0,0 };
+		m_input_slot_type =
+		{
+			SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR2
+		};
+		m_input_name =
+		{
+			"In", "MinMax"
+		};
 
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
-
 		m_node_type = NODE_TYPE::DYNAMIC;
 	}
 
 	void	NoiseSineWaveNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		draw_list->ChannelsSetCurrent(1);
-
-		m_input_name[0] = "In" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
-		m_input_name[1] = "MinMax" + NodeFunction::GetSlotTypeName(m_input_slot_type[1]);
-		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
-
-		if (!m_is_input[0])
-		{
-			NodeFunction::SetInputSlotDynamic(m_input_pos[0], In, m_input_slot_type[0]);
-		}
-		if (!m_is_input[1])
-		{
-			NodeFunction::SetInputSlotFloat2(m_input_pos[1], MinMax, 2);
-		}
-
+		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0]);
+		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], m_minmax, 2);
 	}
 
 	void	NoiseSineWaveNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_Name = "NoiseSineWave_" + NodeFunction::GetType(m_input_slot_type[0]);
 
+		NodeFunction::SetSlotData(m_in, m_input_str[0], m_input_slot_type[0]);
+		m_input_str[1] = NodeFunction::SetInputToString2(m_minmax);
+
 		m_out_str[0] = "NoiseSineWave_out" + std::to_string(m_ID);
 
-		NodeFunction::SetSlotData(In, m_input_str[0], m_input_slot_type[0]);
-
-		type_set(nodes_ptr, links);
 		m_output_slot_type[0] = m_input_slot_type[0];
-		//outéwíËÇ…ëŒÇ∑ÇÈíËã`
-		m_function_call_str = "    " + NodeFunction::GetType(m_output_slot_type[0]) + " " + m_out_str[0] + ";\n";
-		m_function_call_str += "    NoiseSineWave_" + NodeFunction::GetType(m_input_slot_type[0]) + "(";
-		//å^ÇçáÇÌÇπÇÈ
+		m_function_call_str = NodeFunction::SetDefineOutDynamic(m_out_str[0], m_output_slot_type[0]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
+
 		m_dynamic_slot_type = m_input_slot_type[0];
+		str_check(nodes_ptr, links);
 		m_input_slot_type[1] = SLOT_TYPE::VECTOR2;
 
-		str_check(nodes_ptr, links);
 	}
 	std::string	NoiseSineWaveNode::GetFunctionDefStr()
 	{
@@ -117,7 +107,7 @@ namespace	epion::NodeCustom
 
 	void	SawtoothWaveNode::Init()
 	{
-		In = { 0,0,0,0 };
+		m_in = { 0,0,0,0 };
 		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_input_name.push_back("In");
 
@@ -137,7 +127,7 @@ namespace	epion::NodeCustom
 
 		if (!m_is_input[0])
 		{
-			NodeFunction::SetInputSlotDynamic(m_input_pos[0], In, m_input_slot_type[0]);
+			NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0]);
 		}
 	}
 
@@ -147,7 +137,7 @@ namespace	epion::NodeCustom
 
 		m_out_str[0] = "SawtoothWave_out" + std::to_string(m_ID);
 
-		NodeFunction::SetSlotData(In, m_input_str[0], m_input_slot_type[0]);
+		NodeFunction::SetSlotData(m_in, m_input_str[0], m_input_slot_type[0]);
 
 		type_set(nodes_ptr, links);
 		m_output_slot_type[0] = m_input_slot_type[0];

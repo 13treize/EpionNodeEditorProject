@@ -12,19 +12,17 @@ namespace	epion::NodeCustom
 		void	Init()override;
 		void	Update(ImVec2 offset, ImDrawList*	draw_list)	override;
 		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
-
 		std::string	GetFunctionDefStr()	override;
 
 		template<class Archive>
 		void serialize(Archive & archive)
 		{
-			archive(cereal::base_class<NodeBase>(this), CEREAL_NVP(In), CEREAL_NVP(MinMax));
+			archive(cereal::base_class<NodeBase>(this), CEREAL_NVP(m_in), CEREAL_NVP(m_minmax));
 		};
 
 	private:
-		math::FVector4	In;
-
-		math::FVector2	MinMax;
+		math::FVector4	m_in;
+		math::FVector2	m_minmax;
 
 	};
 
@@ -38,19 +36,17 @@ namespace	epion::NodeCustom
 		void	Init()override;
 		void	Update(ImVec2 offset, ImDrawList*	draw_list)	override;
 		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
-
 		std::string	GetFunctionDefStr()	override;
-
 
 		template<class Archive>
 		void serialize(Archive & archive)
 		{
-			archive(cereal::base_class<NodeBase>(this), CEREAL_NVP(In));
+			archive(cereal::base_class<NodeBase>(this), CEREAL_NVP(m_in));
 		};
 
 	private:
 		//	input
-		math::FVector4	In;
+		math::FVector4	m_in;
 	};
 
 
