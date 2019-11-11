@@ -213,117 +213,6 @@ namespace	epion::NodeCustom
 
 	NodeBase::NodeBase()
 	{
-		//for (int i = 0; i < m_inputs_count; i++)
-		//{
-		//	m_is_input.push_back(false);
-
-		//	m_input_str.push_back("");
-		//	m_input_pos.push_back({});
-		//	m_input_slot_color.push_back(0);
-		//	m_input_links.push_back({ -1, -1 });
-		//}
-
-		//for (int i = 0; i < m_outputs_count; i++)
-		//{
-		//	m_out_str.push_back("");
-		//	m_output_pos.push_back({});
-		//	m_output_slot_color.push_back(0);
-		//	m_output_links.push_back({ -1, -1 });
-		//}
-		//if (m_inputs_count < m_outputs_count)
-		//{
-		//	m_Size = { 55.0f*m_outputs_count ,55.0f*m_outputs_count };
-		//}
-		//else
-		//{
-		//	m_Size = { 55.0f*m_inputs_count ,55.0f*m_inputs_count };
-		//}
-	}
-	//test
-	void	NodeBase::ResouceInit()
-	{
-			m_resouce = std::make_unique<Texture>();
-			m_vertex = std::make_unique<VertexShader>(L"HLSLShader\\square_vertex_shader.hlsl");
-			m_pixel = std::make_unique<PixelShader>(L"test.hlsl");
-			m_preview = std::make_unique<Square>(m_vertex->GetBlob());
-			is_save=false;
-			com_ptr<ID3D11Texture2D>	depth_stencil_buffer;
-
-			D3D11_TEXTURE2D_DESC	texture_desc;
-
-			texture_desc.Width=static_cast<UINT>(m_Size.x);
-			texture_desc.Height = static_cast<UINT>(m_Size.x);
-			texture_desc.MipLevels = 1;
-			texture_desc.ArraySize = 1;
-			texture_desc.Format = DXGI_FORMAT::DXGI_FORMAT_D24_UNORM_S8_UINT;
-			texture_desc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
-			texture_desc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
-			texture_desc.CPUAccessFlags = 0;
-			texture_desc.MiscFlags = 0;
-
-			Device::GetDevice()->CreateTexture2D(&texture_desc,
-				nullptr,
-				depth_stencil_buffer.ReleaseAndGetAddressOf());
-
-			D3D11_DEPTH_STENCIL_VIEW_DESC	depth_stincil_view;
-			depth_stincil_view.Format = texture_desc.Format;
-			depth_stincil_view.ViewDimension = D3D11_DSV_DIMENSION::D3D11_DSV_DIMENSION_TEXTURE2DMS;
-			depth_stincil_view.Flags = 0;
-			depth_stincil_view.Texture2D.MipSlice = 0;
-
-			Device::GetDevice()->CreateDepthStencilView(depth_stencil_buffer.Get(),
-				&depth_stincil_view,
-				depth_view.ReleaseAndGetAddressOf());
-
-			m_resouce->Create(static_cast<u_int>(m_Size.x), static_cast<u_int>(m_Size.x), DXGI_FORMAT_R16G16B16A16_FLOAT);
-	}
-
-	//test
-	void	NodeBase::ResouceRender(ImVec2& offset, ImDrawList*	draw_list)
-	{
-		Device::GetContext()->OMSetRenderTargets(1, m_resouce->RenderTargetView.GetAddressOf(), Dxgi::get_dsv().Get());
-		float color[4] = { 1,0,0,0 };
-		Device::GetContext()->ClearRenderTargetView(m_resouce->RenderTargetView.Get(), color);
-		Device::GetContext()->ClearDepthStencilView(Dxgi::get_dsv().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-		Device::GetContext()->PSSetShaderResources(0, 1, m_resouce->ShaderResourceView.GetAddressOf());
-		m_preview->Render(math::FVector2(0, 0), math::FVector2(m_Size.x, m_Size.x),0, FixColor::Red);
-		draw_list->ChannelsSetCurrent(4); // input_slot
-		ImGui::SetCursorScreenPos(ImVec2(m_Pos.x + offset.x, m_Pos.y + m_Size.y + offset.y));
-		ImGui::Image(m_resouce->ShaderResourceView.Get(), ImVec2(m_Size.x, m_Size.x), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1, 1, 1, 1), ImVec4(0, 0, 0, 1));
-	}
-
-	void	NodeBase::ResouceCreate()
-	{
-	}
-	NodeBase::NodeBase(int inputs_count, int outputs_count)
-		:m_inputs_count(inputs_count), m_outputs_count(outputs_count)
-	{
-				for (int i = 0; i < m_inputs_count; i++)
-		{
-			m_is_input.push_back(false);
-
-			m_input_str.push_back("");
-			m_input_pos.push_back({});
-			m_input_slot_color.push_back(0);
-			m_input_links.push_back({ -1, -1 });
-		}
-
-		for (int i = 0; i < m_outputs_count; i++)
-		{
-			m_out_str.push_back("");
-			m_output_pos.push_back({});
-			m_output_slot_color.push_back(0);
-			m_output_links.push_back({ -1, -1 });
-		}
-		if (m_inputs_count < m_outputs_count)
-		{
-			m_Size = { 55.0f*m_outputs_count ,55.0f*m_outputs_count };
-		}
-		else
-		{
-			m_Size = { 55.0f*m_inputs_count ,55.0f*m_inputs_count };
-		}
-
 	}
 
 	NodeBase::NodeBase(std::string name, int id, const epion::math::FVector2& pos, int inputs_count, int outputs_count)
@@ -364,24 +253,27 @@ namespace	epion::NodeCustom
 		ResouceInit();
 #endif
 	}
-	void	NodeBase::Update(ImVec2& offset, ImDrawList*	draw_list)
+	void	NodeBase::TitleDraw(ImVec2& offset, ImDrawList*	draw_list, bool is_push)
 	{
 		ImVec2 node_rect_min = { offset.x + m_Pos.x,offset.y + m_Pos.y };
 		ImVec2 node_rect_max = node_rect_min + m_Size;
 		ImVec2 node_rect_max2 = node_rect_min + ImVec2(m_Size.x*0.5f, m_Size.y);
 
-		draw_list->ChannelsSetCurrent(1);
 		draw_list->AddRectFilled(node_rect_min, node_rect_max, RECT_COLOR, 2.0f);
 
-		if (m_node_type != NODE_TYPE::MASTER)
-		{
-			draw_list->AddRectFilled(node_rect_min, node_rect_max2, RECT_COLOR, 2.0f);
-		}
-		draw_list->ChannelsSetCurrent(2); // Foreground
-		draw_list->AddRectFilled(node_rect_min, node_rect_min + ImVec2(m_Size.x, 18.0f), IM_COL32(40, 40, 40, 255), 2.0f);
+		if (m_node_type != NODE_TYPE::MASTER)	draw_list->AddRectFilled(node_rect_min, node_rect_max2, RECT_COLOR, 2.0f);
+		draw_list->AddRectFilled(node_rect_min, node_rect_min + ImVec2(m_Size.x, 18.0f), TITLE_BAR_COLOR, 2.0f);
 		ImGui::SetCursorScreenPos(node_rect_min + NODE_FONT_POS);	//ƒm[ƒh‚Ì•¶Žš‚ð•`‰æ‚·‚épos
-		ImGui::SetWindowFontScale(1.0f);
 		ImGui::TextColored(ImColor::Vec4::WHITE, "%s", m_Name.c_str());
+
+		if (is_push)
+		{
+			draw_list->AddRect(node_rect_min, node_rect_max, ImColor::U32::WHITE, 7.0f);
+		}
+		else
+		{
+			draw_list->AddRect(node_rect_min, node_rect_max, IM_COL32(0, 0, 0, 0), 7.0f);
+		}
 
 #ifdef DEBUG
 	ResouceRender( offset, 	draw_list);
@@ -410,57 +302,48 @@ namespace	epion::NodeCustom
 
 	}
 
-	void	NodeBase::i_update(ImVec2 offset, ImDrawList*	draw_list)
+	void	NodeBase::DrawUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
+		draw_list->ChannelsSetCurrent(1);
 		for (int i = 0; i < m_inputs_count; i++)
 		{
 			m_input_pos[i] = offset + GetInputSlotPos(i);
 			m_input_pos[i].y += 10.0f;
-			draw_list->ChannelsSetCurrent(1);
 			ImGui::SetCursorScreenPos(m_input_pos[i] + ImVec2(10.0f, -SLOT_INPUT_FLOAT));
-			ImGui::SetWindowFontScale(0.9f);
 			ImGui::TextColored(ImColor::Vec4::WHITE, "%s", m_input_name[i].c_str());
 			NodeFunction::NodeCircle(draw_list, m_input_pos[i], NODE_SLOT_RADIUS, m_input_slot_color[i], m_input_slot_type[i]);
 
-			draw_list->ChannelsSetCurrent(0); // input_slot
-			if (!m_is_input[i])
-			{
-				draw_list->AddLine(m_input_pos[i] + ImVec2(-20, 0), m_input_pos[i], ImColor::U32::GREEN, 1.0f);
-
-				NodeFunction::InputRectDraw(draw_list, m_input_pos[i], m_input_slot_type[i]);
-			}
-
-
-			draw_list->ChannelsSetCurrent(1);
-			if (physics::Collider2D::sphere_and_sphere(math::FVector2(m_input_pos[i].x, m_input_pos[i].y), math::FVector2(ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y), NODE_SLOT_RADIUS, 2.0f))
+			if (physics::Collider2D::SphereAndSphere(math::FVector2(m_input_pos[i].x, m_input_pos[i].y), math::FVector2(ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y), NODE_SLOT_RADIUS, 2.0f))
 			{
 				draw_list->AddCircleFilled(m_input_pos[i], NODE_SLOT_RADIUS - 2, ImColor::U32::GREEN);
 			}
 		}
-	}
-
-	void	NodeBase::o_update(ImVec2 offset, ImDrawList*	draw_list)
-	{
 		for (int i = 0; i < m_outputs_count; i++)
 		{
-			m_output_pos[i] = offset + this->GetOutputSlotPos(i);
+			m_output_pos[i] = offset + GetOutputSlotPos(i);
 			m_output_pos[i].y += 10.0f;
 
-			//float x = m_output_name[i].size()*10.0f;
-			//x=std::clamp(x, 0.0f, 30.0f);
-			draw_list->ChannelsSetCurrent(1); // input_slot
 			ImGui::SetCursorScreenPos(m_output_pos[i] + ImVec2(-60.0f, -SLOT_INPUT_FLOAT));
 
-			//ImGui::SetCursorScreenPos(m_output_pos[i] + ImVec2(-60.0f+x, -SLOT_INPUT_FLOAT));
-			ImGui::SetWindowFontScale(0.9f);
 			ImGui::TextColored(ImColor::Vec4::WHITE, "%s", m_output_name[i].c_str());
 			NodeFunction::NodeCircle(draw_list, m_output_pos[i], NODE_SLOT_RADIUS, m_output_slot_color[i], m_output_slot_type[i]);
-			if (physics::Collider2D::sphere_and_sphere(math::FVector2(m_output_pos[i].x, m_output_pos[i].y), math::FVector2(ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y), NODE_SLOT_RADIUS, 2.0f))
+			if (physics::Collider2D::SphereAndSphere(math::FVector2(m_output_pos[i].x, m_output_pos[i].y), math::FVector2(ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y), NODE_SLOT_RADIUS, 2.0f))
 			{
 				draw_list->AddCircleFilled(m_output_pos[i], NODE_SLOT_RADIUS - 2, ImColor::U32::RED);
 			}
 		}
+
+		draw_list->ChannelsSetCurrent(0); // input_slot
+		for (int i = 0; i < m_inputs_count; i++)
+		{
+			if (!m_is_input[i])
+			{
+				draw_list->AddLine(m_input_pos[i] + ImVec2(-20, 0), m_input_pos[i], ImColor::U32::GREEN, 1.0f);
+				NodeFunction::InputRectDraw(draw_list, m_input_pos[i], m_input_slot_type[i]);
+			}
+		}
 	}
+
 
 	void	NodeBase::str_check(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
@@ -515,6 +398,92 @@ namespace	epion::NodeCustom
 	std::vector<std::string>&	NodeBase::GetInputStr()
 	{
 		return m_input_str;
+	}
+	//test
+	void	NodeBase::ResouceInit()
+	{
+		m_resouce = std::make_unique<Texture>();
+		m_vertex = std::make_unique<VertexShader>(L"HLSLShader\\square_vertex_shader.hlsl");
+		m_pixel = std::make_unique<PixelShader>(L"test.hlsl");
+		m_preview = std::make_unique<Square>(m_vertex->GetBlob());
+		is_save = false;
+		com_ptr<ID3D11Texture2D>	depth_stencil_buffer;
+
+		D3D11_TEXTURE2D_DESC	texture_desc;
+
+		texture_desc.Width = static_cast<UINT>(m_Size.x);
+		texture_desc.Height = static_cast<UINT>(m_Size.x);
+		texture_desc.MipLevels = 1;
+		texture_desc.ArraySize = 1;
+		texture_desc.Format = DXGI_FORMAT::DXGI_FORMAT_D24_UNORM_S8_UINT;
+		texture_desc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
+		texture_desc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
+		texture_desc.CPUAccessFlags = 0;
+		texture_desc.MiscFlags = 0;
+
+		Device::GetDevice()->CreateTexture2D(&texture_desc,
+			nullptr,
+			depth_stencil_buffer.ReleaseAndGetAddressOf());
+
+		D3D11_DEPTH_STENCIL_VIEW_DESC	depth_stincil_view;
+		depth_stincil_view.Format = texture_desc.Format;
+		depth_stincil_view.ViewDimension = D3D11_DSV_DIMENSION::D3D11_DSV_DIMENSION_TEXTURE2DMS;
+		depth_stincil_view.Flags = 0;
+		depth_stincil_view.Texture2D.MipSlice = 0;
+
+		Device::GetDevice()->CreateDepthStencilView(depth_stencil_buffer.Get(),
+			&depth_stincil_view,
+			depth_view.ReleaseAndGetAddressOf());
+
+		m_resouce->Create(static_cast<u_int>(m_Size.x), static_cast<u_int>(m_Size.x), DXGI_FORMAT_R16G16B16A16_FLOAT);
+	}
+
+	//test
+	void	NodeBase::ResouceRender(ImVec2& offset, ImDrawList*	draw_list)
+	{
+		Device::GetContext()->OMSetRenderTargets(1, m_resouce->RenderTargetView.GetAddressOf(), Dxgi::get_dsv().Get());
+		float color[4] = { 1,0,0,0 };
+		Device::GetContext()->ClearRenderTargetView(m_resouce->RenderTargetView.Get(), color);
+		Device::GetContext()->ClearDepthStencilView(Dxgi::get_dsv().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+		Device::GetContext()->PSSetShaderResources(0, 1, m_resouce->ShaderResourceView.GetAddressOf());
+		m_preview->Render(math::FVector2(0, 0), math::FVector2(m_Size.x, m_Size.x), 0, FixColor::Red);
+		draw_list->ChannelsSetCurrent(4); // input_slot
+		ImGui::SetCursorScreenPos(ImVec2(m_Pos.x + offset.x, m_Pos.y + m_Size.y + offset.y));
+		ImGui::Image(m_resouce->ShaderResourceView.Get(), ImVec2(m_Size.x, m_Size.x), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1, 1, 1, 1), ImVec4(0, 0, 0, 1));
+	}
+
+	void	NodeBase::ResouceCreate()
+	{
+	}
+	NodeBase::NodeBase(int inputs_count, int outputs_count)
+		:m_inputs_count(inputs_count), m_outputs_count(outputs_count)
+	{
+		for (int i = 0; i < m_inputs_count; i++)
+		{
+			m_is_input.push_back(false);
+
+			m_input_str.push_back("");
+			m_input_pos.push_back({});
+			m_input_slot_color.push_back(0);
+			m_input_links.push_back({ -1, -1 });
+		}
+
+		for (int i = 0; i < m_outputs_count; i++)
+		{
+			m_out_str.push_back("");
+			m_output_pos.push_back({});
+			m_output_slot_color.push_back(0);
+			m_output_links.push_back({ -1, -1 });
+		}
+		if (m_inputs_count < m_outputs_count)
+		{
+			m_Size = { 55.0f*m_outputs_count ,55.0f*m_outputs_count };
+		}
+		else
+		{
+			m_Size = { 55.0f*m_inputs_count ,55.0f*m_inputs_count };
+		}
+
 	}
 
 

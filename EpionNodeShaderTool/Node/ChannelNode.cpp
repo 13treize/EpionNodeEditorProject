@@ -59,9 +59,9 @@
 //		};
 //		m_node_type = NODE_TYPE::NORMAL;
 //	}
-//	void	CombineNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+//	void	CombineNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 //	{
-//		i_update(offset, draw_list);
+//		DrawUpdate(offset, draw_list);
 //
 //		draw_list->ChannelsSetCurrent(1);
 //		if (!m_is_input[0])	NodeFunction::SetInputSlotFloat(m_input_pos[0], SLOT_INPUT_POS_X, StringConverter::get_space(0), R);

@@ -49,17 +49,12 @@ namespace	epion::NodeCustom
 		m_node_type = NODE_TYPE::NORMAL;
 	}
 
-	void SamplerTexture2DNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void SamplerTexture2DNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotTexture2D(m_input_pos[1]);
 		if (!m_is_input[2])	NodeFunction::SetInputSlotSamplerState(m_input_pos[2]);
-	}
-
-	void	SamplerTexture2DNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	SamplerTexture2DNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -111,14 +106,9 @@ namespace	epion::NodeCustom
 
 		m_node_type = NODE_TYPE::VARIABLE;
 	}
-	void SamplerStateNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void SamplerStateNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
-	}
-
-	void SamplerStateNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 	}
 
 	void SamplerStateNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)

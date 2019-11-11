@@ -49,9 +49,9 @@ namespace epion::NodeCustom
 		m_output_name.push_back("Out");
 	}
 
-	void	LerpNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	LerpNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
 		m_input_name[0] = "A" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
 		m_input_name[1] = "B" + NodeFunction::GetSlotTypeName(m_input_slot_type[1]);
@@ -72,14 +72,6 @@ namespace epion::NodeCustom
 					break;
 				}
 			}
-		}
-	}
-
-	void	LerpNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
 		}
 	}
 

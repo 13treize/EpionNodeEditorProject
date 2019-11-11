@@ -58,18 +58,14 @@ namespace	epion::NodeCustom
 		m_node_type = NODE_TYPE::MASTER;
 	}
 
-	void	UnlitMasterNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	UnlitMasterNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotColor(m_input_pos[1], open_popup, color,1);
 		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], SLOT_INPUT_POS_X, StringConverter::get_space(2), Alpha);
 		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], SLOT_INPUT_POS_X, StringConverter::get_space(3), AlphaChipThreshold);
 	}
 
-	void	UnlitMasterNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
-	}
 	void	UnlitMasterNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		std::string set_up_str = "";

@@ -10,7 +10,7 @@
 //		~CombineNode();
 //
 //		void	Init()override;
-//		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
+//		void	Update(ImVec2 offset, ImDrawList*	draw_list)	override;
 //		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
 //		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 //		std::string	get_function_def_str()	override;

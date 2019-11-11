@@ -63,18 +63,13 @@ namespace	epion::NodeCustom
 
 		m_node_type = NODE_TYPE::NORMAL;
 	}
-	void	CheckerboardNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	CheckerboardNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
 		if (!m_is_input[1])	m_color_picker[0].SetInputSlotColor2(m_input_pos[1], m_open_popup[0], m_colora, 1);
 		if (!m_is_input[2])	m_color_picker[1].SetInputSlotColor2(m_input_pos[2], m_open_popup[1], m_colorb, 2);
 		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], m_frequency, 3);
-	}
-
-	void	CheckerboardNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	CheckerboardNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -148,17 +143,12 @@ namespace	epion::NodeCustom
 		m_node_type = NODE_TYPE::NORMAL;
 	}
 
-	void	EllipseNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	EllipseNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_width);
 		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_height);
-	}
-
-	void	EllipseNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	EllipseNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -231,17 +221,12 @@ namespace	epion::NodeCustom
 		m_node_type = NODE_TYPE::NORMAL;
 	}
 
-	void	HexagonNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	HexagonNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_scale);
 
-	}
-
-	void	HexagonNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	HexagonNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -327,18 +312,13 @@ namespace	epion::NodeCustom
 		m_node_type = NODE_TYPE::NORMAL;
 	}
 
-	void	PolygonNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	PolygonNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_sides);
 		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_width);
 		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::get_space(3), m_height);
-	}
-
-	void	PolygonNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	PolygonNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -413,19 +393,14 @@ namespace	epion::NodeCustom
 		m_node_type = NODE_TYPE::NORMAL;
 	}
 
-	void	RippleNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	RippleNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_width);
 		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_height);
 		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], m_center, 3);
 		if (!m_is_input[4])	NodeFunction::SetInputSlotFloat(m_input_pos[4], StringConverter::get_space(4), m_scale);
-	}
-
-	void	RippleNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	RippleNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -491,18 +466,13 @@ namespace	epion::NodeCustom
 		m_node_type = NODE_TYPE::NORMAL;
 	}
 
-	void	RoundedRectangleNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	RoundedRectangleNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_width);
 		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_height);
 		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::get_space(3), m_radius);
-	}
-
-	void	RoundedRectangleNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	RoundedRectangleNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)

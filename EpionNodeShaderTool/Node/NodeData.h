@@ -70,7 +70,6 @@ namespace	epion::NodeCustom
 		static std::string SetDefineOutStr3(const std::string& str);
 		static std::string SetDefineOutStr4(const std::string& str);
 		static std::string SetDefineOutSamplerState(const std::string& str,int num);
-
 		static std::string SetDefineOutDynamic(const std::string& str, SLOT_TYPE type);
 
 		static void InputRectDraw(ImDrawList*	draw_list, ImVec2 pos, SLOT_TYPE type);
@@ -206,16 +205,14 @@ namespace	epion::NodeCustom
 		NodeBase(int inputs_count, int outputs_count);
 		NodeBase(std::string name, int id, const math::FVector2& pos, int inputs_count, int outputs_count);
 
-		void	Update(ImVec2& offset, ImDrawList*	draw_list);
-
 		virtual	~NodeBase() {}
+
+		void	TitleDraw(ImVec2& offset, ImDrawList*	draw_list, bool is_push);
 
 		virtual	void	Init() = 0;
 
-		void	Update();
 
-		virtual	void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list) = 0;
-		virtual	void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list) = 0;
+		virtual	void	Update(ImVec2 offset, ImDrawList*	draw_list) = 0;
 
 		//毎フレームは必要ない
 		virtual	void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links) = 0;
@@ -279,8 +276,8 @@ namespace	epion::NodeCustom
 		std::vector<ImVec2>			m_output_pos;
 
 
-		void	i_update(ImVec2 offset, ImDrawList*	draw_list);
-		void	o_update(ImVec2 offset, ImDrawList*	draw_list);
+		void	DrawUpdate(ImVec2 offset, ImDrawList*	draw_list);
+
 		void	str_check(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links);
 
 		NODE_TYPE	m_node_type;

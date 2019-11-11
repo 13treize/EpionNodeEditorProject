@@ -18,11 +18,10 @@ namespace	epion::NodeCustom
 		FloatNode();
 		FloatNode(int id, const math::FVector2& pos);
 		~FloatNode();
-		void	Init()override;
 
-		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
+		void Init()override;
+		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 		std::string	GetFunctionDefStr()	override;
 
 		template<class Archive>
@@ -42,11 +41,10 @@ namespace	epion::NodeCustom
 		Vector2Node();
 		Vector2Node(int id, const math::FVector2& pos);
 		~Vector2Node();
-		void	Init()override;
 
-		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
+		void Init()override;
+		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 		std::string	GetFunctionDefStr()	override;
 
 		template<class Archive>
@@ -66,11 +64,10 @@ namespace	epion::NodeCustom
 		Vector3Node();
 		Vector3Node(int id, const math::FVector2& pos);
 		~Vector3Node();
-		void	Init()override;
 
-		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
+		void Init()override;
+		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 		std::string	GetFunctionDefStr()	override;
 
 		template<class Archive>
@@ -90,11 +87,10 @@ namespace	epion::NodeCustom
 		Vector4Node();
 		Vector4Node(int id, const math::FVector2& pos);
 		~Vector4Node();
-		void	Init()override;
 
-		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
+		void Init()override;
+		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 		std::string	GetFunctionDefStr()	override;
 
 		template<class Archive>
@@ -113,11 +109,10 @@ namespace	epion::NodeCustom
 		ColorNode();
 		ColorNode(int id, const math::FVector2& pos);
 		~ColorNode();
-		void	Init()override;
 
-		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
+		void Init()override;
+		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 		std::string	GetFunctionDefStr()	override;
 
 		template<class Archive>
@@ -140,11 +135,10 @@ namespace	epion::NodeCustom
 		TimeNode();
 		TimeNode(int id, const math::FVector2& pos);
 		~TimeNode();
-		void	Init()override;
 
-		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
+		void Init()override;
+		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 		std::string	GetFunctionDefStr()	override;
 
 		template<class Archive>

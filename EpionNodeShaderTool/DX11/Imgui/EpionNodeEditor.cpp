@@ -118,10 +118,7 @@ namespace	epion::NodeCustom
 
 		static const char* names[9] = { "Bobby", "Beatrice", "Betty", "Brianna", "Barry", "Bernard", "Bibi", "Blaine", "Bryn" };
 
-		if(node_name.empty())
-		{
-			node_name = "Node CustomGraph";
-		}
+		if(node_name.empty())	node_name = "Node CustomGraph";
 
 		if (!ImGui::Begin(node_name.c_str(),nullptr, m_window_flags))
 		{
@@ -187,7 +184,7 @@ namespace	epion::NodeCustom
 
 		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
 		ImGui::PushStyleColor(ImGuiCol_Border,	ImColor::U32::GREEN);
-		ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, IM_COL32(0, 0, 0,255));	//”wŒi
+		ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColor::U32::BLACK);	//”wŒi
 		ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, 12);
 
 		m_offset = ImGui::GetCursorScreenPos() + m_scrolling;
@@ -328,7 +325,7 @@ namespace	epion::NodeCustom
 	//ƒm[ƒh‚ðŒq‚®ü‚Ì•`‰æ
 	void	NodeEditor::draw_node_line(ImDrawList*	draw_list)
 	{
-		draw_list->ChannelsSetCurrent(3); // Background
+		draw_list->ChannelsSetCurrent(2); // Line
 #ifdef  DEBUG
 		draw_list->AddCircle(ImGui::GetMousePos(), 10.0f, IM_COL32(255, 255, 255, 255));
 #endif //  DEBUG
@@ -437,7 +434,7 @@ namespace	epion::NodeCustom
 				//input slot‚ðƒNƒŠƒbƒN‚µ‚½‚Æ‚«
 				if (!m_click_state.is_click_output_slot&&
 					ImGui::IsMouseDown(0) &&
-					physics::Collider2D::sphere_and_sphere<float>(getFVec2(input_slot_pos), getFVec2(ImGui::GetIO().MousePos), NODE_SLOT_RADIUS, 2.0f))
+					physics::Collider2D::SphereAndSphere<float>(getFVec2(input_slot_pos), getFVec2(ImGui::GetIO().MousePos), NODE_SLOT_RADIUS, 2.0f))
 				{
 					m_click_state = { nodes[node_size]->m_ID,	slot_input,input_slot_pos2,	false,	true,	false };
 					break;
@@ -448,7 +445,7 @@ namespace	epion::NodeCustom
 				{
 					bool	is_hit = false;
 					bool	is_input = false;
-					if (physics::Collider2D::sphere_and_sphere(::getFVec2(input_slot_pos), ::getFVec2(ImGui::GetIO().MousePos), NODE_SLOT_RADIUS, 2.0f))
+					if (physics::Collider2D::SphereAndSphere(::getFVec2(input_slot_pos), ::getFVec2(ImGui::GetIO().MousePos), NODE_SLOT_RADIUS, 2.0f))
 					{
 						if (m_click_state.id != nodes[node_size]->m_ID)
 						{
@@ -467,10 +464,7 @@ namespace	epion::NodeCustom
 									break;
 								}
 							}
-							if (is_input)
-							{
-								links.erase(links.begin() + slot_input - 1);
-							}
+							if (is_input)	links.erase(links.begin() + slot_input - 1);
 							if (!is_hit)
 							{
 								links.push_back(NodeLink(m_click_state.id, m_click_state.slot, nodes[m_click_state.id]->m_output_slot_type[m_click_state.slot],
@@ -494,7 +488,7 @@ namespace	epion::NodeCustom
 				//output slot‚ðƒNƒŠƒbƒN‚µ‚½‚Æ‚«
 				if (!m_click_state.is_click_input_slot&&
 					ImGui::IsMouseDown(0) &&
-					physics::Collider2D::sphere_and_sphere(math::FVector2(output_slot_pos.x, output_slot_pos.y), math::FVector2(ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y), NODE_SLOT_RADIUS, 2.0f))
+					physics::Collider2D::SphereAndSphere(math::FVector2(output_slot_pos.x, output_slot_pos.y), math::FVector2(ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y), NODE_SLOT_RADIUS, 2.0f))
 				{
 					m_click_state = { nodes[node_size]->m_ID,	slot_output,	output_slot_pos2,false,false,true };
 					break;
@@ -504,7 +498,7 @@ namespace	epion::NodeCustom
 				if (m_click_state.is_click_input_slot	&&ImGui::IsMouseReleased(0))
 				{
 					bool	is_hit = false;
-					if (physics::Collider2D::sphere_and_sphere(math::FVector2(output_slot_pos.x, output_slot_pos.y), math::FVector2(ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y), NODE_SLOT_RADIUS, 2.0f))
+					if (physics::Collider2D::SphereAndSphere(math::FVector2(output_slot_pos.x, output_slot_pos.y), math::FVector2(ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y), NODE_SLOT_RADIUS, 2.0f))
 					{
 						if (m_click_state.id != nodes[node_size]->m_ID)
 						{
@@ -543,32 +537,28 @@ namespace	epion::NodeCustom
 			}
 
 			//node‚É“–‚½‚Á‚½‚©
-			ImU32 push_rect_color;
+			bool is_push;
 			if (m_node_hovered_list == nodes[node_size]->m_ID ||
 				scene == nodes[node_size]->m_ID ||
 				(m_node_hovered_list == INIT_NUM && m_node_select_num == nodes[node_size]->m_ID))
 			{
-				push_rect_color = IM_COL32(255, 255, 255, 255);
+				is_push = true;
 			}
 			else
 			{
-				push_rect_color = IM_COL32(0, 0, 0, 0);
+				is_push = false;
 			}
 
+			draw_list->ChannelsSetCurrent(1);//NodeDraw
 
-			//NodeRect•`‰æ
-			nodes[node_size]->Update(m_offset, draw_list);
-
-			//draw_list->ChannelsSetCurrent(1); // Background
-			draw_list->AddRect(node_rect_min, node_rect_max, push_rect_color, 7.0f);
+			//Node–{‘ÌA•¶Žš•`‰æ
+			ImGui::SetWindowFontScale(1.0f);
+			nodes[node_size]->TitleDraw(m_offset, draw_list, is_push);
 
 
+			ImGui::SetWindowFontScale(0.9f);
 			//input slot circledraw
-			nodes[node_size]->InputUpdate(m_offset, draw_list);
-
-			//draw_list->ChannelsSetCurrent(1); // input_slot
-			nodes[node_size]->OutputUpdate(m_offset, draw_list);
-
+			nodes[node_size]->Update(m_offset, draw_list);
 
 			nodes[node_size]->ShaderUpdate(nodes, links);
 
@@ -606,12 +596,12 @@ namespace	epion::NodeCustom
 		return	m_offset;
 	}
 
-	int		NodeEditor::GetNodeSize()
+	int NodeEditor::GetNodeSize()
 	{
 		return	static_cast<int>(nodes.size());
 	}
 
-	int		NodeEditor::GetLinkSize()
+	int NodeEditor::GetLinkSize()
 	{
 		return	static_cast<int>(links.size());
 	}

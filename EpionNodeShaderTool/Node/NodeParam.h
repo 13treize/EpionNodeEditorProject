@@ -41,4 +41,6 @@ namespace	epion::NodeCustom
 	const ImVec2 NODE_FONT_POS = { 10.0f, 5.0f };
 
 	const ImU32 RECT_COLOR = IM_COL32(60, 60, 60, 200);
+	const ImU32 TITLE_BAR_COLOR = IM_COL32(40, 40, 40, 250);
+
 }

@@ -40,9 +40,9 @@ namespace	epion::NodeCustom
 		m_output_name.push_back("Out");
 	}
 
-	void	DDXNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	DDXNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
 		m_input_name[0] = "In" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
 		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
@@ -57,14 +57,6 @@ namespace	epion::NodeCustom
 			case SLOT_TYPE::VECTOR1:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]))		*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 3), In.x);
 				break;
 			}
-		}
-	}
-
-	void	DDXNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
 		}
 	}
 
@@ -114,9 +106,9 @@ namespace	epion::NodeCustom
 		m_output_name.push_back("Out");
 	}
 
-	void	DDYNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	DDYNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
 		m_input_name[0] = "In" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
 		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
@@ -131,14 +123,6 @@ namespace	epion::NodeCustom
 			case SLOT_TYPE::VECTOR1:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]))		*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 3), In.x);
 				break;
 			}
-		}
-	}
-
-	void	DDYNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
 		}
 	}
 
@@ -188,9 +172,9 @@ namespace	epion::NodeCustom
 		m_output_name.push_back("Out");
 	}
 
-	void	DDXYNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	DDXYNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
 		m_input_name[0] = "In" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
 		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
@@ -205,14 +189,6 @@ namespace	epion::NodeCustom
 			case SLOT_TYPE::VECTOR1:	NodeFunction::SetInputSlotFloat(m_input_pos[0], (static_cast<float>(m_input_slot_type[0]))		*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(m_input_slot_type[0]) - 3), In.x);
 				break;
 			}
-		}
-	}
-
-	void	DDXYNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
 		}
 	}
 

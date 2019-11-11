@@ -21,7 +21,7 @@ namespace	epion::physics
 	{
 	public:
 		template<class	T>
-		__forceinline	static	bool	sphere_and_sphere(const	math::Vector2<T>	&p, const	math::Vector2<T>	&e,
+		__forceinline	static	bool	SphereAndSphere(const	math::Vector2<T>	&p, const	math::Vector2<T>	&e,
 			const	T	r1, const	T	r2 = 0);
 
 		template<class	T>
@@ -38,7 +38,7 @@ namespace	epion::physics
 namespace	epion::physics
 {
 	template<class	T>
-	__forceinline	static	bool	Collider2D::sphere_and_sphere(const	math::Vector2<T>	&p, const	math::Vector2<T>	&e,
+	__forceinline	static	bool	Collider2D::SphereAndSphere(const	math::Vector2<T>	&p, const	math::Vector2<T>	&e,
 		const	T	r1, const	T	r2)
 	{
 		math::Vector2<T>	dis = { e.x - p.x, e.y - p.y };				//ìÒì_ä‘ÇÃãóó£ÇÃéZèo

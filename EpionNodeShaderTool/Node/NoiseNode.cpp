@@ -53,17 +53,12 @@ namespace	epion::NodeCustom
 		m_output_name.push_back("Out");
 	}
 
-	void	FBMNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	FBMNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_amplitude);
 		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_frequency);
-	}
-
-	void	FBMNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	FBMNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -143,16 +138,11 @@ namespace	epion::NodeCustom
 		m_output_name.push_back("Out");
 	}
 
-	void	GradientNoiseNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	GradientNoiseNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_scale);
-	}
-
-	void	GradientNoiseNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	GradientNoiseNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -231,16 +221,11 @@ namespace	epion::NodeCustom
 		m_node_type = NODE_TYPE::NORMAL;
 	}
 
-	void	SimpleNoiseNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	SimpleNoiseNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_scale);
-	}
-
-	void	SimpleNoiseNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	SimpleNoiseNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -300,9 +285,8 @@ namespace	epion::NodeCustom
 	}
 #pragma endregion
 
-	//TODO êRãc
+//TODO êRãc
 #pragma region Voronoi
-
 	VoronoiNode::VoronoiNode()
 		:NodeBase( 3, 3)
 	{
@@ -345,17 +329,12 @@ namespace	epion::NodeCustom
 		m_node_type = NODE_TYPE::NORMAL;
 	}
 
-	void	VoronoiNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	VoronoiNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_angleoffset);
 		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_celldensity);
-	}
-
-	void	VoronoiNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	VoronoiNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -427,5 +406,4 @@ namespace	epion::NodeCustom
 			"}\n";
 	}
 #pragma endregion
-
 }

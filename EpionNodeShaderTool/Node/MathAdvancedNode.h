@@ -8,11 +8,9 @@ namespace	epion::NodeCustom
 		AbsoluteNode(int id, const math::FVector2& pos);
 		~AbsoluteNode();
 
-		void	Init()override;
-
-		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
+		void Init()override;
+		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 
 		std::string	GetFunctionDefStr()	override;
 		template<class Archive>
@@ -33,12 +31,9 @@ namespace	epion::NodeCustom
 		LengthNode(int id, const math::FVector2& pos);
 		~LengthNode();
 
-		void	Init()override;
-
-		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
-
+		void Init()override;
+		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 		std::string	GetFunctionDefStr()	override;
 		template<class Archive>
 		void serialize(Archive & archive)
@@ -58,10 +53,9 @@ namespace	epion::NodeCustom
 		ModuloNode(int id, const math::FVector2& pos);
 		~ModuloNode();
 
-		void	Init()override;
-		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
+		void Init()override;
+		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 
 		std::string	GetFunctionDefStr()	override;
 		template<class Archive>
@@ -84,10 +78,9 @@ namespace	epion::NodeCustom
 		NegateNode(int id, const math::FVector2& pos);
 		~NegateNode();
 
-		void	Init()override;
-		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
+		void Init()override;
+		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 
 		std::string	GetFunctionDefStr()	override;
 		template<class Archive>
@@ -108,10 +101,9 @@ namespace	epion::NodeCustom
 		NormalizeNode(int id, const math::FVector2& pos);
 		~NormalizeNode();
 
-		void	Init()override;
-		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
+		void Init()override;
+		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 
 		std::string	GetFunctionDefStr()	override;
 		template<class Archive>
@@ -132,11 +124,9 @@ namespace	epion::NodeCustom
 		PosterizeNode(int id, const math::FVector2& pos);
 		~PosterizeNode();
 
-		void	Init()override;
-
-		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
+		void Init()override;
+		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 
 		std::string	GetFunctionDefStr()	override;
 		template<class Archive>
@@ -160,12 +150,11 @@ namespace	epion::NodeCustom
 		ReciprocalSquareRootNode(int id, const math::FVector2& pos);
 		~ReciprocalSquareRootNode();
 
-		void	Init()override;
-		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
-
+		void Init()override;
+		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;	
 		std::string	GetFunctionDefStr()	override;
+
 		template<class Archive>
 		void serialize(Archive & archive)
 		{

@@ -72,9 +72,9 @@ namespace	epion::NodeCustom
 
 	}
 
-	void	FlipbookNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	FlipbookNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		//draw_list->ChannelsSetCurrent(1);
 
 		//if (!m_is_input[0])
@@ -94,15 +94,6 @@ namespace	epion::NodeCustom
 		//}
 
 	}
-
-	void	FlipbookNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
-		}
-	}
-
 	void	FlipbookNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		//m_out_str[0] = "Volonoi_out" + std::to_string(m_ID);

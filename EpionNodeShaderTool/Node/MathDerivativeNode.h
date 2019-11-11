@@ -8,12 +8,11 @@ namespace	epion::NodeCustom
 		DDXNode(int id, const math::FVector2& pos);
 		~DDXNode();
 
-		void	Init()override;
-		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
-
+		void Init()override;
+		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 		std::string	GetFunctionDefStr()	override;
+
 		template<class Archive>
 		void serialize(Archive & archive)
 		{
@@ -32,12 +31,11 @@ namespace	epion::NodeCustom
 		DDYNode(int id, const math::FVector2& pos);
 		~DDYNode();
 
-		void	Init()override;
-		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
-
+		void Init()override;
+		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 		std::string	GetFunctionDefStr()	override;
+
 		template<class Archive>
 		void serialize(Archive & archive)
 		{
@@ -56,12 +54,11 @@ namespace	epion::NodeCustom
 		DDXYNode(int id, const math::FVector2& pos);
 		~DDXYNode();
 
-		void	Init()override;
-		void	InputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)	override;
-		void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
-
+		void Init()override;
+		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
 		std::string	GetFunctionDefStr()	override;
+
 		template<class Archive>
 		void serialize(Archive & archive)
 		{

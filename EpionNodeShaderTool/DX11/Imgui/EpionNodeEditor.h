@@ -11,10 +11,10 @@ namespace	epion::NodeCustom
 		3.0f,	4.0f,	5.0f,	6.0f,	7.0f,	8.0f
 	};
 
-	struct	SettingsParam
-	{
-		int	m_create_count;	//ノードのサイズ
-	};
+	//struct	SettingsParam
+	//{
+	//	int	m_create_count;	//ノードのサイズ
+	//};
 
 	class	NodeBase;
 	class	NodeLink;

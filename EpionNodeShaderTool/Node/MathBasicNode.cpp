@@ -57,17 +57,12 @@ namespace	epion::NodeCustom
 		m_node_type = NODE_TYPE::DYNAMIC;
 	}
 
-	void	AddNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	AddNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_num[0], m_input_slot_type[0],	0);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_num[1], m_input_slot_type[1], 1);
-	}
-
-	void	AddNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	AddNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -129,17 +124,12 @@ namespace	epion::NodeCustom
 		m_node_type = NODE_TYPE::DYNAMIC;
 	}
 
-	void	SubtractNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	SubtractNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_num[0], m_input_slot_type[0], 0);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_num[1], m_input_slot_type[1], 1);
-	}
-
-	void	SubtractNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	SubtractNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -202,17 +192,12 @@ namespace	epion::NodeCustom
 		m_node_type = NODE_TYPE::DYNAMIC;
 	}
 
-	void	MultiplyNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	MultiplyNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_num[0], m_input_slot_type[0], 0);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_num[1], m_input_slot_type[1], 1);
-	}
-
-	void	MultiplyNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	MultiplyNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -274,17 +259,12 @@ namespace	epion::NodeCustom
 
 	}
 
-	void	DivideNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	DivideNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_num[0], m_input_slot_type[0], 0);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_num[1], m_input_slot_type[1], 1);
-	}
-
-	void	DivideNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	DivideNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -347,18 +327,13 @@ namespace	epion::NodeCustom
 		m_node_type = NODE_TYPE::DYNAMIC;
 	}
 
-	void	PowerNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	PowerNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		draw_list->ChannelsSetCurrent(1);
 
 		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_num[0], m_input_slot_type[0], 0);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_num[1], m_input_slot_type[1], 1);
-	}
-
-	void	PowerNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	PowerNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -415,15 +390,10 @@ namespace	epion::NodeCustom
 		m_node_type = NODE_TYPE::DYNAMIC;
 	}
 
-	void	SquareRootNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	SquareRootNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0]);
-	}
-
-	void	SquareRootNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	SquareRootNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)

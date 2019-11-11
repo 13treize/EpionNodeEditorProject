@@ -54,18 +54,10 @@ namespace	epion::NodeCustom
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
 	}
-	void	FloatNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	FloatNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::get_space(0), m_num);
-	}
-
-	void	FloatNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
-		}
 	}
 
 	void	FloatNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -111,19 +103,11 @@ namespace	epion::NodeCustom
 
 	}
 
-	void	Vector2Node::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	Vector2Node::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::get_space(0), m_num.x);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_num.y);
-	}
-
-	void	Vector2Node::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
-		}
 	}
 
 	void	Vector2Node::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -166,21 +150,13 @@ namespace	epion::NodeCustom
 		m_node_type = NODE_TYPE::NORMAL;
 
 	}
-	void	Vector3Node::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	Vector3Node::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::get_space(0), m_num.x);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_num.y);
 		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_num.z);
 
-	}
-
-	void	Vector3Node::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
-		}
 	}
 
 	void	Vector3Node::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -223,21 +199,13 @@ namespace	epion::NodeCustom
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR4);
 		m_output_name.push_back("Out");
 	}
-	void	Vector4Node::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	Vector4Node::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::get_space(0), m_num.x);
 		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_num.y);
 		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_num.z);
 		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::get_space(3), m_num.w);
-	}
-
-	void	Vector4Node::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
-		}
 	}
 
 	void	Vector4Node::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -280,16 +248,11 @@ namespace	epion::NodeCustom
 		m_open_popup[0] = false;
 		m_node_type = NODE_TYPE::VARIABLE;
 	}
-	void	ColorNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	ColorNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 		if (!m_is_input[0])	m_color_picker[0].SetInputSlotColor2(m_input_pos[0], m_open_popup[0], m_color,0);
 
-	}
-
-	void	ColorNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		o_update(offset, draw_list);
 	}
 
 	void	ColorNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -335,16 +298,9 @@ namespace	epion::NodeCustom
 		m_node_type = NODE_TYPE::NORMAL;
 
 	}
-	void	TimeNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	TimeNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
-	}
-	void	TimeNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
-		}
+		DrawUpdate(offset, draw_list);
 	}
 
 	void	TimeNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)

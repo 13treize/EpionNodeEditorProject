@@ -66,9 +66,9 @@ namespace	epion::NodeCustom
 		m_output_slot_type.clear();
 	}
 
-	void	PBRMasterNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
+	void	PBRMasterNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		i_update(offset, draw_list);
+		DrawUpdate(offset, draw_list);
 
 		if (m_inputs_count != 0)
 		{
@@ -92,14 +92,6 @@ namespace	epion::NodeCustom
 			//	ImGui::InputFloat("    ", &AlphaChipThreshold, 0.0f, 1.0f, "%.2f");
 			//}
 
-		}
-	}
-
-	void	PBRMasterNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
-	{
-		if (m_outputs_count != 0)
-		{
-			o_update(offset, draw_list);
 		}
 	}
 
