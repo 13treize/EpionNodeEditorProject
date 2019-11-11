@@ -23,11 +23,12 @@ CEREAL_REGISTER_TYPE(epion::NodeCustom::PosterizeNode)
 namespace	epion::NodeCustom
 {
 	AbsoluteNode::AbsoluteNode()
+		:NodeBase(1, 1)
 	{
 		Init();
 	}
 	AbsoluteNode::AbsoluteNode(int id, const math::FVector2& pos)
-		:NodeBase("Absolute_float", id, pos, 1, 1)
+		:NodeBase("Absolute", id, pos, 1, 1)
 	{
 		Init();
 	}
@@ -52,37 +53,28 @@ namespace	epion::NodeCustom
 	void	AbsoluteNode::InputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		i_update(offset, draw_list);
-		draw_list->ChannelsSetCurrent(1);
-		m_input_name[0] = "In" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
-		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
-
-		if (!m_is_input[0])
-		{
-			NodeFunction::SetInputSlotDynamic(m_input_pos[0], In, m_input_slot_type[0], 0);
-		}
+		NodeFunction::SetInputSlotDynamic(m_input_pos[0], In, m_input_slot_type[0], 0);
 	}
 
 	void	AbsoluteNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
-		}
+		o_update(offset, draw_list);
 	}
 
 	void	AbsoluteNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_Name = "Absolute_" + NodeFunction::GetType(m_input_slot_type[0]);
-		m_out_str[0] = m_Name +"_out" + std::to_string(m_ID);
 
 		NodeFunction::SetSlotData(In, m_input_str[0], m_input_slot_type[0]);
 
-		type_set(nodes_ptr, links);
 		m_output_slot_type[0] = m_input_slot_type[0];
-		m_function_call_str = "    " + NodeFunction::GetType(m_output_slot_type[0]) + " " + m_out_str[0] + ";\n";
-		m_function_call_str += "    " + m_Name +"(";
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 
-		str_set(nodes_ptr, links);
+		m_function_call_str = NodeFunction::SetDefineOutDynamic(m_out_str[0], m_output_slot_type[0]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
+
+		m_dynamic_slot_type = m_input_slot_type[0];
+		str_check(nodes_ptr, links);
 	}
 	std::string	AbsoluteNode::GetFunctionDefStr()
 	{

@@ -181,6 +181,7 @@ namespace	epion::Shader
 		{
 			if (typeid(*n) == typeid(NodeCustom::SamplerStateNode))
 			{
+				n->ShaderUpdate(nodes,links);
 				function_str += n->GetFunctionDefStr() + "\n";
 			}
 		}

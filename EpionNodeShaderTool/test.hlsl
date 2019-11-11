@@ -16,22 +16,90 @@ float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)
     return ret_color;
 };
 
-void TilingAndOffset(float2 UV, float2 Tiling, float2 Offset, out float2 Out)
+void Add_float3(float3 A,float3 B, out float3 Out)
 {
-    Out = UV * Tiling + Offset;
+	Out = A + B;
 }
 
-void Polygon(float2 UV, float Sides, float Width, float Height, out float Out)
+inline float2 voronoi_noise_randomVector(float2 UV, float offset)
 {
-    float pi = 3.14159265359;
-    float aWidth = Width * cos(pi / Sides);
-    float aHeight = Height * cos(pi / Sides);
-    float2 uv = (UV * 2 - 1) / float2(aWidth, aHeight);
-    uv.y *= -1;
-    float pCoord = atan2(uv.x, uv.y);
-    float r = 2 * pi / Sides;
-    float distance = cos(floor(0.5 + pCoord / r) * r - pCoord) * length(uv);
-    Out = saturate((1 - distance) / fwidth(distance));
+    float2x2 m = float2x2(15.27, 47.63, 99.41, 89.98);
+    UV = frac(sin(mul(UV, m)) * 46839.32);
+    return float2(sin(UV.y * +offset) * 0.5 + 0.5, cos(UV.x * offset) * 0.5 + 0.5);
+}
+void Voronoi(float2 UV, float AngleOffset, float CellDensity, out float Out, out float Cells, out float Lines)
+{
+    float2 g = floor(UV * CellDensity);
+    float2 f = frac(UV * CellDensity);
+    float3 res = float3(8.0, 0.0, 0.0);
+    float2 res2 = float2(8.0, 8.0);
+    for (int y = -1; y <= 1; y++)
+    {
+        for (int x = -1; x <= 1; x++)
+        {
+            float2 lattice = float2(x, y);
+            float2 offset = voronoi_noise_randomVector(lattice + g, AngleOffset);
+            float d = distance(lattice + offset, f);
+            float2 r = lattice +offset -f;
+            float d2 = dot(r,r);
+            if (d < res.x)
+            {
+                res = float3(d, offset.x, offset.y);
+                Out = res.x;
+                Cells = res.y;
+            }
+            else if (d < res.y)
+            {
+                res.y = d; 
+            }
+            if (d2 < res2.x)
+            {
+                res2.y = res2.x;
+                res2.x = d2;
+            }
+            else if (d2 < res2.y)
+            {
+                res2.y = d2; 
+            }
+        }
+    }
+    float2 c = sqrt(res2);
+    Lines = 1.-smoothstep(0.0, 0.1, c.y-c.x);
+}
+
+void Checkerboard(float2 UV, float3 ColorA, float3 ColorB, float2 Frequency, out float3 Out)
+{
+    UV = (UV.xy + 0.5) * Frequency;
+    float4 derivatives = float4(ddx(UV), ddy(UV));
+    float2 duv_length = sqrt(float2(dot(derivatives.xz, derivatives.xz), dot(derivatives.yw, derivatives.yw)));
+    float width = 1.0;
+    float2 distance3 = 4.0 * abs(frac(UV + 0.25) - 0.5) - width;
+    float2 scale = 0.35 / duv_length.xy;
+    float freqLimiter = sqrt(clamp(1.1f - max(duv_length.x, duv_length.y), 0.0, 1.0));
+    float2 vector_alpha = clamp(distance3 * scale.xy, -1.0, 1.0);
+    float alpha = saturate(0.5f + 0.5f * vector_alpha.x * vector_alpha.y * freqLimiter);
+    Out = lerp(ColorA, ColorB, alpha.xxx);
+}
+
+void Hexagon(float2 UV, float Scale, out float Out, out float2 Pos, out float2 oUV, out float2 Index)
+{
+    float2 p = UV * Scale;
+    float isTwo = frac(floor(p.x) / 2.0) * 2.0;
+    float isOne = 1.0 - isTwo;
+    p.y += isTwo * 0.5;
+    float2 rectUV = frac(p);
+    float2 grid = floor(p);
+    p = frac(p) - 0.5;
+    float2 s = sign(p);
+    p = abs(p);
+    Out = abs(max(p.x * 1.5 + p.y, p.y * 2.0) - 1.0);
+    float isInHex = step(p.x * 1.5 + p.y, 1.0);
+    float isOutHex = 1.0 - isInHex;
+    float2 grid2 = float2(0, 0);
+    grid2 = lerp(float2(s.x, +step(0.0, s.y)), float2(s.x, -step(s.y, 0.0)), isTwo) *isOutHex;
+    Index = grid + grid2;
+    Pos = Index / Scale;
+    oUV = lerp(rectUV, rectUV - s * float2(1.0, 0.5), isOutHex);
 }
 
 float4 PS(PSInput input) : SV_TARGET
@@ -39,9 +107,25 @@ float4 PS(PSInput input) : SV_TARGET
     float Time_ =Time.x;
     float Sin_Time_ =sin(Time.x);
     float Cos_Time_ =cos(Time.x);
-    float Polygon_out2;
-    Polygon(input.uv,4.000000,1.000000,1.000000,Polygon_out2);
 
-    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Polygon_out2,1.000000,0.000000);
+
+    float VoronoiOut_out2;
+    float VoronoiCell_out2;
+    float VoronoiLine_out2;
+    Voronoi(input.uv,6.000000,6.000000,VoronoiOut_out2,VoronoiCell_out2,VoronoiLine_out2);
+
+    float HexagonOut_out4;
+    float2 HexagonPos_out4;
+    float2 HexagonScale_out4;
+    float2 HexagonIndex_out4;
+    Hexagon(input.uv,10.000000,HexagonOut_out4,HexagonPos_out4,HexagonScale_out4,HexagonIndex_out4);
+
+    float3 Checkerboard_out3;
+    Checkerboard(input.uv,VoronoiOut_out2,VoronoiCell_out2,float2(1.000000,1.000000),Checkerboard_out3);
+
+    float3 Add_float3_out1;
+    Add_float3(Checkerboard_out3,HexagonOut_out4,Add_float3_out1);
+
+    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Add_float3_out1,1.000000,0.000000);
     return flag_color;
 }

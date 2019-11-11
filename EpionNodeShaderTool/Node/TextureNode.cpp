@@ -85,7 +85,7 @@ namespace	epion::NodeCustom
 
 #pragma region SamplerState
 	SamplerStateNode::SamplerStateNode()
-		:NodeBase("SamplerState", 3, math::FVector2(0,0), 1, 1)
+		:NodeBase("SamplerState", 35, math::FVector2(0,0), 1, 1)
 
 	{
 		Init();
@@ -124,7 +124,6 @@ namespace	epion::NodeCustom
 	void SamplerStateNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_input_str[0] = std::to_string(static_cast<int>(m_slot_no));
-
 		m_out_str[0] ="SamplerStates"+ m_input_str[0];
 		//m_function_call_str = m_out_str[0];
 		//m_function_call_str += NodeFunction::SetFuncCall(m_Name);

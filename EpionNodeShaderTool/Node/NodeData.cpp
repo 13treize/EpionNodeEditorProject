@@ -295,6 +295,36 @@ namespace	epion::NodeCustom
 	void	NodeBase::ResouceCreate()
 	{
 	}
+	NodeBase::NodeBase(int inputs_count, int outputs_count)
+		:m_inputs_count(inputs_count), m_outputs_count(outputs_count)
+	{
+				for (int i = 0; i < m_inputs_count; i++)
+		{
+			m_is_input.push_back(false);
+
+			m_input_str.push_back("");
+			m_input_pos.push_back({});
+			m_input_slot_color.push_back(0);
+			m_input_links.push_back({ -1, -1 });
+		}
+
+		for (int i = 0; i < m_outputs_count; i++)
+		{
+			m_out_str.push_back("");
+			m_output_pos.push_back({});
+			m_output_slot_color.push_back(0);
+			m_output_links.push_back({ -1, -1 });
+		}
+		if (m_inputs_count < m_outputs_count)
+		{
+			m_Size = { 55.0f*m_outputs_count ,55.0f*m_outputs_count };
+		}
+		else
+		{
+			m_Size = { 55.0f*m_inputs_count ,55.0f*m_inputs_count };
+		}
+
+	}
 
 	NodeBase::NodeBase(std::string name, int id, const epion::math::FVector2& pos, int inputs_count, int outputs_count)
 		:m_Name(name),

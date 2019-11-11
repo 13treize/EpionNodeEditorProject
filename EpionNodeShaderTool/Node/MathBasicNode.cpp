@@ -23,6 +23,7 @@ namespace	epion::NodeCustom
 {
 #pragma region Add
 	AddNode::AddNode()
+		:NodeBase(2, 1)
 	{
 		Init();
 	}
@@ -66,10 +67,7 @@ namespace	epion::NodeCustom
 
 	void	AddNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		if (m_outputs_count != 0)
-		{
-			o_update(offset, draw_list);
-		}
+		o_update(offset, draw_list);
 	}
 
 	void	AddNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -90,7 +88,7 @@ namespace	epion::NodeCustom
 	std::string	AddNode::GetFunctionDefStr()
 	{
 		return
-			"void Add_" + NodeFunction::GetType(m_dynamic_slot_type) + "(" + NodeFunction::GetType(m_dynamic_slot_type) + " A," + NodeFunction::GetType(m_dynamic_slot_type) + " B, out " + NodeFunction::GetType(m_dynamic_slot_type) + " Out)\n"
+			"void " +m_Name + "(" + NodeFunction::GetType(m_dynamic_slot_type) + " A," + NodeFunction::GetType(m_dynamic_slot_type) + " B, out " + NodeFunction::GetType(m_dynamic_slot_type) + " Out)\n"
 			"{\n"
 			"	Out = A + B;\n"
 			"}\n";
@@ -99,6 +97,7 @@ namespace	epion::NodeCustom
 
 #pragma region Subtract
 	SubtractNode::SubtractNode()
+		:NodeBase(2, 1)
 	{
 		Init();
 	}
@@ -140,10 +139,7 @@ namespace	epion::NodeCustom
 
 	void	SubtractNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		if (m_outputs_count != 0)
-		{
-			o_update(offset, draw_list);
-		}
+		o_update(offset, draw_list);
 	}
 
 	void	SubtractNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -173,6 +169,7 @@ namespace	epion::NodeCustom
 
 #pragma region Multiply
 	MultiplyNode::MultiplyNode()
+		:NodeBase(2, 1)
 	{
 		Init();
 	}
@@ -215,10 +212,7 @@ namespace	epion::NodeCustom
 
 	void	MultiplyNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
-		}
+		o_update(offset, draw_list);
 	}
 
 	void	MultiplyNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -248,6 +242,7 @@ namespace	epion::NodeCustom
 
 #pragma region Divide
 	DivideNode::DivideNode()
+		:NodeBase(2, 1)
 	{
 		Init();
 	}
@@ -289,10 +284,7 @@ namespace	epion::NodeCustom
 
 	void	DivideNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
-		}
+		o_update(offset, draw_list);
 	}
 
 	void	DivideNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -323,6 +315,7 @@ namespace	epion::NodeCustom
 #pragma region Power
 
 	PowerNode::PowerNode()
+		:NodeBase(2, 1)
 	{
 		Init();
 	}
@@ -365,10 +358,7 @@ namespace	epion::NodeCustom
 
 	void	PowerNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
-		if (m_outputs_count > 0)
-		{
-			o_update(offset, draw_list);
-		}
+		o_update(offset, draw_list);
 	}
 
 	void	PowerNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -400,6 +390,7 @@ namespace	epion::NodeCustom
 #pragma region SquareRoot
 
 	SquareRootNode::SquareRootNode()
+		:NodeBase(1, 1)
 	{
 		Init();
 	}
@@ -428,7 +419,6 @@ namespace	epion::NodeCustom
 	{
 		i_update(offset, draw_list);
 		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0]);
-
 	}
 
 	void	SquareRootNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)

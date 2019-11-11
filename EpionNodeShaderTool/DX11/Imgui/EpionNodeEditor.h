@@ -1,5 +1,4 @@
 #pragma once
-#include	<string>
 
 namespace	epion::NodeCustom
 {
@@ -10,6 +9,11 @@ namespace	epion::NodeCustom
 		0.1f,	0.15f,	0.20f,	0.25f,	0.33f,	0.5f,
 		0.75f,	1.0f,	1.25f,	1.50f,	2.0f,	2.5f,
 		3.0f,	4.0f,	5.0f,	6.0f,	7.0f,	8.0f
+	};
+
+	struct	SettingsParam
+	{
+		int	m_create_count;	//ノードのサイズ
 	};
 
 	class	NodeBase;

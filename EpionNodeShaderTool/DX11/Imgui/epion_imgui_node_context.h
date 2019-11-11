@@ -49,9 +49,8 @@ namespace	epion::NodeCustom
 
 		static	ImVec2	m_offfset;
 
+		//ID‚ğŠ„‚èU‚é‚½‚ß‚ÌƒJƒEƒ“ƒg,”í‚è‚Íƒ_ƒ
 		static	int	m_create_count;
-
-		static	int	m_node_num;	//“o˜^‚³‚ê‚Ä‚¢‚énode‚Ì”
 
 		//input
 		static	bool	m_is_open_input_basic_menu;
@@ -71,10 +70,10 @@ namespace	epion::NodeCustom
 		static	inline	void	InputContext();
 		static	inline	void	master_context();
 		static	inline	void	math_context();
-		static	inline	void	procedura_context();
-		static	inline	void	utility_context();
-		static	inline	void	uv_context();
-		static	inline	void	noise_context();
+		static	inline	void	ProceduralContext();
+		static	inline	void	UtilityContext();
+		static	inline	void	UVContext();
+		static	inline	void	NoiseContext();
 	};
 }
 

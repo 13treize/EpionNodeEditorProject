@@ -23,6 +23,7 @@ namespace	epion::NodeCustom
 {
 #pragma region Checkerboard
 	CheckerboardNode::CheckerboardNode()
+		:NodeBase(4, 1)
 	{
 		Init();
 	}
@@ -110,6 +111,7 @@ namespace	epion::NodeCustom
 
 #pragma region Ellipse
 	EllipseNode::EllipseNode()
+		:NodeBase(3, 1)
 	{
 		Init();
 	}
@@ -189,6 +191,7 @@ namespace	epion::NodeCustom
 	//TODO Ç±Ç¢Ç¬êRãc
 #pragma region Hexagon
 	HexagonNode::HexagonNode()
+		:NodeBase(2, 4)
 	{
 		Init();
 	}
@@ -287,6 +290,7 @@ namespace	epion::NodeCustom
 
 #pragma region Polygon
 	PolygonNode::PolygonNode()
+		:NodeBase( 4, 1)
 	{
 		Init();
 	}
@@ -369,6 +373,7 @@ namespace	epion::NodeCustom
 
 #pragma region Ripple
 	RippleNode::RippleNode()
+		:NodeBase(5, 1)
 	{
 		Init();
 	}
@@ -421,7 +426,6 @@ namespace	epion::NodeCustom
 	void	RippleNode::OutputUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		o_update(offset, draw_list);
-
 	}
 
 	void	RippleNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -450,6 +454,7 @@ namespace	epion::NodeCustom
 
 #pragma region RoundedRectangle
 	RoundedRectangleNode::RoundedRectangleNode()
+		:NodeBase(4, 1)
 	{
 		Init();
 	}

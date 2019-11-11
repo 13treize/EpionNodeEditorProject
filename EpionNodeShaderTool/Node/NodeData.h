@@ -203,6 +203,7 @@ namespace	epion::NodeCustom
 	{
 	public:
 		NodeBase();
+		NodeBase(int inputs_count, int outputs_count);
 		NodeBase(std::string name, int id, const math::FVector2& pos, int inputs_count, int outputs_count);
 
 		void	Update(ImVec2& offset, ImDrawList*	draw_list);
@@ -257,8 +258,8 @@ namespace	epion::NodeCustom
 				CEREAL_NVP(m_dynamic_slot_type),
 				//CEREAL_NVP(m_input_name),
 				//CEREAL_NVP(m_output_name),
-				CEREAL_NVP(m_inputs_count),
-				CEREAL_NVP(m_outputs_count),
+				//CEREAL_NVP(m_inputs_count),
+				//CEREAL_NVP(m_outputs_count),
 				CEREAL_NVP(m_function_call_str));
 		}
 

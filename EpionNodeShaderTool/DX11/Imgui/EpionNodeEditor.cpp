@@ -2,7 +2,6 @@
 #include <cereal/cereal.hpp>
 #include <cereal/archives/json.hpp>
 #include <cereal/types/vector.hpp>
-#include <cereal/types/boost_variant.hpp>
 
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_impl_win32.h"
@@ -64,10 +63,6 @@ namespace
 	constexpr	float	NODE_SLOT_RADIUS	=5.0f;
 	const	ImVec2	NODE_WINDOW_PADDING(165.0f, 165.0f);
 	const	ImVec2	NODE_FONT_POS(64.0f, 10.0f);
-
-
-	//ImU32	LEFT_RECT_COLOR = IM_COL32(120, 120, 120, 200);
-	//ImU32	RIGHT_RECT_COLOR = IM_COL32(60, 60, 60, 200);
 
 	ImU32	NODE_LINE_COLOR	= IM_COL32(0, 150, 250, 250);
 
@@ -305,7 +300,6 @@ namespace	epion::NodeCustom
 		//if (!m_is_node_import)
 		//{
 			//nodes.resize(100);
-			//links.resize(100);
 
 			nodes.clear();
 			links.clear();
@@ -314,18 +308,6 @@ namespace	epion::NodeCustom
 
 			json_file.input(nodejson, nodes, links);
 
-			//nodes.push_back(std::make_unique<UnlitMasterNode>(nodes.size(), math::FVector2(100, 50)));
-			//nodes.push_back(std::make_unique<VoronoiNode>(nodes.size(), math::FVector2(100, 100)));
-			//nodes.push_back(std::make_unique<VoronoiNode>(nodes.size(), math::FVector2(100, 100)));
-
-			//nodes.push_back(std::make_unique<ColorNode>(nodes.size(), math::FVector2(40, 400)));
-			//nodes.push_back(std::make_unique<LerpNode>(nodes.size(), math::FVector2(400, 400)));
-
-			//////nodes.push_back(std::make_unique<VoronoiNode>(nodes.size(), ImVec2(40, 50)));
-			//nodes.push_back(std::make_unique<LerpNode>(nodes.size(), math::FVector2(400, 200)));
-
-			//links.push_back(NodeLink(1, 0, 0, 2));
-		//}
 		//m_is_node_import = true;
 
 	}

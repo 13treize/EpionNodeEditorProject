@@ -20,6 +20,7 @@ namespace	epion::NodeCustom
 {
 #pragma region FBM
 	FBMNode::FBMNode()
+		:NodeBase(3, 1)
 	{
 		Init();
 	}
@@ -112,6 +113,7 @@ namespace	epion::NodeCustom
 
 #pragma region GradientNoise
 	GradientNoiseNode::GradientNoiseNode()
+		:NodeBase(2, 1)
 	{
 		Init();
 	}
@@ -195,6 +197,7 @@ namespace	epion::NodeCustom
 
 #pragma region SimpleNoise
 	SimpleNoiseNode::SimpleNoiseNode()
+		:NodeBase(2, 1)
 	{
 		Init();
 	}
@@ -301,6 +304,7 @@ namespace	epion::NodeCustom
 #pragma region Voronoi
 
 	VoronoiNode::VoronoiNode()
+		:NodeBase( 3, 3)
 	{
 		Init();
 	}

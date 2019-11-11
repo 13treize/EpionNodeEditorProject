@@ -1,23 +1,13 @@
-#include	<fstream>
-#include	<sstream>
-
-#include	<string>
-#include	<vector>
-
-#include <boost/variant.hpp>
-
+#include	"../All.h"
 #include <cereal/cereal.hpp>
 #include <cereal/archives/json.hpp>
 #include <cereal/types/vector.hpp>
 #include <cereal/types/list.hpp>
-#include <cereal/types/boost_variant.hpp>
 #include <cereal/types/polymorphic.hpp>
 
 #include	"../Node/NodeData.h"
 
 #include	"Fileio_json.h"
-#include	"../Node/MasterNode.h"
-//#include	"../Node/ColorNode.h"
 
 
 

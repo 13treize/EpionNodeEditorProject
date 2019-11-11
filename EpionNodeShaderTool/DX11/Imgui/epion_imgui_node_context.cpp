@@ -114,10 +114,10 @@ namespace	epion::NodeCustom
 		InputContext();
 		master_context();
 		math_context();
-		procedura_context();
-		utility_context();
-		uv_context();
-		noise_context();
+		ProceduralContext();
+		UtilityContext();
+		UVContext();
+		NoiseContext();
 	}
 	void	ContextManager::DragAndDropEvent()
 	{
@@ -343,7 +343,7 @@ namespace	epion::NodeCustom
 
 	}
 
-	void	ContextManager::procedura_context()
+	void	ContextManager::ProceduralContext()
 	{
 		if (m_is_open_menu[Procedural])
 		{
@@ -364,12 +364,12 @@ namespace	epion::NodeCustom
 
 	}
 
-	void	ContextManager::utility_context()
+	void	ContextManager::UtilityContext()
 	{
 
 	}
 
-	void	ContextManager::uv_context()
+	void	ContextManager::UVContext()
 	{
 		if (m_is_open_menu[UV])
 		{
@@ -390,7 +390,7 @@ namespace	epion::NodeCustom
 
 	}
 
-	void	ContextManager::noise_context()
+	void	ContextManager::NoiseContext()
 	{
 		if (m_is_open_menu[Noise])
 		{
