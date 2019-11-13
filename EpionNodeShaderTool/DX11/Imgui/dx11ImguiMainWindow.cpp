@@ -22,10 +22,10 @@
 
 namespace
 {
-	ImGuiCond_	state_bar = ImGuiCond_::ImGuiCond_Appearing;
-	constexpr	int CHAR_SIZE = 256;
-	float a[4] = {};
+	//float a[4] = {};
 	bool is_tex;
+	std::string path = "GenerateNodeJson\\test.json";
+
 }
 
 
@@ -56,7 +56,6 @@ namespace	epion
 
 		char node_title_name[CHAR_MAX] = "";
 		char node_shader_name[CHAR_MAX] = "";
-		char import_json_name[CHAR_MAX] = "";
 
 		//(L"Assets//sa.jpg");
 
@@ -121,10 +120,9 @@ namespace	epion
 		//m_preview_resouce = std::make_unique<Texture>();
 		//m_preview_resouce->Create(400, 400, DXGI_FORMAT_R16G16B16A16_FLOAT);
 
-		m_impl->window_flags |= ImGuiWindowFlags_NoTitleBar;
-		m_impl->window_flags |= ImGuiWindowFlags_MenuBar;
-		m_impl->window_flags |= ImGuiWindowFlags_NoMove;
-		m_impl->window_flags |= ImGuiWindowFlags_NoResize;
+
+		ImGuiFunction::DefaultWindowFlagsSetiing(m_impl->window_flags);
+
 
 
 		TextureInit();
@@ -156,19 +154,16 @@ namespace	epion
 			Shader::NodeShaderManager::json_import("GenerateNodeJson\\test.json");
 
 			Shader::NodeShaderManager::generate("test.hlsl");
-
 		}
 
 
 		if (m_impl->is_update)
 		{
-			ImGui::SetNextWindowSize(ImVec2(500, 600), state_bar);
+			ImGui::SetNextWindowSize(ImVec2(500, 600), ImGuiCond_::ImGuiCond_Appearing);
 
 			ImGui::Begin("MainWindow", &m_impl->is_update, m_impl->window_flags);
 
 			auto&	io = ImGui::GetIO();
-			float my_tex_w = (float)io.Fonts->TexWidth;
-			float my_tex_h = (float)io.Fonts->TexHeight;
 			//ImGui::Image(m_impl->shader_resouce_view.Get(), ImVec2(512,512));
 
 			ImGui::Text("FPS: %.2f (%.2gms)", io.Framerate, io.Framerate ? 1000.0f / io.Framerate : 0.0f);
@@ -192,21 +187,23 @@ namespace	epion
 						//import jsonfile
 						if (ImGui::Button("Import"))
 						{
-							//std::string path = "GenarateNodeJson\\";
+							//std::string path = "GenerateNodeJson\\";
+							std::string path = "GenerateNodeJson\\test.json";
+							//path += import_json_name;
 							NodeCustom::NodeEditor::Clear();
 							NodeCustom::NodeEditor::Init();
 							//		NodeCustom::ContextManager::init();
-							std::string path = "GenerateNodeJson\\test.json";
 							NodeCustom::NodeEditor::import_node_data(path);
 						}
 						ImGui::SameLine();
-						ImGui::InputText("JsonName", m_impl->import_json_name, CHAR_MAX);
+						ImGui::InputText("JsonName", const_cast<char*>(import_json_name.c_str()), CHAR_MAX);
 
-						//nodeセーブ
+						ImGui::Text(import_json_name.c_str());
+
+						//Node情報をJsonに書き出し
 						if (ImGui::Button("SaveNodeData"))
 						{
-							m_impl->json_name = NodeCustom::NodeEditor::export_node_data();
-							//m_impl->is_node_export = true;
+							m_impl->json_name = NodeCustom::NodeEditor::ExportNodeData(path);
 						}
 
 

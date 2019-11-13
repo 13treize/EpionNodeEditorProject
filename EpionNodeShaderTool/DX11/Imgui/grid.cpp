@@ -30,7 +30,7 @@ namespace	epion::NodeCustom
 		m_grid_color = color;
 	}
 
-	void	Grids::show_grid(ImDrawList*	draw_list, const	ImVec2&	scroll)
+	void	Grids::ShowGrid(ImDrawList*	draw_list, const	ImVec2&	scroll)
 	{
 		if (m_is_show_grid)
 		{

@@ -108,12 +108,13 @@ namespace	epion
 		//コンスタントバッファ更新
 	//	auto size = sizeof(SquareVertex) * 4;
 
+				//vertex_shader->map_update(vertex_buffer->get_buffer_ptr(), v.data(), sizeof(SquareVertex) * 4);
+
 		D3D11_MAPPED_SUBRESOURCE	map_resouce = {};
 		Device::GetContext()->Map(vertex_buffer->get_buffer_ptr().Get(), 0, D3D11_MAP::D3D11_MAP_WRITE_DISCARD, 0, &map_resouce);
 		memcpy(map_resouce.pData, v.data(), sizeof(SquareVertex) * 4);
 		Device::GetContext()->Unmap(vertex_buffer->get_buffer_ptr().Get(), 0);
 
-		//vertex_shader->map_update(vertex_buffer->get_buffer_ptr(), v.data(), sizeof(SquareVertex) * 4);
 
 		vertex_buffer->set_state(stride, offset);
 		input_layout->set_state();

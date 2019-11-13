@@ -37,7 +37,7 @@ namespace	epion::NodeCustom
 
 	void FBMNode::Init()
 	{
-		m_uv = { 0, 0 };
+		m_uv = { 0.0f, 0.0f };
 		m_amplitude = 0.5f;
 		m_frequency = 2.0f;
 
@@ -51,6 +51,7 @@ namespace	epion::NodeCustom
 		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
+		m_node_type = NODE_TYPE::NORMAL;
 	}
 
 	void	FBMNode::Update(ImVec2 offset, ImDrawList*	draw_list)
@@ -125,7 +126,8 @@ namespace	epion::NodeCustom
 
 	void GradientNoiseNode::Init()
 	{
-		m_uv = { 0,0 };
+		m_uv = { 0.0f, 0.0f };
+		m_scale = 10.0f;
 		m_input_slot_type =
 		{
 			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR1,
@@ -205,7 +207,7 @@ namespace	epion::NodeCustom
 
 	void	SimpleNoiseNode::Init()
 	{
-		m_uv = { 0,0 };
+		m_uv = { 0.0f, 0.0f };
 		m_scale = 500.0f;
 		m_input_slot_type =
 		{
@@ -305,7 +307,7 @@ namespace	epion::NodeCustom
 
 	void	VoronoiNode::Init()
 	{
-		m_uv = { 0,0 };
+		m_uv = { 0.0f, 0.0f };
 		m_angleoffset = 1.0f;
 		m_celldensity = 1.0f;
 		m_input_name =

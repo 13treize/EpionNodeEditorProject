@@ -37,9 +37,7 @@ namespace	epion
 	}
 
 	void	ObjMesh::Render(const	DirectX::XMFLOAT4X4	&world_view_projection,
-		const	DirectX::XMFLOAT4X4	&world,
-		const	math::FVector4		&light_direction,
-		const	Color				&material_color)
+		const	DirectX::XMFLOAT4X4	&world)
 	{
 		unsigned	int	stride = sizeof(obj_vertex);
 		unsigned	int	offset = 0;
@@ -58,8 +56,6 @@ namespace	epion
 			Device::GetContext()->Map(constant_buffer.get_buffer_ptr().Get(), 0, D3D11_MAP::D3D11_MAP_WRITE_DISCARD, 0, &mapped_buffer);
 
 			constant_buffer_3d	*data = static_cast<constant_buffer_3d*>(mapped_buffer.pData);
-			data->light_direction = light_direction;
-			data->material_color = material_color;
 			DirectX::XMStoreFloat4x4(&data->world_view_projection, DirectX::XMLoadFloat4x4(&coordinate_conversion)	*DirectX::XMLoadFloat4x4(&world_view_projection));
 			DirectX::XMStoreFloat4x4(&data->world, DirectX::XMLoadFloat4x4(&coordinate_conversion)	*DirectX::XMLoadFloat4x4(&world));
 

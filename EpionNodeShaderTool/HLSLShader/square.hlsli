@@ -1,6 +1,6 @@
 struct VS_INPUT
 {
-    float4 position : POSITION0;
+    float4 position : POSITION;
     float2 uv : UV0;
     float4 color : COLOR0;
 };
@@ -8,7 +8,7 @@ struct VS_INPUT
 struct PSInput
 {
     float4 position : SV_POSITION;
-    float2 uv : UV0;
+    float2 uv : TEXCOORD0;
     float4 color : COLOR0;
 };
 //cbuffer Buffers : register(b0)

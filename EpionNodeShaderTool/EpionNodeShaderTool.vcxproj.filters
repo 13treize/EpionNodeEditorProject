@@ -121,6 +121,12 @@
     <Filter Include="ヘッダー ファイル\epion_string">
       <UniqueIdentifier>{afacaa0b-d83a-42a9-bb3d-4b0024e7a3f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Scene">
+      <UniqueIdentifier>{7a4130d6-34b8-4890-b34c-ee2730f4c84f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene">
+      <UniqueIdentifier>{1bf58235-2da6-4bf8-bc28-239474f43d4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Winmain.cpp">
@@ -305,6 +311,12 @@
     </ClCompile>
     <ClCompile Include="epion_string\epion_string.cpp">
       <Filter>ソース ファイル\epion_string</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneManager.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneDemo2D.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -523,6 +535,12 @@
     </ClInclude>
     <ClInclude Include="epion_string\epion_string.h">
       <Filter>ヘッダー ファイル\epion_string</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneManager.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneDemo2D.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

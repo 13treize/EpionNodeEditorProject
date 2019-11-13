@@ -14,6 +14,7 @@ namespace	epion
 	class ImGuiFunction
 	{
 	public:
+		static void DefaultWindowFlagsSetiing(ImGuiWindowFlags& window_flags);
 
 	};
 
@@ -87,4 +88,12 @@ namespace	epion
 	public:
 		static void ShowExampleAppMain();
 	};
+
+	class PopUp final
+	{
+	public:
+		static void Init();
+		static void Update(bool is_popup);
+	};
+
 }

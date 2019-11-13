@@ -2,6 +2,7 @@
 #include <cereal/cereal.hpp>
 #include <cereal/archives/json.hpp>
 #include <cereal/types/vector.hpp>
+#include <cereal/types/list.hpp>
 
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_impl_win32.h"
@@ -149,8 +150,6 @@ namespace	epion::NodeCustom
 					}
 					ImGui::TreePop();
 				}
-				static int mode = 1;
-
 
 				if (ImGui::TreeNode("NodeItem"))
 				{
@@ -208,7 +207,7 @@ namespace	epion::NodeCustom
 
 		// Display grid
 		Grids	grid(64.0f, ImGui::GetCursorScreenPos(), ImGui::GetWindowSize(), IM_COL32(0, 200, 120, 120));
-		grid.show_grid(draw_list,m_scrolling);
+		grid.ShowGrid(draw_list,m_scrolling);
 
 		// Display links
 		draw_node_line(draw_list);
@@ -303,7 +302,7 @@ namespace	epion::NodeCustom
 
 			epion::FileIO::FileIOJson	json_file;
 
-			json_file.input(nodejson, nodes, links);
+			json_file.Input(nodejson, nodes, links);
 
 		//m_is_node_import = true;
 
@@ -315,10 +314,10 @@ namespace	epion::NodeCustom
 		links.clear();
 		nodes.push_back(std::make_unique<UnlitMasterNode>(nodes.size(), math::FVector2(500, 50)));
 	}
-	std::string	NodeEditor::export_node_data()
+	std::string	NodeEditor::ExportNodeData(const std::string& json_name)
 	{
 		epion::FileIO::FileIOJson	json_file;
-		json_file.output(name,	nodes,	links);
+		json_file.Output(json_name,	nodes,	links);
 		return name;
 	}
 
@@ -337,23 +336,44 @@ namespace	epion::NodeCustom
 			left_pos.y += 10.0f;
 			right_pos.y += 10.0f;
 
-			if (physics::Collider2D::LineCircle(::getFVec2(left_pos), ::getFVec2(right_pos), ::getFVec2(ImGui::GetIO().MousePos), 3.0f))
+			if (physics::Collider2D::LineCircle(::getFVec2(left_pos), ::getFVec2(right_pos), ::getFVec2(ImGui::GetIO().MousePos), 5.0f))
 			{
 				m_line_size = 10.0f;
+				if (ImGui::IsMouseClicked(1))
+				{
+					l.m_is_delete = true;
+				}
 				l.m_is_hit = true;
 			}
 			else
 			{
 				m_line_size = 3.0f;
+				l.m_is_delete = false;
 				l.m_is_hit = false;
-			}
-			if (l.m_is_hit	&&ImGui::IsMouseDown(0))
-			{
-				l.m_is_delete = true;
 			}
 
 			draw_list->AddBezierCurve(left_pos, left_pos /*+ ImVec2(+50, 0)*/, right_pos /*+ ImVec2(-50, 0)*/, right_pos, NODE_LINE_COLOR, m_line_size);
 		}
+
+
+		for (int i = 0; i < links.size(); i++)
+		{
+			if(links[i].m_is_delete)
+			{
+				ImGui::OpenPopup("context_menu");
+				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 12));
+				if (ImGui::BeginPopup("context_menu"))
+				{
+					if (ImGui::MenuItem("Delete", nullptr))
+					{
+						links.erase(links.begin() + i);
+					}
+					ImGui::EndPopup();
+				}
+				ImGui::PopStyleVar();
+			}
+		}
+
 
 		for (auto& l : links)
 		{

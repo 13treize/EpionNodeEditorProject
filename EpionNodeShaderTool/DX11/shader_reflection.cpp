@@ -145,7 +145,7 @@ namespace	epion
 		// 先頭がアンダースコアでない場合スロット指定がないものとしてスロット0
 		if (semantic_name[0] != '_') return slot;
 
-		int nameSize = semantic_name.size();
+		int nameSize = static_cast<int>(semantic_name.size());
 		for (int i = 0; i < nameSize; i++)
 		{
 			// 2つ目のアンダースコアを確認する

@@ -33,8 +33,6 @@ namespace	epion
 		void	SetState();
 		com_ptr<ID3D11VertexShader>&	GetVS()	noexcept;
 
-		void	map_update_begin(com_ptr<ID3D11Buffer>	&buffer_, D3D11_MAPPED_SUBRESOURCE	&resourse_);
-		void	map_update_end(com_ptr<ID3D11Buffer>	&buffer_);
 
 	private:
 		com_ptr<ID3D11VertexShader>	m_vs;

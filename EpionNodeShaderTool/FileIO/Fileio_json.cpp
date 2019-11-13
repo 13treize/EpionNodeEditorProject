@@ -44,7 +44,7 @@ void serialize(Archive & archive, ImVec2 &vector)
 namespace	epion::FileIO
 {
 
-	void	FileIOJson::input(
+	void	FileIOJson::Input(
 		std::string&	path,
 		std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>& node_base,
 		std::vector<epion::NodeCustom::NodeLink>&	node_link)
@@ -61,7 +61,7 @@ namespace	epion::FileIO
 
 	}
 
-	void	FileIOJson::output(	std::string&	path,
+	void	FileIOJson::Output(	const std::string&	path,
 								const std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>& node_base,
 								const std::vector<epion::NodeCustom::NodeLink>&	node_link)
 	{
@@ -81,4 +81,40 @@ namespace	epion::FileIO
 		ofs.close();
 	}
 
+	void	FileIOJson::Input(
+		std::string&	path,
+		std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>& node_base,
+		std::list<epion::NodeCustom::NodeLink>&	node_link)
+	{
+		std::ifstream	ifs(path, std::ios::in);
+		std::stringstream	stream;
+		stream << ifs.rdbuf();
+		cereal::JSONInputArchive	i_archive(stream);
+
+		i_archive(cereal::make_nvp("node_param", node_base));
+
+		i_archive(cereal::make_nvp("link_param", node_link));
+		ifs.close();
+
+	}
+
+	void	FileIOJson::Output(const std::string&	path,
+		const std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>& node_base,
+		const std::list<epion::NodeCustom::NodeLink>&	node_link)
+	{
+		FileIOStates	output_node_data;
+
+		std::ofstream		ofs(path);
+		std::stringstream	stream;
+
+		{
+			cereal::JSONOutputArchive	o_archive(stream);
+			//o_archive(cereal::make_nvp("node_param", output_node_data.nodes));
+
+			o_archive(cereal::make_nvp("node_param", node_base));
+			o_archive(cereal::make_nvp("link_param", node_link));
+		}
+		ofs << stream.str();
+		ofs.close();
+	}
 }

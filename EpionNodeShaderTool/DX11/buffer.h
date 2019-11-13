@@ -64,8 +64,6 @@ namespace	epion
 	{
 		DirectX::XMFLOAT4X4	world_view_projection;
 		DirectX::XMFLOAT4X4	world;
-		Color				material_color;
-		math::FVector4		light_direction;
 	};
 
 	class	VertexBuffer	final

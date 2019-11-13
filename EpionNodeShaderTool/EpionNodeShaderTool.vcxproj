@@ -194,6 +194,8 @@
     <ClCompile Include="Node\TextureNode.cpp" />
     <ClCompile Include="Node\UVNode.cpp" />
     <ClCompile Include="Node\NoiseNode.cpp" />
+    <ClCompile Include="Scene\SceneDemo2D.cpp" />
+    <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="ShaderGenerate\ShaderGenerate.cpp" />
     <ClCompile Include="Winmain.cpp" />
     <ClCompile Include="win_core.cpp" />
@@ -269,6 +271,8 @@
     <ClInclude Include="Node\TextureNode.h" />
     <ClInclude Include="Node\UVNode.h" />
     <ClInclude Include="Node\NoiseNode.h" />
+    <ClInclude Include="Scene\SceneDemo2D.h" />
+    <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="ShaderGenerate\ShaderGenerate.h" />
     <ClInclude Include="win_core.h" />
   </ItemGroup>

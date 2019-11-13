@@ -20,11 +20,14 @@ namespace	epion::Shader
 		static	std::string	create();
 
 		static	std::string	CBuffer0SetUp();
+		static	std::string	CBuffer1SetUp();
+		static	std::string	CBuffer2SetUp();
+		static	std::string	CBuffer3SetUp();
 
 		//定数バッファ生成
 		static	std::string	CBuffer0Create();
 
-		static	void	node_create();
+		static	void	NodeCreate();
 
 		static	void	preview_create();
 
@@ -64,9 +67,7 @@ namespace	epion::Shader
 		static	std::string	event_end2();
 		static	std::string	PSInputGenerate();
 		static	std::string	MainFunctionBegin();
-		static	std::string	floatGenerate(std::string	var_str, std::string	init_str);
 
-		static	std::string	float4Generate(std::string	var_str, std::string	init_str);
 		static	std::string	float4Generate2(std::string	var_str, std::string	init_str);
 
 		static	std::string	ReturnEvent(std::string retuern_color_str);

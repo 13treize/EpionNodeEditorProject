@@ -143,7 +143,7 @@ namespace	epion::math
 			this->z	=_z;
 			return	*this;
 		}
-		Vector3&	set_xyz(T	_x,	T	_y,	T	_z)
+		Vector3&	SetXYZ(T	_x,	T	_y,	T	_z)
 		{
 			this->x	=_x;
 			this->y	=_y;

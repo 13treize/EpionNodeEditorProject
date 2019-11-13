@@ -1,4 +1,4 @@
-#include	<array>
+#include	"All.h"
 #include	"epion.h"
 #include	"Dx11//dx11_device.h"
 #include	"Dx11//dx11_dxgi.h"
@@ -7,6 +7,7 @@
 #include	"Dx11//Imgui//dx11_imgui_manager.h"
 #include	"Dx11//Imgui//dx11_imgui_main_window.h"
 
+#include	"Scene/SceneManager.h"
 #include	"Framework.h"
 
 #include	"DX11/blender.h"
@@ -44,10 +45,13 @@ namespace	epion
 
 	void	FrameWork::Update()
 	{
+		SceneManager::ChangeScene();
 
 		ImguiManager::begin();
 		ImguiMain::get_inst().Update();
 		CameraManager::Update();
+
+		SceneManager::Update();
 
 		blender->set_state(BS_ALPHA);
 		rasterizer->set_state(RASTER_STATE::SOLID);
@@ -60,6 +64,7 @@ namespace	epion
 			{0.0f,0.0f,0.0f,0.0f}
 		};
 		Dxgi::begin(back_color);
+		SceneManager::Render();
 
 		ImguiMain::get_inst().Render();
 

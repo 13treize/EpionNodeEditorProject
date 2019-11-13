@@ -8,9 +8,12 @@
 #include	"grid.h"
 #include	"../../Node/NodeData.h"
 #include	"epion_imgui_node_context.h"
+#include	"../../Node/ChannelNode.h"
+
 #include	"../../Node/NoiseNode.h"
 #include	"../../Node/MasterNode.h"
 #include	"../../Node/PBRNode.h"
+
 
 #include	"../../Node//ProceduralNode.h"
 
@@ -110,10 +113,10 @@ namespace	epion::NodeCustom
 
 		click_add();
 		artistic_context();
-		channel_context();
+		ChannelContext();
 		InputContext();
 		master_context();
-		math_context();
+		MathContext();
 		ProceduralContext();
 		UtilityContext();
 		UVContext();
@@ -192,9 +195,19 @@ namespace	epion::NodeCustom
 	{
 
 	}
-	void	ContextManager::channel_context()
+	void	ContextManager::ChannelContext()
 	{
-
+		if (m_is_open_menu[Channel])
+		{
+			ImGui::OpenPopup("ChannelMenu");
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
+			if (ImGui::BeginPopup("ChannelMenu"))
+			{
+				MenuCreateNode<CombineNode>("Combine", m_offfset, m_create_count, m_is_open_menu[Channel]);
+			}
+			ImGui::PopStyleVar();
+			ImGui::EndPopup();
+		}
 	}
 
 	void	ContextManager::InputContext()
@@ -270,7 +283,7 @@ namespace	epion::NodeCustom
 		}
 	}
 
-	void	ContextManager::math_context()
+	void	ContextManager::MathContext()
 	{
 		if (m_is_open_menu[Math])
 		{

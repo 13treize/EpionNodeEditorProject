@@ -1,0 +1,462 @@
+{
+    "node_param": [
+        {
+            "polymorphic_id": 2147483649,
+            "polymorphic_name": "epion::NodeCustom::UnlitMasterNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Unlit Master",
+                        "m_ID": 0,
+                        "m_Pos": {
+                            "x": 1079,
+                            "y": 149
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Multiply_float3_out2,1.000000,0.000000);\n"
+                    },
+                    "Pos": {
+                        "cereal_class_version": 0,
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "color": {
+                        "cereal_class_version": 0,
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "Alpha": 1,
+                    "AlphaChipThreshold": 0
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483650,
+            "polymorphic_name": "epion::NodeCustom::ColorNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Color",
+                        "m_ID": 1,
+                        "m_Pos": {
+                            "x": 708,
+                            "y": 88
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float3 Color_out1=Vector3_out10;\n"
+                    },
+                    "m_color": {
+                        "x": 0.082000002264976501,
+                        "y": 0.81656801700592041,
+                        "z": 0
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483651,
+            "polymorphic_name": "epion::NodeCustom::MultiplyNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Multiply_float3",
+                        "m_ID": 2,
+                        "m_Pos": {
+                            "x": 859,
+                            "y": 161
+                        },
+                        "m_dynamic_slot_type": 3,
+                        "m_function_call_str": "    float3 Multiply_float3_out2;\n    Multiply_float3(Color_out1,Multiply_float_out3,Multiply_float3_out2);\n"
+                    },
+                    "A": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "B": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 3,
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Multiply_float",
+                        "m_ID": 3,
+                        "m_Pos": {
+                            "x": 680,
+                            "y": 248
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float Multiply_float_out3;\n    Multiply_float(GradientNoise_out4,Power_float_out7,Multiply_float_out3);\n"
+                    },
+                    "A": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "B": {
+                        "x": 1,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483652,
+            "polymorphic_name": "epion::NodeCustom::GradientNoiseNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "GradientNoise",
+                        "m_ID": 4,
+                        "m_Pos": {
+                            "x": 509,
+                            "y": 100
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float GradientNoise_out4;\n    GradientNoise(TilingAndOffset_out5,5.000000,GradientNoise_out4);\n"
+                    },
+                    "m_uv": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "m_scale": 5
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483653,
+            "polymorphic_name": "epion::NodeCustom::TilingAndOffsetNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "TilingAndOffset",
+                        "m_ID": 5,
+                        "m_Pos": {
+                            "x": 266,
+                            "y": 73
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float2 TilingAndOffset_out5;\n    TilingAndOffset(input.uv,float2(1.000000,1.000000),Time_,TilingAndOffset_out5);\n"
+                    },
+                    "m_uv": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "Tiling": {
+                        "x": 1,
+                        "y": 1
+                    },
+                    "Offset": {
+                        "x": 0,
+                        "y": 0
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483654,
+            "polymorphic_name": "epion::NodeCustom::TimeNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "TimeNode",
+                        "m_ID": 6,
+                        "m_Pos": {
+                            "x": -252,
+                            "y": 189
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": ""
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483655,
+            "polymorphic_name": "epion::NodeCustom::PowerNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Power_float",
+                        "m_ID": 7,
+                        "m_Pos": {
+                            "x": 493,
+                            "y": 314
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float Power_float_out7;\n    Power_float(VoronoiOut_out8,0.000000,Power_float_out7);\n"
+                    },
+                    "A": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "B": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483656,
+            "polymorphic_name": "epion::NodeCustom::VoronoiNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Voronoi",
+                        "m_ID": 8,
+                        "m_Pos": {
+                            "x": 250,
+                            "y": 347
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float VoronoiOut_out8;\n    float VoronoiCell_out8;\n    float VoronoiLine_out8;\n    Voronoi(TilingAndOffset_out9,2.000000,1.000000,VoronoiOut_out8,VoronoiCell_out8,VoronoiLine_out8);\n"
+                    },
+                    "m_uv": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "m_angleoffset": 2,
+                    "m_celldensity": 1
+                }
+            }
+        },
+        {
+            "polymorphic_id": 5,
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "TilingAndOffset",
+                        "m_ID": 9,
+                        "m_Pos": {
+                            "x": 32,
+                            "y": 288
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float2 TilingAndOffset_out9;\n    TilingAndOffset(input.uv,float2(1.000000,1.000000),Time_,TilingAndOffset_out9);\n"
+                    },
+                    "m_uv": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "Tiling": {
+                        "x": 1,
+                        "y": 1
+                    },
+                    "Offset": {
+                        "x": 0,
+                        "y": 0
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483657,
+            "polymorphic_name": "epion::NodeCustom::Vector3Node",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Vector3",
+                        "m_ID": 10,
+                        "m_Pos": {
+                            "x": 455,
+                            "y": -101
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float3 Vector3_out10=float3(Add_float_out12,0.600000,0.000000);\n"
+                    },
+                    "m_num": {
+                        "x": 1.7000000476837158,
+                        "y": 0.60000002384185791,
+                        "z": 0
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 6,
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "TimeNode",
+                        "m_ID": 11,
+                        "m_Pos": {
+                            "x": 3,
+                            "y": -246
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": ""
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483658,
+            "polymorphic_name": "epion::NodeCustom::AddNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Add_float",
+                        "m_ID": 12,
+                        "m_Pos": {
+                            "x": 220,
+                            "y": -120
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float Add_float_out12;\n    Add_float(Sin_Time_,1.300000,Add_float_out12);\n"
+                    },
+                    "A": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "B": {
+                        "x": 1.2999999523162842,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    }
+                }
+            }
+        }
+    ],
+    "link_param": [
+        {
+            "m_input.id": 2,
+            "m_input.slot": 0,
+            "m_input_type": 1,
+            "m_output.id": 1,
+            "m_output.slot": 0,
+            "m_output_type": 3
+        },
+        {
+            "m_input.id": 0,
+            "m_input.slot": 1,
+            "m_input_type": 10,
+            "m_output.id": 2,
+            "m_output.slot": 0,
+            "m_output_type": 3
+        },
+        {
+            "m_input.id": 2,
+            "m_input.slot": 1,
+            "m_input_type": 1,
+            "m_output.id": 3,
+            "m_output.slot": 0,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 3,
+            "m_input.slot": 0,
+            "m_input_type": 1,
+            "m_output.id": 4,
+            "m_output.slot": 0,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 4,
+            "m_input.slot": 0,
+            "m_input_type": 9,
+            "m_output.id": 5,
+            "m_output.slot": 0,
+            "m_output_type": 2
+        },
+        {
+            "m_input.id": 5,
+            "m_input.slot": 2,
+            "m_input_type": 2,
+            "m_output.id": 6,
+            "m_output.slot": 0,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 3,
+            "m_input.slot": 1,
+            "m_input_type": 1,
+            "m_output.id": 7,
+            "m_output.slot": 0,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 7,
+            "m_input.slot": 0,
+            "m_input_type": 1,
+            "m_output.id": 8,
+            "m_output.slot": 0,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 9,
+            "m_input.slot": 2,
+            "m_input_type": 2,
+            "m_output.id": 6,
+            "m_output.slot": 0,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 8,
+            "m_input.slot": 0,
+            "m_input_type": 9,
+            "m_output.id": 9,
+            "m_output.slot": 0,
+            "m_output_type": 2
+        },
+        {
+            "m_input.id": 1,
+            "m_input.slot": 0,
+            "m_input_type": 10,
+            "m_output.id": 10,
+            "m_output.slot": 0,
+            "m_output_type": 3
+        },
+        {
+            "m_input.id": 12,
+            "m_input.slot": 0,
+            "m_input_type": 1,
+            "m_output.id": 11,
+            "m_output.slot": 1,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 10,
+            "m_input.slot": 0,
+            "m_input_type": 1,
+            "m_output.id": 12,
+            "m_output.slot": 0,
+            "m_output_type": 1
+        }
+    ]
+}

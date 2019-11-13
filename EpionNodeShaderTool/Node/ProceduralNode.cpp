@@ -9,7 +9,6 @@
 
 namespace
 {
-	const ImVec2	size(0, 0);
 }
 
 CEREAL_REGISTER_TYPE(epion::NodeCustom::CheckerboardNode)
@@ -39,10 +38,10 @@ namespace	epion::NodeCustom
 	}
 	void CheckerboardNode::Init()
 	{
-		m_uv = { 0,0 };
-		m_colora = { 0,0,0 };
-		m_colorb = { 1,1,1 };
-		m_frequency = { 1, 1 };
+		m_uv = { 0.0f, 0.0f };
+		m_colora = { 0.0f, 0.0f, 0.0f };
+		m_colorb = { 1.0f, 1.0f,1.0f };
+		m_frequency = { 1.0f, 1.0f };
 
 		m_input_slot_type =
 		{
@@ -123,7 +122,7 @@ namespace	epion::NodeCustom
 
 	void	EllipseNode::Init()
 	{
-		m_uv = { 0,0 };
+		m_uv = { 0.0f,0.0f };
 		m_width = 1.0f;
 		m_height = 1.0f;
 
@@ -197,7 +196,7 @@ namespace	epion::NodeCustom
 
 	void	HexagonNode::Init()
 	{
-		m_uv = { 0,0 };
+		m_uv = { 0.0f, 0.0f };
 		m_scale = 1.0f;
 		m_input_slot_type =
 		{
@@ -292,7 +291,7 @@ namespace	epion::NodeCustom
 
 	void	PolygonNode::Init()
 	{
-		m_uv = { 0,0 };
+		m_uv = { 0.0f, 0.0f};
 		m_sides = 4.0f;
 		m_width = 1.0f;
 		m_height = 1.0f;
@@ -370,10 +369,10 @@ namespace	epion::NodeCustom
 
 	void	RippleNode::Init()
 	{
-		m_uv = { 0,0 };
+		m_uv = { 0.0f ,0.0f };
 		m_width = 1.0f;
 		m_height = 1.0f;
-		m_center = { 0,0 };
+		m_center = { 0.0f, 0.0f };
 		m_scale = 1.0f;
 
 		m_input_slot_type =
@@ -446,7 +445,7 @@ namespace	epion::NodeCustom
 
 	void	RoundedRectangleNode::Init()
 	{
-		m_uv = { 0,0 };
+		m_uv = { 0.0f ,0.0f };
 		m_width = 1.0f;
 		m_height = 1.0f;
 		m_radius = 1.0f;

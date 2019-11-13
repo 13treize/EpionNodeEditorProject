@@ -50,7 +50,7 @@ namespace	epion::NodeCustom
 
 		static	void	constant_state_update();
 
-		static	std::string	export_node_data();
+		static	std::string	ExportNodeData(const std::string& json_name);
 
 		static	void	draw_node_line(ImDrawList*	draw_list);
 
@@ -70,6 +70,8 @@ namespace	epion::NodeCustom
 
 		static	std::vector<std::unique_ptr<NodeBase>>	nodes;
 
+
+		// listêÑèß
 		static	std::vector<NodeLink>	links;
 
 	private:

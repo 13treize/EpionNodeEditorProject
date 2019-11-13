@@ -13,8 +13,16 @@ namespace epion
 	ImVec4	ColorPicker::m_backup_color;
 	ImVec4	ColorPicker::m_color;
 	math::FVector3	ColorPicker::m_ret_color;
+	
+	void ImGuiFunction::DefaultWindowFlagsSetiing(ImGuiWindowFlags& window_flags)
+	{
+		window_flags |= ImGuiWindowFlags_NoTitleBar;
+		window_flags |= ImGuiWindowFlags_MenuBar;
+		window_flags |= ImGuiWindowFlags_NoMove;
+		window_flags |= ImGuiWindowFlags_NoResize;
+	}
 
-	void  MenuBar::ShowExampleAppMain()
+	void MenuBar::ShowExampleAppMain()
 	{
 		if (ImGui::BeginMainMenuBar())
 		{

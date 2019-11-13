@@ -56,7 +56,12 @@ namespace	epion::Shader
 		std::ofstream	ofs(file_path);
 		Init();
 		ofs << PSInputGenerate();
+		//‰½‚©‚µ‚ç‚Å§Œä
 		ofs << CBuffer0SetUp();
+		ofs << CBuffer1SetUp();
+		ofs << CBuffer2SetUp();
+		ofs << CBuffer3SetUp();
+
 		ofs << func_setup();
 		ofs << MainFunctionBegin();
 		ofs << event_begin();
@@ -91,8 +96,38 @@ namespace	epion::Shader
 			"    float2 ScreenSize;\n"
 			"    float2 Dummy0;\n"
 			"};\n";
+	}
+	std::string	NodeShaderManager::CBuffer1SetUp()
+	{
+		return
+			"cbuffer LightCBuffer : register(b1)\n"
+			"{\n"
+			"    float4 LightColor;\n"
+			"    float4 LightDir;\n"
+			"    float4 AmbientColor;\n"
+			"};\n";
+	}
+	std::string	NodeShaderManager::CBuffer2SetUp()
+	{
+		return
+			"cbuffer CameraCBuffer : register(b2)\n"
+			"{\n"
+			"    float4 Pos;\n"
+			"    float4 Target;\n"
+			"    float4 Up;\n"
+			"};\n";
 
 	}
+	std::string	NodeShaderManager::CBuffer3SetUp()
+	{
+		return
+			"cbuffer WorldCBuffer : register(b3)\n"
+			"{\n"
+			"    row_major float4x4 WorldViewProjection;\n"
+			"    row_major float4x4 World;\n"
+			"};\n";
+	}
+
 
 	std::string	NodeShaderManager::CBuffer0Create()
 	{
@@ -102,7 +137,7 @@ namespace	epion::Shader
 			"    float Cos_Time_ =cos(Time.x);\n";
 	}
 
-	void	NodeShaderManager::node_create()
+	void	NodeShaderManager::NodeCreate()
 	{
 		counts++;
 		get_id.clear();
@@ -130,7 +165,7 @@ namespace	epion::Shader
 
 		if (!current_id.empty())
 		{
-			node_create();
+			NodeCreate();
 		}
 		return;
 	}
@@ -151,13 +186,12 @@ namespace	epion::Shader
 			}
 		}
 
-		node_create();
+		NodeCreate();
 
 		for (const auto&c : create_str)
 		{
 			ret_str += c;
 		}
-		//return
 
 		ret_str += ReturnEvent("flag_color");
 		return	ret_str;
@@ -209,13 +243,12 @@ namespace	epion::Shader
 	void	NodeShaderManager::json_import(std::string	path)
 	{
 		epion::FileIO::FileIOJson	json_file;
-		json_file.input(path, nodes, links);
+		json_file.Input(path, nodes, links);
 	}
 
 
 	std::string	NodeShaderManager::call_uv()
 	{
-
 		return	"input.uv";
 	}
 
@@ -257,7 +290,7 @@ namespace	epion::Shader
 		ret_str = "struct PSInput\n";
 		ret_str += event_begin();
 		ret_str += space + "float4 position : SV_POSITION;\n";
-		ret_str += space + "float2 uv : UV0;\n";
+		ret_str += space + "float2 uv : TEXCOORD0;\n";
 		ret_str += space + "float4 color : COLOR0;\n";
 		ret_str += event_end2();
 		return	ret_str;
@@ -270,17 +303,6 @@ namespace	epion::Shader
 		return	function_name;
 	}
 
-	std::string	NodeShaderManager::floatGenerate(std::string	var_str, std::string	init_str)
-	{
-		std::string	ret_str = space + "float " + var_str + init_str + ";\n";
-		return	ret_str;
-	}
-
-	std::string	NodeShaderManager::float4Generate(std::string	var_str, std::string	init_str)
-	{
-		std::string	ret_str = space + "float4 " + var_str + init_str + ";\n";
-		return	ret_str;
-	}
 	std::string	NodeShaderManager::float4Generate2(std::string	var_str, std::string	init_str)
 	{
 		std::string	ret_str = space + "float4 " + var_str + init_str;

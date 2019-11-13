@@ -13,8 +13,7 @@ namespace	epion
 		void	Update();
 		void	Render(
 			const	DirectX::XMFLOAT4X4& view,
-			const	DirectX::XMFLOAT4X4& projection,
-			const	math::FVector4&light);
+			const	DirectX::XMFLOAT4X4& projection);
 
 		//setä÷êî
 		void	set_pos(math::FVector3&	pos_);

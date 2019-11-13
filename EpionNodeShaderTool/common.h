@@ -42,5 +42,9 @@ namespace	epion
 
 	template<class	T>
 	using	com_ptr = Microsoft::WRL::ComPtr<T>;
+
+	//’è”
+	constexpr	int CHAR_SIZE = 256;
+
 };
 

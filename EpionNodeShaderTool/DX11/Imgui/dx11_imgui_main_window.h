@@ -44,6 +44,7 @@ namespace	epion
 
 		void	PreviewEvent();
 
+		std::string import_json_name;
 
 		//std::unique_ptr<Texture> m_preview_resouce;
 		bool	is_reset;

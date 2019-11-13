@@ -20,24 +20,23 @@ namespace	epion
 
 		~ObjMesh() {};
 		void Render(const DirectX::XMFLOAT4X4 &world_view_projection,
-			const DirectX::XMFLOAT4X4 &world,
-			const	math::FVector4 &light_direction,
-			const	Color&	material_color);
+			const DirectX::XMFLOAT4X4 &world);
 	private:
 		std::unique_ptr<ObjLoader>			obj_data;
 		std::unique_ptr<ObjMaterialLoader>	obj_mtl_data;
 
 		VertexShader		vertex_shader;
 		PixelShader			pixel_shader;
+		ConstantBuffer	constant_buffer;
+		Sampler			sampler;
+
 		ShaderReflection	shader_refrection;
 		InputLayout			input_layout;
 
 		VertexBuffer	vertex_buffer;
 		IndexBuffer		index_buffer;
-		ConstantBuffer	constant_buffer;
 
 		DepthStencil	depth_stencil;
-		Sampler			sampler;
 
 		//Texture			texture;
 		DirectX::XMFLOAT4X4	coordinate_conversion = { 1, 0, 0, 0,

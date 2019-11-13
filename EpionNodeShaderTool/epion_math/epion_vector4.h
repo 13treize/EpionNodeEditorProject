@@ -188,7 +188,7 @@ namespace	epion::math
 			return	*this;
 		}
 
-		Vector4&	set_xyz(T	_x, T	_y, T	_z)
+		Vector4&	SetXYZ(T	_x, T	_y, T	_z)
 		{
 			this->x = _x;
 			this->y = _y;

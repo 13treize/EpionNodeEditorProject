@@ -1,6 +1,13 @@
 #pragma once
 namespace	epion::NodeCustom
 {
+	/**
+	* @file MathBasicNode.h
+	* @brief Šî–{“I‚ÈŒvŽZ
+	* @author treize
+	* @date 2019/10/25
+	*/
+
 	class	AbsoluteNode	final :public NodeBase
 	{
 	public:

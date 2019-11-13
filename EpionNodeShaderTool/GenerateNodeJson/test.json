@@ -2,19 +2,67 @@
     "node_param": [
         {
             "polymorphic_id": 2147483649,
+            "polymorphic_name": "epion::NodeCustom::SimpleNoiseNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "SimpleNoise",
+                        "m_ID": 0,
+                        "m_Pos": {
+                            "x": 512,
+                            "y": 561
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float SimpleNoise_out0;\n    SimpleNoise(HexagonPos_out1,50.000000,SimpleNoise_out0);\n"
+                    },
+                    "m_uv": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "m_scale": 50
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483650,
+            "polymorphic_name": "epion::NodeCustom::HexagonNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Hexagon",
+                        "m_ID": 1,
+                        "m_Pos": {
+                            "x": 134,
+                            "y": 454
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float HexagonOut_out1;\n    float2 HexagonPos_out1;\n    float2 HexagonScale_out1;\n    float2 HexagonIndex_out1;\n    Hexagon(input.uv,10.000000,HexagonOut_out1,HexagonPos_out1,HexagonScale_out1,HexagonIndex_out1);\n"
+                    },
+                    "m_uv": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "m_scale": 10
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483651,
             "polymorphic_name": "epion::NodeCustom::UnlitMasterNode",
             "ptr_wrapper": {
                 "valid": 1,
                 "data": {
                     "value0": {
                         "m_Name": "Unlit Master",
-                        "m_ID": 0,
+                        "m_ID": 2,
                         "m_Pos": {
-                            "x": 740,
-                            "y": 314
+                            "x": 924,
+                            "y": 416
                         },
                         "m_dynamic_slot_type": 1,
-                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),SamplerTexture2D_out3.xyz,1.000000,0.000000);\n"
+                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),float3(1.000000,0.999990,0.999990),SimpleNoise_out0,0.000000);\n"
                     },
                     "Pos": {
                         "cereal_class_version": 0,
@@ -25,138 +73,32 @@
                     },
                     "color": {
                         "cereal_class_version": 0,
-                        "x": 0,
-                        "y": 0,
-                        "z": 0
+                        "x": 1,
+                        "y": 0.99998998641967773,
+                        "z": 0.99998998641967773
                     },
                     "Alpha": 1,
                     "AlphaChipThreshold": 0
-                }
-            }
-        },
-        {
-            "polymorphic_id": 2147483650,
-            "polymorphic_name": "epion::NodeCustom::TwirlNode",
-            "ptr_wrapper": {
-                "valid": 1,
-                "data": {
-                    "value0": {
-                        "m_Name": "Twirl",
-                        "m_ID": 1,
-                        "m_Pos": {
-                            "x": 80,
-                            "y": 165
-                        },
-                        "m_dynamic_slot_type": 1,
-                        "m_function_call_str": "    float2 Twirl_out1;\n    Twirl(input.uv,float2(0.500000,0.500000),0.000000,float2(0.000000,0.000000),Twirl_out1);\n"
-                    },
-                    "m_uv": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "Center": {
-                        "x": 0.5,
-                        "y": 0.5
-                    },
-                    "Strength": 0,
-                    "Offset": {
-                        "x": 0,
-                        "y": 0
-                    }
-                }
-            }
-        },
-        {
-            "polymorphic_id": 2147483651,
-            "polymorphic_name": "epion::NodeCustom::SamplerStateNode",
-            "ptr_wrapper": {
-                "valid": 1,
-                "data": {
-                    "value0": {
-                        "m_Name": "SamplerState",
-                        "m_ID": 2,
-                        "m_Pos": {
-                            "x": 426,
-                            "y": 620
-                        },
-                        "m_dynamic_slot_type": 1,
-                        "m_function_call_str": ""
-                    },
-                    "m_slot_no": 0
-                }
-            }
-        },
-        {
-            "polymorphic_id": 2147483652,
-            "polymorphic_name": "epion::NodeCustom::SamplerTexture2DNode",
-            "ptr_wrapper": {
-                "valid": 1,
-                "data": {
-                    "value0": {
-                        "m_Name": "SamplerTexture2D",
-                        "m_ID": 3,
-                        "m_Pos": {
-                            "x": 514,
-                            "y": 292
-                        },
-                        "m_dynamic_slot_type": 1,
-                        "m_function_call_str": "    float4 SamplerTexture2D_out3;\n    SamplerTexture2D(Twirl_out1,tex0,SamplerStates0,SamplerTexture2D_out3);\n"
-                    }
-                }
-            }
-        },
-        {
-            "polymorphic_id": 2147483653,
-            "polymorphic_name": "epion::NodeCustom::Texture2DNode",
-            "ptr_wrapper": {
-                "valid": 1,
-                "data": {
-                    "value0": {
-                        "m_Name": "Texture2D",
-                        "m_ID": 4,
-                        "m_Pos": {
-                            "x": 358,
-                            "y": 393
-                        },
-                        "m_dynamic_slot_type": 1,
-                        "m_function_call_str": ""
-                    }
                 }
             }
         }
     ],
     "link_param": [
         {
-            "m_input.id": 3,
-            "m_input.slot": 1,
-            "m_input_type": 6,
-            "m_output.id": 4,
-            "m_output.slot": 0,
-            "m_output_type": 6
-        },
-        {
-            "m_input.id": 3,
+            "m_input.id": 2,
             "m_input.slot": 2,
-            "m_input_type": 7,
-            "m_output.id": 2,
+            "m_input_type": 1,
+            "m_output.id": 0,
             "m_output.slot": 0,
-            "m_output_type": 7
-        },
-        {
-            "m_input.id": 3,
-            "m_input.slot": 0,
-            "m_input_type": 9,
-            "m_output.id": 1,
-            "m_output.slot": 0,
-            "m_output_type": 2
+            "m_output_type": 1
         },
         {
             "m_input.id": 0,
-            "m_input.slot": 1,
-            "m_input_type": 10,
-            "m_output.id": 3,
-            "m_output.slot": 0,
-            "m_output_type": 4
+            "m_input.slot": 0,
+            "m_input_type": 9,
+            "m_output.id": 1,
+            "m_output.slot": 1,
+            "m_output_type": 2
         }
     ]
 }

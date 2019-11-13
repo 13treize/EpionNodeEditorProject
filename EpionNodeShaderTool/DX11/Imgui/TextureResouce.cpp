@@ -32,7 +32,7 @@ namespace epion
 
 			if (m_tex_name.size() > m_tex_display_str.size())
 			{
-				m_tex_display_str.push_back("Texture Name" + StringConverter::get_space(m_tex_name.size()));
+				m_tex_display_str.push_back("Texture Name" + StringConverter::get_space(static_cast<int>(m_tex_name.size())));
 				m_tex_title.push_back("Slot " + std::to_string(m_tex_name.size() - 1));
 				m_is_tex.push_back(false);
 			}

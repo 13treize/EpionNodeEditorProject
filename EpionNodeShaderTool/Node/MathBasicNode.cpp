@@ -55,6 +55,7 @@ namespace	epion::NodeCustom
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
 		m_node_type = NODE_TYPE::DYNAMIC;
+		m_dynamic_slot_type = SLOT_TYPE::VECTOR1;
 	}
 
 	void	AddNode::Update(ImVec2 offset, ImDrawList*	draw_list)

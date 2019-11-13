@@ -7,6 +7,8 @@ namespace	epion::NodeCustom::Dx11
 {
 	com_ptr<ID3D11Buffer>	ConstantBufferManager::m_constant_buffer0;
 	com_ptr<ID3D11Buffer>	ConstantBufferManager::m_constant_buffer1;
+	com_ptr<ID3D11Buffer>	ConstantBufferManager::m_constant_buffer2;
+	com_ptr<ID3D11Buffer>	ConstantBufferManager::m_constant_buffer3;
 
 	void ConstantBufferManager::CreateDesc(D3D11_BUFFER_DESC& desc, UINT size)
 	{
@@ -22,12 +24,20 @@ namespace	epion::NodeCustom::Dx11
 
 		D3D11_BUFFER_DESC bd = {};
 		CreateDesc(bd, sizeof(CBuffer0));
-
 		hr = epion::Device::GetDevice()->CreateBuffer(&bd, nullptr, m_constant_buffer0.ReleaseAndGetAddressOf());
-		if (FAILED(hr))
-		{
-			return false;
-		}
+		if (FAILED(hr))	return false;
+		bd = {};
+		CreateDesc(bd, sizeof(CBuffer1));
+		hr = epion::Device::GetDevice()->CreateBuffer(&bd, nullptr, m_constant_buffer1.ReleaseAndGetAddressOf());
+		if (FAILED(hr))	return false;
+		bd = {};
+		CreateDesc(bd, sizeof(CBuffer2));
+		hr = epion::Device::GetDevice()->CreateBuffer(&bd, nullptr, m_constant_buffer2.ReleaseAndGetAddressOf());
+		if (FAILED(hr))	return false;
+		bd = {};
+		CreateDesc(bd, sizeof(CBuffer3));
+		hr = epion::Device::GetDevice()->CreateBuffer(&bd, nullptr, m_constant_buffer3.ReleaseAndGetAddressOf());
+		if (FAILED(hr))	return false;
 		return true;
 	}
 
@@ -54,10 +64,23 @@ namespace	epion::NodeCustom::Dx11
 		cb.LightDir = LightDir;
 
 		Device::GetContext()->UpdateSubresource(m_constant_buffer1.Get(), 0, nullptr, &cb, 0, 0);
-		Device::GetContext()->VSSetConstantBuffers(2, 1, m_constant_buffer1.GetAddressOf());
-		Device::GetContext()->PSSetConstantBuffers(2, 1, m_constant_buffer1.GetAddressOf());
+		Device::GetContext()->VSSetConstantBuffers(1, 1, m_constant_buffer1.GetAddressOf());
+		Device::GetContext()->PSSetConstantBuffers(1, 1, m_constant_buffer1.GetAddressOf());
 	}
 
+	void ConstantBufferManager::UpdateCBuffer2(math::FVector3&	Pos, math::FVector3&	Target, math::FVector3&	Up)
+	{
+		CBuffer2 cb = {};
+		cb.Pos.SetXYZ(Pos.x, Pos.y, Pos.z);
+		cb.Target.SetXYZ(Target.x, Target.y, Target.z);
+		cb.Up.SetXYZ(Up.x, Up.y, Up.z);
+		cb.Pos.w = 0;
+		cb.Target.w = 0;
+		cb.Up.w = 0;
+		Device::GetContext()->UpdateSubresource(m_constant_buffer1.Get(), 0, nullptr, &cb, 0, 0);
+		Device::GetContext()->VSSetConstantBuffers(1, 1, m_constant_buffer1.GetAddressOf());
+		Device::GetContext()->PSSetConstantBuffers(1, 1, m_constant_buffer1.GetAddressOf());
+	}
 	com_ptr<ID3D11SamplerState> SamplerStateManager::m_sampler_states[D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT];
 
 	bool SamplerStateManager::Create(int index, D3D11_FILTER filter, D3D11_TEXTURE_ADDRESS_MODE address)

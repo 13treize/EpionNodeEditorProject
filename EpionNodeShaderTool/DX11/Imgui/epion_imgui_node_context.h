@@ -66,10 +66,10 @@ namespace	epion::NodeCustom
 		static	bool	m_is_open_node_menu;
 
 		static	inline	void	artistic_context();
-		static	inline	void	channel_context();
+		static	inline	void	ChannelContext();
 		static	inline	void	InputContext();
 		static	inline	void	master_context();
-		static	inline	void	math_context();
+		static	inline	void	MathContext();
 		static	inline	void	ProceduralContext();
 		static	inline	void	UtilityContext();
 		static	inline	void	UVContext();
