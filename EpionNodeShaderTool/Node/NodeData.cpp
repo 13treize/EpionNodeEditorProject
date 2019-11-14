@@ -497,49 +497,49 @@ namespace	epion::NodeCustom
 		//‚»‚à‚»‚àŒq‚ª‚Á‚Ä‚¢‚é‚Ì‚©
 		for (auto& l : links)
 		{
-			if (m_ID == l.get_input_id())
+			if (m_ID == l.GetInputID())
 			{
 				//output node‚©‚ç•Ï”Žæ“¾
 				//out -in
-				m_input_str[l.get_input_slot()] = nodes_ptr[l.get_output_id()]->GetOutStr()[l.get_output_slot()];
+				m_input_str[l.GetInputSlot()] = nodes_ptr[l.GetOutputID()]->GetOutStr()[l.GetOutputSlot()];
 				//Œ^‚ð‡‚í‚¹‚é
 				//Œ^‚ªˆê’v‚µ‚È‚¢
-				if (m_input_slot_type[l.get_input_slot()] != l.get_output_type())
+				if (m_input_slot_type[l.GetInputSlot()] != l.GetOutputType())
 				{
-					switch (m_input_slot_type[l.get_input_slot()])
+					switch (m_input_slot_type[l.GetInputSlot()])
 					{
 					case	SLOT_TYPE::VECTOR1:
-						m_input_slot_type[l.get_input_slot()] = l.get_output_type();
+						m_input_slot_type[l.GetInputSlot()] = l.GetOutputType();
 						break;
 					case	SLOT_TYPE::VECTOR2:
-						//if (m_input_slot_type[l.get_input_slot()] != SLOT_TYPE::VECTOR1)
+						//if (m_input_slot_type[l.GetInputSlot()] != SLOT_TYPE::VECTOR1)
 						//{
-						//	m_input_slot_type[l.get_input_slot()] = l.get_output_type();
+						//	m_input_slot_type[l.GetInputSlot()] = l.GetOutputType();
 						//}
-						switch (l.get_output_type())
+						switch (l.GetOutputType())
 						{
 						case	SLOT_TYPE::VECTOR1:	break;
 						case	SLOT_TYPE::VECTOR2:	break;
 						case	SLOT_TYPE::VECTOR3:
-						case	SLOT_TYPE::VECTOR4:	m_input_str[l.get_input_slot()] += ".xy";	break;
+						case	SLOT_TYPE::VECTOR4:	m_input_str[l.GetInputSlot()] += ".xy";	break;
 						}
 
 						break;
 					case	SLOT_TYPE::VECTOR3:
-						switch (l.get_output_type())
+						switch (l.GetOutputType())
 						{
 						case	SLOT_TYPE::VECTOR1:	break;
-						case	SLOT_TYPE::VECTOR2:	m_input_slot_type[l.get_input_slot()] = l.get_output_type();	break;
+						case	SLOT_TYPE::VECTOR2:	m_input_slot_type[l.GetInputSlot()] = l.GetOutputType();	break;
 						case	SLOT_TYPE::VECTOR3:	break;
-						case	SLOT_TYPE::VECTOR4:	m_input_str[l.get_input_slot()] += ".xyz";	break;
+						case	SLOT_TYPE::VECTOR4:	m_input_str[l.GetInputSlot()] += ".xyz";	break;
 						}
 						break;
 					case	SLOT_TYPE::VECTOR4:
-						switch (l.get_output_type())
+						switch (l.GetOutputType())
 						{
 						case	SLOT_TYPE::VECTOR1:	break;
-						case	SLOT_TYPE::VECTOR2:	m_input_slot_type[l.get_input_slot()] = l.get_output_type();	break;
-						case	SLOT_TYPE::VECTOR3:	m_input_slot_type[l.get_input_slot()] = l.get_output_type();	break;
+						case	SLOT_TYPE::VECTOR2:	m_input_slot_type[l.GetInputSlot()] = l.GetOutputType();	break;
+						case	SLOT_TYPE::VECTOR3:	m_input_slot_type[l.GetInputSlot()] = l.GetOutputType();	break;
 						case	SLOT_TYPE::VECTOR4:	break;
 						}
 						break;
@@ -578,51 +578,55 @@ namespace	epion::NodeCustom
 	{
 		for (auto& l : links)
 		{
-			if (m_ID == l.get_input_id())
+			if (m_ID == l.GetInputID())
 			{
 				//Žh‚³‚Á‚½ó‘Ô
-				m_is_input[l.get_input_slot()] = true;
+				m_is_input[l.GetInputSlot()] = true;
 				//linedata_set
-				m_input_links[l.get_input_slot()] = { l.get_output_id(),l.get_input_slot() };
+				m_input_links[l.GetInputSlot()] = { l.GetOutputID(),l.GetInputSlot() };
 				//output node‚©‚ç•Ï”Žæ“¾
-				m_input_str[l.get_input_slot()] = nodes_ptr[l.get_output_id()]->GetOutStr()[l.get_output_slot()];
+				m_input_str[l.GetInputSlot()] = nodes_ptr[l.GetOutputID()]->GetOutStr()[l.GetOutputSlot()];
 				//Œ^‚ð‡‚í‚¹‚é
-				if (m_input_slot_type[l.get_input_slot()] != l.get_output_type())
+				if (m_input_slot_type[l.GetInputSlot()] != l.GetOutputType())
 				{
-					switch (m_input_slot_type[l.get_input_slot()])
+					switch (m_input_slot_type[l.GetInputSlot()])
 					{
-					case	SLOT_TYPE::VECTOR1:	m_input_str[l.get_input_slot()] += ".x";	break;
+					case	SLOT_TYPE::VECTOR1:	m_input_str[l.GetInputSlot()] += ".x";	break;
 					case	SLOT_TYPE::VECTOR2:
 					case	SLOT_TYPE::UV:
-						switch (l.get_output_type())
+						switch (l.GetOutputType())
 						{
 						case	SLOT_TYPE::VECTOR1:	break;
 						case	SLOT_TYPE::VECTOR2:	break;
-						case	SLOT_TYPE::VECTOR3:	m_input_str[l.get_input_slot()] += ".xy"; break;
-						case	SLOT_TYPE::VECTOR4:m_input_str[l.get_input_slot()] += ".xy"; break;
+						case	SLOT_TYPE::VECTOR3:	m_input_str[l.GetInputSlot()] += ".xy"; break;
+						case	SLOT_TYPE::VECTOR4:m_input_str[l.GetInputSlot()] += ".xy"; break;
 						}
 						break;
 					case	SLOT_TYPE::VECTOR3:
 					case	SLOT_TYPE::COLOR:
-						switch (l.get_output_type())
+						switch (l.GetOutputType())
 						{
 						case	SLOT_TYPE::VECTOR1:	break;
-						case	SLOT_TYPE::VECTOR2:	m_input_str[l.get_input_slot()] = "float3(" + nodes_ptr[l.get_output_id()]->GetOutStr()[l.get_output_slot()] + ", 0.0)";	break;
+						case	SLOT_TYPE::VECTOR2:	m_input_str[l.GetInputSlot()] = "float3(" + nodes_ptr[l.GetOutputID()]->GetOutStr()[l.GetOutputSlot()] + ", 0.0)";	break;
 						case	SLOT_TYPE::VECTOR3:	break;
-						case	SLOT_TYPE::VECTOR4:	m_input_str[l.get_input_slot()] += ".xyz";	break;
+						case	SLOT_TYPE::VECTOR4:	m_input_str[l.GetInputSlot()] += ".xyz";	break;
 						}
 						break;
 					case	SLOT_TYPE::VECTOR4:
-						switch (l.get_output_type())
+						switch (l.GetOutputType())
 						{
 						case	SLOT_TYPE::VECTOR1:	break;
-						case	SLOT_TYPE::VECTOR2:	m_input_str[l.get_input_slot()] = "float4(" + nodes_ptr[l.get_output_id()]->GetOutStr()[l.get_output_slot()] + ",0.0, 0.0)";	break;
-						case	SLOT_TYPE::VECTOR3:	m_input_str[l.get_input_slot()] = "float4(" + nodes_ptr[l.get_output_id()]->GetOutStr()[l.get_output_slot()] + "0.0)";	break;
+						case	SLOT_TYPE::VECTOR2:	m_input_str[l.GetInputSlot()] = "float4(" + nodes_ptr[l.GetOutputID()]->GetOutStr()[l.GetOutputSlot()] + ",0.0, 0.0)";	break;
+						case	SLOT_TYPE::VECTOR3:	m_input_str[l.GetInputSlot()] = "float4(" + nodes_ptr[l.GetOutputID()]->GetOutStr()[l.GetOutputSlot()] + "0.0)";	break;
 						case	SLOT_TYPE::VECTOR4:	break;
 						}
 						break;
 					}
 				}
+			}
+			else
+			{
+				m_is_input[l.GetInputSlot()]	=false;
 			}
 		}
 
@@ -641,7 +645,7 @@ namespace	epion::NodeCustom
 	{
 		for (auto& l : links)
 		{
-			if (m_ID == l.get_output_id())	l.set_output_type(m_dynamic_slot_type);
+			if (m_ID == l.GetOutputID())	l.set_output_type(m_dynamic_slot_type);
 		}
 	}
 
@@ -669,15 +673,15 @@ namespace	epion::NodeCustom
 	}
 
 
-	int	NodeLink::get_output_id()
+	int	NodeLink::GetOutputID()
 	{
 		return	m_output.id;
 	}
-	int	NodeLink::get_output_slot()
+	int	NodeLink::GetOutputSlot()
 	{
 		return	m_output.slot;
 	}
-	SLOT_TYPE NodeLink::get_output_type()
+	SLOT_TYPE NodeLink::GetOutputType()
 	{
 		return m_output_type;
 	}
@@ -687,11 +691,11 @@ namespace	epion::NodeCustom
 	}
 
 	//right
-	int	NodeLink::get_input_id()
+	int	NodeLink::GetInputID()
 	{
 		return	m_input.id;
 	}
-	int	NodeLink::get_input_slot()
+	int	NodeLink::GetInputSlot()
 	{
 		return	m_input.slot;
 	}

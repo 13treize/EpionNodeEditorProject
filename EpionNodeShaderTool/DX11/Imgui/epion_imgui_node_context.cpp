@@ -22,6 +22,7 @@
 #include	"../../Node/MathAdvancedNode.h"
 #include	"../../Node/MathBasicNode.h"
 #include	"../../Node/MathInterpolation.h"
+#include	"../../Node/MathRangeNode.h"
 #include	"../../Node/MathWaveNode.h"
 
 #include	"../../Node/InputBasicNode.h"
@@ -49,7 +50,7 @@ namespace
 	}
 
 	template <class T =epion::NodeCustom::NodeBase, class First, class... Args>
-	void MenuCreateNode(std::string name,ImVec2& pos,int& count, First&first, Args&... args)
+	void MenuCreateNode(const std::string& name,ImVec2& pos,int& count, First&first, Args&... args)
 	{
 		static_assert(std::is_base_of<epion::NodeCustom::NodeBase, T>::value == true, "BaseClass not NodeBase");
 		if (ImGui::MenuItem(name.c_str()))
@@ -67,8 +68,10 @@ namespace	epion::NodeCustom
 	bool	ContextManager::m_is_open_input_basic_menu;
 	bool	ContextManager::m_is_open_input_texture_menu;
 
-	bool	ContextManager::m_is_open_math_basic_menu;
+
 	bool	ContextManager::m_is_open_math_advanced_menu;
+	bool	ContextManager::m_is_open_math_basic_menu;
+	bool	ContextManager::m_is_open_math_range_menu;
 	bool	ContextManager::m_is_open_math_wave_menu;
 
 	bool	ContextManager::m_is_open_context_menu;
@@ -99,6 +102,7 @@ namespace	epion::NodeCustom
 		m_is_open_input_basic_menu = false;
 		m_is_open_math_advanced_menu = false;
 		m_is_open_math_basic_menu = false;
+		m_is_open_math_range_menu = false;
 		m_is_open_math_wave_menu = false;
 
 		m_is_open_line_menu = false;
@@ -130,7 +134,7 @@ namespace	epion::NodeCustom
 	}
 
 
-	void	ContextManager::click_event()
+	void	ContextManager::ClickEvent()
 	{
 		if (m_is_open_context_menu)
 		{
@@ -149,7 +153,7 @@ namespace	epion::NodeCustom
 		}
 	}
 
-	void	ContextManager::line_event()
+	void	ContextManager::LineEvent()
 	{
 		if (m_is_open_line_menu)
 		{
@@ -302,6 +306,11 @@ namespace	epion::NodeCustom
 					m_is_open_math_basic_menu = true;
 					m_is_open_menu[Math] = false;
 				}
+				if (ImGui::MenuItem("Range"))
+				{
+					m_is_open_math_range_menu = true;
+					m_is_open_menu[Math] = false;
+				}
 				if (ImGui::MenuItem("Wave"))
 				{
 					m_is_open_math_wave_menu = true;
@@ -343,6 +352,23 @@ namespace	epion::NodeCustom
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
 		}
+		if (m_is_open_math_range_menu)
+		{
+			ImGui::OpenPopup("MathRangeMenu");
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
+			if (ImGui::BeginPopup("MathRangeMenu"))
+			{
+				MenuCreateNode<ClampNode>("Clamp", m_offfset, m_create_count, m_is_open_math_range_menu);
+				MenuCreateNode<FractionNode>("Fraction", m_offfset, m_create_count, m_is_open_math_range_menu);
+				MenuCreateNode<MaximumNode>("Maximum", m_offfset, m_create_count, m_is_open_math_range_menu);
+				MenuCreateNode<MinimumNode>("Minimum", m_offfset, m_create_count, m_is_open_math_range_menu);
+				MenuCreateNode<OneMinusNode>("OneMinus", m_offfset, m_create_count, m_is_open_math_range_menu);
+
+			}
+			ImGui::PopStyleVar();
+			ImGui::EndPopup();
+		}
+
 		if (m_is_open_math_wave_menu)
 		{
 			ImGui::OpenPopup("MathWaveMenu");
@@ -422,7 +448,7 @@ namespace	epion::NodeCustom
 			ImGui::EndPopup();
 		}
 	}
-	void	ContextManager::set_context(bool is_set)
+	void	ContextManager::SetContext(bool is_set)
 	{
 		m_is_open_context_menu = is_set;
 	}

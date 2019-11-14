@@ -17,8 +17,8 @@
 #include	"../../ImguiFunction.h"
 #include	"../../Node/NodeParam.h"
 #include	"../../Node/NodeData.h"
-#include	"../../Node/MasterNode.h"
-#include	"../../Node/PBRNode.h"
+//#include	"../../Node/MasterNode.h"
+//#include	"../../Node/PBRNode.h"
 
 #include	"../../FileIO/Fileio_json.h"
 
@@ -39,6 +39,7 @@ namespace	epion::NodeCustom
 	bool	NodeEditor::m_is_node_import;
 	bool	NodeEditor::m_is_node_moving;
 	bool	NodeEditor::m_is_line;
+	bool	NodeEditor::m_is_line_delete_menu;
 
 	int	NodeEditor::m_node_select_num;
 	int	NodeEditor::m_node_hovered_list;
@@ -88,7 +89,8 @@ namespace	epion::NodeCustom
 	void	NodeEditor::Init()
 	{
 		m_is_node_import = false;
-
+		m_is_line = false;
+		m_is_line_delete_menu = false;
 		m_node_select_num = INIT_NUM;
 		m_node_hovered_list = INIT_NUM;
 		m_click_state = { INIT_NUM,INIT_NUM,ImVec2(0, 0),	false,	false,	false };
@@ -117,7 +119,6 @@ namespace	epion::NodeCustom
 		ImGui::SetNextWindowSize(m_screen_pos,1);
 		std::string	node_name = node_bar_name;
 
-		static const char* names[9] = { "Bobby", "Beatrice", "Betty", "Brianna", "Barry", "Bernard", "Bibi", "Blaine", "Bryn" };
 
 		if(node_name.empty())	node_name = "Node CustomGraph";
 
@@ -151,24 +152,6 @@ namespace	epion::NodeCustom
 					ImGui::TreePop();
 				}
 
-				if (ImGui::TreeNode("NodeItem"))
-				{
-					for (int n = 0; n < IM_ARRAYSIZE(names); n++)
-					{
-						ImGui::PushID(n);
-						ImGui::Button(names[n], ImVec2(60, 20));
-						if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None))
-						{
-							ImGui::SetDragDropPayload("DND_DEMO_CELL", &n, sizeof(int));
-							ImGui::Text("Move %s", names[n]);
-							ImGui::EndDragDropSource();
-						}
-
-						ImGui::PopID();
-
-					}
-					ImGui::TreePop();
-				}
 
 				ImGui::EndTabItem();
 			}
@@ -188,20 +171,6 @@ namespace	epion::NodeCustom
 
 		m_offset = ImGui::GetCursorScreenPos() + m_scrolling;
 		ImDrawList*	draw_list = ImGui::GetWindowDrawList();
-		if (ImGui::BeginDragDropTarget())
-		{
-			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("DND_DEMO_CELL"))
-			{
-				IM_ASSERT(payload->DataSize == sizeof(NodeBase));
-				int payload_n = *(const int*)payload->Data;
-				if (names[payload_n] == "Bobby")
-				{
-					nodes.push_back(std::make_unique<UnlitMasterNode>(nodes.size(), math::FVector2(ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y)));
-				}
-				//names[n] = names[payload_n];
-			}
-			ImGui::EndDragDropTarget();
-		}
 
 		draw_list->ChannelsSplit(5);
 
@@ -224,9 +193,12 @@ namespace	epion::NodeCustom
 		{
 			m_node_select_num = m_node_hovered_in_scene;
 		}
-		ContextManager::click_event();
-		ContextManager::line_event();
-		scrolling_event();
+		if (!m_is_line)
+		{
+			ContextManager::ClickEvent();
+		}
+		ContextManager::LineEvent();
+		ScrollingEvent();
 
 		ImGui::EndChild();
 		ImGui::PopStyleColor(2);
@@ -274,13 +246,13 @@ namespace	epion::NodeCustom
 		{
 			if (ContextManager::GetContext())
 			{
-				ContextManager::set_context(false);
+				ContextManager::SetContext(false);
 			}
 			else
 			{
 				m_node_select_num = m_node_hovered_list = m_node_hovered_in_scene = INIT_NUM;
 				m_context_pos = ImGui::GetIO().MousePos;
-				ContextManager::set_context(true);
+				ContextManager::SetContext(true);
 			}
 		}
 	}
@@ -312,7 +284,7 @@ namespace	epion::NodeCustom
 	{
 		nodes.clear();
 		links.clear();
-		nodes.push_back(std::make_unique<UnlitMasterNode>(nodes.size(), math::FVector2(500, 50)));
+		//nodes.push_back(std::make_unique<UnlitMasterNode>(nodes.size(), math::FVector2(500, 50)));
 	}
 	std::string	NodeEditor::ExportNodeData(const std::string& json_name)
 	{
@@ -331,17 +303,19 @@ namespace	epion::NodeCustom
 
 		for (auto& l : links)
 		{
-			ImVec2 right_pos = m_offset + nodes[l.get_input_id()]->GetInputSlotPos(l.get_input_slot());
-			ImVec2 left_pos = m_offset + nodes[l.get_output_id()]->GetOutputSlotPos(l.get_output_slot());
+			ImVec2 right_pos = m_offset + nodes[l.GetInputID()]->GetInputSlotPos(l.GetInputSlot());
+			ImVec2 left_pos = m_offset + nodes[l.GetOutputID()]->GetOutputSlotPos(l.GetOutputSlot());
 			left_pos.y += 10.0f;
 			right_pos.y += 10.0f;
 
-			if (physics::Collider2D::LineCircle(::getFVec2(left_pos), ::getFVec2(right_pos), ::getFVec2(ImGui::GetIO().MousePos), 5.0f))
+			if (physics::Collider2D::LineCircle(::getFVec2(left_pos), ::getFVec2(right_pos), ::getFVec2(ImGui::GetIO().MousePos), 8.0f))
 			{
 				m_line_size = 10.0f;
 				if (ImGui::IsMouseClicked(1))
 				{
 					l.m_is_delete = true;
+					m_is_line_delete_menu =true;
+
 				}
 				l.m_is_hit = true;
 			}
@@ -358,7 +332,7 @@ namespace	epion::NodeCustom
 
 		for (int i = 0; i < links.size(); i++)
 		{
-			if(links[i].m_is_delete)
+			if(m_is_line_delete_menu)
 			{
 				ImGui::OpenPopup("context_menu");
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 12));
@@ -367,6 +341,7 @@ namespace	epion::NodeCustom
 					if (ImGui::MenuItem("Delete", nullptr))
 					{
 						links.erase(links.begin() + i);
+						m_is_line_delete_menu = false;
 					}
 					ImGui::EndPopup();
 				}
@@ -477,8 +452,8 @@ namespace	epion::NodeCustom
 									is_hit = true;
 									break;
 								}
-								if (check_link.get_input_id() == nodes[node_size]->m_ID&&
-									check_link.get_input_slot() == slot_input)
+								if (check_link.GetInputID() == nodes[node_size]->m_ID&&
+									check_link.GetInputSlot() == slot_input)
 								{
 									is_input = true;
 									break;
@@ -591,7 +566,7 @@ namespace	epion::NodeCustom
 	{
 	}
 
-	void	NodeEditor::scrolling_event()
+	void	NodeEditor::ScrollingEvent()
 	{
 		if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemActive() && ImGui::IsMouseDragging(2, 0.0f))
 		{

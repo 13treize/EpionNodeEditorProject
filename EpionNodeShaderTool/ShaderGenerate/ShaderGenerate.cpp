@@ -147,10 +147,10 @@ namespace	epion::Shader
 			for (auto& c_id : current_id)
 			{
 				//©•ª‚Ìid‚ğŒ©‚Â‚¯‚½‚È‚ç
-				if (li.get_input_id() == c_id)
+				if (li.GetInputID() == c_id)
 				{
 					//”h¶æ‚Ìid‚ğŠi”[
-					get_id.push_back(li.get_output_id());
+					get_id.push_back(li.GetOutputID());
 				}
 			}
 		}

@@ -184,6 +184,7 @@
     <ClCompile Include="Node\MathBasicNode.cpp" />
     <ClCompile Include="Node\MathDerivativeNode.cpp" />
     <ClCompile Include="Node\MathInterpolationNode.cpp" />
+    <ClCompile Include="Node\MathRangeNode.cpp" />
     <ClCompile Include="Node\MathWaveNode.cpp" />
     <ClCompile Include="Node\NodeParamDx11.cpp" />
     <ClCompile Include="Node\NodeProgressTex.cpp" />
@@ -260,6 +261,7 @@
     <ClInclude Include="Node\MathBasicNode.h" />
     <ClInclude Include="Node\MathDerivativeNode.h" />
     <ClInclude Include="Node\MathInterpolation.h" />
+    <ClInclude Include="Node\MathRangeNode.h" />
     <ClInclude Include="Node\MathWaveNode.h" />
     <ClInclude Include="Node\NodeParam.h" />
     <ClInclude Include="Node\NodeParamDx11.h" />

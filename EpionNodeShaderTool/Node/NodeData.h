@@ -139,14 +139,14 @@ namespace	epion::NodeCustom
 
 
 
-		int	get_output_id();
-		int	get_output_slot();
-		SLOT_TYPE get_output_type();
+		int	GetOutputID();
+		int	GetOutputSlot();
+		SLOT_TYPE GetOutputType();
 		void set_output_type(SLOT_TYPE type);
 
 		//right
-		int	get_input_id();
-		int	get_input_slot();
+		int	GetInputID();
+		int	GetInputSlot();
 		SLOT_TYPE get_input_type();
 		void set_input_type(SLOT_TYPE type);
 

@@ -27,11 +27,11 @@ namespace	epion::NodeCustom
 
 		static	void	DragAndDropEvent();
 
-		static	void	click_event();
-		static	void	set_context(bool is_set);
+		static	void	ClickEvent();
+		static	void	SetContext(bool is_set);
 		static	bool	GetContext();
 
-		static	void	line_event();
+		static	void	LineEvent();
 		static	void	set_is_line_menu(bool is_set);
 		static	bool	get_is_line_menu();
 
@@ -56,8 +56,9 @@ namespace	epion::NodeCustom
 		static	bool	m_is_open_input_basic_menu;
 		static	bool	m_is_open_input_texture_menu;
 
-		static	bool	m_is_open_math_basic_menu;
 		static	bool	m_is_open_math_advanced_menu;
+		static	bool	m_is_open_math_basic_menu;
+		static	bool	m_is_open_math_range_menu;
 		static	bool	m_is_open_math_wave_menu;
 
 		static	bool	m_is_open_context_menu;

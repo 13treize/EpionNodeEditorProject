@@ -3,6 +3,7 @@ namespace	epion::NodeCustom
 {
 	class ClampNode final :public NodeBase
 	{
+	public:
 		ClampNode();
 		ClampNode(int id, const math::FVector2& pos);
 		~ClampNode();
@@ -30,6 +31,7 @@ namespace	epion::NodeCustom
 
 	class FractionNode final :public NodeBase
 	{
+	public:
 		FractionNode();
 		FractionNode(int id, const math::FVector2& pos);
 		~FractionNode();
@@ -53,6 +55,7 @@ namespace	epion::NodeCustom
 
 	class MaximumNode final :public NodeBase
 	{
+	public:
 		MaximumNode();
 		MaximumNode(int id, const math::FVector2& pos);
 		~MaximumNode();
@@ -77,6 +80,7 @@ namespace	epion::NodeCustom
 
 	class MinimumNode final :public NodeBase
 	{
+	public:
 		MinimumNode();
 		MinimumNode(int id, const math::FVector2& pos);
 		~MinimumNode();
@@ -101,9 +105,10 @@ namespace	epion::NodeCustom
 
 	class OneMinusNode final :public NodeBase
 	{
+	public:
 		OneMinusNode();
 		OneMinusNode(int id, const math::FVector2& pos);
-		OneMinusNode();
+		~OneMinusNode();
 
 		void Init()override;
 		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
@@ -115,7 +120,7 @@ namespace	epion::NodeCustom
 		{
 			archive(
 				cereal::base_class<NodeBase>(this),
-				cereal::make_nvp("In", m_in);
+				cereal::make_nvp("In", m_in));
 		};
 
 	private:

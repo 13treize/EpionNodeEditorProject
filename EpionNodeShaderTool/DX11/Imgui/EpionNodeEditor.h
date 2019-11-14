@@ -59,7 +59,7 @@ namespace	epion::NodeCustom
 		static	void	create_hlsl();
 
 
-		static	void	scrolling_event();
+		static	void	ScrollingEvent();
 
 		//	get
 		static	ImVec2&	get_scrolling();
@@ -81,6 +81,7 @@ namespace	epion::NodeCustom
 		static	bool	m_is_node_moving;
 
 		static	bool	m_is_line;
+		static	bool	m_is_line_delete_menu;
 		static	bool	m_is_open_context_menu;
 
 		//ƒNƒŠƒbƒN‚É•Û‚·‚éî•ñ

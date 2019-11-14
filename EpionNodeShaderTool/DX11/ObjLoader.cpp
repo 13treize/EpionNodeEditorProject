@@ -124,7 +124,7 @@ void	epion::ObjLoader::Init(std::wstring file_name_, bool	flipping_v_coordinates
 	//コピピペ
 
 	auto	iterator_ = subsets.rbegin();
-	iterator_->index_count = indices.size() - iterator_->index_start;
+	iterator_->index_count = static_cast<unsigned int>(indices.size() - iterator_->index_start);
 	for (iterator_ = subsets.rbegin() + 1; iterator_ != subsets.rend(); ++iterator_)
 	{
 		iterator_->index_count = (iterator_ - 1)->index_start - iterator_->index_start;
