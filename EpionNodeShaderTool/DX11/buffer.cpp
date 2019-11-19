@@ -1,7 +1,4 @@
-#include	<array>
-#include	<vector>
-#include	<string>
-
+#include	"../All.h"
 #include	"../epion.h"
 #include	"../color.h"
 #include	"buffer.h"
@@ -13,7 +10,7 @@ namespace
 
 namespace	epion
 {
-	void	IndexBuffer::set_state(DXGI_FORMAT	format_)
+	void	IndexBuffer::SetState(DXGI_FORMAT	format_)
 	{
 		Device::GetContext()->IASetIndexBuffer(buffer_ptr.Get(), format_, 0);
 	}
@@ -51,10 +48,10 @@ namespace	epion
 		return	SUCCEEDED(hr);
 	}
 
-	void	ConstantBuffer::set_state()
+	void	ConstantBuffer::SetState(int slot)
 	{
-		Device::GetContext()->VSSetConstantBuffers(0, 1, constant_buffer_ptr.GetAddressOf());
-		Device::GetContext()->PSSetConstantBuffers(0, 1, constant_buffer_ptr.GetAddressOf());
+		Device::GetContext()->VSSetConstantBuffers(slot, 1, constant_buffer_ptr.GetAddressOf());
+		Device::GetContext()->PSSetConstantBuffers(slot, 1, constant_buffer_ptr.GetAddressOf());
 	}
 
 	com_ptr<ID3D11Buffer>&	ConstantBuffer::get_buffer_ptr()
@@ -87,7 +84,7 @@ namespace	epion
 		buffer_desc.StructureByteStride = 0;
 	}
 
-	void	VertexBuffer::set_state(unsigned	int	&stride_, unsigned	int	&off_set_)
+	void	VertexBuffer::SetState(unsigned	int	&stride_, unsigned	int	&off_set_)
 	{
 		Device::GetContext()->IASetVertexBuffers(0, 1, vertex_buffer_ptr.GetAddressOf(), &stride_, &off_set_);
 	}

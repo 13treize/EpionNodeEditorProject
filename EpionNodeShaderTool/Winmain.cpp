@@ -1,6 +1,4 @@
-#include	<array>
-#include	<memory>
-
+#include	"All.h"
 #include	"epion.h"
 #include	"../Imgui//imgui.h"
 #include	"../Imgui//imgui_impl_win32.h"
@@ -75,7 +73,7 @@ int	WINAPI	wWinMain(HINSTANCE	hInstance, HINSTANCE	hPrevInstance, LPWSTR	lpCmdLi
 			epion::FrameWork::Render();
 		}
 	}
-	epion::FrameWork::release();
+	epion::FrameWork::Release();
 
 	return	static_cast<int>(msg.wParam);
 }

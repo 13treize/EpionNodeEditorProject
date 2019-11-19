@@ -32,6 +32,7 @@ namespace	epion::NodeCustom
 {
 #pragma region Float
 	FloatNode::FloatNode()
+		:NodeBase(1, 1)
 	{
 		Init();
 	}
@@ -42,7 +43,6 @@ namespace	epion::NodeCustom
 	}
 	FloatNode::~FloatNode()
 	{
-		Init();
 	}
 	void FloatNode::Init()
 	{
@@ -53,6 +53,8 @@ namespace	epion::NodeCustom
 
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
+
+		m_node_type = NODE_TYPE::VARIABLE;
 	}
 	void	FloatNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
@@ -64,7 +66,7 @@ namespace	epion::NodeCustom
 	{
 		m_input_str[0] = std::to_string(m_num);
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
-		str_set(nodes_ptr, links);
+		str_check(nodes_ptr, links);
 		m_function_call_str = NodeFunction::SetVarFloat(m_input_str[0], m_out_str[0]);
 	}
 

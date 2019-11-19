@@ -4,8 +4,8 @@
 
 namespace
 {
-	epion::math::FVector3	pos = { 0.0f,	10.0f,	0.0f };
-	epion::math::FVector3	target = { 0.0f,	0.0f,	0.0f };
+	epion::math::FVector3	pos = { 0.0f,	10.0f,	10.0f };
+	epion::math::FVector3	target = { 0.0f,	1.0f,	0.0f };
 	epion::math::FVector3	up = { 0.0f,	1.0f,	0.0f };
 
 }
@@ -54,34 +54,34 @@ namespace	epion
 	}
 
 	//	getŠÖ”
-	math::FVector3&	View::get_pos()
+	math::FVector3&	View::GetPos()
 	{
 		return	pos;
 	}
 
-	math::FVector3&	View::get_target()
+	math::FVector3&	View::GetTarget()
 	{
 		return	target;
 	}
 
-	math::FVector3&	View::get_up()
+	math::FVector3&	View::GetUp()
 	{
 		return	up;
 	}
 
 
 	//	setŠÖ”
-	void	View::set_pos(math::FVector3&	pos_)
+	void	View::SetPos(math::FVector3&	pos_)
 	{
 		pos = pos_;
 	}
 
-	void	View::set_target(math::FVector3&	target_)
+	void	View::SetTarget(math::FVector3&	target_)
 	{
 		target = target_;
 	}
 
-	void	View::set_up(math::FVector3&	up_)
+	void	View::SetUp(math::FVector3&	up_)
 	{
 		up = up_;
 	}
@@ -118,14 +118,14 @@ namespace	epion
 		basic_camera->activate();
 	}
 
-	DirectX::XMFLOAT4X4&	CameraManager::get_view()
+	DirectX::XMFLOAT4X4&	CameraManager::GetView()
 	{
-		return	basic_camera->get_view();
+		return	basic_camera->GetView();
 	}
 
-	DirectX::XMFLOAT4X4&	CameraManager::get_projection()
+	DirectX::XMFLOAT4X4&	CameraManager::GetProjection()
 	{
-		return	basic_camera->get_projection();
+		return	basic_camera->GetProjection();
 	}
 
 }

@@ -2,6 +2,7 @@
 #include	"epion.h"
 #include	"Dx11//dx11_device.h"
 #include	"Dx11//dx11_dxgi.h"
+#include	"Dx11//Renderer.h"
 
 
 #include	"Dx11//Imgui//dx11_imgui_manager.h"
@@ -10,18 +11,13 @@
 #include	"Scene/SceneManager.h"
 #include	"Framework.h"
 
-#include	"DX11/blender.h"
-#include	"DX11/rasterizer.h"
-#include	"CameraManager.h"
-#include	"DX11/Cube.h"
-#include	"DX11/square.h"
-
+//#include	"DX11/blender.h"
+//#include	"DX11/rasterizer.h"
+//#include	"CameraManager.h"
 namespace
 {
-	epion::math::FVector4	light(-1, 1, 1, 1);
+	epion::math::FVector4	vari;
 
-	std::unique_ptr<epion::Blender>		blender;
-	std::unique_ptr<epion::Rasterizer>	rasterizer;
 
 }
 
@@ -34,27 +30,17 @@ namespace	epion
 		Device::set_up();
 		Dxgi::set(src);
 		ImguiManager::Init();
-		ImguiMain::get_inst().Init();
+		ImguiMain::GetInst().Init();
 		Renderer::set_screen_size(width, height);
-		CameraManager::Init();
-		blender		=std::make_unique<Blender>();
-		rasterizer	=std::make_unique<Rasterizer>();
-
-
 	}
 
 	void	FrameWork::Update()
 	{
 		SceneManager::ChangeScene();
-
-		ImguiManager::begin();
-		ImguiMain::get_inst().Update();
-		CameraManager::Update();
-
+		ImguiManager::Begin();
 		SceneManager::Update();
+		ImguiMain::GetInst().Update();
 
-		blender->set_state(BS_ALPHA);
-		rasterizer->set_state(RASTER_STATE::SOLID);
 	}
 
 	void	FrameWork::Render()
@@ -64,18 +50,19 @@ namespace	epion
 			{0.0f,0.0f,0.0f,0.0f}
 		};
 		Dxgi::begin(back_color);
+
 		SceneManager::Render();
+		ImguiMain::GetInst().Render();
 
-		ImguiMain::get_inst().Render();
 
-		ImguiManager::end();
+		ImguiManager::End();
 		Dxgi::End();
 
 	}
 
-	void	FrameWork::release()
+	void	FrameWork::Release()
 	{
-		ImguiManager::release();
+		ImguiManager::Release();
 	}
 
 }

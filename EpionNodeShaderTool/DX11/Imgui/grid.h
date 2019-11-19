@@ -6,11 +6,11 @@ namespace	epion::NodeCustom
 	{
 	public:
 		Grids();
-		Grids(float	size, ImVec2	win_pos, ImVec2	canvas_size, ImU32	color);
+		Grids(float	size, ImU32	color);
 
 		~Grids();
-		void	Init(float	size, ImVec2	win_pos, ImVec2	canvas_size, ImU32	color);
-		void	ShowGrid(ImDrawList*	draw_list, const	ImVec2&	scroll);
+		void	Init(float	size, ImU32	color);
+		void	ShowGrid(ImDrawList*	draw_list, ImVec2	win_pos, ImVec2	canvas_size, const	ImVec2&	scroll);
 
 	private:
 		bool	m_is_show_grid;

@@ -71,7 +71,7 @@ namespace	epion::NodeCustom
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_set(nodes_ptr, links);
+		StrSet(nodes_ptr, links);
 	}
 	std::string	FBMNode::GetFunctionDefStr()
 	{

@@ -1,9 +1,12 @@
-cbuffer CONSTANT_BUFFER : register(b0)
+cbuffer WorldCBuffer : register(b3)
 {
-    row_major float4x4 world_view_projection;
-    row_major float4x4 world;
-    float4 material_color;
-    float4 light_direction;
-    //float  noise;
+    row_major float4x4 WorldViewProjection;
+    row_major float4x4 World;
 };
 
+struct PSInput
+{
+    float4 position : SV_POSITION;
+    float4 normal : NORMAL;
+    float2 uv : TEXCOORD0;
+};

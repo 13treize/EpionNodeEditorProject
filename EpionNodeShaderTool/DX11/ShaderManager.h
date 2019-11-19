@@ -4,9 +4,9 @@ namespace	epion
 	class	ShaderCompiler	final
 	{
 	public:
-		static	bool	Compile(const	std::wstring	hlsl_name,
-			const	std::string		entry_point,
-			const	std::string		target,
+		static	bool	Compile(const std::wstring&	hlsl_name,
+			const std::string&		entry_point,
+			const std::string&		target,
 			com_ptr<ID3DBlob>&		shader_blob);
 	};
 
@@ -15,7 +15,7 @@ namespace	epion
 	public:
 		virtual	~ShaderBase() {};
 
-		virtual	bool	Create(std::wstring	hlsl_name) = 0;
+		virtual	bool	Create(const std::wstring&	hlsl_name) = 0;
 
 		com_ptr<ID3DBlob>&	GetBlob()	noexcept;
 
@@ -26,10 +26,10 @@ namespace	epion
 	{
 	public:
 		VertexShader();
-		VertexShader(std::wstring	hlsl_name);
+		VertexShader(const std::wstring&	hlsl_name);
 		~VertexShader();
 
-		bool	Create(std::wstring	hlsl_name)	override;
+		bool	Create(const std::wstring&	hlsl_name)	override;
 		void	SetState();
 		com_ptr<ID3D11VertexShader>&	GetVS()	noexcept;
 
@@ -42,10 +42,10 @@ namespace	epion
 	{
 	public:
 		PixelShader();
-		PixelShader(std::wstring	hlsl_name);
+		PixelShader(const std::wstring&	hlsl_name);
 		~PixelShader();
 
-		bool	Create(std::wstring	hlsl_name)	override;
+		bool	Create(const std::wstring&	hlsl_name)	override;
 		void	SetState();
 		com_ptr<ID3D11PixelShader>&	GetPS()	noexcept;
 

@@ -16,7 +16,7 @@ namespace	epion
 	{
 	}
 
-	void	Blender::set_state(BLEND_STATE	state)
+	void	Blender::SetState(BLEND_STATE	state)
 	{
 		Device::GetContext()->OMSetBlendState(blend_states[state].Get(), nullptr, 0xFFFFFFFF);
 	}

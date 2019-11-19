@@ -24,7 +24,7 @@ namespace	epion
 
 		bool	all_create();
 
-		void	set_state(BLEND_STATE	state);
+		void	SetState(BLEND_STATE	state);
 
 	private:
 		bool	create(com_ptr<ID3D11BlendState>	&blend_state_,

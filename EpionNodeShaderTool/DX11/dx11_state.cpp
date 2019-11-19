@@ -38,7 +38,7 @@ namespace	epion
 		return	SUCCEEDED(hr) ? true : false;
 	}
 
-	void	Sampler::set_state()
+	void	Sampler::SetState()
 	{
 		Device::GetContext()->PSSetSamplers(0, 1, sampler_ptr.GetAddressOf());
 	}
@@ -75,7 +75,7 @@ namespace	epion
 		return	SUCCEEDED(hr) ? true : false;
 	}
 
-	void	DepthStencil::set_state()
+	void	DepthStencil::SetState()
 	{
 		Device::GetContext()->OMSetDepthStencilState(depth_stencil_ptr.Get(), 1);
 	}

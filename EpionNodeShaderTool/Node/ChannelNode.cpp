@@ -84,7 +84,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetDefineOutStr1(m_out_str[1]);
 		m_function_call_str += NodeFunction::SetDefineOutStr1(m_out_str[2]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_set(nodes_ptr, links);
+		StrSet(nodes_ptr, links);
 	}
 
 	std::string	CombineNode::GetFunctionDefStr()

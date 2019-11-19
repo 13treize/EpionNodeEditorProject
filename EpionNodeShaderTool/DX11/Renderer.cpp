@@ -10,7 +10,7 @@ namespace	epion
 {
 	math::Vector2<int>	Renderer::m_screen_size;
 
-	void	Renderer::set_state()
+	void	Renderer::SetState()
 	{
 		Device::GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 	}
@@ -37,7 +37,7 @@ namespace	epion
 		m_screen_size.y = height_;
 	}
 
-	math::Vector2<int>	Renderer::get_screen_size()
+	math::Vector2<int>	Renderer::GetScreenSize()
 	{
 		return	m_screen_size;
 	}

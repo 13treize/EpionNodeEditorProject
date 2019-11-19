@@ -57,7 +57,7 @@ namespace	epion
 
 	}
 
-	void	Rasterizer::set_state(RASTER_STATE	state_)
+	void	Rasterizer::SetState(RASTER_STATE	state_)
 	{
 		Device::GetContext()->RSSetState(rasterizer_ptr[state_].Get());
 	}

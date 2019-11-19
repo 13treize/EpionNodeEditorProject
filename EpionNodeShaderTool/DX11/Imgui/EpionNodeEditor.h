@@ -62,8 +62,8 @@ namespace	epion::NodeCustom
 		static	void	ScrollingEvent();
 
 		//	get
-		static	ImVec2&	get_scrolling();
-		static	ImVec2&	get_offset();
+		static	ImVec2&	GetScrolling();
+		static	ImVec2&	GetOffset();
 
 		static	int		GetNodeSize();
 		static	int		GetLinkSize();
@@ -105,7 +105,6 @@ namespace	epion::NodeCustom
 
 		static	float	m_line_size;
 
-		static	Grids	grid;
 
 
 		static	void	mouse_update();

@@ -7,7 +7,7 @@ namespace	epion
 		Sampler();
 		~Sampler();
 		bool	create();
-		void	set_state();
+		void	SetState();
 
 	private:
 		D3D11_SAMPLER_DESC	sampler_desc;
@@ -22,7 +22,7 @@ namespace	epion
 
 		bool	create();
 
-		void	set_state();
+		void	SetState();
 
 	private:
 		D3D11_DEPTH_STENCIL_DESC	d_desc;

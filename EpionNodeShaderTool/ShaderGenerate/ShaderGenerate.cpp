@@ -22,7 +22,7 @@ namespace	epion::Shader
 	std::vector<int>	NodeShaderManager::current_id;
 	std::vector<int>	NodeShaderManager::get_id;
 
-	int	NodeShaderManager::space_count;
+	int	NodeShaderManager::m_space_count;
 	int	NodeShaderManager::texture2d_count;
 
 	std::string	NodeShaderManager::function_str;
@@ -35,7 +35,7 @@ namespace	epion::Shader
 	std::vector	<std::string>	NodeShaderManager::variable;
 	std::map	<std::string, int>	NodeShaderManager::shader_function;
 
-	std::string	NodeShaderManager::space;
+	std::string	NodeShaderManager::m_space;
 
 	NodeShaderManager::NodeShaderManager()
 	{
@@ -81,8 +81,8 @@ namespace	epion::Shader
 		cnt = false;
 
 		//node_id.resize(nodes.size());
-		space = "";
-		space_count = 0;
+		m_space = "";
+		m_space_count = 0;
 		texture2d_count = 0;
 		create_str.clear();
 	}
@@ -254,31 +254,31 @@ namespace	epion::Shader
 
 	std::string	NodeShaderManager::event_begin()
 	{
-		std::string	ret_str = space + "{\n";
-		space += "    ";
-		space_count++;
+		std::string	ret_str = m_space + "{\n";
+		m_space += "    ";
+		m_space_count++;
 		return	ret_str;
 	}
 
 	std::string	NodeShaderManager::event_end()
 	{
-		space = "";
-		space_count--;
-		for (int i = 0; space_count < i; i++)
+		m_space = "";
+		m_space_count--;
+		for (int i = 0; m_space_count < i; i++)
 		{
-			space += "    ";
+			m_space += "    ";
 		}
-		std::string	ret_str = space + "}\n";
+		std::string	ret_str = m_space + "}\n";
 		return	ret_str;
 	}
 
 	std::string	NodeShaderManager::event_end2()
 	{
-		space = "";
-		space_count--;
-		for (int i = 0; space_count < i; i++)
+		m_space = "";
+		m_space_count--;
+		for (int i = 0; m_space_count < i; i++)
 		{
-			space += "    ";
+			m_space += "    ";
 		}
 		std::string	ret_str = "};\n";
 		return	ret_str;
@@ -289,14 +289,14 @@ namespace	epion::Shader
 		std::string	ret_str;
 		ret_str = "struct PSInput\n";
 		ret_str += event_begin();
-		ret_str += space + "float4 position : SV_POSITION;\n";
-		ret_str += space + "float2 uv : TEXCOORD0;\n";
-		ret_str += space + "float4 color : COLOR0;\n";
+		ret_str += m_space + "float4 position : SV_POSITION;\n";
+		ret_str += m_space + "float2 uv : TEXCOORD0;\n";
+		ret_str += m_space + "float4 color : COLOR0;\n";
 		ret_str += event_end2();
 		return	ret_str;
 	}
 
-	std::string		NodeShaderManager::MainFunctionBegin()
+	std::string	NodeShaderManager::MainFunctionBegin()
 	{
 		std::string	function_name = "float4 PS(PSInput input) : SV_TARGET\n";
 
@@ -305,13 +305,13 @@ namespace	epion::Shader
 
 	std::string	NodeShaderManager::float4Generate2(std::string	var_str, std::string	init_str)
 	{
-		std::string	ret_str = space + "float4 " + var_str + init_str;
+		std::string	ret_str = m_space + "float4 " + var_str + init_str;
 		return	ret_str;
 	}
 
 	std::string	NodeShaderManager::ReturnEvent(std::string retuern_color_str)
 	{
-		std::string	ret_str = space + "return " + retuern_color_str + ";\n";
+		std::string	ret_str = m_space + "return " + retuern_color_str + ";\n";
 		return	ret_str;
 	}
 

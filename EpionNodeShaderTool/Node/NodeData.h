@@ -174,7 +174,6 @@ namespace	epion::NodeCustom
 		}
 
 		bool m_is_hit;
-		bool m_is_delete;
 
 		std::string StateStr();
 
@@ -248,16 +247,10 @@ namespace	epion::NodeCustom
 		void serialize(Archive & archive)
 		{
 			archive(CEREAL_NVP(m_Name),
-				CEREAL_NVP(m_ID),
-				CEREAL_NVP(m_Pos),
-				//CEREAL_NVP(m_input_slot_type),
-				//CEREAL_NVP(m_output_slot_type),
-				CEREAL_NVP(m_dynamic_slot_type),
-				//CEREAL_NVP(m_input_name),
-				//CEREAL_NVP(m_output_name),
-				//CEREAL_NVP(m_inputs_count),
-				//CEREAL_NVP(m_outputs_count),
-				CEREAL_NVP(m_function_call_str));
+					CEREAL_NVP(m_ID),
+					CEREAL_NVP(m_Pos),
+					CEREAL_NVP(m_dynamic_slot_type),
+					CEREAL_NVP(m_function_call_str));
 		}
 
 		void	ResouceInit();
@@ -327,9 +320,9 @@ namespace	epion::NodeCustom
 		std::vector<std::string>	m_input_str;
 
 		//“®“I‚ÈŒ^
-		void link_set(std::vector<NodeLink>&	links);
-		void type_set(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links);
-		void str_set(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links);
+		void LinkSet(std::vector<NodeLink>&	links);
+		void TypeSet(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links);
+		void StrSet(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links);
 
 	};
 }

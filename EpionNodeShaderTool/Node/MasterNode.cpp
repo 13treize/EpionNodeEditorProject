@@ -4,16 +4,12 @@
 #include	<cereal/types/polymorphic.hpp>
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
-#include	"NodeParam.h"
 #include	"NodeData.h"
 #include	"MasterNode.h"
 #include "../ImguiFunction.h"
 
 namespace
 {
-	ImVec2	size(0, 0);
-	bool open_popup;
-
 }
 
 CEREAL_REGISTER_TYPE(epion::NodeCustom::UnlitMasterNode)
@@ -49,11 +45,13 @@ namespace	epion::NodeCustom
 		};
 		m_input_name =
 		{
-			"Pos(3)","Color(3)","Alpha(1)","AlphaChipThreshold(1)"
+			"Pos","Color","Alpha","AlphaChipThreshold"
 		};
 		m_function_call_str = "";
 
 		m_output_slot_type.clear();
+		m_open_popup[0] = false;
+		m_color_picker[0].Init("1", "Color");
 
 		m_node_type = NODE_TYPE::MASTER;
 	}
@@ -61,9 +59,9 @@ namespace	epion::NodeCustom
 	void	UnlitMasterNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotColor(m_input_pos[1], open_popup, color,1);
-		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], SLOT_INPUT_POS_X, StringConverter::get_space(2), Alpha);
-		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], SLOT_INPUT_POS_X, StringConverter::get_space(3), AlphaChipThreshold);
+		if (!m_is_input[1])	m_color_picker[0].SetInputSlotColor2(m_input_pos[1], m_open_popup[0], color,1);
+		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2],StringConverter::get_space(2), Alpha);
+		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3],StringConverter::get_space(3), AlphaChipThreshold);
 	}
 
 	void	UnlitMasterNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)

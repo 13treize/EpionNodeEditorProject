@@ -52,7 +52,7 @@ namespace	epion::NodeCustom
 		template<class	T>
 		bool	create(std::vector<T>&	buffer, com_ptr<ID3D11Buffer>&	vertex_buffer_ptr);
 
-		void	set_state(unsigned	int	&stride_, unsigned	int	&off_set_);
+		void	SetState(unsigned	int	&stride_, unsigned	int	&off_set_);
 
 
 	private:

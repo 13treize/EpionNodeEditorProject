@@ -40,7 +40,7 @@ namespace	epion::Shader
 		static	std::vector<int>	current_id;
 		static	std::vector<int>	get_id;
 
-		static	int		space_count;
+		static	int		m_space_count;
 		static	int		texture2d_count;
 		static	int		sampler_count;
 
@@ -58,7 +58,7 @@ namespace	epion::Shader
 
 		static	std::map<std::string, int>	shader_function;
 
-		static	std::string	space;
+		static	std::string	m_space;
 
 		static	std::string	call_uv();
 

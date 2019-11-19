@@ -1,20 +1,14 @@
 #include    "ObjShader.hlsli"
 
-struct VS_OUT
-{
-    float4 position : SV_POSITION;
-    float4 normal : NORMAL;
-    float2 uv : m_uv;
-};
 
-VS_OUT VS(float4 position : POSITION, float4 normal : NORMAL, float2 uv : m_uv)
+PSInput VS(PSInput input)
 {
-    VS_OUT vout;
-    vout.position = mul(position, world_view_projection);
+    PSInput vout;
+    vout.position = mul(input.position, WorldViewProjection);
 
-    float4 N = float4(normalize(mul((float3) normal, (float3x3) world)), 0.0f);
+    float4 N = float4(normalize(mul((float3) input.normal, (float3x3) World)), 0.0f);
     vout.normal = N;
-    vout.uv = uv;
+    vout.uv = input.uv;
 
     return vout;
 }

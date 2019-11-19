@@ -1,4 +1,4 @@
-#include	<string>
+#include	"../All.h"
 #include	"../epion.h"
 #include	"ShaderManager.h"
 #include	"dx11_device.h"
@@ -10,7 +10,7 @@ namespace
 
 namespace	epion
 {
-	bool	ShaderCompiler::Compile(const	std::wstring	hlsl_name, const	std::string		entry_point, const	std::string		target, com_ptr<ID3DBlob>&		shader_blob)
+	bool	ShaderCompiler::Compile(const	std::wstring&	hlsl_name, const	std::string	&	entry_point, const	std::string&		target, com_ptr<ID3DBlob>&		shader_blob)
 	{
 		HRESULT	hr = S_OK;
 
@@ -49,7 +49,7 @@ namespace	epion
 	{
 
 	}
-	VertexShader::VertexShader(std::wstring	hlsl_name)
+	VertexShader::VertexShader(const std::wstring&	hlsl_name)
 	{
 		Create(hlsl_name);
 	}
@@ -58,7 +58,7 @@ namespace	epion
 	{
 	}
 
-	bool	VertexShader::Create(std::wstring	hlsl_name)
+	bool	VertexShader::Create(const std::wstring&	hlsl_name)
 	{
 		if (ShaderCompiler::Compile(hlsl_name, "VS", "vs_5_0", m_blob))
 		{
@@ -88,7 +88,7 @@ namespace	epion
 	{
 
 	}
-	PixelShader::PixelShader(std::wstring	hlsl_name)
+	PixelShader::PixelShader(const std::wstring&	hlsl_name)
 	{
 		Create(hlsl_name);
 	}
@@ -97,7 +97,7 @@ namespace	epion
 	{
 	}
 
-	bool	PixelShader::Create(std::wstring	hlsl_name)
+	bool	PixelShader::Create(const std::wstring&	hlsl_name)
 	{
 		if (ShaderCompiler::Compile(hlsl_name, "PS", "ps_5_0", m_blob))
 		{

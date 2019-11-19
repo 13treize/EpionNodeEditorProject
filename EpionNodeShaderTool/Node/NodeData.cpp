@@ -22,6 +22,7 @@ namespace
 {
 
 }
+//#define DEBUG
 namespace epion
 {
 	std::unique_ptr<Texture>	m_resouce;
@@ -351,15 +352,15 @@ namespace	epion::NodeCustom
 		{
 		case NODE_TYPE::NORMAL:
 		case NODE_TYPE::VARIABLE:
-			str_set(nodes_ptr, links);
+			StrSet(nodes_ptr, links);
 			break;
 		case NODE_TYPE::DYNAMIC:
-			type_set(nodes_ptr, links);
-			str_set(nodes_ptr, links);
-			link_set(links);
+			TypeSet(nodes_ptr, links);
+			StrSet(nodes_ptr, links);
+			LinkSet(links);
 			break;
 		case NODE_TYPE::MASTER:
-			str_set(nodes_ptr, links);
+			StrSet(nodes_ptr, links);
 			break;
 		}
 	}
@@ -441,7 +442,12 @@ namespace	epion::NodeCustom
 	//test
 	void	NodeBase::ResouceRender(ImVec2& offset, ImDrawList*	draw_list)
 	{
-		Device::GetContext()->OMSetRenderTargets(1, m_resouce->RenderTargetView.GetAddressOf(), Dxgi::get_dsv().Get());
+		//ID3D11RenderTargetView* dummyRTVs[D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT] = { nullptr };
+		//ID3D11ShaderResourceView* dummySRVs[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT] = { nullptr };
+
+		//Device::GetContext()->OMSetRenderTargets(_countof(dummyRTVs), dummyRTVs, nullptr);
+		//Device::GetContext()->PSSetShaderResources(0, _countof(dummySRVs), dummySRVs);
+		Device::GetContext()->OMSetRenderTargets(0, m_resouce->RenderTargetView.GetAddressOf(), Dxgi::get_dsv().Get());
 		float color[4] = { 1,0,0,0 };
 		Device::GetContext()->ClearRenderTargetView(m_resouce->RenderTargetView.Get(), color);
 		Device::GetContext()->ClearDepthStencilView(Dxgi::get_dsv().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
@@ -487,7 +493,7 @@ namespace	epion::NodeCustom
 	}
 
 
-	void NodeBase::type_set(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
+	void NodeBase::TypeSet(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		//ìÆìIÇ»node
 		/*
@@ -574,7 +580,7 @@ namespace	epion::NodeCustom
 	}
 
 	//à¯êîÇ…ì¸ÇÍÇÈÇ∆Ç´
-	void	NodeBase::str_set(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
+	void	NodeBase::StrSet(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		for (auto& l : links)
 		{
@@ -641,7 +647,7 @@ namespace	epion::NodeCustom
 		m_function_call_str.pop_back();
 		m_function_call_str += ");\n";
 	}
-	void NodeBase::link_set(std::vector<NodeLink>&	links)
+	void NodeBase::LinkSet(std::vector<NodeLink>&	links)
 	{
 		for (auto& l : links)
 		{
@@ -659,8 +665,7 @@ namespace	epion::NodeCustom
 	NodeLink::NodeLink(int output_id, int output_slot, int input_id, int input_slot)
 		:m_output({ output_id ,output_slot }), m_output_type(SLOT_TYPE::VECTOR1),
 		m_input({ input_id, input_slot }), m_input_type(SLOT_TYPE::VECTOR1),
-		m_is_hit(false),
-		m_is_delete(false)
+		m_is_hit(false)
 	{
 	}
 

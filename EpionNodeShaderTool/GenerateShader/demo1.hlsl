@@ -1,27 +1,28 @@
 struct PSInput
 {
     float4 position : SV_POSITION;
+    float4 normal : NORMAL;
     float2 uv : TEXCOORD0;
-    float4 color : COLOR0;
 };
+
 cbuffer TimeCBuffer : register(b0)
 {
     float4 Time;
     float2 ScreenSize;
     float2 Dummy0;
 };
-cbuffer LightCBuffer : register(b1)
-{
-    float4 LightColor;
-    float4 LightDir;
-    float4 AmbientColor;
-};
-cbuffer CameraCBuffer : register(b2)
-{
-    float4 Pos;
-    float4 Target;
-    float4 Up;
-};
+//cbuffer LightCBuffer : register(b1)
+//{
+//    float4 LightColor;
+//    float4 LightDir;
+//    float4 AmbientColor;
+//};
+//cbuffer CameraCBuffer : register(b2)
+//{
+//    float4 Pos;
+//    float4 Target;
+//    float4 Up;
+//};
 cbuffer WorldCBuffer : register(b3)
 {
     row_major float4x4 WorldViewProjection;

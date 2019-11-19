@@ -12,14 +12,6 @@ namespace
 {
 	unsigned	int	stride = sizeof(epion::SquareVertex);
 	unsigned	int	offset = 0;
-	bool CreateConstantBuffer(epion::com_ptr<ID3D11Buffer>  ppCB, u_int size)
-	{
-		//ID3D11Device* device = pSystem->GetDevice();
-		// 定数バッファ生成
-
-		return true;
-	}
-
 }
 
 
@@ -51,7 +43,7 @@ namespace	epion
 
 		vertex_buffer->create<SquareVertex>(vertices);
 
-		input_layout->create(shader_refrection->get_layout(), m_blob);
+		input_layout->Create(shader_refrection->get_layout(), m_blob);
 
 	}
 
@@ -77,8 +69,8 @@ namespace	epion
 			d_xy.y + d_wh.y,	//right-bottom
 		};
 
-		arr_x = 2.0f	*arr_x / static_cast<float>(Renderer::get_screen_size().x) - 1.0f;
-		arr_y = 1.0f - 2.0f	*arr_y / static_cast<float>(Renderer::get_screen_size().y);
+		arr_x = 2.0f	*arr_x / static_cast<float>(Renderer::GetScreenSize().x) - 1.0f;
+		arr_y = 1.0f - 2.0f	*arr_y / static_cast<float>(Renderer::GetScreenSize().y);
 
 
 		std::array<SquareVertex, 4>	v =
@@ -105,21 +97,16 @@ namespace	epion
 		v[2].uv = { 0,1 };
 		v[3].uv = { 1,1 };
 
-		//コンスタントバッファ更新
-	//	auto size = sizeof(SquareVertex) * 4;
-
-				//vertex_shader->map_update(vertex_buffer->get_buffer_ptr(), v.data(), sizeof(SquareVertex) * 4);
-
 		D3D11_MAPPED_SUBRESOURCE	map_resouce = {};
 		Device::GetContext()->Map(vertex_buffer->get_buffer_ptr().Get(), 0, D3D11_MAP::D3D11_MAP_WRITE_DISCARD, 0, &map_resouce);
 		memcpy(map_resouce.pData, v.data(), sizeof(SquareVertex) * 4);
 		Device::GetContext()->Unmap(vertex_buffer->get_buffer_ptr().Get(), 0);
 
 
-		vertex_buffer->set_state(stride, offset);
-		input_layout->set_state();
+		vertex_buffer->SetState(stride, offset);
+		input_layout->SetState();
 
-		Renderer::set_state();
+		Renderer::SetState();
 
 		Renderer::set_2d_draw();
 

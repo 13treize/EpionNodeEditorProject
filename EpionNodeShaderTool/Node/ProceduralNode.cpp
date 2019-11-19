@@ -81,7 +81,7 @@ namespace	epion::NodeCustom
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr3(m_out_str[0]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_set(nodes_ptr, links);
+		StrSet(nodes_ptr, links);
 	}
 
 	std::string	CheckerboardNode::GetFunctionDefStr()
@@ -242,7 +242,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetDefineOutStr2(m_out_str[2]);
 		m_function_call_str += NodeFunction::SetDefineOutStr2(m_out_str[3]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_set(nodes_ptr, links);
+		StrSet(nodes_ptr, links);
 	}
 	std::string	HexagonNode::GetFunctionDefStr()
 	{
@@ -330,7 +330,7 @@ namespace	epion::NodeCustom
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_set(nodes_ptr, links);
+		StrSet(nodes_ptr, links);
 	}
 	std::string	PolygonNode::GetFunctionDefStr()
 	{

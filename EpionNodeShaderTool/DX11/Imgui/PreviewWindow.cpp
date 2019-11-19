@@ -18,13 +18,15 @@
 
 #include	"../../ShaderGenerate/ShaderGenerate.h"
 #include	"../square.h"
+#include	"../Cube.h"
 #include	"../texture.h"
-
+#include	"../../CameraManager.h"
 
 namespace	epion
 {
 
 	std::unique_ptr<Square>			Preview::m_preview;
+
 	std::unique_ptr<VertexShader>	Preview::m_vertex;
 	std::unique_ptr<PixelShader>	Preview::m_pixel;
 
@@ -37,9 +39,9 @@ namespace	epion
 	{
 		m_used_tex = use_tex;
 		m_used_tex = std::clamp(m_used_tex, 0, 15);
-		NodeCustom::Dx11::ConstantBufferManager::Create();
 		m_vertex = std::make_unique<VertexShader>(L"HLSLShader\\square_vertex_shader.hlsl");
 		m_pixel = std::make_unique<PixelShader>(ps_name);
+
 		m_preview = std::make_unique<Square>(m_vertex->GetBlob());
 		for (int i = 0; i < m_used_tex; i++)
 		{
@@ -53,8 +55,6 @@ namespace	epion
 	void	Preview::Render()
 	{
 		time.x += 0.01f;
-		math::FVector2 a = { 1920,1080 };
-		NodeCustom::Dx11::ConstantBufferManager::UpdateCBuffer0(time, a);
 		m_vertex->SetState();
 		m_pixel->SetState();
 		for (int i = 0; i < m_used_tex; i++)
@@ -63,5 +63,6 @@ namespace	epion
 			NodeCustom::Dx11::SamplerStateManager::SetState(i);
 		}
 		m_preview->Render(math::FVector2(1450, 650), math::FVector2(400, 400), 0, FixColor::Red);
+
 	}
 }

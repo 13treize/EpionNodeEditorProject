@@ -6,12 +6,11 @@ namespace	epion
 	{
 	public:
 		static	void	Init();
-
-		static	void	release();
+		static	void	Release();
 
 		//	毎フレーム必要な処理
-		static	void	begin();
-		static	void	end();
+		static	void	Begin();
+		static	void	End();
 	private:
 	};
 

@@ -22,25 +22,25 @@ namespace	epion
 		void activate();
 
 
-		DirectX::XMFLOAT4X4& get_view()
+		DirectX::XMFLOAT4X4& GetView()
 		{
 			return matView;
 		}
 
-		DirectX::XMFLOAT4X4& get_projection()
+		DirectX::XMFLOAT4X4& GetProjection()
 		{
 			return matProjection;
 		}
 
 		//getä÷êî
-		math::FVector3&	get_pos();
-		math::FVector3&	get_target();
-		math::FVector3&	get_up();
+		math::FVector3&	GetPos();
+		math::FVector3&	GetTarget();
+		math::FVector3&	GetUp();
 
 		//setä÷êî
-		void	set_pos(math::FVector3&		pos_);
-		void	set_target(math::FVector3&	target_);
-		void	set_up(math::FVector3&		up_);
+		void	SetPos(math::FVector3&		pos_);
+		void	SetTarget(math::FVector3&	target_);
+		void	SetUp(math::FVector3&		up_);
 
 	protected:
 		DirectX::XMFLOAT4X4	matView;		//éãñÏïœä∑çsóÒ
@@ -78,9 +78,9 @@ namespace	epion
 		static	void	Update();
 
 		//getä÷êî
-		static	DirectX::XMFLOAT4X4& get_view();
+		static	DirectX::XMFLOAT4X4& GetView();
 
-		static	DirectX::XMFLOAT4X4& get_projection();
+		static	DirectX::XMFLOAT4X4& GetProjection();
 
 	private:
 		static	std::unique_ptr<BasicCamera>	basic_camera;

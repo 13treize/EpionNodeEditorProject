@@ -18,7 +18,7 @@ namespace	epion
 		~Rasterizer();
 
 		bool	create();
-		void	set_state(RASTER_STATE	state_ = SOLID);
+		void	SetState(RASTER_STATE	state_ = SOLID);
 
 	private:
 		D3D11_RASTERIZER_DESC				r_desc[RASTER_STATE::RS_END] = {};	//	https://msdn.microsoft.com/en-us/library/windows/desktop/ff476198(v=vs.85).aspx

@@ -1,5 +1,4 @@
-#include	<memory>
-#include	<string>
+#include	"../All.h"
 #include	"../epion.h"
 
 
@@ -9,10 +8,10 @@
 
 namespace	epion
 {
-	ObjMesh::ObjMesh(std::wstring	obj_filename_)
+	ObjMesh::ObjMesh(const std::wstring&	obj_filename_, com_ptr<ID3DBlob>& blob)
 	{
 		obj_data = std::make_unique<ObjLoader>(obj_filename_);
-		//obj_mtl_data = std::make_unique<ObjMaterialLoader>(obj_data->mtl_filenames[0], obj_data->materials);
+		obj_mtl_data = std::make_unique<ObjMaterialLoader>(obj_data->mtl_filenames[0], obj_data->materials);
 		//for (auto& material : obj_data->materials)
 		//{
 		//	if (!material.map_Kd.file_name.empty())
@@ -22,15 +21,11 @@ namespace	epion
 		//	}
 		//}
 
-		vertex_shader.Create(L"HLSLShader\\ObjVertexShader.hlsl");
-		pixel_shader.Create(L"HLSLShader\\ObjNoTexturePixelShader.hlsl");
+		shader_refrection.set_layout(blob);
 
-		shader_refrection.set_layout(vertex_shader.GetBlob());
-
-		input_layout.create(shader_refrection.get_layout(), vertex_shader.GetBlob());
+		input_layout.Create(shader_refrection.get_layout(), blob);
 
 		depth_stencil.create();
-		assert(sampler.create());
 		assert(vertex_buffer.create<epion::obj_vertex>(obj_data->vertices));
 		assert(index_buffer.create(obj_data->indices));
 		assert(constant_buffer.create<constant_buffer_3d>());
@@ -42,13 +37,11 @@ namespace	epion
 		unsigned	int	stride = sizeof(obj_vertex);
 		unsigned	int	offset = 0;
 
-		vertex_buffer.set_state(stride, offset);
-		index_buffer.set_state(DXGI_FORMAT::DXGI_FORMAT_R32_UINT);
+		vertex_buffer.SetState(stride, offset);
+		index_buffer.SetState(DXGI_FORMAT::DXGI_FORMAT_R32_UINT);
 		Renderer::set_state_list();
-		input_layout.set_state();
-		vertex_shader.SetState();
-		pixel_shader.SetState();
-		depth_stencil.set_state();
+		input_layout.SetState();
+		depth_stencil.SetState();
 		for (auto& material : obj_data->materials)
 		{
 			D3D11_MAPPED_SUBRESOURCE	mapped_buffer = {};
@@ -61,9 +54,7 @@ namespace	epion
 
 			Device::GetContext()->Unmap(constant_buffer.get_buffer_ptr().Get(), 0);
 
-			constant_buffer.set_state();
-			Device::GetContext()->PSSetShaderResources(0, 1, material.map_Kd.shader_resource_view.GetAddressOf());
-			sampler.set_state();
+			constant_buffer.SetState(3);
 
 			for (subset &subset : obj_data->subsets)
 			{

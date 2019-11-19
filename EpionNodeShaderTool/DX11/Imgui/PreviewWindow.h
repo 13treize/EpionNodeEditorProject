@@ -5,6 +5,7 @@ namespace	epion
 	class	Square;
 	class	VertexShader;
 	class	PixelShader;
+	class	Cube;
 
 	class	Preview	final
 	{
@@ -19,6 +20,7 @@ namespace	epion
 		static std::unique_ptr<Square> m_preview;
 		static std::unique_ptr<VertexShader> m_vertex;
 		static std::unique_ptr<PixelShader> m_pixel;
+
 		static std::unique_ptr<Texture2D> m_preview_tex[D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT];
 
 	};

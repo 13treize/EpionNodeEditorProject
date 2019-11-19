@@ -4,13 +4,13 @@ cbuffer Buffers : register(b0)
     float4 Time;
 };
 
-PSInput VS(VS_INPUT input)// : SV_POSITION
+PSInput VS(VSInput input)// : SV_POSITION
 {
     PSInput output;
 
 	output.position =input.position;
 	output.uv = input.uv;
-	output.color = input.color;
+    output.normal = float4(0,0,0,0);
 
 	return output;
 }

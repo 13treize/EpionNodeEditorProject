@@ -295,8 +295,8 @@ namespace epion::NodeCustom
 			d_xy.y + d_wh.y,	//right-bottom
 		};
 
-		arr_x = 2.0f	*arr_x / static_cast<float>(Renderer::get_screen_size().x) - 1.0f;
-		arr_y = 1.0f - 2.0f	*arr_y / static_cast<float>(Renderer::get_screen_size().y);
+		arr_x = 2.0f	*arr_x / static_cast<float>(Renderer::GetScreenSize().x) - 1.0f;
+		arr_y = 1.0f - 2.0f	*arr_y / static_cast<float>(Renderer::GetScreenSize().y);
 
 
 		std::array<SquareVertex, 4>	v =
@@ -350,7 +350,7 @@ namespace epion::NodeCustom
 		Device::GetContext()->VSSetConstantBuffers(0, 1, m_constant_buffer.GetAddressOf());
 		Device::GetContext()->PSSetConstantBuffers(0, 1, m_constant_buffer.GetAddressOf());
 
-		Renderer::set_state();
+		Renderer::SetState();
 
 		Renderer::set_2d_draw();
 

@@ -20,7 +20,7 @@ namespace	epion
 	class	Singleton
 	{
 	public:
-		static	T&	get_inst()	noexcept
+		static	T&	GetInst()	noexcept
 		{
 			static	T	inst;
 			return	inst;

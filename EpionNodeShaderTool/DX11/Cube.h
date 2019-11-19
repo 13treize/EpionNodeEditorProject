@@ -7,7 +7,7 @@ namespace	epion
 	class	Cube	final
 	{
 	public:
-		Cube();
+		Cube(com_ptr<ID3DBlob>& blob);
 		~Cube();
 
 		void	Update();
@@ -16,24 +16,24 @@ namespace	epion
 			const	DirectX::XMFLOAT4X4& projection);
 
 		//setä÷êî
-		void	set_pos(math::FVector3&	pos_);
-		void	set_scale(math::FVector3&	scale_);
-		void	set_angle(math::FVector3&	angle_);
+		void	SetPos(math::FVector3&	pos_);
+		void	SetScale(math::FVector3&	scale_);
+		void	SetAngle(math::FVector3&	angle_);
 
 		//getä÷êî
-		math::FVector3&	get_pos();
-		math::FVector3&	get_scale();
-		math::FVector3&	get_angle();
-		std::wstring&	get_file_name();
+		math::FVector3&	GetPos();
+		math::FVector3&	GetScale();
+		math::FVector3&	GetAngle();
+		std::wstring&	GetFileName();
 
-		std::unique_ptr<ObjMesh>	obj;
+		std::unique_ptr<ObjMesh>	m_obj;
 
 	private:
-		std::wstring	file_name;
+		std::wstring	m_file_name;
 
-		math::FVector3		pos;
-		math::FVector3		scale;
-		math::FVector3		angle;
-		DirectX::XMFLOAT4X4	matWorld;
+		math::FVector3		m_pos;
+		math::FVector3		m_scale;
+		math::FVector3		m_angle;
+		DirectX::XMFLOAT4X4	m_world_matrix;
 	};
 }

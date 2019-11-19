@@ -1,4 +1,6 @@
 #include	"../../All.h"
+#include	"../../epion.h"
+
 #include <cereal/cereal.hpp>
 #include <cereal/archives/json.hpp>
 #include <cereal/types/vector.hpp>
@@ -9,7 +11,6 @@
 #include	"../../../imgui\\imgui_impl_dx11.h"
 #include	"../../../imgui\\imgui_internal.h"
 
-#include	"../../epion.h"
 #include	"EpionNodeEditor.h"
 #include	"epion_imgui_node_context.h"
 
@@ -25,7 +26,7 @@
 
 #pragma warning(disable:4996)
 
-#define	DEBUG 0
+#define	DEBUG 1
 
 
 namespace	epion::NodeCustom
@@ -56,7 +57,6 @@ namespace	epion::NodeCustom
 	ImVec2	NodeEditor::m_drag_offset;
 	ImVec2	NodeEditor::m_screen_pos;
 	ImVec2	NodeEditor::m_context_pos;
-
 }
 
 namespace
@@ -80,7 +80,6 @@ namespace
 	{
 		return ImVec2(vec2.x, vec2.y);
 	}
-
 }
 
 
@@ -110,6 +109,7 @@ namespace	epion::NodeCustom
 		m_window_flags |= ImGuiWindowFlags_MenuBar;
 		m_window_flags |= ImGuiWindowFlags_NoMove;
 		m_window_flags |= ImGuiWindowFlags_NoResize;
+
 	}
 
 	void	NodeEditor::Update(bool* opened,std::string	node_bar_name)
@@ -175,8 +175,10 @@ namespace	epion::NodeCustom
 		draw_list->ChannelsSplit(5);
 
 		// Display grid
-		Grids	grid(64.0f, ImGui::GetCursorScreenPos(), ImGui::GetWindowSize(), IM_COL32(0, 200, 120, 120));
-		grid.ShowGrid(draw_list,m_scrolling);
+		epion::NodeCustom::Grids	grid;
+		grid.Init(64.0f, IM_COL32(0, 200, 120, 120));
+
+		grid.ShowGrid(draw_list, ImGui::GetCursorScreenPos(),ImGui::GetWindowSize(), m_scrolling);
 
 		// Display links
 		draw_node_line(draw_list);
@@ -265,19 +267,12 @@ namespace	epion::NodeCustom
 
 	void	NodeEditor::import_node_data(std::string nodejson)
 	{
-		//if (!m_is_node_import)
-		//{
-			//nodes.resize(100);
-
 			nodes.clear();
 			links.clear();
 
 			epion::FileIO::FileIOJson	json_file;
 
 			json_file.Input(nodejson, nodes, links);
-
-		//m_is_node_import = true;
-
 	}
 
 	void	NodeEditor::default_setting_unlit()
@@ -313,7 +308,6 @@ namespace	epion::NodeCustom
 				m_line_size = 10.0f;
 				if (ImGui::IsMouseClicked(1))
 				{
-					l.m_is_delete = true;
 					m_is_line_delete_menu =true;
 
 				}
@@ -322,7 +316,6 @@ namespace	epion::NodeCustom
 			else
 			{
 				m_line_size = 3.0f;
-				l.m_is_delete = false;
 				l.m_is_hit = false;
 			}
 
@@ -581,12 +574,12 @@ namespace	epion::NodeCustom
 	}
 
 	//get
-	ImVec2&	NodeEditor::get_scrolling()
+	ImVec2&	NodeEditor::GetScrolling()
 	{
 		return	m_scrolling;
 	}
 
-	ImVec2&	NodeEditor::get_offset()
+	ImVec2&	NodeEditor::GetOffset()
 	{
 		return	m_offset;
 	}

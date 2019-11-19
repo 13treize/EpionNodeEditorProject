@@ -92,9 +92,9 @@ namespace	epion
 	//	);
 
 	//	device->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-	//	vertex_shader->set_state();
-	//	input_layout->set_state();
-	//	pixel_shader->set_state();
+	//	vertex_shader->SetState();
+	//	input_layout->SetState();
+	//	pixel_shader->SetState();
 	//	device->PSSetShaderResources(0, 1, &view);
 	//	device->PSSetSamplers(0, 1, &state);
 	//	device->Draw(4, 0);

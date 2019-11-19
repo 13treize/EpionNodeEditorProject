@@ -13,25 +13,26 @@ namespace	epion::NodeCustom
 	Grids::Grids()
 	{
 	}
-	Grids::Grids(float	size, ImVec2	win_pos, ImVec2	canvas_size, ImU32	color)
-		:m_is_show_grid(true), m_grid_size(size), m_win_pos(win_pos), m_canvas_size(canvas_size), m_grid_color(color)
+	Grids::Grids(float	size, ImU32	color)
+		:m_is_show_grid(true), m_grid_size(size),m_grid_color(color)
 	{
 	}
 	Grids::~Grids()
 	{
 	}
 
-	void	Grids::Init(float	size, ImVec2	win_pos, ImVec2	canvas_size, ImU32	color)
+	void	Grids::Init(float	size, ImU32	color)
 	{
 		m_is_show_grid	=true;
 		m_grid_size	=size;
-		m_win_pos = win_pos;
-		m_canvas_size = canvas_size;
 		m_grid_color = color;
 	}
 
-	void	Grids::ShowGrid(ImDrawList*	draw_list, const	ImVec2&	scroll)
+	void	Grids::ShowGrid(ImDrawList*	draw_list, ImVec2	win_pos, ImVec2	canvas_size, const	ImVec2&	scroll)
 	{
+		m_win_pos = win_pos;
+		m_canvas_size = canvas_size;
+
 		if (m_is_show_grid)
 		{
 			for (float x = fmodf(scroll.x, m_grid_size); x < m_canvas_size.x; x += m_grid_size)

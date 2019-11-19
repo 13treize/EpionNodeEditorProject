@@ -11,7 +11,7 @@ namespace	epion
 
 		bool	create(const	std::vector<unsigned int>&	buffer);
 
-		void	set_state(DXGI_FORMAT	format_ = DXGI_FORMAT::DXGI_FORMAT_R32_UINT);
+		void	SetState(DXGI_FORMAT	format_ = DXGI_FORMAT::DXGI_FORMAT_R32_UINT);
 		com_ptr<ID3D11Buffer>&	get_buffer_ptr();
 
 
@@ -37,7 +37,7 @@ namespace	epion
 		template<class	T>
 		bool	create();
 
-		void	set_state();
+		void	SetState(int slot);
 
 		com_ptr<ID3D11Buffer>&	get_buffer_ptr();
 
@@ -76,7 +76,7 @@ namespace	epion
 		template<class	T>
 		bool	create(std::vector<T>&	buffer);
 
-		void	set_state(unsigned	int	&stride_, unsigned	int	&off_set_);
+		void	SetState(unsigned	int	&stride_, unsigned	int	&off_set_);
 
 		com_ptr<ID3D11Buffer>&	get_buffer_ptr();
 

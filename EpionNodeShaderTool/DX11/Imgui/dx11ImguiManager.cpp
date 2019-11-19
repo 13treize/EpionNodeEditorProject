@@ -21,7 +21,7 @@ namespace	epion
 	}
 
 
-	void	ImguiManager::release()
+	void	ImguiManager::Release()
 	{
 		ImGui_ImplDX11_Shutdown();
 		ImGui_ImplWin32_Shutdown();
@@ -29,7 +29,7 @@ namespace	epion
 	}
 
 	//	最初に必要
-	void	ImguiManager::begin()
+	void	ImguiManager::Begin()
 	{
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
@@ -37,7 +37,7 @@ namespace	epion
 	}
 
 	//	最後に必要
-	void	ImguiManager::end()
+	void	ImguiManager::End()
 	{
 		ImGui::Render();
 		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
