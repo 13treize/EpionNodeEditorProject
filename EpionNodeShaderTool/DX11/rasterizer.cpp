@@ -10,7 +10,7 @@ namespace	epion
 
 	Rasterizer::Rasterizer()
 	{
-		create();
+		Create();
 	}
 
 	Rasterizer::~Rasterizer()
@@ -44,7 +44,7 @@ namespace	epion
 		r_desc[WIRE_FRAME].AntialiasedLineEnable = false;
 	}
 
-	bool	Rasterizer::create()
+	bool	Rasterizer::Create()
 	{
 		HRESULT	hr[2] = {};
 		create_desc();

@@ -1,4 +1,6 @@
 #include "../All.h"
+#include "../epion.h"
+
 #include <cereal/cereal.hpp>
 #include <cereal/types/vector.hpp>
 
@@ -62,13 +64,17 @@ namespace	epion::Shader
 		ofs << CBuffer2SetUp();
 		ofs << CBuffer3SetUp();
 
-		ofs << func_setup();
-		ofs << MainFunctionBegin();
-		ofs << event_begin();
-		ofs << CBuffer0Create();
-		ofs << create();
+		//Node‚ÌŠÖ”‚ð¶¬
+		ofs << FuncSetup();
 
-		ofs << event_end();
+		//PixelShader
+		ofs << MainFunctionBegin();
+		ofs << EventBegin();
+		ofs << CBuffer0Create();
+		ofs << Create();
+		ofs << EventEnd();
+
+
 		ofs.close();
 
 
@@ -170,7 +176,7 @@ namespace	epion::Shader
 		return;
 	}
 
-	std::string	NodeShaderManager::create()
+	std::string	NodeShaderManager::Create()
 	{
 		std::string	ret_str;
 		//MasterNode‚ðŒ©‚Â‚¯‚Ä‚»‚Á‚©‚ç’H‚Á‚Ä¶¬
@@ -197,7 +203,7 @@ namespace	epion::Shader
 		return	ret_str;
 	}
 
-	std::string	NodeShaderManager::func_setup()
+	std::string	NodeShaderManager::FuncSetup()
 	{
 		function_str = "";
 		//texture
@@ -252,7 +258,7 @@ namespace	epion::Shader
 		return	"input.uv";
 	}
 
-	std::string	NodeShaderManager::event_begin()
+	std::string	NodeShaderManager::EventBegin()
 	{
 		std::string	ret_str = m_space + "{\n";
 		m_space += "    ";
@@ -260,7 +266,7 @@ namespace	epion::Shader
 		return	ret_str;
 	}
 
-	std::string	NodeShaderManager::event_end()
+	std::string	NodeShaderManager::EventEnd()
 	{
 		m_space = "";
 		m_space_count--;
@@ -288,10 +294,10 @@ namespace	epion::Shader
 	{
 		std::string	ret_str;
 		ret_str = "struct PSInput\n";
-		ret_str += event_begin();
+		ret_str += EventBegin();
 		ret_str += m_space + "float4 position : SV_POSITION;\n";
+		ret_str += m_space + "float4 normal : NORMAL;\n";
 		ret_str += m_space + "float2 uv : TEXCOORD0;\n";
-		ret_str += m_space + "float4 color : COLOR0;\n";
 		ret_str += event_end2();
 		return	ret_str;
 	}

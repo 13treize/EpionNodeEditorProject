@@ -1,8 +1,5 @@
 #include "square.hlsli"
-cbuffer Buffers : register(b0)
-{
-    float4 Time;
-};
+
 
 PSInput VS(VSInput input)// : SV_POSITION
 {

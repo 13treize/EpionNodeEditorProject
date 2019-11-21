@@ -363,7 +363,6 @@ namespace	epion::NodeCustom
 				MenuCreateNode<MaximumNode>("Maximum", m_offfset, m_create_count, m_is_open_math_range_menu);
 				MenuCreateNode<MinimumNode>("Minimum", m_offfset, m_create_count, m_is_open_math_range_menu);
 				MenuCreateNode<OneMinusNode>("OneMinus", m_offfset, m_create_count, m_is_open_math_range_menu);
-
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();

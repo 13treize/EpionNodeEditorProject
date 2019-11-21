@@ -6,14 +6,14 @@ namespace	epion
 {
 	Sampler::Sampler()
 	{
-		create();
+		Create();
 	}
 	Sampler::~Sampler()
 	{
 	}
 
 
-	bool	Sampler::create()
+	bool	Sampler::Create()
 	{
 		HRESULT	hr = {};
 		sampler_desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
@@ -45,14 +45,14 @@ namespace	epion
 
 	DepthStencil::DepthStencil()
 	{
-		create();
+		Create();
 	}
 
 	DepthStencil::~DepthStencil()
 	{
 	}
 
-	bool	DepthStencil::create()
+	bool	DepthStencil::Create()
 	{
 		HRESULT	hr = {};
 		d_desc.DepthEnable = true;														//深度テストが使用可能かどうか

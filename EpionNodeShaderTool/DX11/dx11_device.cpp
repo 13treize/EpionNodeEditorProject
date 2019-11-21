@@ -12,7 +12,7 @@ namespace	epion
 	com_ptr<ID3D11Device>			Device::device;
 	com_ptr<ID3D11DeviceContext>	Device::device_context;
 
-	HRESULT	Device::create()
+	HRESULT	Device::Create()
 	{
 		unsigned	int	create_device_flags = 0;
 #ifdef	_DEBUG
@@ -53,7 +53,7 @@ namespace	epion
 		constexpr	unsigned	int	num_driver_types = static_cast<unsigned	int>(driver_types.size());
 		I_FOR(num_driver_types)
 		{
-			hr = create();
+			hr = Create();
 			if (SUCCEEDED(hr))
 			{
 				break;

@@ -54,8 +54,8 @@ namespace	epion::NodeCustom
 	void	NoiseSineWaveNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0]);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], m_minmax, 2);
+		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0]);
+		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], m_minmax, 2);
 	}
 
 	void	NoiseSineWaveNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -125,7 +125,7 @@ namespace	epion::NodeCustom
 		m_input_name[0] = "A" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
 		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
 
-		if (!m_is_input[0])
+		if (!m_is_slot_input[0])
 		{
 			NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0]);
 		}

@@ -22,7 +22,7 @@ namespace epion
 		LoadNodeResouce();
 		~LoadNodeResouce();
 
-		void create(epion::com_ptr<ID3D11Device>& device);
+		void Create(epion::com_ptr<ID3D11Device>& device);
 		void draw(epion::com_ptr<ID3D11DeviceContext>& device,
 			com_ptr<ID3D11ShaderResourceView>&view,
 			com_ptr<ID3D11SamplerState> &state

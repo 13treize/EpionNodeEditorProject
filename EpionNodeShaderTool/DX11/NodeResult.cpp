@@ -270,7 +270,7 @@ namespace epion::NodeCustom
 				{ { 0,	0,	0,	0 },{ 0,	0 },{ 0,	0,	0,	0 } },
 			}
 		};
-		v_buffer.create<SquareVertex>(vertices,m_vertex_buffer);
+		v_buffer.Create<SquareVertex>(vertices,m_vertex_buffer);
 		ConstantBufferCreate(Device::GetDevice(),m_constant_buffer, sizeof(CBuffer));
 		m_shader_manager.ShaderCreate(Device::GetDevice(), name, m_vertex_shader, m_pixel_shader);
 		m_shader_reflection.set_layout(m_shader_manager.vertex_blob);

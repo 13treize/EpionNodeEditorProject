@@ -4,8 +4,8 @@
 
 namespace
 {
-	epion::math::FVector3	pos = { 0.0f,	10.0f,	10.0f };
-	epion::math::FVector3	target = { 0.0f,	1.0f,	0.0f };
+	epion::math::FVector3	pos = {0.0f,	0.0f,	10.0f };
+	epion::math::FVector3	target = { 0.0f,	0.0f,	0.0f };
 	epion::math::FVector3	up = { 0.0f,	1.0f,	0.0f };
 
 }

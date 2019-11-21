@@ -88,7 +88,7 @@ namespace	epion
 
 		com_ptr<ID3D11Texture2D>	depth_stencil_buffer;
 
-		hr = Device::GetDevice()->CreateTexture2D(&depth_2d.create(back_buffer_desc,
+		hr = Device::GetDevice()->CreateTexture2D(&depth_2d.Create(back_buffer_desc,
 			D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL),
 			nullptr,
 			depth_stencil_buffer.ReleaseAndGetAddressOf());
@@ -99,7 +99,7 @@ namespace	epion
 		}
 
 		hr = Device::GetDevice()->CreateDepthStencilView(depth_stencil_buffer.Get(),
-			&depth_view.create(depth_2d.get_texture_desc()),
+			&depth_view.Create(depth_2d.get_texture_desc()),
 			depth_stencil_view.ReleaseAndGetAddressOf());
 		if (FAILED(hr))
 		{
@@ -145,7 +145,7 @@ namespace	epion
 		return	swap_desc;
 	}
 
-	D3D11_DEPTH_STENCIL_VIEW_DESC&	DepthView::create(D3D11_TEXTURE2D_DESC&	t_desc)
+	D3D11_DEPTH_STENCIL_VIEW_DESC&	DepthView::Create(D3D11_TEXTURE2D_DESC&	t_desc)
 	{
 		depth_stencil.Format = t_desc.Format;
 		depth_stencil.ViewDimension = D3D11_DSV_DIMENSION::D3D11_DSV_DIMENSION_TEXTURE2DMS;
@@ -154,7 +154,7 @@ namespace	epion
 		return	depth_stencil;
 	}
 
-	D3D11_TEXTURE2D_DESC&	Texture_2d::create(
+	D3D11_TEXTURE2D_DESC&	Texture_2d::Create(
 		D3D11_TEXTURE2D_DESC&	back_buffer_desc,
 		D3D11_BIND_FLAG			bind_flag)
 	{

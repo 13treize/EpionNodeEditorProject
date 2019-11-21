@@ -321,6 +321,9 @@
     <ClCompile Include="Node\MathRangeNode.cpp">
       <Filter>ソース ファイル\Node\Math</Filter>
     </ClCompile>
+    <ClCompile Include="Node\MathRoundNode.cpp">
+      <Filter>ソース ファイル\Node\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -546,6 +549,9 @@
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Node\MathRangeNode.h">
+      <Filter>ヘッダー ファイル\Node\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\MathRoundNode.h">
       <Filter>ヘッダー ファイル\Node\Math</Filter>
     </ClInclude>
   </ItemGroup>

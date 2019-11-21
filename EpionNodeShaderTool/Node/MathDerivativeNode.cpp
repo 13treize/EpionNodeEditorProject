@@ -47,7 +47,7 @@ namespace	epion::NodeCustom
 		m_input_name[0] = "In" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
 		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
 
-		if (!m_is_input[0])
+		if (!m_is_slot_input[0])
 		{
 			switch (m_input_slot_type[0])
 			{
@@ -113,7 +113,7 @@ namespace	epion::NodeCustom
 		m_input_name[0] = "In" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
 		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
 
-		if (!m_is_input[0])
+		if (!m_is_slot_input[0])
 		{
 			switch (m_input_slot_type[0])
 			{
@@ -179,7 +179,7 @@ namespace	epion::NodeCustom
 		m_input_name[0] = "In" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
 		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
 
-		if (!m_is_input[0])
+		if (!m_is_slot_input[0])
 		{
 			switch (m_input_slot_type[0])
 			{

@@ -227,8 +227,7 @@ namespace	epion::NodeCustom
 	{
 		for (int i = 0; i < m_inputs_count; i++)
 		{
-			m_is_input.push_back(false);
-
+			m_is_slot_input.push_back(false);
 			m_input_str.push_back("");
 			m_input_pos.push_back({});
 			m_input_slot_color.push_back(0);
@@ -305,6 +304,7 @@ namespace	epion::NodeCustom
 
 	void	NodeBase::DrawUpdate(ImVec2 offset, ImDrawList*	draw_list)
 	{
+		assert(m_is_slot_input.size() == m_inputs_count);
 		draw_list->ChannelsSetCurrent(1);
 		for (int i = 0; i < m_inputs_count; i++)
 		{
@@ -337,7 +337,7 @@ namespace	epion::NodeCustom
 		draw_list->ChannelsSetCurrent(0); // input_slot
 		for (int i = 0; i < m_inputs_count; i++)
 		{
-			if (!m_is_input[i])
+			if (!m_is_slot_input[i])
 			{
 				draw_list->AddLine(m_input_pos[i] + ImVec2(-20, 0), m_input_pos[i], ImColor::U32::GREEN, 1.0f);
 				NodeFunction::InputRectDraw(draw_list, m_input_pos[i], m_input_slot_type[i]);
@@ -366,7 +366,7 @@ namespace	epion::NodeCustom
 	}
 
 	//mainä÷êî
-	void	NodeBase::function_call_update(std::string	func_name)
+	void	NodeBase::FunctionCallUpdate(std::string	func_name)
 	{
 	}
 
@@ -466,7 +466,7 @@ namespace	epion::NodeCustom
 	{
 		for (int i = 0; i < m_inputs_count; i++)
 		{
-			m_is_input.push_back(false);
+			m_is_slot_input.push_back(false);
 
 			m_input_str.push_back("");
 			m_input_pos.push_back({});
@@ -587,7 +587,7 @@ namespace	epion::NodeCustom
 			if (m_ID == l.GetInputID())
 			{
 				//éhÇ≥Ç¡ÇΩèÛë‘
-				m_is_input[l.GetInputSlot()] = true;
+				m_is_slot_input[l.GetInputSlot()] = true;
 				//linedata_set
 				m_input_links[l.GetInputSlot()] = { l.GetOutputID(),l.GetInputSlot() };
 				//output nodeÇ©ÇÁïœêîéÊìæ
@@ -632,7 +632,7 @@ namespace	epion::NodeCustom
 			}
 			else
 			{
-				m_is_input[l.GetInputSlot()]	=false;
+				m_is_slot_input[l.GetInputSlot()]	=false;
 			}
 		}
 
@@ -715,7 +715,7 @@ namespace	epion::NodeCustom
 	}
 
 	//Debug Text
-	std::string  NodeLink::StateStr()
+	std::string NodeLink::StateStr()
 	{
 		return
 			"out id " + std::to_string(m_output.id) + " " +

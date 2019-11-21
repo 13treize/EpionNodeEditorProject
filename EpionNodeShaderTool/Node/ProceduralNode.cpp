@@ -65,10 +65,10 @@ namespace	epion::NodeCustom
 	void	CheckerboardNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		if (!m_is_input[1])	m_color_picker[0].SetInputSlotColor2(m_input_pos[1], m_open_popup[0], m_colora, 1);
-		if (!m_is_input[2])	m_color_picker[1].SetInputSlotColor2(m_input_pos[2], m_open_popup[1], m_colorb, 2);
-		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], m_frequency, 3);
+		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_slot_input[1])	m_color_picker[0].SetInputSlotColor2(m_input_pos[1], m_open_popup[0], m_colora, 1);
+		if (!m_is_slot_input[2])	m_color_picker[1].SetInputSlotColor2(m_input_pos[2], m_open_popup[1], m_colorb, 2);
+		if (!m_is_slot_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], m_frequency, 3);
 	}
 
 	void	CheckerboardNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -145,9 +145,9 @@ namespace	epion::NodeCustom
 	void	EllipseNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_width);
-		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_height);
+		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_width);
+		if (!m_is_slot_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_height);
 	}
 
 	void	EllipseNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -223,8 +223,8 @@ namespace	epion::NodeCustom
 	void	HexagonNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_scale);
+		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_scale);
 
 	}
 
@@ -314,10 +314,10 @@ namespace	epion::NodeCustom
 	void	PolygonNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_sides);
-		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_width);
-		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::get_space(3), m_height);
+		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_sides);
+		if (!m_is_slot_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_width);
+		if (!m_is_slot_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::get_space(3), m_height);
 	}
 
 	void	PolygonNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -395,11 +395,11 @@ namespace	epion::NodeCustom
 	void	RippleNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_width);
-		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_height);
-		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], m_center, 3);
-		if (!m_is_input[4])	NodeFunction::SetInputSlotFloat(m_input_pos[4], StringConverter::get_space(4), m_scale);
+		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_width);
+		if (!m_is_slot_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_height);
+		if (!m_is_slot_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], m_center, 3);
+		if (!m_is_slot_input[4])	NodeFunction::SetInputSlotFloat(m_input_pos[4], StringConverter::get_space(4), m_scale);
 	}
 
 	void	RippleNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -468,10 +468,10 @@ namespace	epion::NodeCustom
 	void	RoundedRectangleNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_width);
-		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_height);
-		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::get_space(3), m_radius);
+		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_width);
+		if (!m_is_slot_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_height);
+		if (!m_is_slot_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::get_space(3), m_radius);
 	}
 
 	void	RoundedRectangleNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)

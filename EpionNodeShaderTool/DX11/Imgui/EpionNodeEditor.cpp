@@ -181,11 +181,11 @@ namespace	epion::NodeCustom
 		grid.ShowGrid(draw_list, ImGui::GetCursorScreenPos(),ImGui::GetWindowSize(), m_scrolling);
 
 		// Display links
-		draw_node_line(draw_list);
+		DrawLinkLine(draw_list);
 
-		mouse_update();
+		MouseUpdate();
 
-		create_node_data(draw_list, m_node_hovered_in_scene);
+		CreateNodeData(draw_list, m_node_hovered_in_scene);
 
 		if (m_node_hovered_list != INIT_NUM)
 		{
@@ -221,7 +221,7 @@ namespace	epion::NodeCustom
 	{
 
 	}
-	void	NodeEditor::mouse_update()
+	void	NodeEditor::MouseUpdate()
 	{
 		if (ImGui::IsMouseDown(0))
 		{
@@ -289,7 +289,7 @@ namespace	epion::NodeCustom
 	}
 
 	//ƒm[ƒh‚ðŒq‚®ü‚Ì•`‰æ
-	void	NodeEditor::draw_node_line(ImDrawList*	draw_list)
+	void	NodeEditor::DrawLinkLine(ImDrawList*	draw_list)
 	{
 		draw_list->ChannelsSetCurrent(2); // Line
 #ifdef  DEBUG
@@ -354,7 +354,7 @@ namespace	epion::NodeCustom
 		}
 	}
 
-	void	NodeEditor::create_node_data(ImDrawList*	draw_list,int scene)
+	void	NodeEditor::CreateNodeData(ImDrawList*	draw_list,int scene)
 	{
 		static	bool is_init_size = false;
 

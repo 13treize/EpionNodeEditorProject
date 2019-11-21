@@ -17,8 +17,11 @@ namespace	epion
 
 	private:
 		std::unique_ptr<VertexShader> m_vertex;
-		std::unique_ptr<PixelShader> m_pixel;
-		std::unique_ptr<Cube>	m_preview_3d;
+		std::array<std::unique_ptr<PixelShader>	,20>	m_pixel;
+		std::unique_ptr<Cube> m_preview_3d;
+		std::array<math::FVector3, 20>	m_pos;
+		//std::array<math::FVector3, 20>	m_scale;
+		std::array<math::FVector3, 20>	m_angle;
 
 	};
 }

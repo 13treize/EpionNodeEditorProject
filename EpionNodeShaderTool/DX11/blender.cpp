@@ -24,7 +24,7 @@ namespace	epion
 	bool	Blender::all_create()
 	{
 		bool	is_check[9];
-		is_check[0] = create(blend_states[BS_NONE],
+		is_check[0] = Create(blend_states[BS_NONE],
 			false,
 			D3D11_BLEND::D3D11_BLEND_ONE,
 			D3D11_BLEND::D3D11_BLEND_ZERO,
@@ -33,7 +33,7 @@ namespace	epion
 			D3D11_BLEND::D3D11_BLEND_ZERO,
 			D3D11_BLEND_OP::D3D11_BLEND_OP_ADD);
 
-		is_check[1] = create(blend_states[BS_ALPHA],
+		is_check[1] = Create(blend_states[BS_ALPHA],
 			true,
 			D3D11_BLEND::D3D11_BLEND_SRC_ALPHA,
 			D3D11_BLEND::D3D11_BLEND_INV_SRC_ALPHA,
@@ -43,7 +43,7 @@ namespace	epion
 			D3D11_BLEND_OP::D3D11_BLEND_OP_ADD);
 
 
-		is_check[2] = create(blend_states[BS_ADD],
+		is_check[2] = Create(blend_states[BS_ADD],
 			true,
 			D3D11_BLEND::D3D11_BLEND_SRC_ALPHA,
 			D3D11_BLEND::D3D11_BLEND_ONE,
@@ -52,7 +52,7 @@ namespace	epion
 			D3D11_BLEND::D3D11_BLEND_ONE,
 			D3D11_BLEND_OP::D3D11_BLEND_OP_ADD);
 
-		is_check[3] = create(blend_states[BS_SUBTRACT],
+		is_check[3] = Create(blend_states[BS_SUBTRACT],
 			true,
 			D3D11_BLEND::D3D11_BLEND_SRC_ALPHA,
 			D3D11_BLEND::D3D11_BLEND_ONE,
@@ -61,7 +61,7 @@ namespace	epion
 			D3D11_BLEND::D3D11_BLEND_ONE,
 			D3D11_BLEND_OP::D3D11_BLEND_OP_ADD);
 
-		is_check[4] = create(blend_states[BS_REPLACE],
+		is_check[4] = Create(blend_states[BS_REPLACE],
 			true,
 			D3D11_BLEND::D3D11_BLEND_SRC_ALPHA,
 			D3D11_BLEND::D3D11_BLEND_ZERO,
@@ -70,7 +70,7 @@ namespace	epion
 			D3D11_BLEND::D3D11_BLEND_ZERO,
 			D3D11_BLEND_OP::D3D11_BLEND_OP_ADD);
 
-		is_check[5] = create(blend_states[BS_MULTIPLY],
+		is_check[5] = Create(blend_states[BS_MULTIPLY],
 			true,
 			D3D11_BLEND::D3D11_BLEND_ZERO,
 			D3D11_BLEND::D3D11_BLEND_SRC_COLOR,
@@ -79,7 +79,7 @@ namespace	epion
 			D3D11_BLEND::D3D11_BLEND_ZERO,
 			D3D11_BLEND_OP::D3D11_BLEND_OP_ADD);
 
-		is_check[6] = create(blend_states[BS_LIGHTEN],
+		is_check[6] = Create(blend_states[BS_LIGHTEN],
 			true,
 			D3D11_BLEND::D3D11_BLEND_ONE,
 			D3D11_BLEND::D3D11_BLEND_ONE,
@@ -89,7 +89,7 @@ namespace	epion
 			D3D11_BLEND_OP::D3D11_BLEND_OP_MAX);
 
 
-		is_check[7] = create(blend_states[BS_DARKEN],
+		is_check[7] = Create(blend_states[BS_DARKEN],
 			true,
 			D3D11_BLEND::D3D11_BLEND_ONE,
 			D3D11_BLEND::D3D11_BLEND_ONE,
@@ -98,7 +98,7 @@ namespace	epion
 			D3D11_BLEND::D3D11_BLEND_ONE,
 			D3D11_BLEND_OP::D3D11_BLEND_OP_MIN);
 
-		is_check[8] = create(blend_states[BS_SCREEN],
+		is_check[8] = Create(blend_states[BS_SCREEN],
 			true,
 			D3D11_BLEND::D3D11_BLEND_SRC_ALPHA,
 			D3D11_BLEND::D3D11_BLEND_SRC_COLOR,
@@ -118,7 +118,7 @@ namespace	epion
 	}
 
 
-	bool	Blender::create(com_ptr<ID3D11BlendState>	&blend_state_,
+	bool	Blender::Create(com_ptr<ID3D11BlendState>	&blend_state_,
 		bool						blend_enable_,
 		const	D3D11_BLEND			src_blend_,
 		const	D3D11_BLEND			dest_blend_,

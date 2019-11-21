@@ -76,18 +76,18 @@ namespace	epion::NodeCustom
 		DrawUpdate(offset, draw_list);
 		//draw_list->ChannelsSetCurrent(1);
 
-		//if (!m_is_input[0])
+		//if (!m_is_slot_input[0])
 		//{
 		//	ImGui::SetCursorScreenPos(m_input_pos[0] + ImVec2(-50, -SLOT_INPUT_FLOAT));
 		//	ImGui::TextColored(ImColor::Vec4::WHITE, "%s", "uv");
 		//}
 
-		//if (!m_is_input[1])
+		//if (!m_is_slot_input[1])
 		//{
 		//	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), AngleOffset);
 		//}
 
-		//if (!m_is_input[2])
+		//if (!m_is_slot_input[2])
 		//{
 		//	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), CellDensity);
 		//}

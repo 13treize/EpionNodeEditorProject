@@ -6,9 +6,9 @@
 
 namespace	epion
 {
-	Cube::Cube(com_ptr<ID3DBlob>& blob)
+	Cube::Cube(const std::wstring& model,com_ptr<ID3DBlob>& blob)
 	{
-		m_file_name= L"Assets//obj//box//box.obj";
+		m_file_name= model;
 		m_obj = std::make_unique<ObjMesh>(m_file_name,blob);
 		m_pos = { 0,0,0 };
 		m_scale = { 1,1,1 };

@@ -149,7 +149,7 @@ float4 PS(PSInput input) : SV_TARGET
     float VoronoiOut_out8;
     float VoronoiCell_out8;
     float VoronoiLine_out8;
-    Voronoi(TilingAndOffset_out9,2.000000,1.000000,VoronoiOut_out8,VoronoiCell_out8,VoronoiLine_out8);
+    Voronoi(TilingAndOffset_out9,8.000000,4.000000,VoronoiOut_out8,VoronoiCell_out8,VoronoiLine_out8);
 
     float2 TilingAndOffset_out5;
     TilingAndOffset(input.uv,float2(1.000000,1.000000),Time_,TilingAndOffset_out5);
@@ -160,7 +160,7 @@ float4 PS(PSInput input) : SV_TARGET
     Power_float(VoronoiOut_out8,0.000000,Power_float_out7);
 
     float GradientNoise_out4;
-    GradientNoise(TilingAndOffset_out5,5.000000,GradientNoise_out4);
+    GradientNoise(TilingAndOffset_out5,8.000000,GradientNoise_out4);
 
     float Multiply_float_out3;
     Multiply_float(GradientNoise_out4,Power_float_out7,Multiply_float_out3);

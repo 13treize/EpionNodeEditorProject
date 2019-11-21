@@ -25,10 +25,10 @@ namespace	epion
 
 		input_layout.Create(shader_refrection.get_layout(), blob);
 
-		depth_stencil.create();
-		assert(vertex_buffer.create<epion::obj_vertex>(obj_data->vertices));
-		assert(index_buffer.create(obj_data->indices));
-		assert(constant_buffer.create<constant_buffer_3d>());
+		depth_stencil.Create();
+		assert(vertex_buffer.Create<epion::obj_vertex>(obj_data->vertices));
+		assert(index_buffer.Create(obj_data->indices));
+		assert(constant_buffer.Create<constant_buffer_3d>());
 	}
 
 	void	ObjMesh::Render(const	DirectX::XMFLOAT4X4	&world_view_projection,

@@ -249,6 +249,13 @@ namespace	epion
 						}
 						ImGui::EndTabItem();
 					}
+					if (ImGui::BeginTabItem("Option"))
+					{
+						ImGui::Text("Option");
+						ImGui::EndTabItem();
+					}
+
+
 
 					ImGui::EndTabBar();
 				}

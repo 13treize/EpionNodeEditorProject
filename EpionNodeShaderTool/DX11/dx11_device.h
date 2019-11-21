@@ -15,7 +15,7 @@ namespace	epion
 			return	device_context;
 		}
 
-		static	HRESULT	create();
+		static	HRESULT	Create();
 		static	void	set_up();
 
 	private:

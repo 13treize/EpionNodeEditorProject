@@ -79,13 +79,13 @@ namespace	epion::NodeCustom
 			ImGui::SetCursorScreenPos(m_input_pos[1] + SLOT_INPUT_POS);
 			ImGui::SetNextItemWidth(120.0f);
 
-			//if (!m_is_input[2])
+			//if (!m_is_slot_input[2])
 			//{
 			//	ImGui::SetCursorScreenPos(m_input_pos[2] + SLOT_INPUT_POS);
 			//	ImGui::SetNextItemWidth(30.0f);
 			//	ImGui::InputFloat("   ", &Alpha, 0.0f, 1.0f, "%.2f");
 			//}
-			//if (!m_is_input[3])
+			//if (!m_is_slot_input[3])
 			//{
 			//	ImGui::SetCursorScreenPos(m_input_pos[3] + SLOT_INPUT_POS);
 			//	ImGui::SetNextItemWidth(30.0f);

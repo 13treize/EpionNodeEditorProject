@@ -50,7 +50,7 @@ namespace	epion::NodeCustom
 
 		//vector
 		template<class	T>
-		bool	create(std::vector<T>&	buffer, com_ptr<ID3D11Buffer>&	vertex_buffer_ptr);
+		bool	Create(std::vector<T>&	buffer, com_ptr<ID3D11Buffer>&	vertex_buffer_ptr);
 
 		void	SetState(unsigned	int	&stride_, unsigned	int	&off_set_);
 
@@ -106,7 +106,7 @@ namespace	epion::NodeCustom
 
 
 template<class	T>
-bool	epion::NodeCustom::VertexBuffer::create(std::vector<T>&	buffer, com_ptr<ID3D11Buffer>&	vertex_buffer_ptr)
+bool	epion::NodeCustom::VertexBuffer::Create(std::vector<T>&	buffer, com_ptr<ID3D11Buffer>&	vertex_buffer_ptr)
 {
 	HRESULT	hr = S_OK;
 	buffer_desc.ByteWidth = sizeof(T)	*static_cast<unsigned int>(buffer.size());

@@ -17,7 +17,7 @@ namespace	epion
 		Rasterizer();
 		~Rasterizer();
 
-		bool	create();
+		bool	Create();
 		void	SetState(RASTER_STATE	state_ = SOLID);
 
 	private:

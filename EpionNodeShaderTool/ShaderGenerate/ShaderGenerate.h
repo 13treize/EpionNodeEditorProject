@@ -17,7 +17,7 @@ namespace	epion::Shader
 
 		static	void	progress_generate();
 
-		static	std::string	create();
+		static	std::string	Create();
 
 		static	std::string	CBuffer0SetUp();
 		static	std::string	CBuffer1SetUp();
@@ -31,7 +31,7 @@ namespace	epion::Shader
 
 		static	void	preview_create();
 
-		static	std::string	func_setup();
+		static	std::string	FuncSetup();
 
 		static	void	json_import(std::string	path);
 
@@ -46,7 +46,7 @@ namespace	epion::Shader
 
 		static	std::string	function_str;
 
-		//use create,1array 1line
+		//use Create,1array 1line
 		static	std::list<std::string>	create_str;
 
 		static	std::list<std::string>	node_create_str;
@@ -62,8 +62,8 @@ namespace	epion::Shader
 
 		static	std::string	call_uv();
 
-		static	std::string	event_begin();
-		static	std::string	event_end();
+		static	std::string	EventBegin();
+		static	std::string	EventEnd();
 		static	std::string	event_end2();
 		static	std::string	PSInputGenerate();
 		static	std::string	MainFunctionBegin();

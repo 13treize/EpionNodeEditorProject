@@ -15,7 +15,7 @@ namespace	epion
 	//LoadNodeResouce::~LoadNodeResouce()
 	//{
 	//}
-	//void LoadNodeResouce::create(epion::com_ptr<ID3D11Device>& device)
+	//void LoadNodeResouce::Create(epion::com_ptr<ID3D11Device>& device)
 	//{
 	//	CD3D11_TEXTURE2D_DESC	tdesc(DXGI_FORMAT_R32G32B32A32_FLOAT, 1920, 1080, 1, 1,
 	//		D3D11_BIND_SHADER_RESOURCE
@@ -58,14 +58,14 @@ namespace	epion
 	//	vertex_buffer = std::make_unique<VertexBuffer>();
 	//	input_layout = std::make_unique<InputLayout>();
 
-	//	vertex_shader->create(L"HLSLShader\\square_vertex_shader.hlsl");
-	//	pixel_shader->create(L"HLSLShader\\tests.hlsl");
+	//	vertex_shader->Create(L"HLSLShader\\square_vertex_shader.hlsl");
+	//	pixel_shader->Create(L"HLSLShader\\tests.hlsl");
 
 	//	shader_refrection->set_layout(vertex_shader->get_blob());
 
-	//	vertex_buffer->create<TexVertex>(vertices);
+	//	vertex_buffer->Create<TexVertex>(vertices);
 
-	//	input_layout->create(shader_refrection->get_layout(), vertex_shader->get_blob());
+	//	input_layout->Create(shader_refrection->get_layout(), vertex_shader->get_blob());
 	//}
 	//void LoadNodeResouce::draw(
 	//	com_ptr<ID3D11DeviceContext>& device,

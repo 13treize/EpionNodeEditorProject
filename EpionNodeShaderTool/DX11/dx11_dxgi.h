@@ -21,7 +21,7 @@ namespace	epion
 		DepthView() = default;
 		~DepthView() = default;
 
-		D3D11_DEPTH_STENCIL_VIEW_DESC&	create(D3D11_TEXTURE2D_DESC&	t_desc);
+		D3D11_DEPTH_STENCIL_VIEW_DESC&	Create(D3D11_TEXTURE2D_DESC&	t_desc);
 
 	private:
 		D3D11_DEPTH_STENCIL_VIEW_DESC	depth_stencil = {};
@@ -33,7 +33,7 @@ namespace	epion
 		Texture_2d() = default;
 		~Texture_2d() = default;
 
-		D3D11_TEXTURE2D_DESC&	create(D3D11_TEXTURE2D_DESC&	back_buffer_desc,
+		D3D11_TEXTURE2D_DESC&	Create(D3D11_TEXTURE2D_DESC&	back_buffer_desc,
 			D3D11_BIND_FLAG			bind_flag);
 
 		D3D11_TEXTURE2D_DESC&	get_texture_desc()

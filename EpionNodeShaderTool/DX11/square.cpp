@@ -41,7 +41,7 @@ namespace	epion
 		input_layout = std::make_unique<InputLayout>();
 		shader_refrection->set_layout(m_blob);
 
-		vertex_buffer->create<SquareVertex>(vertices);
+		vertex_buffer->Create<SquareVertex>(vertices);
 
 		input_layout->Create(shader_refrection->get_layout(), m_blob);
 

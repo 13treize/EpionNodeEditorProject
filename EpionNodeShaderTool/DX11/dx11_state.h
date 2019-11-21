@@ -6,7 +6,7 @@ namespace	epion
 	public:
 		Sampler();
 		~Sampler();
-		bool	create();
+		bool	Create();
 		void	SetState();
 
 	private:
@@ -20,7 +20,7 @@ namespace	epion
 		DepthStencil();
 		~DepthStencil();
 
-		bool	create();
+		bool	Create();
 
 		void	SetState();
 

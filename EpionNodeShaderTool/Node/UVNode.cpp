@@ -60,10 +60,10 @@ namespace	epion::NodeCustom
 	void	PolarCoordinatesNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], m_center, 1);
-		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_radialscale);
-		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::get_space(3), m_lengthscale);
+		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], m_center, 1);
+		if (!m_is_slot_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_radialscale);
+		if (!m_is_slot_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::get_space(3), m_lengthscale);
 	}
 
 	void	PolarCoordinatesNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -127,10 +127,10 @@ namespace	epion::NodeCustom
 	void	RadialShearNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], m_center);
-		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat2(m_input_pos[2], m_strength, 1);
-		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], m_offset, 2);
+		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], m_center);
+		if (!m_is_slot_input[2])	NodeFunction::SetInputSlotFloat2(m_input_pos[2], m_strength, 1);
+		if (!m_is_slot_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], m_offset, 2);
 	}
 
 	void	RadialShearNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -200,10 +200,10 @@ namespace	epion::NodeCustom
 	void	SpherizeNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], m_center, 1);
-		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_strength);
-		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], m_offset, 3);
+		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], m_center, 1);
+		if (!m_is_slot_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_strength);
+		if (!m_is_slot_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], m_offset, 3);
 	}
 
 	void	SpherizeNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -272,9 +272,9 @@ namespace	epion::NodeCustom
 	void	TilingAndOffsetNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], Tiling, 1);
-		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat2(m_input_pos[2], Offset, 2);
+		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], Tiling, 1);
+		if (!m_is_slot_input[2])	NodeFunction::SetInputSlotFloat2(m_input_pos[2], Offset, 2);
 	}
 
 	void	TilingAndOffsetNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -338,10 +338,10 @@ namespace	epion::NodeCustom
 	void	TwirlNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[1]);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1],Center,1);
-		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2],"   ", Strength);
-		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], Offset, 3);
+		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[1]);
+		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1],Center,1);
+		if (!m_is_slot_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2],"   ", Strength);
+		if (!m_is_slot_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], Offset, 3);
 	}
 
 	void	TwirlNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)

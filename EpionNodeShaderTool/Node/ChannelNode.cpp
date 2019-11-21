@@ -63,10 +63,10 @@ namespace	epion::NodeCustom
 	void	CombineNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::get_space(0), R);
-		if (!m_is_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), G);
-		if (!m_is_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), B);
-		if (!m_is_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3],StringConverter::get_space(3), A);
+		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::get_space(0), R);
+		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), G);
+		if (!m_is_slot_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), B);
+		if (!m_is_slot_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3],StringConverter::get_space(3), A);
 	}
 
 	void	CombineNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)

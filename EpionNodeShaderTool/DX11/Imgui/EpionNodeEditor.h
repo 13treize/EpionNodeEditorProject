@@ -52,9 +52,9 @@ namespace	epion::NodeCustom
 
 		static	std::string	ExportNodeData(const std::string& json_name);
 
-		static	void	draw_node_line(ImDrawList*	draw_list);
+		static	void	DrawLinkLine(ImDrawList*	draw_list);
 
-		static	void	create_node_data(ImDrawList*	draw_list, int scene);
+		static	void	CreateNodeData(ImDrawList*	draw_list, int scene);
 
 		static	void	create_hlsl();
 
@@ -107,7 +107,7 @@ namespace	epion::NodeCustom
 
 
 
-		static	void	mouse_update();
+		static	void	MouseUpdate();
 
 		static	void	draw_node_rect();
 

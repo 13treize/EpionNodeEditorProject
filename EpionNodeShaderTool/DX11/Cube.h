@@ -7,7 +7,7 @@ namespace	epion
 	class	Cube	final
 	{
 	public:
-		Cube(com_ptr<ID3DBlob>& blob);
+		Cube(const std::wstring& model,com_ptr<ID3DBlob>& blob);
 		~Cube();
 
 		void	Update();

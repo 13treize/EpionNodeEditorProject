@@ -9,7 +9,7 @@ namespace	epion
 		IndexBuffer() {};
 		~IndexBuffer() {};
 
-		bool	create(const	std::vector<unsigned int>&	buffer);
+		bool	Create(const	std::vector<unsigned int>&	buffer);
 
 		void	SetState(DXGI_FORMAT	format_ = DXGI_FORMAT::DXGI_FORMAT_R32_UINT);
 		com_ptr<ID3D11Buffer>&	get_buffer_ptr();
@@ -35,7 +35,7 @@ namespace	epion
 
 		//vector
 		template<class	T>
-		bool	create();
+		bool	Create();
 
 		void	SetState(int slot);
 
@@ -50,7 +50,7 @@ namespace	epion
 	};
 
 	template<class	T>
-	bool	ConstantBuffer::create()
+	bool	ConstantBuffer::Create()
 	{
 		HRESULT	hr = S_OK;
 		create_desc(sizeof(T));
@@ -74,7 +74,7 @@ namespace	epion
 
 		//vector
 		template<class	T>
-		bool	create(std::vector<T>&	buffer);
+		bool	Create(std::vector<T>&	buffer);
 
 		void	SetState(unsigned	int	&stride_, unsigned	int	&off_set_);
 
@@ -103,7 +103,7 @@ void	epion::VertexBuffer::create_sub_data(const	std::vector<T>&	buffer)
 }
 
 template<class	T>
-bool	epion::VertexBuffer::create(std::vector<T>&	buffer)
+bool	epion::VertexBuffer::Create(std::vector<T>&	buffer)
 {
 	HRESULT	hr = S_OK;
 	create_desc(sizeof(T)	*static_cast<unsigned int>(buffer.size()));

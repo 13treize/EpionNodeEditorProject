@@ -37,7 +37,7 @@ namespace	epion
 		sub_resource_data.SysMemSlicePitch = 0;
 	}
 
-	bool	IndexBuffer::create(const	std::vector<unsigned	int>&	buffer)
+	bool	IndexBuffer::Create(const	std::vector<unsigned	int>&	buffer)
 	{
 		HRESULT	hr = S_OK;
 		create_desc(sizeof(unsigned	int)	*static_cast<unsigned	int>(buffer.size()));

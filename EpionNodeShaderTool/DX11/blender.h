@@ -27,7 +27,7 @@ namespace	epion
 		void	SetState(BLEND_STATE	state);
 
 	private:
-		bool	create(com_ptr<ID3D11BlendState>	&blend_state_,
+		bool	Create(com_ptr<ID3D11BlendState>	&blend_state_,
 			bool						blend_enable_,
 			const	D3D11_BLEND			src_blend_,
 			const	D3D11_BLEND			dest_blend_,

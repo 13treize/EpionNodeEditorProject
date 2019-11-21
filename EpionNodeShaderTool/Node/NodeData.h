@@ -195,6 +195,13 @@ namespace	epion::NodeCustom
 		MASTER,
 		VARIABLE,
 	};
+	enum class INPUT_SLOT_STATE :unsigned char
+	{
+		NONE,
+		ONE,
+		OUTOFRANGE,
+	};
+
 	//ノード
 	using LinkVector = std::vector<LinkData>;
 	class	NodeBase
@@ -238,7 +245,7 @@ namespace	epion::NodeCustom
 		std::vector<ImU32>	m_output_slot_color;
 
 		//inputslotにノードが刺さっているかどうか
-		std::vector<bool>	m_is_input;
+		std::vector<bool>	m_is_slot_input;
 
 		ImVec2 GetInputSlotPos(int slot_no) const;
 		ImVec2 GetOutputSlotPos(int slot_no) const;
@@ -258,7 +265,7 @@ namespace	epion::NodeCustom
 		void	ResouceCreate();
 
 	private:
-		void	function_call_update(std::string	func_name);
+		void	FunctionCallUpdate(std::string	func_name);
 
 	protected:
 		//nodeに出す名前

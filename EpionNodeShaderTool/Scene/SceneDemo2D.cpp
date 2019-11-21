@@ -15,35 +15,46 @@ namespace epion
 		//m_vertex = std::make_unique<VertexShader>(L"HLSLShader\\square_vertex_shader.hlsl");
 		//m_pixel = std::make_unique<PixelShader>(L"test.hlsl");
 		CameraManager::Init();
-		//NodeCustom::Dx11::ConstantBufferManager::Create();
+		NodeCustom::Dx11::ConstantBufferManager::Create();
 
 		m_vertex = std::make_unique<VertexShader>(L"HLSLShader\\ObjVertexShader.hlsl");
-		//m_pixel = std::make_unique<PixelShader>(L"HLSLShader\\ObjNoTexturePixelShader.hlsl");
-		m_pixel = std::make_unique<PixelShader>(L"GenerateShader\\demo1.hlsl");
-		//m_pixel = std::make_unique<PixelShader>(L"test.hlsl");
+		m_pixel[0] = std::make_unique<PixelShader>(L"GenerateShader\\demo1.hlsl");
+		m_pixel[1] = std::make_unique<PixelShader>(L"test.hlsl");
 
 		//m_preview = std::make_unique<Square>(m_vertex->GetBlob());
-		m_preview_3d = std::make_unique<Cube>(m_vertex->GetBlob());
+		m_preview_3d = std::make_unique<Cube>(L"Assets//obj//plane//plane.obj",m_vertex->GetBlob());
+		m_pos[0]= { 0.0f,0.0f,-20.0f };
+		m_pos[1] = { 2.1f,0.0f,-20.0f };
+		math::FVector3 scale = { 1.0f,1.0f,1.0f };
+		m_preview_3d->SetScale(scale);
+		math::FVector3 angle = { 200.0f,0.0f,0.0f };
+		m_preview_3d->SetAngle(angle);
 
 	}
 	void SceneDemo2D::Update()
 	{
 		CameraManager::Update();
-		m_preview_3d->Update();
-
 	}
 	void SceneDemo2D::Render()
 	{
-		//static math::FVector4 time;
-		//time.x += 0.01f;
+		static math::FVector4 time;
+		time.x += 0.001f;
 
-		//math::FVector2 a = { 1920,1080 };
-		//NodeCustom::Dx11::ConstantBufferManager::UpdateCBuffer0(time, a);
-
+		math::FVector2 a = { 1920,1080 };
+		NodeCustom::Dx11::ConstantBufferManager::UpdateCBuffer0(time, a);
 
 		m_vertex->SetState();
-		m_pixel->SetState();
+
+		m_preview_3d->SetPos(m_pos[0]);
+		m_preview_3d->Update();
+		m_pixel[0]->SetState();
 		m_preview_3d->Render(CameraManager::GetView(), CameraManager::GetProjection());
+
+		m_preview_3d->SetPos(m_pos[1]);
+		m_preview_3d->Update();
+		m_pixel[1]->SetState();
+		m_preview_3d->Render(CameraManager::GetView(), CameraManager::GetProjection());
+
 	}
 	void SceneDemo2D::Release()
 	{
