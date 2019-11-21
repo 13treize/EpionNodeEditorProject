@@ -1,11 +1,17 @@
 #include	"../All.h"
 #include	"../epion.h"
-#include	<cereal/cereal.hpp>
-#include	<cereal/types/polymorphic.hpp>
+
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
+
+#include	<cereal/cereal.hpp>
+#include	<cereal/types/polymorphic.hpp>
+
 #include	"NodeData.h"
 #include	"NoiseNode.h"
+
+#include	"NodeParam.h"
+#include	"NodeFunction.h"
 
 namespace
 {
@@ -155,7 +161,7 @@ namespace	epion::NodeCustom
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 
 	}
 	std::string	GradientNoiseNode::GetFunctionDefStr()
@@ -238,7 +244,7 @@ namespace	epion::NodeCustom
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	SimpleNoiseNode::GetFunctionDefStr()
 	{
@@ -352,7 +358,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetDefineOutStr1(m_out_str[1]);
 		m_function_call_str += NodeFunction::SetDefineOutStr1(m_out_str[2]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	VoronoiNode::GetFunctionDefStr()
 	{

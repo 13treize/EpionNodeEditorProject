@@ -1,24 +1,20 @@
 #include	"../All.h"
 #include	"../epion.h"
-#include	<cereal/cereal.hpp>
-#include	<cereal/types/polymorphic.hpp>
+
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
+
+#include	<cereal/cereal.hpp>
+#include	<cereal/types/polymorphic.hpp>
+
 #include	"NodeData.h"
 #include	"InputBasicNode.h"
 
+#include	"NodeParam.h"
+#include	"NodeFunction.h"
+
 namespace
 {
-	const ImVec2	size(-20, -20);
-
-	epion::NodeCustom::InputSlotState	UnlitInitState[] =
-	{
-		{"NUM",	0,	epion::NodeCustom::SLOT_TYPE::VECTOR1},
-	};
-	std::string vec_str[4]=
-	{
-		"x","y","z","w"
-	};
 }
 
 CEREAL_REGISTER_TYPE(epion::NodeCustom::FloatNode)
@@ -66,7 +62,7 @@ namespace	epion::NodeCustom
 	{
 		m_input_str[0] = std::to_string(m_num);
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 		m_function_call_str = NodeFunction::SetVarFloat(m_input_str[0], m_out_str[0]);
 	}
 
@@ -117,7 +113,7 @@ namespace	epion::NodeCustom
 		m_input_str[0] = std::to_string(m_num.x);
 		m_input_str[1] = std::to_string(m_num.y);
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 		m_function_call_str = NodeFunction::SetVarFloat2(m_input_str[0], m_input_str[1], m_out_str[0]);
 	}
 
@@ -142,11 +138,16 @@ namespace	epion::NodeCustom
 	void	Vector3Node::Init()
 	{
 		m_num = { 1.0f, 1.0f, 1.0f };
-		for (int i = 0; i < m_inputs_count; i++)
+		m_input_slot_type =
 		{
-			m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-			m_input_name.push_back(vec_str[i]);
-		}
+			SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR1,
+		};
+
+		m_input_name =
+		{
+			"x", "y", "z"
+		};
+
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR3);
 		m_output_name.push_back("Out");
 		m_node_type = NODE_TYPE::NORMAL;
@@ -167,7 +168,7 @@ namespace	epion::NodeCustom
 		m_input_str[1] = std::to_string(m_num.y);
 		m_input_str[2] = std::to_string(m_num.z);
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 		m_function_call_str = "    float3 " + m_out_str[0] + "=" + "float3(" + m_input_str[0] + "," + m_input_str[1] + "," + m_input_str[2]+");\n";
 	}
 
@@ -193,11 +194,16 @@ namespace	epion::NodeCustom
 	void	Vector4Node::Init()
 	{
 		m_num = { 1.0f, 1.0f, 1.0f, 1.0f };
-		for (int i = 0; i < m_inputs_count; i++)
+		m_input_slot_type =
 		{
-			m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
-			m_input_name.push_back(vec_str[i]);
-		}
+			SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR1,
+		};
+
+		m_input_name =
+		{
+			"x", "y", "z", "w"
+		};
+
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR4);
 		m_output_name.push_back("Out");
 	}
@@ -217,7 +223,7 @@ namespace	epion::NodeCustom
 		m_input_str[2] = std::to_string(m_num.z);
 		m_input_str[3] = std::to_string(m_num.w);
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 		m_function_call_str = "    float4 " + m_out_str[0] + "=" + "float4(" + m_input_str[0] +","+ m_input_str[1] + "," + m_input_str[2] + "," + m_input_str[3] + ");\n";
 	}
 
@@ -263,7 +269,7 @@ namespace	epion::NodeCustom
 
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 		m_function_call_str = "    float3 " + m_out_str[0] + "="+ m_input_str[0] +";\n";
 	}
 

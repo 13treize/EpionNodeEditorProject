@@ -187,6 +187,7 @@
     <ClCompile Include="Node\MathRangeNode.cpp" />
     <ClCompile Include="Node\MathRoundNode.cpp" />
     <ClCompile Include="Node\MathWaveNode.cpp" />
+    <ClCompile Include="Node\NodeFunction.cpp" />
     <ClCompile Include="Node\NodeParamDx11.cpp" />
     <ClCompile Include="Node\NodeProgressTex.cpp" />
     <ClCompile Include="Node\NodeData.cpp" />
@@ -265,6 +266,7 @@
     <ClInclude Include="Node\MathRangeNode.h" />
     <ClInclude Include="Node\MathRoundNode.h" />
     <ClInclude Include="Node\MathWaveNode.h" />
+    <ClInclude Include="Node\NodeFunction.h" />
     <ClInclude Include="Node\NodeParam.h" />
     <ClInclude Include="Node\NodeParamDx11.h" />
     <ClInclude Include="Node\NodeProgressTex.h" />

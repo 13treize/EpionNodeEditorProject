@@ -26,6 +26,35 @@ namespace	epion::ImColor
 
 namespace	epion::NodeCustom
 {
+	enum class SLOT_TYPE
+	{
+		VECTOR1 = 1,
+		VECTOR2,
+		VECTOR3,
+		VECTOR4,
+		BOOLEAN,
+		TEXTURE2D,
+		SAMPLERSTATE,
+		POS,//inputÇÃÇ›ÅAàµÇ¢ÇÕVECTOR3ìØÇ∂
+		UV,	//inputÇÃÇ›ÅAàµÇ¢ÇÕVECTOR2ìØÇ∂
+		COLOR,//inputÇÃÇ›ÅAàµÇ¢ÇÕVECTOR3ìØÇ∂
+	};
+
+	enum class NODE_TYPE :unsigned char
+	{
+		NORMAL,
+		DYNAMIC,
+		MASTER,
+		VARIABLE,
+	};
+
+	enum class INPUT_SLOT_STATE :unsigned char
+	{
+		NONE,
+		ONE,
+		OUTOFRANGE,
+	};
+
 	static constexpr int SLOT_POS = 10;
 	static constexpr float SLOT_INPUT_RECT_X = -70.0f;
 	static constexpr float SLOT_INPUT_FLOAT = 8;

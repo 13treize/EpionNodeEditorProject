@@ -1,14 +1,20 @@
 #include	"../All.h"
 #include	"../epion.h"
+
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
+
 #include	<cereal/cereal.hpp>
 #include	<cereal/types/polymorphic.hpp>
+
 #include	"NodeData.h"
 #include	"MathBasicNode.h"
+
+#include	"NodeParam.h"
+#include	"NodeFunction.h"
+
 namespace
 {
-	const ImVec2	size(0, 0);
 }
 
 CEREAL_REGISTER_TYPE(epion::NodeCustom::AddNode)
@@ -54,8 +60,8 @@ namespace	epion::NodeCustom
 
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
+
 		m_node_type = NODE_TYPE::DYNAMIC;
-		m_dynamic_slot_type = SLOT_TYPE::VECTOR1;
 	}
 
 	void	AddNode::Update(ImVec2 offset, ImDrawList*	draw_list)
@@ -78,7 +84,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	AddNode::GetFunctionDefStr()
 	{
@@ -146,7 +152,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	SubtractNode::GetFunctionDefStr()
 	{
@@ -191,14 +197,13 @@ namespace	epion::NodeCustom
 		m_output_name.push_back("Out");
 		m_node_type = NODE_TYPE::DYNAMIC;
 		m_dynamic_slot_type = SLOT_TYPE::VECTOR1;
-
 	}
 
 	void	MultiplyNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_num[0], m_input_slot_type[0], 0);
-		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_num[1], m_input_slot_type[1], 1);
+		if (m_is_slot_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_num[0], m_input_slot_type[0], 0);
+		if (m_is_slot_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_num[1], m_input_slot_type[1], 1);
 	}
 
 	void	MultiplyNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -214,7 +219,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	MultiplyNode::GetFunctionDefStr()
 	{
@@ -280,7 +285,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	DivideNode::GetFunctionDefStr()
 	{
@@ -346,7 +351,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 
 	std::string	PowerNode::GetFunctionDefStr()
@@ -404,7 +409,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 
 	}
 	std::string	SquareRootNode::GetFunctionDefStr()

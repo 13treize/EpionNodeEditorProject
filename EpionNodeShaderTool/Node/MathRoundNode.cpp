@@ -5,7 +5,11 @@
 #include	<cereal/cereal.hpp>
 #include	<cereal/types/polymorphic.hpp>
 #include	"NodeData.h"
+
 #include	"MathRoundNode.h"
+
+#include	"NodeParam.h"
+#include	"NodeFunction.h"
 
 CEREAL_REGISTER_TYPE(epion::NodeCustom::CeilingNode)
 CEREAL_REGISTER_TYPE(epion::NodeCustom::StepNode)
@@ -55,7 +59,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	CeilingNode::GetFunctionDefStr()
 	{
@@ -119,7 +123,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	StepNode::GetFunctionDefStr()
 	{

@@ -1,11 +1,21 @@
 #include	"../All.h"
 #include	"../epion.h"
+
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
+
 #include	<cereal/cereal.hpp>
 #include	<cereal/types/polymorphic.hpp>
+
 #include	"NodeData.h"
 #include	"MathRangeNode.h"
+
+#include	"NodeParam.h"
+#include	"NodeFunction.h"
+
+namespace
+{
+}
 
 CEREAL_REGISTER_TYPE(epion::NodeCustom::ClampNode)
 CEREAL_REGISTER_TYPE(epion::NodeCustom::FractionNode)
@@ -46,8 +56,8 @@ namespace	epion::NodeCustom
 
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
+
 		m_node_type = NODE_TYPE::DYNAMIC;
-		m_dynamic_slot_type = SLOT_TYPE::VECTOR1;
 	}
 	void ClampNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
@@ -70,7 +80,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	ClampNode::GetFunctionDefStr()
 	{
@@ -100,13 +110,14 @@ namespace	epion::NodeCustom
 	void FractionNode::Init()
 	{
 		m_in = {0.0f, 0.0f, 0.0f, 0.0f};
+
 		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_input_name.push_back("In");
+
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
 
 		m_node_type = NODE_TYPE::DYNAMIC;
-		m_dynamic_slot_type = SLOT_TYPE::VECTOR1;
 	}
 
 	void	FractionNode::Update(ImVec2 offset, ImDrawList*	draw_list)
@@ -127,7 +138,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	FractionNode::GetFunctionDefStr()
 	{
@@ -172,7 +183,6 @@ namespace	epion::NodeCustom
 		m_output_name.push_back("Out");
 
 		m_node_type = NODE_TYPE::DYNAMIC;
-		m_dynamic_slot_type = SLOT_TYPE::VECTOR1;
 	}
 
 	void	MaximumNode::Update(ImVec2 offset, ImDrawList*	draw_list)
@@ -195,7 +205,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	MaximumNode::GetFunctionDefStr()
 	{
@@ -240,7 +250,6 @@ namespace	epion::NodeCustom
 		m_output_name.push_back("Out");
 
 		m_node_type = NODE_TYPE::DYNAMIC;
-		m_dynamic_slot_type = SLOT_TYPE::VECTOR1;
 	}
 
 	void MinimumNode::Update(ImVec2 offset, ImDrawList*	draw_list)
@@ -263,7 +272,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	MinimumNode::GetFunctionDefStr()
 	{
@@ -320,7 +329,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	OneMinusNode::GetFunctionDefStr()
 	{

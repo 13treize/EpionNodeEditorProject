@@ -114,14 +114,14 @@ namespace	epion::NodeCustom
 			archive(
 				cereal::base_class<NodeBase>(this),
 				CEREAL_NVP(m_uv),
-				CEREAL_NVP(Tiling),
-				CEREAL_NVP(Offset));
+				CEREAL_NVP(m_tiling),
+				CEREAL_NVP(m_offset));
 		};
 
 	private:
 		math::FVector2	m_uv;
-		math::FVector2	Tiling;
-		math::FVector2	Offset;
+		math::FVector2	m_tiling;
+		math::FVector2	m_offset;
 	};
 	class TwirlNode	final :public	NodeBase
 	{
@@ -141,16 +141,16 @@ namespace	epion::NodeCustom
 			archive(
 				cereal::base_class<NodeBase>(this),
 				CEREAL_NVP(m_uv),
-				CEREAL_NVP(Center),
-				CEREAL_NVP(Strength),
-				CEREAL_NVP(Offset));
+				CEREAL_NVP(m_center),
+				CEREAL_NVP(m_strength),
+				CEREAL_NVP(m_offset));
 		};
 
 	private:
 		math::FVector2	m_uv;
-		math::FVector2	Center;
-		float	Strength;
-		math::FVector2	Offset;
+		math::FVector2	m_center;
+		float	m_strength;
+		math::FVector2	m_offset;
 
 	};
 	class UVNode	final :public	NodeBase

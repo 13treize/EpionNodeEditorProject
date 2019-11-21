@@ -1,11 +1,17 @@
 #include	"../All.h"
 #include	"../epion.h"
-#include	<cereal/cereal.hpp>
-#include	<cereal/types/polymorphic.hpp>
+
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
+
+#include	<cereal/cereal.hpp>
+#include	<cereal/types/polymorphic.hpp>
+
 #include	"NodeData.h"
 #include	"ProceduralNode.h"
+
+#include	"NodeParam.h"
+#include	"NodeFunction.h"
 
 namespace
 {
@@ -132,7 +138,6 @@ namespace	epion::NodeCustom
 		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 
-		//node	slot name
 		m_input_name =
 		{
 			"UV", "Width", "Height"
@@ -159,7 +164,7 @@ namespace	epion::NodeCustom
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	//void Ellipse(float2 UV, float2 pos, float Width, float Height, out float Out)
 	//{
@@ -207,7 +212,6 @@ namespace	epion::NodeCustom
 			SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR2,
 		};
 
-		//node	slot name
 		m_input_name =
 		{
 			"UV", "Scale"
@@ -413,7 +417,7 @@ namespace	epion::NodeCustom
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	RippleNode::GetFunctionDefStr()
 	{
@@ -484,7 +488,7 @@ namespace	epion::NodeCustom
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	RoundedRectangleNode::GetFunctionDefStr()
 	{

@@ -1,18 +1,22 @@
-#include	<string>
-#include	<utility>
-#include	<cereal/cereal.hpp>
-#include	<cereal/types/polymorphic.hpp>
+#include	"../All.h"
+#include	"../epion.h"
+
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
 
-#include	"NodeParam.h"
+#include	<cereal/cereal.hpp>
+#include	<cereal/types/polymorphic.hpp>
+
 #include	"NodeData.h"
 #include	"PBRNode.h"
+
+#include	"NodeParam.h"
+#include	"NodeFunction.h"
 
 namespace
 {
 	const ImVec2	size(0, 0);
-	epion::NodeCustom::InputSlotState	InitState[9] =
+	epion::NodeCustom::InputSlotState	InitStates[9] =
 	{
 		{"Pos",					0,epion::NodeCustom::SLOT_TYPE::VECTOR4},
 		{"Albedo",				1,epion::NodeCustom::SLOT_TYPE::VECTOR3},
@@ -59,8 +63,8 @@ namespace	epion::NodeCustom
 		AlphaChipThreshold = 0.0f;
 		for (int i = 0; i < m_inputs_count; i++)
 		{
-			m_input_slot_type.push_back(InitState[i].slot_type);
-			m_input_name.push_back(InitState[i].slot_name);
+			m_input_slot_type.push_back(InitStates[i].slot_type);
+			m_input_name.push_back(InitStates[i].slot_name);
 		}
 
 		m_output_slot_type.clear();

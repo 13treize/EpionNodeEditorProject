@@ -1,14 +1,20 @@
 #include	"../All.h"
 #include	"../epion.h"
-#include	<cereal/cereal.hpp>
-#include	<cereal/types/polymorphic.hpp>
+
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
+
+#include	<cereal/cereal.hpp>
+#include	<cereal/types/polymorphic.hpp>
+
 #include	"NodeData.h"
 #include	"UVNode.h"
+
+#include	"NodeParam.h"
+#include	"NodeFunction.h"
+
 namespace
 {
-	const ImVec2	size(0, 0);
 }
 
 CEREAL_REGISTER_TYPE(epion::NodeCustom::PolarCoordinatesNode)
@@ -55,6 +61,8 @@ namespace	epion::NodeCustom
 		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR2);
 		m_output_name.push_back("Out");
+
+		m_node_type = NODE_TYPE::NORMAL;
 	}
 
 	void	PolarCoordinatesNode::Update(ImVec2 offset, ImDrawList*	draw_list)
@@ -76,7 +84,7 @@ namespace	epion::NodeCustom
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr2(m_out_str[0]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 
 	std::string	PolarCoordinatesNode::GetFunctionDefStr()
@@ -123,6 +131,8 @@ namespace	epion::NodeCustom
 		};
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR2);
 		m_output_name.push_back("Out");
+
+		m_node_type = NODE_TYPE::NORMAL;
 	}
 	void	RadialShearNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
@@ -144,7 +154,7 @@ namespace	epion::NodeCustom
 
 		m_function_call_str = NodeFunction::SetDefineOutStr2(m_out_str[0]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string RadialShearNode::GetFunctionDefStr()
 	{
@@ -195,6 +205,7 @@ namespace	epion::NodeCustom
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR2);
 		m_output_name.push_back("Out");
 
+		m_node_type = NODE_TYPE::NORMAL;
 	}
 
 	void	SpherizeNode::Update(ImVec2 offset, ImDrawList*	draw_list)
@@ -217,7 +228,7 @@ namespace	epion::NodeCustom
 
 		m_function_call_str = NodeFunction::SetDefineOutStr2(m_out_str[0]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	SpherizeNode::GetFunctionDefStr()
 	{
@@ -253,8 +264,8 @@ namespace	epion::NodeCustom
 	void	TilingAndOffsetNode::Init()
 	{
 		m_uv = { 0.0f, 0.0f };
-		Tiling = { 1.0f,1.0f };
-		Offset = { 0.0f, 0.0f };
+		m_tiling = { 1.0f,1.0f };
+		m_offset = { 0.0f, 0.0f };
 		m_input_slot_type =
 		{
 			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR2,
@@ -267,26 +278,27 @@ namespace	epion::NodeCustom
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR2);
 		m_output_name.push_back("Out");
 
+		m_node_type = NODE_TYPE::NORMAL;
 	}
 
 	void	TilingAndOffsetNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
 		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], Tiling, 1);
-		if (!m_is_slot_input[2])	NodeFunction::SetInputSlotFloat2(m_input_pos[2], Offset, 2);
+		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1], m_tiling, 1);
+		if (!m_is_slot_input[2])	NodeFunction::SetInputSlotFloat2(m_input_pos[2], m_offset, 2);
 	}
 
 	void	TilingAndOffsetNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_input_str[0] = "input.uv";
-		m_input_str[1] = NodeFunction::SetInputToString2(Tiling);
-		m_input_str[2] = NodeFunction::SetInputToString2(Offset);
+		m_input_str[1] = NodeFunction::SetInputToString2(m_tiling);
+		m_input_str[2] = NodeFunction::SetInputToString2(m_offset);
 
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr2(m_out_str[0]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	TilingAndOffsetNode::GetFunctionDefStr()
 	{
@@ -318,9 +330,9 @@ namespace	epion::NodeCustom
 	void	TwirlNode::Init()
 	{
 		m_uv = { 0.0f, 0.0f };
-		Center = { 0.5f, 0.5f };
-		Strength = 10.0f;
-		Offset = { 0.0f, 0.0f };
+		m_center = { 0.5f, 0.5f };
+		m_strength = 10.0f;
+		m_offset = { 0.0f, 0.0f };
 		m_input_slot_type=
 		{
 			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR2,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR2,
@@ -333,28 +345,29 @@ namespace	epion::NodeCustom
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR2);
 		m_output_name.push_back("Out");
 
+		m_node_type = NODE_TYPE::NORMAL;
 	}
 
 	void	TwirlNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
 		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[1]);
-		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1],Center,1);
-		if (!m_is_slot_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2],"   ", Strength);
-		if (!m_is_slot_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], Offset, 3);
+		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotFloat2(m_input_pos[1],m_center,1);
+		if (!m_is_slot_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2],"   ", m_strength);
+		if (!m_is_slot_input[3])	NodeFunction::SetInputSlotFloat2(m_input_pos[3], m_offset, 3);
 	}
 
 	void	TwirlNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_input_str[0] = "input.uv";
-		m_input_str[1] = NodeFunction::SetInputToString2(Center);
-		m_input_str[2] = std::to_string(Strength);
-		m_input_str[3] = NodeFunction::SetInputToString2(Offset);
+		m_input_str[1] = NodeFunction::SetInputToString2(m_center);
+		m_input_str[2] = std::to_string(m_strength);
+		m_input_str[3] = NodeFunction::SetInputToString2(m_offset);
 
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr2(m_out_str[0]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	TwirlNode::GetFunctionDefStr()
 	{

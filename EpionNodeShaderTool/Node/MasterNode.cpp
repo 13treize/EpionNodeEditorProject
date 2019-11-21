@@ -1,12 +1,17 @@
 #include	"../All.h"
 #include	"../epion.h"
-#include	<cereal/cereal.hpp>
-#include	<cereal/types/polymorphic.hpp>
+
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
+
+#include	<cereal/cereal.hpp>
+#include	<cereal/types/polymorphic.hpp>
+
 #include	"NodeData.h"
 #include	"MasterNode.h"
-#include "../ImguiFunction.h"
+
+#include	"NodeParam.h"
+#include	"NodeFunction.h"
 
 namespace
 {
@@ -74,7 +79,7 @@ namespace	epion::NodeCustom
 		m_input_str[3] = std::to_string(AlphaChipThreshold);
 
 		m_function_call_str = " = Unlit(";
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 
 	std::string	UnlitMasterNode::GetFunctionDefStr()

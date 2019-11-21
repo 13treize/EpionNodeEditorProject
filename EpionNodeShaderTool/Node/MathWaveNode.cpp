@@ -1,12 +1,17 @@
 #include	"../All.h"
 #include	"../epion.h"
-#include	<cereal/cereal.hpp>
-#include	<cereal/types/polymorphic.hpp>
+
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
-#include	"NodeParam.h"
+
+#include	<cereal/cereal.hpp>
+#include	<cereal/types/polymorphic.hpp>
+
 #include	"NodeData.h"
 #include	"MathWaveNode.h"
+
+#include	"NodeParam.h"
+#include	"NodeFunction.h"
 
 namespace
 {
@@ -48,6 +53,7 @@ namespace	epion::NodeCustom
 
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
+
 		m_node_type = NODE_TYPE::DYNAMIC;
 	}
 
@@ -72,7 +78,7 @@ namespace	epion::NodeCustom
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 		m_input_slot_type[1] = SLOT_TYPE::VECTOR2;
 
 	}
@@ -114,38 +120,28 @@ namespace	epion::NodeCustom
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
 
-
 		m_node_type = NODE_TYPE::DYNAMIC;
 	}
 
 	void	SawtoothWaveNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		draw_list->ChannelsSetCurrent(1);
-		m_input_name[0] = "A" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
-		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
-
-		if (!m_is_slot_input[0])
-		{
-			NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0]);
-		}
+		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0]);
 	}
 
 	void	SawtoothWaveNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		m_Name = "SawtoothWave_" + NodeFunction::GetType(m_input_slot_type[0]);
 
-		m_out_str[0] = "SawtoothWave_out" + std::to_string(m_ID);
-
 		NodeFunction::SetSlotData(m_in, m_input_str[0], m_input_slot_type[0]);
 
-		TypeSet(nodes_ptr, links);
 		m_output_slot_type[0] = m_input_slot_type[0];
-		//outéwíËÇ…ëŒÇ∑ÇÈíËã`
-		m_function_call_str = "    " + NodeFunction::GetType(m_output_slot_type[0]) + " " + m_out_str[0] + ";\n";
-		m_function_call_str += "    SawtoothWave_" + NodeFunction::GetType(m_input_slot_type[0]) + "(";
-		//å^ÇçáÇÌÇπÇÈ
-		str_check(nodes_ptr, links);
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutDynamic(m_out_str[0], m_output_slot_type[0]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
+
+		m_dynamic_slot_type = m_input_slot_type[0];
+		StrCheck(nodes_ptr, links);
 	}
 	std::string	SawtoothWaveNode::GetFunctionDefStr()
 	{

@@ -1,16 +1,20 @@
 #include	"../All.h"
 #include	"../epion.h"
+
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
+
 #include	<cereal/cereal.hpp>
 #include	<cereal/types/polymorphic.hpp>
-#include	"NodeParam.h"
 
 #include	"NodeData.h"
 #include	"MathInterpolation.h"
+
+#include	"NodeParam.h"
+#include	"NodeFunction.h"
+
 namespace
 {
-	const ImVec2	size(0, 0);
 }
 
 CEREAL_REGISTER_TYPE(epion::NodeCustom::LerpNode)
@@ -50,6 +54,8 @@ namespace epion::NodeCustom
 
 		m_output_slot_type.push_back(SLOT_TYPE::VECTOR1);
 		m_output_name.push_back("Out");
+
+		m_node_type = NODE_TYPE::DYNAMIC;
 	}
 
 	void	LerpNode::Update(ImVec2 offset, ImDrawList*	draw_list)
@@ -74,7 +80,7 @@ namespace epion::NodeCustom
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
 
 		m_dynamic_slot_type = m_input_slot_type[0];
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 
 	std::string	LerpNode::GetFunctionDefStr()

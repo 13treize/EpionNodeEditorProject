@@ -1,11 +1,17 @@
 #include	"../All.h"
 #include	"../epion.h"
+
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
+
 #include	<cereal/cereal.hpp>
 #include	<cereal/types/polymorphic.hpp>
+
 #include	"NodeData.h"
 #include	"TextureNode.h"
+
+#include	"NodeParam.h"
+#include	"NodeFunction.h"
 
 namespace
 {
@@ -56,7 +62,7 @@ namespace	epion::NodeCustom
 		m_out_str[0] = "SamplerStates" + m_input_str[0];
 		//m_function_call_str = m_out_str[0];
 		//m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		//str_check(nodes_ptr, links);
+		//StrCheck(nodes_ptr, links);
 	}
 
 	std::string SamplerStateNode::GetFunctionDefStr()
@@ -113,7 +119,7 @@ namespace	epion::NodeCustom
 		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name, m_ID);
 		m_function_call_str = NodeFunction::SetDefineOutStr4(m_out_str[0]);
 		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
-		str_check(nodes_ptr, links);
+		StrCheck(nodes_ptr, links);
 	}
 
 	std::string	SamplerTexture2DNode::GetFunctionDefStr()
