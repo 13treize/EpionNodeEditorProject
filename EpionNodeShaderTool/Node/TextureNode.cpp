@@ -107,9 +107,9 @@ namespace	epion::NodeCustom
 	void SamplerTexture2DNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotUV(m_input_pos[0]);
-		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotTexture2D(m_input_pos[1]);
-		if (!m_is_slot_input[2])	NodeFunction::SetInputSlotSamplerState(m_input_pos[2]);
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotTexture2D(m_input_pos[1]);
+		if (m_is_slot_input[2] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotSamplerState(m_input_pos[2]);
 	}
 
 	void	SamplerTexture2DNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)

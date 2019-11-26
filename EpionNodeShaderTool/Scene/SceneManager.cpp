@@ -1,6 +1,7 @@
 #include	"../All.h"
 #include	"SceneManager.h"
 #include	"SceneDemo2D.h"
+#include	"SceneDemo3D.h"
 
 namespace	epion
 {

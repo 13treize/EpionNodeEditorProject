@@ -10,7 +10,7 @@ namespace
 
 namespace	epion
 {
-	void	RenderTarget::set(	com_ptr<ID3D11RenderTargetView>& rtv,
+	void	RenderTarget::Set(	com_ptr<ID3D11RenderTargetView>& rtv,
 									com_ptr<ID3D11DepthStencilView>& dsv)
 	{
 		Device::GetContext()->OMSetRenderTargets(1,rtv.GetAddressOf(),dsv.Get());

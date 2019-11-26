@@ -24,6 +24,7 @@ CEREAL_REGISTER_TYPE(epion::NodeCustom::DDXYNode)
 namespace	epion::NodeCustom
 {
 	DDXNode::DDXNode()
+		:NodeBase( 1, 1)
 	{
 		Init();
 	}
@@ -53,7 +54,7 @@ namespace	epion::NodeCustom
 		m_input_name[0] = "In" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
 		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
 
-		if (!m_is_slot_input[0])
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)
 		{
 			switch (m_input_slot_type[0])
 			{
@@ -90,6 +91,7 @@ namespace	epion::NodeCustom
 	}
 
 	DDYNode::DDYNode()
+		:NodeBase(1, 1)
 	{
 		Init();
 	}
@@ -119,7 +121,7 @@ namespace	epion::NodeCustom
 		m_input_name[0] = "In" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
 		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
 
-		if (!m_is_slot_input[0])
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)
 		{
 			switch (m_input_slot_type[0])
 			{
@@ -156,6 +158,7 @@ namespace	epion::NodeCustom
 	}
 
 	DDXYNode::DDXYNode()
+		:NodeBase(1, 1)
 	{
 		Init();
 	}
@@ -185,7 +188,7 @@ namespace	epion::NodeCustom
 		m_input_name[0] = "In" + NodeFunction::GetSlotTypeName(m_input_slot_type[0]);
 		m_output_name[0] = "Out" + NodeFunction::GetSlotTypeName(m_output_slot_type[0]);
 
-		if (!m_is_slot_input[0])
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)
 		{
 			switch (m_input_slot_type[0])
 			{

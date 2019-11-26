@@ -4,9 +4,10 @@
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
 
+#include	"NodeData.h"
+
 #include	"NodeParam.h"
 #include	"NodeFunction.h"
-#include	"NodeData.h"
 #include	"../epion_physics/epion_collider.h"
 
 #include	"../DX11/dx11_device.h"
@@ -35,9 +36,6 @@ namespace epion
 }
 namespace	epion::NodeCustom
 {
-	NodeBase::NodeBase()
-	{
-	}
 	NodeBase::NodeBase(int inputs_count, int outputs_count)
 		:m_inputs_count(inputs_count), m_outputs_count(outputs_count)
 	{
@@ -51,7 +49,8 @@ namespace	epion::NodeCustom
 		m_inputs_count(inputs_count),
 		m_outputs_count(outputs_count),
 		m_function_call_str(""),
-		m_dynamic_slot_type(SLOT_TYPE::VECTOR1)
+		m_dynamic_slot_type(SLOT_TYPE::VECTOR1),
+		m_is_push(false)
 	{
 		Initialize();
 #ifdef DEBUG
@@ -61,9 +60,11 @@ namespace	epion::NodeCustom
 
 	void NodeBase::Initialize()
 	{
+		//m_is_slot_input.reserve(m_inputs_count);
+		//assert(m_is_slot_input.capacity() >= m_inputs_count);
 		for (int i = 0; i < m_inputs_count; i++)
 		{
-			m_is_slot_input.push_back(false);
+			m_is_slot_input.push_back(INPUT_SLOT_STATE::ZERO);
 
 			m_input_str.push_back("");
 			m_input_pos.push_back({});
@@ -86,11 +87,15 @@ namespace	epion::NodeCustom
 		{
 			m_Size = { 55.0f*m_inputs_count ,55.0f*m_inputs_count };
 		}
+		if (m_inputs_count == 1 && m_outputs_count == 1)
+		{
+			m_Size = { 130.0f,55.0f};
+		}
 	}
 	void NodeBase::Finalize()
 	{}
 
-	void	NodeBase::TitleDraw(ImVec2& offset, ImDrawList*	draw_list, bool is_push)
+	void	NodeBase::TitleDraw(ImVec2& offset, ImDrawList*	draw_list)
 	{
 		ImVec2 node_rect_min = { offset.x + m_Pos.x,offset.y + m_Pos.y };
 		ImVec2 node_rect_max = node_rect_min + m_Size;
@@ -100,18 +105,8 @@ namespace	epion::NodeCustom
 
 		if (m_node_type != NODE_TYPE::MASTER)	draw_list->AddRectFilled(node_rect_min, node_rect_max2, RECT_COLOR, 2.0f);
 		draw_list->AddRectFilled(node_rect_min, node_rect_min + ImVec2(m_Size.x, 18.0f), TITLE_BAR_COLOR, 2.0f);
-		ImGui::SetCursorScreenPos(node_rect_min + NODE_FONT_POS);	//ノードの文字を描画するpos
+		ImGui::SetCursorScreenPos(node_rect_min + NODE_FONT_ADD_POS);	//ノードのタイトル描画の座標を指定
 		ImGui::TextColored(ImColor::Vec4::WHITE, "%s", m_Name.c_str());
-
-		if (is_push)
-		{
-			draw_list->AddRect(node_rect_min, node_rect_max, ImColor::U32::WHITE, 7.0f);
-		}
-		else
-		{
-			draw_list->AddRect(node_rect_min, node_rect_max, IM_COL32(0, 0, 0, 0), 7.0f);
-		}
-
 #ifdef DEBUG
 	ResouceRender( offset, 	draw_list);
 	draw_list->ChannelsSetCurrent(0); // input_slot
@@ -143,6 +138,18 @@ namespace	epion::NodeCustom
 	{
 		assert(m_is_slot_input.size() == m_inputs_count);
 		draw_list->ChannelsSetCurrent(1);
+
+		ImVec2 node_rect_min = { offset.x + m_Pos.x,offset.y + m_Pos.y };
+		ImVec2 node_rect_max = node_rect_min + m_Size;
+		if (m_is_push)
+		{
+			draw_list->AddRect(node_rect_min, node_rect_max, ImColor::U32::GREEN, 7.0f);
+		}
+		else
+		{
+			draw_list->AddRect(node_rect_min, node_rect_max, ImColor::U32::ZERO, 7.0f);
+		}
+
 		for (int i = 0; i < m_inputs_count; i++)
 		{
 			m_input_pos[i] = offset + GetInputSlotPos(i);
@@ -174,7 +181,7 @@ namespace	epion::NodeCustom
 		draw_list->ChannelsSetCurrent(0); // input_slot
 		for (int i = 0; i < m_inputs_count; i++)
 		{
-			if (!m_is_slot_input[i])
+			if (m_is_slot_input[i] !=INPUT_SLOT_STATE::ONE)
 			{
 				draw_list->AddLine(m_input_pos[i] + ImVec2(-20, 0), m_input_pos[i], ImColor::U32::GREEN, 1.0f);
 				NodeFunction::InputRectDraw(draw_list, m_input_pos[i], m_input_slot_type[i]);
@@ -394,7 +401,10 @@ namespace	epion::NodeCustom
 			if (m_ID == l.GetInputID())
 			{
 				//刺さった状態
-				m_is_slot_input[l.GetInputSlot()] = true;
+				//if (m_is_slot_input[l.GetInputSlot()] == INPUT_SLOT_STATE::ZERO)
+				{
+					m_is_slot_input[l.GetInputSlot()] = INPUT_SLOT_STATE::ONE;
+				}
 				//linedata_set
 				m_input_links[l.GetInputSlot()] = { l.GetOutputID(),l.GetInputSlot() };
 				//output nodeから変数取得
@@ -439,7 +449,8 @@ namespace	epion::NodeCustom
 			}
 			else
 			{
-				m_is_slot_input[l.GetInputSlot()]	=false;
+				//m_is_slot_input[l.GetInputSlot()]	=false;
+				//m_is_slot_input[l.GetInputSlot()] =INPUT_SLOT_STATE::ZERO;
 			}
 		}
 

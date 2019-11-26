@@ -47,7 +47,7 @@ namespace	epion
 	class	Dxgi	final
 	{
 	public:
-		static	void	set(math::FVector2&	win_size_);
+		static	void	Set(math::FVector2&	win_size_);
 		static	void	begin(std::array<float, 4>&	colordata_);
 		static	void	End();
 

@@ -55,6 +55,7 @@ namespace	epion::NodeCustom
 		m_function_call_str = "";
 
 		m_output_slot_type.clear();
+		m_output_name.clear();
 		m_open_popup[0] = false;
 		m_color_picker[0].Init("1", "Color");
 
@@ -64,9 +65,13 @@ namespace	epion::NodeCustom
 	void	UnlitMasterNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_slot_input[1])	m_color_picker[0].SetInputSlotColor2(m_input_pos[1], m_open_popup[0], color,1);
-		if (!m_is_slot_input[2])	NodeFunction::SetInputSlotFloat(m_input_pos[2],StringConverter::get_space(2), Alpha);
-		if (!m_is_slot_input[3])	NodeFunction::SetInputSlotFloat(m_input_pos[3],StringConverter::get_space(3), AlphaChipThreshold);
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)
+		{
+		}
+		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	m_color_picker[0].SetInputSlotColor2(m_input_pos[1], m_open_popup[0], color, 1);
+
+		if (m_is_slot_input[2] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[2],StringConverter::get_space(2), Alpha);
+		if (m_is_slot_input[3] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[3],StringConverter::get_space(3), AlphaChipThreshold);
 	}
 
 	void	UnlitMasterNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -87,6 +92,10 @@ namespace	epion::NodeCustom
 		return
 			"float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)\n"
 			"{\n"
+			"    if (Alpha < AlphaChipThreshold)\n"
+			"    {\n"
+			"        Alpha = 0;\n"
+			"    }\n"
 			"    float4 ret_color = float4(Color, Alpha);\n"
 			"    return ret_color;\n"
 			"};\n";

@@ -31,7 +31,7 @@ namespace	epion
 		Device::GetContext()->DrawIndexed(count, start, 0);
 	}
 
-	void	Renderer::set_screen_size(int	width_, int	height_)
+	void	Renderer::SetScreenSize(int	width_, int	height_)
 	{
 		m_screen_size.x = width_;
 		m_screen_size.y = height_;

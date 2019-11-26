@@ -33,11 +33,14 @@ namespace	epion::NodeCustom
 
 		static	void	LineEvent();
 		static	void	set_is_line_menu(bool is_set);
-		static	bool	get_is_line_menu();
+
+		static	bool	GetIsLineMenu();
+
+		static	void	SetCreateCount(int size);
 
 
 
-		static	void	click_add();
+		static	void	ClickAdd();
 
 		static void reset_create_count()
 		{
@@ -59,6 +62,7 @@ namespace	epion::NodeCustom
 		static	bool	m_is_open_math_advanced_menu;
 		static	bool	m_is_open_math_basic_menu;
 		static	bool	m_is_open_math_range_menu;
+		static	bool	m_is_open_math_round_menu;
 		static	bool	m_is_open_math_wave_menu;
 
 		static	bool	m_is_open_context_menu;

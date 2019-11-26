@@ -1,10 +1,12 @@
 #include	"../../All.h"
 #include	"../../epion.h"
+
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_impl_win32.h"
 #include	"../../../imgui\\imgui_impl_dx11.h"
 #include	"../../../imgui\\imgui_internal.h"
 #include	"../../ImguiFunction.h"
+
 
 #include	"dx11_imgui_main_window.h"
 #include	"PreviewWindow.h"
@@ -18,11 +20,14 @@
 #include	"../../ShaderGenerate/ShaderGenerate.h"
 #include	"../texture.h"
 
+#include	"../../Scene//SceneManager.h"
+#include	"../../Scene//SceneDemo2D.h"
+#include	"../../Scene//SceneDemo3D.h"
+
 #pragma warning(disable:4996)
 
 namespace
 {
-	//float a[4] = {};
 	bool is_tex;
 	std::string path = "GenerateNodeJson\\test.json";
 
@@ -119,7 +124,7 @@ namespace	epion
 
 		//m_preview_resouce = std::make_unique<Texture>();
 		//m_preview_resouce->Create(400, 400, DXGI_FORMAT_R16G16B16A16_FLOAT);
-
+		m_select_scene = 0;
 
 		ImGuiFunction::DefaultWindowFlagsSetiing(m_impl->window_flags);
 
@@ -193,7 +198,7 @@ namespace	epion
 							NodeCustom::NodeEditor::Clear();
 							NodeCustom::NodeEditor::Init();
 							//		NodeCustom::ContextManager::init();
-							NodeCustom::NodeEditor::import_node_data(path);
+							NodeCustom::NodeEditor::ImportNodeData(path);
 						}
 						ImGui::SameLine();
 						ImGui::InputText("JsonName", const_cast<char*>(import_json_name.c_str()), CHAR_MAX);
@@ -249,13 +254,25 @@ namespace	epion
 						}
 						ImGui::EndTabItem();
 					}
+					if (ImGui::BeginTabItem("DemoScene"))
+					{
+						if (ImGui::RadioButton("Demo 2D", &m_select_scene, 0))
+						{
+							SceneManager::SetNextScene<SceneDemo2D>();
+						}
+						if (ImGui::RadioButton("Demo 3D", &m_select_scene, 1))
+						{
+							SceneManager::SetNextScene<SceneDemo3D>();
+						}
+
+						ImGui::EndTabItem();
+					}
+
 					if (ImGui::BeginTabItem("Option"))
 					{
 						ImGui::Text("Option");
 						ImGui::EndTabItem();
 					}
-
-
 
 					ImGui::EndTabBar();
 				}

@@ -15,13 +15,13 @@ namespace	epion::NodeCustom
 
 	std::string	NodeFunction::SetVarFloat(const std::string& in, const std::string& out) { return "    float " + out + "=" + in + ";\n"; }
 	std::string	NodeFunction::SetVarFloat2(const std::string& in_x, const std::string& in_y, const std::string& out) { return"    float2 " + out + "=" + "float2(" + in_x + "," + in_y + ");\n"; }
-	std::string	NodeFunction::SetVarFloat3(const std::string& in, const std::string& out) { return ""; }
-	std::string	NodeFunction::SetVarFloat4(const std::string& in, const std::string& out) { return ""; }
+	std::string	NodeFunction::SetVarFloat3(const std::string& in_x, const std::string& in_y, const std::string& in_z, const std::string& out) { return"    float3 " + out + "=" + "float3(" + in_x + "," + in_y + "," + in_z + ");\n"; }
+	std::string	NodeFunction::SetVarFloat4(const std::string& in_x, const std::string& in_y, const std::string& in_z, const std::string& in_w, const std::string& out) { return"    float4 " + out + "=" + "float4(" + in_x + "," + in_y + "," + in_z + "," + in_w + ");\n"; }
 
 	std::string	NodeFunction::SetInputToString(float str) { return std::to_string(str); }
-	std::string	NodeFunction::SetInputToString2(math::FVector2 str) { return "float2(" + StringConverter::to_string2(str, ",") + ")"; }
-	std::string	NodeFunction::SetInputToString3(math::FVector3 str) { return "float3(" + StringConverter::to_string3(str, ",") + ")"; }
-	std::string	NodeFunction::SetInputToString4(math::FVector4 str) { return "float4(" + StringConverter::to_string4(str, ",") + ")"; }
+	std::string	NodeFunction::SetInputToString2(math::FVector2& str) { return "float2(" + StringConverter::to_string2(str, ",") + ")"; }
+	std::string	NodeFunction::SetInputToString3(math::FVector3& str) { return "float3(" + StringConverter::to_string3(str, ",") + ")"; }
+	std::string	NodeFunction::SetInputToString4(math::FVector4& str) { return "float4(" + StringConverter::to_string4(str, ",") + ")"; }
 
 	void NodeFunction::SetInputSlotFloat(ImVec2& set_cursor, const std::string& label, float& num)
 	{
@@ -164,10 +164,10 @@ namespace	epion::NodeCustom
 	{
 		switch (type)
 		{
-		case SLOT_TYPE::VECTOR1:	str = std::to_string(data.x);			break;
-		case SLOT_TYPE::VECTOR2:	str = NodeFunction::GetType(type) + "(" + StringConverter::to_string2(data.x, data.y) + ")";			break;
-		case SLOT_TYPE::VECTOR3:	str = NodeFunction::GetType(type) + "(" + StringConverter::to_string3(data.x, data.y, data.z) + ")";	break;
-		case SLOT_TYPE::VECTOR4:	str = NodeFunction::GetType(type) + "(" + StringConverter::to_string4(data) + ")";						break;
+		case SLOT_TYPE::VECTOR1:	str = std::to_string(data.x); break;
+		case SLOT_TYPE::VECTOR2:	str = NodeFunction::GetType(type) + "(" + StringConverter::to_string2(data.x, data.y) + ")"; break;
+		case SLOT_TYPE::VECTOR3:	str = NodeFunction::GetType(type) + "(" + StringConverter::to_string3(data.x, data.y, data.z) + ")"; break;
+		case SLOT_TYPE::VECTOR4:	str = NodeFunction::GetType(type) + "(" + StringConverter::to_string4(data) + ")"; break;
 		}
 
 	}

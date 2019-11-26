@@ -55,7 +55,7 @@ namespace	epion
 		ShowWindow(hwnd, nCmdShow);
 	}
 
-	HWND	MainSystem::get_hwnd()
+	HWND	MainSystem::GetHwnd()
 	{
 		return	hwnd;
 	}

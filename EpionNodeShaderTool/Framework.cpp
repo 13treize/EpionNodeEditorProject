@@ -28,10 +28,10 @@ namespace	epion
 		math::FVector2	src(static_cast<float>(width), static_cast<float>(height));
 
 		Device::set_up();
-		Dxgi::set(src);
+		Dxgi::Set(src);
 		ImguiManager::Init();
 		ImguiMain::GetInst().Init();
-		Renderer::set_screen_size(width, height);
+		Renderer::SetScreenSize(width, height);
 	}
 
 	void	FrameWork::Update()
@@ -47,13 +47,12 @@ namespace	epion
 	{
 		std::array<float, 4>	back_color
 		{
-			{0.0f,0.0f,0.0f,0.0f}
+			{0.6f,0.6f,0.6f,0.6f}
 		};
 		Dxgi::begin(back_color);
 
 		SceneManager::Render();
 		ImguiMain::GetInst().Render();
-
 
 		ImguiManager::End();
 		Dxgi::End();

@@ -62,9 +62,10 @@ namespace	epion::NodeCustom
 	void ClampNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0], 0);
-		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_min, m_input_slot_type[1], 1);
-		if (!m_is_slot_input[2])	NodeFunction::SetInputSlotDynamic(m_input_pos[2], m_max, m_input_slot_type[2], 2);
+
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0], 0);
+		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_min, m_input_slot_type[1], 1);
+		if (m_is_slot_input[2] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotDynamic(m_input_pos[2], m_max, m_input_slot_type[2], 2);
 	}
 	void ClampNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
@@ -123,7 +124,7 @@ namespace	epion::NodeCustom
 	void	FractionNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0], 0);
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0], 0);
 	}
 
 	void	FractionNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -188,8 +189,8 @@ namespace	epion::NodeCustom
 	void	MaximumNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in[0], m_input_slot_type[0], 0);
-		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_in[1], m_input_slot_type[1], 1);
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in[0], m_input_slot_type[0], 0);
+		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_in[1], m_input_slot_type[1], 1);
 	}
 
 	void	MaximumNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -255,8 +256,8 @@ namespace	epion::NodeCustom
 	void MinimumNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in[0], m_input_slot_type[0], 0);
-		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_in[1], m_input_slot_type[1], 1);
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in[0], m_input_slot_type[0], 0);
+		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_in[1], m_input_slot_type[1], 1);
 	}
 
 	void MinimumNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -308,13 +309,12 @@ namespace	epion::NodeCustom
 		m_output_name.push_back("Out");
 
 		m_node_type = NODE_TYPE::DYNAMIC;
-		m_dynamic_slot_type = SLOT_TYPE::VECTOR1;
 	}
 
 	void OneMinusNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0], 0);
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0], 0);
 	}
 
 	void	OneMinusNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)

@@ -36,6 +36,7 @@ CEREAL_REGISTER_TYPE(epion::NodeCustom::PBRMasterNode)
 namespace	epion::NodeCustom
 {
 	PBRMasterNode::PBRMasterNode()
+		:NodeBase( 9, 0)
 	{
 		Init();
 	}

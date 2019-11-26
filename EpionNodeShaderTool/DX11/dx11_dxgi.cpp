@@ -25,7 +25,7 @@ namespace	epion
 	com_ptr<ID3D11DepthStencilView>	Dxgi::depth_stencil_view;
 	com_ptr<ID3D11Texture2D>		Dxgi::back_buffer;
 
-	void	Dxgi::set(math::FVector2&	win_size_)
+	void	Dxgi::Set(math::FVector2&	win_size_)
 	{
 		HRESULT	hr = S_OK;
 
@@ -62,7 +62,7 @@ namespace	epion
 			gi_swapchain.ReleaseAndGetAddressOf());
 		if (FAILED(hr))
 		{
-			//std::terminate();
+			std::terminate();
 			throw	"スワップチェイン生成失敗";
 		}
 
@@ -107,7 +107,7 @@ namespace	epion
 			throw	"深度ステンシルビュー失敗";
 		}
 
-		view_port.set(win_size_);
+		view_port.Set(win_size_);
 	}
 
 	void	epion::Dxgi::begin(std::array<float, 4>&	colordata_)
@@ -137,10 +137,11 @@ namespace	epion
 		swap_desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 		swap_desc.SampleDesc.Count = 1;
 		swap_desc.SampleDesc.Quality = 0;
-		swap_desc.BufferCount = 1;											//バックバッファの数
-		swap_desc.OutputWindow = MainSystem::get_hwnd();
+		swap_desc.BufferCount = 2;											//バックバッファの数
+		swap_desc.OutputWindow = MainSystem::GetHwnd();
 		swap_desc.Windowed = true;
-		swap_desc.SwapEffect = DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_DISCARD;
+		swap_desc.SwapEffect = DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_FLIP_DISCARD;
+		//swap_desc.SwapEffect = DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_DISCARD;
 		swap_desc.Flags = 0;
 		return	swap_desc;
 	}

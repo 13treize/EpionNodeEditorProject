@@ -136,13 +136,15 @@ namespace	epion::NodeCustom
 	class	NodeBase
 	{
 	public:
-		NodeBase();
+		NodeBase() =delete;
+		//Json
 		NodeBase(int inputs_count, int outputs_count);
+		//Editor
 		NodeBase(std::string name, int id, const math::FVector2& pos, int inputs_count, int outputs_count);
 
 		virtual	~NodeBase() {}
 
-		void	TitleDraw(ImVec2& offset, ImDrawList*	draw_list, bool is_push);
+		void	TitleDraw(ImVec2& offset, ImDrawList*	draw_list);
 
 		virtual	void	Init() = 0;
 
@@ -158,8 +160,11 @@ namespace	epion::NodeCustom
 		math::FVector2	m_Pos;
 		ImVec2	m_Size;
 
+		bool	m_is_push;
+
 		int	m_inputs_count;
 		int	m_outputs_count;
+
 
 		//input‚ÉŒq‚ª‚Á‚Ä‚élink data
 		LinkVector	m_input_links;
@@ -174,8 +179,8 @@ namespace	epion::NodeCustom
 		std::vector<ImU32>	m_output_slot_color;
 
 		//inputslot‚Éƒm[ƒh‚ªh‚³‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©
-		std::vector<bool>	m_is_slot_input;
-		//std::vector<INPUT_SLOT_STATE> m_is_slot_input;
+		//TODO •¡”‚É‘Î‰
+		std::deque<INPUT_SLOT_STATE> m_is_slot_input;
 
 		ImVec2 GetInputSlotPos(int slot_no) const;
 		ImVec2 GetOutputSlotPos(int slot_no) const;
@@ -198,15 +203,15 @@ namespace	epion::NodeCustom
 		// –½–¼‹K‘¥”í‚è‚Ì‚¹‚¢
 		void Initialize();
 		void Finalize();
-		void	FunctionCallUpdate(std::string	func_name);
+		void FunctionCallUpdate(std::string	func_name);
 
 	protected:
 		//node‚Éo‚·–¼‘O
-		std::vector<std::string>	m_input_name;
-		std::vector<std::string>	m_output_name;
+		std::vector<std::string> m_input_name;
+		std::vector<std::string> m_output_name;
 
-		std::vector<ImVec2>			m_input_pos;
-		std::vector<ImVec2>			m_output_pos;
+		std::vector<ImVec2> m_input_pos;
+		std::vector<ImVec2> m_output_pos;
 
 
 		void	DrawUpdate(ImVec2 offset, ImDrawList*	draw_list);

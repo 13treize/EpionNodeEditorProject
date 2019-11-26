@@ -8,7 +8,7 @@ namespace	epion
 		ViewPort() = default;
 		~ViewPort() = default;
 
-		void	set(math::FVector2&	size);
+		void	Set(math::FVector2&	size);
 
 		D3D11_VIEWPORT	get_vp()	const	noexcept;
 

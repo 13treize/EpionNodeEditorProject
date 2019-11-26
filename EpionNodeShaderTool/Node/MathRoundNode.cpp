@@ -1,11 +1,13 @@
 #include	"../All.h"
 #include	"../epion.h"
+
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
+
 #include	<cereal/cereal.hpp>
 #include	<cereal/types/polymorphic.hpp>
-#include	"NodeData.h"
 
+#include	"NodeData.h"
 #include	"MathRoundNode.h"
 
 #include	"NodeParam.h"
@@ -45,7 +47,7 @@ namespace	epion::NodeCustom
 	void CeilingNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0], 0);
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_in, m_input_slot_type[0], 0);
 	}
 	void CeilingNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
@@ -107,8 +109,8 @@ namespace	epion::NodeCustom
 	void StepNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (!m_is_slot_input[0])	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_edge, m_input_slot_type[0], 0);
-		if (!m_is_slot_input[1])	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_in, m_input_slot_type[1], 1);
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotDynamic(m_input_pos[0], m_edge, m_input_slot_type[0], 0);
+		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotDynamic(m_input_pos[1], m_in, m_input_slot_type[1], 1);
 	}
 	void StepNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
@@ -135,15 +137,15 @@ namespace	epion::NodeCustom
 	};
 #pragma endregion
 
-#pragma region Ceiling
+#pragma region a
 #pragma endregion
 
-#pragma region Ceiling
+#pragma region f
 #pragma endregion
 
-#pragma region Ceiling
+#pragma region v
 #pragma endregion
 
-#pragma region Ceiling
+#pragma region g
 #pragma endregion
 }

@@ -228,9 +228,6 @@
     <ClCompile Include="DX11\square.cpp">
       <Filter>ソース ファイル\Dx11</Filter>
     </ClCompile>
-    <ClCompile Include="DX11\Imgui\epion_imgui_node_context.cpp">
-      <Filter>ソース ファイル\Dx11\Imgui</Filter>
-    </ClCompile>
     <ClCompile Include="Node\RotateNode.cpp">
       <Filter>ソース ファイル\Node\UV</Filter>
     </ClCompile>
@@ -326,6 +323,12 @@
     </ClCompile>
     <ClCompile Include="Node\NodeFunction.cpp">
       <Filter>ソース ファイル\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\Imgui\EpionImguiNodeContext.cpp">
+      <Filter>ソース ファイル\Dx11\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneDemo3D.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -559,6 +562,9 @@
     </ClInclude>
     <ClInclude Include="Node\NodeFunction.h">
       <Filter>ヘッダー ファイル\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneDemo3D.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

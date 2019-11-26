@@ -41,25 +41,15 @@ namespace	epion::NodeCustom
 
 		static	void	Clear();
 
-		static	void	release();
+		static	void	Release();
 
-		static	void	import_node_data(std::string nodejson);
+		static	void	ImportNodeData(std::string nodejson);
 
-		static	void	default_setting_unlit();
-
-
-		static	void	constant_state_update();
 
 		static	std::string	ExportNodeData(const std::string& json_name);
 
 		static	void	DrawLinkLine(ImDrawList*	draw_list);
 
-		static	void	CreateNodeData(ImDrawList*	draw_list, int scene);
-
-		static	void	create_hlsl();
-
-
-		static	void	ScrollingEvent();
 
 		//	get
 		static	ImVec2&	GetScrolling();
@@ -84,6 +74,9 @@ namespace	epion::NodeCustom
 		static	bool	m_is_line_delete_menu;
 		static	bool	m_is_open_context_menu;
 
+		static	bool	m_is_node_push;
+
+
 		//ÉNÉäÉbÉNéûÇ…ï€éùÇ∑ÇÈèÓïÒ
 		static	ClickState	m_click_state;
 
@@ -94,24 +87,36 @@ namespace	epion::NodeCustom
 
 		static	float	m_scale;
 
-		static	ImVec2	m_scrolling;
 		static	float	m_delta;
 
 		static	ImVec2	m_offset;
 		static	ImVec2	m_drag_offset;
 
 		static	ImVec2	m_screen_pos;
-		static	ImVec2	m_context_pos;
 
 		static	float	m_line_size;
 
+		//Node
+		static	void	NodeUpdate(ImDrawList* draw_list);
+		static	void	NodeDrag(ImDrawList* draw_list, int scene, int size);
+		static	void	NodeDraw(ImDrawList* draw_list, int scene, int size);
+		static	void	NodeInputUpdate(ImDrawList* draw_list, int size);
+		static	void	NodeOutputUpdate(ImDrawList* draw_list, int size);
+		static	void	NodeTabBar();
 
+		static	bool	m_is_node_widgets_active;
+		static	bool	m_is_now_any_active;
+		static	bool	m_is_old_any_active;
 
-		static	void	MouseUpdate();
-
-		static	void	draw_node_rect();
-
-
+		//Mouse
+		static	void	MouseUpdate(ImDrawList* draw_list);
+		static	void	CallContext();
+		static	void	Drag(ImDrawList* draw_list);
+		static	void	Enclose(ImDrawList* draw_list);
+		static	void	Scroll();
+		static ImVec2	m_context_pos;
+		static ImVec2	m_enclose_pos;
+		static ImVec2	m_scrolling_pos;
 
 	};
 }

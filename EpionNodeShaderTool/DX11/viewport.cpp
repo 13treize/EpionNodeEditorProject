@@ -3,7 +3,7 @@
 
 namespace	epion
 {
-	void	ViewPort::set(math::FVector2&	size)
+	void	ViewPort::Set(math::FVector2&	size)
 	{
 		vp.Width = size.x;
 		vp.Height = size.y;

@@ -36,7 +36,7 @@ namespace	epion
 	class	MainSystem	final
 	{
 	public:
-		static	HWND	get_hwnd();
+		static	HWND	GetHwnd();
 
 		//ウィンドウ作成
 		static	void	Init(HINSTANCE&	hInstance, int&	nCmdShow, WindowRect&	screen_data);

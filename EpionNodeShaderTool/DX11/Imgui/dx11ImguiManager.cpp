@@ -15,7 +15,7 @@ namespace	epion
 	void	ImguiManager::Init()
 	{
 		ImGui::CreateContext();
-		ImGui_ImplWin32_Init(MainSystem::get_hwnd());
+		ImGui_ImplWin32_Init(MainSystem::GetHwnd());
 		ImGui_ImplDX11_Init(Device::GetDevice().Get(),Device::GetContext().Get());
 		ImGui::StyleColorsLight();
 	}

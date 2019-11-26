@@ -33,6 +33,7 @@ namespace
 namespace	epion::NodeCustom
 {
 	FlipbookNode::FlipbookNode()
+		:NodeBase( 5, 1)
 	{
 		Init();
 	}

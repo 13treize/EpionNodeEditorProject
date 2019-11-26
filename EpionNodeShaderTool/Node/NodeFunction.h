@@ -6,14 +6,14 @@ namespace	epion::NodeCustom
 	public:
 		static std::string SetVarFloat(const std::string& in, const std::string& out);
 		static std::string SetVarFloat2(const std::string& in_x, const std::string& in_y, const std::string& out);
-		static std::string SetVarFloat3(const std::string& in, const std::string& out);
-		static std::string SetVarFloat4(const std::string& in, const std::string& out);
+		static std::string SetVarFloat3(const std::string& in_x, const std::string& in_y, const std::string& in_z, const std::string& out);
+		static std::string SetVarFloat4(const std::string& in_x, const std::string& in_y, const std::string& in_z, const std::string& in_w, const std::string& out);
 
 		//vector‚Ì”’l‚ğ•¶š—ñ‚É•ÏŠ·
 		static std::string SetInputToString(float str);
-		static std::string SetInputToString2(math::FVector2 str);
-		static std::string SetInputToString3(math::FVector3 str);
-		static std::string SetInputToString4(math::FVector4 str);
+		static std::string SetInputToString2(math::FVector2& str);
+		static std::string SetInputToString3(math::FVector3& str);
+		static std::string SetInputToString4(math::FVector4& str);
 
 
 		static void SetInputSlotFloat(ImVec2& set_cursor, const std::string& label, float& num);

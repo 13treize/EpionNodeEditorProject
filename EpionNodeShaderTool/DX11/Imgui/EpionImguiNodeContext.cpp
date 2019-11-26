@@ -1,13 +1,14 @@
 #include	"../../All.h"
+#include	"../../epion.h"
+
 #include	"../../../imgui\\imgui.h"
 #include	"../../../imgui\\imgui_internal.h"
 
-#include	"../../epion.h"
 #include	"EpionNodeEditor.h"
 
-#include	"grid.h"
-#include	"../../Node/NodeData.h"
 #include	"epion_imgui_node_context.h"
+
+#include	"../../Node/NodeData.h"
 #include	"../../Node/ChannelNode.h"
 
 #include	"../../Node/NoiseNode.h"
@@ -15,7 +16,7 @@
 #include	"../../Node/PBRNode.h"
 
 
-#include	"../../Node//ProceduralNode.h"
+#include	"../../Node/ProceduralNode.h"
 
 #include	"../../Node/UVNode.h"
 
@@ -23,6 +24,7 @@
 #include	"../../Node/MathBasicNode.h"
 #include	"../../Node/MathInterpolation.h"
 #include	"../../Node/MathRangeNode.h"
+#include	"../../Node/MathRoundNode.h"
 #include	"../../Node/MathWaveNode.h"
 
 #include	"../../Node/InputBasicNode.h"
@@ -30,7 +32,49 @@
 #include	"../../Node/TextureNode.h"
 
 #define STR(var) #var
+/*
+	Node一覧
+	Artistic
 
+	Channel
+		CombineNode
+
+	Input
+
+	--Basic
+		FloatNode
+		Vector2Node
+		Vector3Node
+		Vector4Node
+		ColorNode
+		TimeNode
+
+	Math
+	--Advanced
+		AbsoluteNode
+		LengthNode
+		ModuloNode
+		NegateNode
+		NormalizeNode
+		PosterizeNode
+		ReciprocalSquareRootNode
+
+	--Basic
+		AddNode
+		SubtractNode
+		MultiplyNode
+		DivideNode
+		PowerNode
+		SquareRootNode
+
+	Noise
+
+	Procedural
+
+	raymarching
+
+	UV
+*/
 
 namespace
 {
@@ -72,6 +116,7 @@ namespace	epion::NodeCustom
 	bool	ContextManager::m_is_open_math_advanced_menu;
 	bool	ContextManager::m_is_open_math_basic_menu;
 	bool	ContextManager::m_is_open_math_range_menu;
+	bool	ContextManager::m_is_open_math_round_menu;
 	bool	ContextManager::m_is_open_math_wave_menu;
 
 	bool	ContextManager::m_is_open_context_menu;
@@ -81,7 +126,7 @@ namespace	epion::NodeCustom
 	bool	ContextManager::m_is_open_menu[ArraySize];
 	std::string	ContextManager::m_str_menu[ArraySize];
 
-	int		ContextManager::m_create_count;
+	int	ContextManager::m_create_count;
 
 	void	ContextManager::Init()
 	{
@@ -103,6 +148,7 @@ namespace	epion::NodeCustom
 		m_is_open_math_advanced_menu = false;
 		m_is_open_math_basic_menu = false;
 		m_is_open_math_range_menu = false;
+		m_is_open_math_round_menu = false;
 		m_is_open_math_wave_menu = false;
 
 		m_is_open_line_menu = false;
@@ -115,7 +161,7 @@ namespace	epion::NodeCustom
 	{
 		m_offfset=/*offset+*/ ImGui::GetIO().MousePos;
 
-		click_add();
+		ClickAdd();
 		artistic_context();
 		ChannelContext();
 		InputContext();
@@ -173,7 +219,7 @@ namespace	epion::NodeCustom
 	}
 
 	//Create Nodeをクリックした後のイベント
-	void	ContextManager::click_add()
+	void	ContextManager::ClickAdd()
 	{
 		if (m_is_open_node_menu)
 		{
@@ -311,6 +357,12 @@ namespace	epion::NodeCustom
 					m_is_open_math_range_menu = true;
 					m_is_open_menu[Math] = false;
 				}
+				if (ImGui::MenuItem("Round"))
+				{
+					m_is_open_math_round_menu = true;
+					m_is_open_menu[Math] = false;
+				}
+
 				if (ImGui::MenuItem("Wave"))
 				{
 					m_is_open_math_wave_menu = true;
@@ -363,6 +415,18 @@ namespace	epion::NodeCustom
 				MenuCreateNode<MaximumNode>("Maximum", m_offfset, m_create_count, m_is_open_math_range_menu);
 				MenuCreateNode<MinimumNode>("Minimum", m_offfset, m_create_count, m_is_open_math_range_menu);
 				MenuCreateNode<OneMinusNode>("OneMinus", m_offfset, m_create_count, m_is_open_math_range_menu);
+			}
+			ImGui::PopStyleVar();
+			ImGui::EndPopup();
+		}
+		if (m_is_open_math_round_menu)
+		{
+			ImGui::OpenPopup("MathRoundMenu");
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
+			if (ImGui::BeginPopup("MathRoundMenu"))
+			{
+				MenuCreateNode<CeilingNode>("Ceiling", m_offfset, m_create_count, m_is_open_math_round_menu);
+				MenuCreateNode<StepNode>("Step", m_offfset, m_create_count, m_is_open_math_round_menu);
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
@@ -456,12 +520,17 @@ namespace	epion::NodeCustom
 	{
 		return	m_is_open_context_menu;
 	}
+	void ContextManager::SetCreateCount(int size)
+	{
+		m_create_count = size;
+	}
+
 	void	ContextManager::set_is_line_menu(bool is_set)
 	{
 		m_is_open_line_menu = is_set;
 	}
 
-	bool	ContextManager::get_is_line_menu()
+	bool	ContextManager::GetIsLineMenu()
 	{
 		return	m_is_open_line_menu;
 	}

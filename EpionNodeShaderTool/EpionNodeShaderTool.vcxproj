@@ -151,7 +151,7 @@
     <ClCompile Include="DX11\dx11_state.cpp" />
     <ClCompile Include="DX11\Imgui\dx11ImguiMainWindow.cpp" />
     <ClCompile Include="DX11\Imgui\dx11ImguiManager.cpp" />
-    <ClCompile Include="DX11\Imgui\epion_imgui_node_context.cpp" />
+    <ClCompile Include="DX11\Imgui\EpionImguiNodeContext.cpp" />
     <ClCompile Include="DX11\Imgui\EpionNodeEditor.cpp" />
     <ClCompile Include="DX11\Imgui\grid.cpp" />
     <ClCompile Include="DX11\Imgui\PreviewWindow.cpp" />
@@ -198,6 +198,7 @@
     <ClCompile Include="Node\UVNode.cpp" />
     <ClCompile Include="Node\NoiseNode.cpp" />
     <ClCompile Include="Scene\SceneDemo2D.cpp" />
+    <ClCompile Include="Scene\SceneDemo3D.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="ShaderGenerate\ShaderGenerate.cpp" />
     <ClCompile Include="Winmain.cpp" />
@@ -278,6 +279,7 @@
     <ClInclude Include="Node\UVNode.h" />
     <ClInclude Include="Node\NoiseNode.h" />
     <ClInclude Include="Scene\SceneDemo2D.h" />
+    <ClInclude Include="Scene\SceneDemo3D.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="ShaderGenerate\ShaderGenerate.h" />
     <ClInclude Include="win_core.h" />
