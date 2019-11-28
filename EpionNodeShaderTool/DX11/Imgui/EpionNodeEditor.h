@@ -98,8 +98,8 @@ namespace	epion::NodeCustom
 
 		//Node
 		static	void	NodeUpdate(ImDrawList* draw_list);
-		static	void	NodeDrag(ImDrawList* draw_list, int scene, int size);
-		static	void	NodeDraw(ImDrawList* draw_list, int scene, int size);
+		static	void	NodeDrag(ImDrawList* draw_list, int size);
+		static	void	NodeDraw(ImDrawList* draw_list, int size);
 		static	void	NodeInputUpdate(ImDrawList* draw_list, int size);
 		static	void	NodeOutputUpdate(ImDrawList* draw_list, int size);
 		static	void	NodeTabBar();

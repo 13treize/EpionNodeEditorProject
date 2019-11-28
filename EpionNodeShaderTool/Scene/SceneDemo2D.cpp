@@ -24,8 +24,8 @@ namespace epion
 		m_preview_3d = std::make_unique<Cube>(L"Assets//obj//plane//plane.obj",m_vertex->GetBlob());
 		//m_preview_3d = std::make_unique<Cube>(L"Assets//obj//sphere//sphere.obj", m_vertex->GetBlob());
 
-		m_pos[0]= { 0.0f,0.0f,-20.0f };
-		m_pos[1] = { 2.1f,0.0f,-20.0f };
+		m_pos[0]= { 6.3f,3.0f,-20.0f };
+		m_pos[1] = { 8.4f,3.0f,-20.0f };
 		math::FVector3 scale = { 1.0f,1.0f,1.0f };
 		m_preview_3d->SetScale(scale);
 		math::FVector3 angle = { 200.0f,0.0,0.0f };

@@ -37,7 +37,7 @@ namespace	epion
 		static	std::string		to_string4(epion::math::FVector4&	vec4, std::string	str = ",");
 		static	std::string		to_string4(float x, float y, float z, float w,std::string	str = ",");
 
-		static	std::string		get_space(int num);
+		static	std::string		GetSpace(int num);
 
 	};
 }

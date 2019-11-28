@@ -70,8 +70,8 @@ namespace	epion::NodeCustom
 		}
 		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	m_color_picker[0].SetInputSlotColor2(m_input_pos[1], m_open_popup[0], color, 1);
 
-		if (m_is_slot_input[2] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[2],StringConverter::get_space(2), Alpha);
-		if (m_is_slot_input[3] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[3],StringConverter::get_space(3), AlphaChipThreshold);
+		if (m_is_slot_input[2] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[2],StringConverter::GetSpace(2), Alpha);
+		if (m_is_slot_input[3] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[3],StringConverter::GetSpace(3), AlphaChipThreshold);
 	}
 
 	void	UnlitMasterNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)

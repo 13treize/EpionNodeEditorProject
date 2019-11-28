@@ -100,7 +100,7 @@ namespace	epion
 	}
 
 
-	std::string	StringConverter::get_space(int num)
+	std::string	StringConverter::GetSpace(int num)
 	{
 		std::string		ret_str="";
 		for (int i = 0; i < num; i++)

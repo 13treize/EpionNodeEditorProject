@@ -10,11 +10,11 @@
                         "m_Name": "Unlit Master",
                         "m_ID": 0,
                         "m_Pos": {
-                            "x": 774,
-                            "y": 186
+                            "x": 865,
+                            "y": 328
                         },
                         "m_dynamic_slot_type": 1,
-                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),RoundedRectangle_out1,1.000000,0.000000);\n"
+                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Checkerboard_out1,1.000000,0.000000);\n"
                     },
                     "Pos": {
                         "cereal_class_version": 0,
@@ -25,7 +25,7 @@
                     },
                     "color": {
                         "cereal_class_version": 0,
-                        "x": 1,
+                        "x": 0,
                         "y": 0,
                         "z": 0
                     },
@@ -36,27 +36,38 @@
         },
         {
             "polymorphic_id": 2147483650,
-            "polymorphic_name": "epion::NodeCustom::RoundedRectangleNode",
+            "polymorphic_name": "epion::NodeCustom::CheckerboardNode",
             "ptr_wrapper": {
                 "valid": 1,
                 "data": {
                     "value0": {
-                        "m_Name": "RoundedRectangle",
+                        "m_Name": "Checkerboard",
                         "m_ID": 1,
                         "m_Pos": {
-                            "x": 256,
-                            "y": 255
+                            "x": 482,
+                            "y": 276
                         },
                         "m_dynamic_slot_type": 1,
-                        "m_function_call_str": "    float RoundedRectangle_out1;\n    RoundedRectangle(input.uv,1.000000,1.000000,0.300000,RoundedRectangle_out1);\n"
+                        "m_function_call_str": "    float3 Checkerboard_out1;\n    Checkerboard(input.uv,float3(0.905325,0.000000,0.000000),float3(0.000000,0.000000,0.000000),float2(1.000000,1.000000),Checkerboard_out1);\n"
                     },
                     "m_uv": {
                         "x": 0,
                         "y": 0
                     },
-                    "m_width": 1,
-                    "m_height": 1,
-                    "m_radius": 0.30000001192092896
+                    "m_colora": {
+                        "x": 0.90532541275024414,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "m_colorb": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "m_frequency": {
+                        "x": 1,
+                        "y": 1
+                    }
                 }
             }
         }
@@ -68,7 +79,7 @@
             "m_input_type": 10,
             "m_output.id": 1,
             "m_output.slot": 0,
-            "m_output_type": 1
+            "m_output_type": 3
         }
     ]
 }

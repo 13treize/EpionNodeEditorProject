@@ -330,6 +330,9 @@
     <ClCompile Include="Scene\SceneDemo3D.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Node\ArtisticAdjustment.cpp">
+      <Filter>ソース ファイル\Node\Artistic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -565,6 +568,9 @@
     </ClInclude>
     <ClInclude Include="Scene\SceneDemo3D.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\ArtisticAdjustment.h">
+      <Filter>ヘッダー ファイル\Node\Artistic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

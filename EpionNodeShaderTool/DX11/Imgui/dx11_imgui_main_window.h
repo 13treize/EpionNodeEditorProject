@@ -47,7 +47,7 @@ namespace	epion
 		std::string import_json_name;
 		//std::unique_ptr<Texture> m_preview_resouce;
 		bool	is_reset;
-
+		bool	m_is_node_window;
 		int	m_select_scene;
 
 	};

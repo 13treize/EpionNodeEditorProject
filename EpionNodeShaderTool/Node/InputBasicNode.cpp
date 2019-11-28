@@ -55,7 +55,7 @@ namespace	epion::NodeCustom
 	void	FloatNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::get_space(0), m_num);
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::GetSpace(0), m_num);
 	}
 
 	void	FloatNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -106,8 +106,8 @@ namespace	epion::NodeCustom
 	void	Vector2Node::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::get_space(0), m_num.x);
-		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_num.y);
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::GetSpace(0), m_num.x);
+		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::GetSpace(1), m_num.y);
 	}
 
 	void	Vector2Node::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -158,9 +158,9 @@ namespace	epion::NodeCustom
 	void	Vector3Node::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::get_space(0), m_num.x);
-		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_num.y);
-		if (m_is_slot_input[2] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_num.z);
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::GetSpace(0), m_num.x);
+		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::GetSpace(1), m_num.y);
+		if (m_is_slot_input[2] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::GetSpace(2), m_num.z);
 	}
 
 	void	Vector3Node::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -213,10 +213,10 @@ namespace	epion::NodeCustom
 	void	Vector4Node::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::get_space(0), m_num.x);
-		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), m_num.y);
-		if (m_is_slot_input[2] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_num.z);
-		if (m_is_slot_input[3] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::get_space(3), m_num.w);
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[0], StringConverter::GetSpace(0), m_num.x);
+		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::GetSpace(1), m_num.y);
+		if (m_is_slot_input[2] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::GetSpace(2), m_num.z);
+		if (m_is_slot_input[3] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::GetSpace(3), m_num.w);
 	}
 
 	void	Vector4Node::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)

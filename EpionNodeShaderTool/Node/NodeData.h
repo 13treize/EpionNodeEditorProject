@@ -230,10 +230,10 @@ namespace	epion::NodeCustom
 
 		/*
 			ColorPicker
-			//ポインタやstlにするとエラー,CheckerboardでMax2つ使用の暫定処置
+			//ポインタやstlにするとエラー,ReplaceColorでMax3つ使用の暫定処置
 		*/
-		ColorPicker2	m_color_picker[2];
-		bool			m_open_popup[2];
+		ColorPicker2	m_color_picker[3];
+		bool			m_open_popup[3];
 		/*
 		hlsl生成
 		*/

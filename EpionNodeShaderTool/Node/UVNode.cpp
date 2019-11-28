@@ -70,8 +70,8 @@ namespace	epion::NodeCustom
 		DrawUpdate(offset, draw_list);
 		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotUV(m_input_pos[0]);
 		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat2(m_input_pos[1], m_center, 1);
-		if (m_is_slot_input[2] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_radialscale);
-		if (m_is_slot_input[3] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::get_space(3), m_lengthscale);
+		if (m_is_slot_input[2] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::GetSpace(2), m_radialscale);
+		if (m_is_slot_input[3] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::GetSpace(3), m_lengthscale);
 	}
 
 	void	PolarCoordinatesNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
@@ -213,7 +213,7 @@ namespace	epion::NodeCustom
 		DrawUpdate(offset, draw_list);
 		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotUV(m_input_pos[0]);
 		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat2(m_input_pos[1], m_center, 1);
-		if (m_is_slot_input[2] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), m_strength);
+		if (m_is_slot_input[2] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::GetSpace(2), m_strength);
 		if (m_is_slot_input[3] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat2(m_input_pos[3], m_offset, 3);
 	}
 

@@ -178,7 +178,6 @@ namespace	epion::NodeCustom
 		ImGui::EndGroup();
 		ImGui::End();
 	//	ImGui::EndTabBar();
-
 	}
 
 	void	NodeEditor::Clear()
@@ -189,7 +188,6 @@ namespace	epion::NodeCustom
 
 	void	NodeEditor::Release()
 	{
-
 	}
 
 	void	NodeEditor::ImportNodeData(std::string nodejson)
@@ -294,8 +292,8 @@ namespace	epion::NodeCustom
 			ImVec2 node_rect_max = node_rect_min + nodes[node_size]->m_Size;
 
 			ImGui::SetCursorScreenPos(node_rect_min);
-			NodeDrag(draw_list, m_node_hovered_in_scene, node_size);
-			NodeDraw(draw_list, m_node_hovered_in_scene, node_size);
+			NodeDrag(draw_list, node_size);
+			NodeDraw(draw_list, node_size);
 			NodeInputUpdate(draw_list, node_size);
 			NodeOutputUpdate(draw_list, node_size);
 
@@ -304,12 +302,16 @@ namespace	epion::NodeCustom
 		draw_list->ChannelsMerge();
 	}
 
-	void NodeEditor::NodeDrag(ImDrawList* draw_list, int scene, int size)
+	void NodeEditor::NodeDrag(ImDrawList* draw_list, int size)
 	{
 		ImGui::InvisibleButton("node", nodes[size]->m_Size);
 		if (ImGui::IsItemHovered())
 		{
-			scene = nodes[size]->m_ID;
+			m_node_hovered_in_scene = nodes[size]->m_ID;
+		}
+		else
+		{
+			m_node_hovered_in_scene = INIT_NUM;
 		}
 
 		m_is_now_any_active = ImGui::IsItemActive();
@@ -329,16 +331,12 @@ namespace	epion::NodeCustom
 		}
 	}
 
-	void NodeEditor::NodeDraw(ImDrawList* draw_list, int scene,int size)
+	void NodeEditor::NodeDraw(ImDrawList* draw_list, int size)
 	{
 		//Node‚É“–‚½‚Á‚½‚©
-		if (
-			m_node_hovered_list == nodes[size]->m_ID
-			//||
-			//scene == nodes[size]->m_ID
-			//||
-			//(m_node_hovered_list == INIT_NUM && m_node_select_num == nodes[m_is_node_push]->m_ID)
-			)
+		if (m_node_hovered_list == nodes[size]->m_ID ||
+			m_node_hovered_in_scene == nodes[size]->m_ID ||
+			(m_node_hovered_list == INIT_NUM && m_node_select_num == nodes[m_is_node_push]->m_ID))
 		{
 			nodes[size]->m_is_push = true;
 		}
@@ -502,11 +500,11 @@ namespace	epion::NodeCustom
 		//{
 		//	if (ContextManager::get_is_line_menu())
 		//	{
-		//		ContextManager::set_is_line_menu(false);
+		//		ContextManager::SetLineMenu(false);
 		//	}
 		//	else
 		//	{
-		//		ContextManager::set_is_line_menu(true);
+		//		ContextManager::SetLineMenu(true);
 		//	}
 
 		//}

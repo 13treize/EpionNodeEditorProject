@@ -37,12 +37,18 @@ float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)
     return ret_color;
 };
 
-void RoundedRectangle(float2 UV, float Width, float Height, float Radius, out float Out)
+void Checkerboard(float2 UV, float3 ColorA, float3 ColorB, float2 Frequency, out float3 Out)
 {
-    Radius = max(min(min(abs(Radius * 2), abs(Width)), abs(Height)), 1e-5);
-    float2 uv = abs(UV * 2 - 1) - float2(Width, Height) + Radius;
-    float d = length(max(0, uv)) / Radius;
-    Out = saturate((1 - d) / fwidth(d));
+    UV = (UV.xy + 0.5) * Frequency;
+    float4 derivatives = float4(ddx(UV), ddy(UV));
+    float2 duv_length = sqrt(float2(dot(derivatives.xz, derivatives.xz), dot(derivatives.yw, derivatives.yw)));
+    float width = 1.0;
+    float2 distance3 = 4.0 * abs(frac(UV + 0.25) - 0.5) - width;
+    float2 scale = 0.35 / duv_length.xy;
+    float freqLimiter = sqrt(clamp(1.1f - max(duv_length.x, duv_length.y), 0.0, 1.0));
+    float2 vector_alpha = clamp(distance3 * scale.xy, -1.0, 1.0);
+    float alpha = saturate(0.5f + 0.5f * vector_alpha.x * vector_alpha.y * freqLimiter);
+    Out = lerp(ColorA, ColorB, alpha.xxx);
 }
 
 float4 PS(PSInput input) : SV_TARGET
@@ -50,9 +56,9 @@ float4 PS(PSInput input) : SV_TARGET
     float Time_ =Time.x;
     float Sin_Time_ =sin(Time.x);
     float Cos_Time_ =cos(Time.x);
-    float RoundedRectangle_out1;
-    RoundedRectangle(input.uv,1.000000,1.000000,0.300000,RoundedRectangle_out1);
+    float3 Checkerboard_out1;
+    Checkerboard(input.uv,float3(0.905325,0.000000,0.000000),float3(0.000000,0.000000,0.000000),float2(1.000000,1.000000),Checkerboard_out1);
 
-    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),RoundedRectangle_out1,1.000000,0.000000);
+    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Checkerboard_out1,1.000000,0.000000);
     return flag_color;
 }

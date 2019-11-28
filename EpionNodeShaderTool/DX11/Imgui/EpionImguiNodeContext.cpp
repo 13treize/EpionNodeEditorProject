@@ -9,6 +9,8 @@
 #include	"epion_imgui_node_context.h"
 
 #include	"../../Node/NodeData.h"
+#include	"../../Node/ArtisticAdjustment.h"
+
 #include	"../../Node/ChannelNode.h"
 
 #include	"../../Node/NoiseNode.h"
@@ -34,8 +36,10 @@
 #define STR(var) #var
 /*
 	Nodeˆê——
+	ŽÀ‘•‚µ‚½‚©‚ÌŠm”F
 	Artistic
-
+	--Adjustment
+		ReplaceColor
 	Channel
 		CombineNode
 
@@ -109,6 +113,8 @@ namespace	epion::NodeCustom
 {
 	ImVec2	ContextManager::m_offfset;
 
+	bool	ContextManager::m_is_open_artistic_adjustment_menu;
+
 	bool	ContextManager::m_is_open_input_basic_menu;
 	bool	ContextManager::m_is_open_input_texture_menu;
 
@@ -144,6 +150,8 @@ namespace	epion::NodeCustom
 		m_str_menu[UV] = STR(UV);
 		m_str_menu[Noise] = STR(Noise);
 
+		m_is_open_artistic_adjustment_menu = false;
+
 		m_is_open_input_basic_menu = false;
 		m_is_open_math_advanced_menu = false;
 		m_is_open_math_basic_menu = false;
@@ -162,10 +170,10 @@ namespace	epion::NodeCustom
 		m_offfset=/*offset+*/ ImGui::GetIO().MousePos;
 
 		ClickAdd();
-		artistic_context();
+		ArtisticContext();
 		ChannelContext();
 		InputContext();
-		master_context();
+		MasterContext();
 		MathContext();
 		ProceduralContext();
 		UtilityContext();
@@ -174,9 +182,6 @@ namespace	epion::NodeCustom
 	}
 	void	ContextManager::DragAndDropEvent()
 	{
-		//ImGui::PushID(n);
-		//ImGui::Button(names[n], ImVec2(60, 60));
-
 	}
 
 
@@ -241,9 +246,31 @@ namespace	epion::NodeCustom
 
 	}
 
-	void	ContextManager::artistic_context()
+	void	ContextManager::ArtisticContext()
 	{
-
+		if (m_is_open_menu[Artistic])
+		{
+			ImGui::OpenPopup("ArtisticMenu");
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
+			if (ImGui::BeginPopup("ArtisticMenu"))
+			{
+				m_is_open_artistic_adjustment_menu = true;
+				m_is_open_menu[Artistic] = false;
+			}
+			ImGui::PopStyleVar();
+			ImGui::EndPopup();
+		}
+		if (m_is_open_artistic_adjustment_menu)
+		{
+			ImGui::OpenPopup("ArtisticAdjustmentMenu");
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
+			if (ImGui::BeginPopup("ArtisticAdjustmentMenu"))
+			{
+				MenuCreateNode<ReplaceColorNode>("RePlaceColor", m_offfset, m_create_count, m_is_open_artistic_adjustment_menu);
+			}
+			ImGui::PopStyleVar();
+			ImGui::EndPopup();
+		}
 	}
 	void	ContextManager::ChannelContext()
 	{
@@ -268,17 +295,8 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("InputMenu"))
 			{
-				if (ImGui::MenuItem("Basic"))
-				{
-					m_is_open_input_basic_menu = true;
-					m_is_open_menu[Input] = false;
-				}
-
-				if (ImGui::MenuItem("Texture"))
-				{
-					m_is_open_input_texture_menu = true;
-					m_is_open_menu[Input] = false;
-				}
+				MenuItem("Basic", NodeType::Input, m_is_open_input_basic_menu);
+				MenuItem("Texture", NodeType::Input, m_is_open_input_texture_menu);
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
@@ -317,7 +335,7 @@ namespace	epion::NodeCustom
 
 	}
 
-	void	ContextManager::master_context()
+	void	ContextManager::MasterContext()
 	{
 		if (m_is_open_menu[Master])
 		{
@@ -341,33 +359,11 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("MathMenu"))
 			{
-
-				if (ImGui::MenuItem("Advanced"))
-				{
-					m_is_open_math_advanced_menu = true;
-					m_is_open_menu[Math] = false;
-				}
-				if (ImGui::MenuItem("Basic")) 
-				{
-					m_is_open_math_basic_menu = true;
-					m_is_open_menu[Math] = false;
-				}
-				if (ImGui::MenuItem("Range"))
-				{
-					m_is_open_math_range_menu = true;
-					m_is_open_menu[Math] = false;
-				}
-				if (ImGui::MenuItem("Round"))
-				{
-					m_is_open_math_round_menu = true;
-					m_is_open_menu[Math] = false;
-				}
-
-				if (ImGui::MenuItem("Wave"))
-				{
-					m_is_open_math_wave_menu = true;
-					m_is_open_menu[Math] = false;
-				}
+				MenuItem("Advanced", NodeType::Math, m_is_open_math_advanced_menu);
+				MenuItem("Basic", NodeType::Math, m_is_open_math_basic_menu);
+				MenuItem("Range", NodeType::Math, m_is_open_math_range_menu);
+				MenuItem("Round", NodeType::Math, m_is_open_math_round_menu);
+				MenuItem("Wave", NodeType::Math, m_is_open_math_wave_menu);
 
 				MenuCreateNode<LerpNode>("Lerp", m_offfset, m_create_count, m_is_open_menu[Math]);
 			}
@@ -491,7 +487,6 @@ namespace	epion::NodeCustom
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
 		}
-
 	}
 
 	void	ContextManager::NoiseContext()
@@ -511,6 +506,16 @@ namespace	epion::NodeCustom
 			ImGui::EndPopup();
 		}
 	}
+
+	void	ContextManager::MenuItem(const std::string& str, NodeType type, bool& is_menu)
+	{
+		if (ImGui::MenuItem(str.c_str()))
+		{
+			is_menu = true;
+			m_is_open_menu[type] = false;
+		}
+	}
+
 	void	ContextManager::SetContext(bool is_set)
 	{
 		m_is_open_context_menu = is_set;
@@ -525,12 +530,12 @@ namespace	epion::NodeCustom
 		m_create_count = size;
 	}
 
-	void	ContextManager::set_is_line_menu(bool is_set)
+	void	ContextManager::SetLineMenu(bool is_set)
 	{
 		m_is_open_line_menu = is_set;
 	}
 
-	bool	ContextManager::GetIsLineMenu()
+	bool	ContextManager::GetLineMenu()
 	{
 		return	m_is_open_line_menu;
 	}

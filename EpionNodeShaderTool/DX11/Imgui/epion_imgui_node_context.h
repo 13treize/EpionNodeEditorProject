@@ -32,9 +32,8 @@ namespace	epion::NodeCustom
 		static	bool	GetContext();
 
 		static	void	LineEvent();
-		static	void	set_is_line_menu(bool is_set);
-
-		static	bool	GetIsLineMenu();
+		static	void	SetLineMenu(bool is_set);
+		static	bool	GetLineMenu();
 
 		static	void	SetCreateCount(int size);
 
@@ -56,6 +55,8 @@ namespace	epion::NodeCustom
 		static	int	m_create_count;
 
 		//input
+		static	bool	m_is_open_artistic_adjustment_menu;
+
 		static	bool	m_is_open_input_basic_menu;
 		static	bool	m_is_open_input_texture_menu;
 
@@ -70,15 +71,18 @@ namespace	epion::NodeCustom
 
 		static	bool	m_is_open_node_menu;
 
-		static	inline	void	artistic_context();
+		static	inline	void	ArtisticContext();
 		static	inline	void	ChannelContext();
 		static	inline	void	InputContext();
-		static	inline	void	master_context();
+		static	inline	void	MasterContext();
 		static	inline	void	MathContext();
 		static	inline	void	ProceduralContext();
 		static	inline	void	UtilityContext();
 		static	inline	void	UVContext();
 		static	inline	void	NoiseContext();
+
+		static	inline	void	MenuItem(const std::string& str,NodeType type,bool&is_menu);
+
 	};
 }
 

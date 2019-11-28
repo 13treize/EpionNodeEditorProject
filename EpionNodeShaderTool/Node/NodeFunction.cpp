@@ -38,8 +38,8 @@ namespace	epion::NodeCustom
 	}
 	void NodeFunction::SetInputSlotFloat2(ImVec2& set_cursor, math::FVector2& num, int label_num)
 	{
-		SetInputSlotFloat(set_cursor, SLOT_INPUT_POS_X, StringConverter::get_space(1 + (label_num + 1) * 2), num.x);
-		SetInputSlotFloat(set_cursor, SLOT_INPUT_POS_X * 2, StringConverter::get_space(2 + (label_num + 1) * 2), num.y);
+		SetInputSlotFloat(set_cursor, SLOT_INPUT_POS_X, StringConverter::GetSpace(1 + (label_num + 1) * 2), num.x);
+		SetInputSlotFloat(set_cursor, SLOT_INPUT_POS_X * 2, StringConverter::GetSpace(2 + (label_num + 1) * 2), num.y);
 	}
 
 	void NodeFunction::SetInputSlotUV(ImVec2& set_cursor)
@@ -73,10 +73,10 @@ namespace	epion::NodeCustom
 	{
 		switch (type)
 		{
-		case SLOT_TYPE::VECTOR4:	SetInputSlotFloat(set_cursor, (static_cast<float>(type) - 3)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(type) + (label_num + 1) * 4), num.w);
-		case SLOT_TYPE::VECTOR3:	SetInputSlotFloat(set_cursor, (static_cast<float>(type) - 2)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(type) - 1 + (label_num + 1) * 4), num.z);
-		case SLOT_TYPE::VECTOR2:	SetInputSlotFloat(set_cursor, (static_cast<float>(type) - 1)	*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(type) - 2 + (label_num + 1) * 4), num.y);
-		case SLOT_TYPE::VECTOR1:	SetInputSlotFloat(set_cursor, static_cast<float>(type)			*SLOT_INPUT_POS_X, StringConverter::get_space(static_cast<int>(type) - 3 + (label_num + 1) * 4), num.x);
+		case SLOT_TYPE::VECTOR4:	SetInputSlotFloat(set_cursor, (static_cast<float>(type) - 3)	*SLOT_INPUT_POS_X, StringConverter::GetSpace(static_cast<int>(type) + (label_num + 1) * 4), num.w);
+		case SLOT_TYPE::VECTOR3:	SetInputSlotFloat(set_cursor, (static_cast<float>(type) - 2)	*SLOT_INPUT_POS_X, StringConverter::GetSpace(static_cast<int>(type) - 1 + (label_num + 1) * 4), num.z);
+		case SLOT_TYPE::VECTOR2:	SetInputSlotFloat(set_cursor, (static_cast<float>(type) - 1)	*SLOT_INPUT_POS_X, StringConverter::GetSpace(static_cast<int>(type) - 2 + (label_num + 1) * 4), num.y);
+		case SLOT_TYPE::VECTOR1:	SetInputSlotFloat(set_cursor, static_cast<float>(type)			*SLOT_INPUT_POS_X, StringConverter::GetSpace(static_cast<int>(type) - 3 + (label_num + 1) * 4), num.x);
 			break;
 		}
 

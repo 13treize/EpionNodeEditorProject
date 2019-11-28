@@ -175,6 +175,7 @@
     <ClCompile Include="FileIO\Fileio_json.cpp" />
     <ClCompile Include="Framework.cpp" />
     <ClCompile Include="ImguiFunction.cpp" />
+    <ClCompile Include="Node\ArtisticAdjustment.cpp" />
     <ClCompile Include="Node\ArtisticNormalNode.cpp" />
     <ClCompile Include="Node\ChannelNode.cpp" />
     <ClCompile Include="Node\Flipbook.cpp" />
@@ -255,6 +256,7 @@
     <ClInclude Include="FileIO\Fileio_json.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="ImguiFunction.h" />
+    <ClInclude Include="Node\ArtisticAdjustment.h" />
     <ClInclude Include="Node\ArtisticNormalNode.h" />
     <ClInclude Include="Node\ChannelNode.h" />
     <ClInclude Include="Node\FlipbookNode.h" />

@@ -46,7 +46,7 @@ namespace	epion
 
 		bool	is_update;
 		bool	is_update_node;
-		bool	is_show_node_window;
+		//bool	is_show_node_window;
 		bool	is_hlsl_export;
 
 		bool	is_unlit_setting;
@@ -80,7 +80,7 @@ namespace	epion
 		m_impl = std::make_unique<ImguiMain::Impl>();
 		m_impl->is_update = true;
 		m_impl->is_update_node = true;
-		m_impl->is_show_node_window = true;
+		m_is_node_window = true;
 
 
 		m_impl->is_hlsl_export = false;
@@ -105,7 +105,6 @@ namespace	epion
 		m_impl = std::make_unique<ImguiMain::Impl>();
 		m_impl->is_update = true;
 		m_impl->is_update_node = true;
-		m_impl->is_show_node_window = true;
 		m_impl->is_hlsl_export = false;
 		is_reset = false;
 		m_impl->is_link_reset = false;
@@ -125,6 +124,8 @@ namespace	epion
 		//m_preview_resouce = std::make_unique<Texture>();
 		//m_preview_resouce->Create(400, 400, DXGI_FORMAT_R16G16B16A16_FLOAT);
 		m_select_scene = 0;
+
+		m_is_node_window = true;
 
 		ImGuiFunction::DefaultWindowFlagsSetiing(m_impl->window_flags);
 
@@ -146,7 +147,7 @@ namespace	epion
 	void	ImguiMain::Update()
 	{
 
-		if (m_impl->is_show_node_window)
+		if (m_is_node_window)
 		{
 			NodeCustom::NodeEditor::Update(&m_impl->is_update_node, m_impl->node_title_name);
 		}
@@ -176,106 +177,103 @@ namespace	epion
 			ImGui::PushItemWidth(200.0f);
 
 			MenuBar::ShowExampleAppMain();
-			ImGui::Checkbox("NodeWindow", &m_impl->is_show_node_window);
+			ImGui::Checkbox("NodeWindow", &m_is_node_window);
 
 			//create_shader
-			if (m_impl->is_show_node_window)
+			if (ImGui::BeginTabBar("##tabs", ImGuiTabBarFlags_None))
 			{
-				if (ImGui::BeginTabBar("##tabs", ImGuiTabBarFlags_None))
+				if (ImGui::BeginTabItem("MainMenu"))
 				{
-					if (ImGui::BeginTabItem("MainMenu"))
+
+					ResetEvent();
+					//reset
+
+					//import jsonfile
+					if (ImGui::Button("Import"))
 					{
-
-						ResetEvent();
-						//reset
-
-						//import jsonfile
-						if (ImGui::Button("Import"))
-						{
-							//std::string path = "GenerateNodeJson\\";
-							std::string path = "GenerateNodeJson\\test.json";
-							//path += import_json_name;
-							NodeCustom::NodeEditor::Clear();
-							NodeCustom::NodeEditor::Init();
-							//		NodeCustom::ContextManager::init();
-							NodeCustom::NodeEditor::ImportNodeData(path);
-						}
-						ImGui::SameLine();
-						ImGui::InputText("JsonName", const_cast<char*>(import_json_name.c_str()), CHAR_MAX);
-
-						ImGui::Text(import_json_name.c_str());
-
-						//Nodeî•ñ‚ðJson‚É‘‚«o‚µ
-						if (ImGui::Button("SaveNodeData"))
-						{
-							m_impl->json_name = NodeCustom::NodeEditor::ExportNodeData(path);
-						}
-
-
-						//export_shader_name
-						//ImGui::InputText("ShaderName", m_impl->node_shader_name, CHAR_MAX);
-
-						//create_shader
-						(ImGui::Button("CreateShader")) ? m_impl->is_hlsl_export = true : m_impl->is_hlsl_export = false;
-						ImGui::SameLine();
-						ImGui::InputText("ShaderName", m_impl->node_shader_name, CHAR_MAX);
-
-						//reset_shader
-						if(ImGui::Button("Updatehlsl"))	Preview::Init(L"test.hlsl", m_tex_resouce.GetTexNames());
-						ImGui::EndTabItem();
+						//std::string path = "GenerateNodeJson\\";
+						std::string path = "GenerateNodeJson\\test.json";
+						//path += import_json_name;
+						NodeCustom::NodeEditor::Clear();
+						NodeCustom::NodeEditor::Init();
+						//		NodeCustom::ContextManager::init();
+						NodeCustom::NodeEditor::ImportNodeData(path);
 					}
-					if (ImGui::BeginTabItem("Texture"))
+					ImGui::SameLine();
+					ImGui::InputText("JsonName", const_cast<char*>(import_json_name.c_str()), CHAR_MAX);
+
+					ImGui::Text(import_json_name.c_str());
+
+					//Nodeî•ñ‚ðJson‚É‘‚«o‚µ
+					if (ImGui::Button("SaveNodeData"))
 					{
-						TextureUpdate();
-						ImGui::EndTabItem();
-					}
-					if (ImGui::BeginTabItem("TexParam"))
-					{
-						m_tex_resouce.Update();
-						ImGui::EndTabItem();
+						m_impl->json_name = NodeCustom::NodeEditor::ExportNodeData(path);
 					}
 
-					if (ImGui::BeginTabItem("Node"))
-					{
-						ImGui::Text("Node size %d", NodeCustom::NodeEditor::GetNodeSize());
-						ImGui::EndTabItem();
-					}
 
-					if (ImGui::BeginTabItem("Link"))
-					{
-						ImGui::Text("Link size %d", NodeCustom::NodeEditor::GetLinkSize());
-						if (ImGui::TreeNode("LinkState"))
-						{
-							for (auto & li : NodeCustom::NodeEditor::links)
-							{
-								ImGui::Text(li.StateStr().c_str());
-							}
-							ImGui::TreePop();
-						}
-						ImGui::EndTabItem();
-					}
-					if (ImGui::BeginTabItem("DemoScene"))
-					{
-						if (ImGui::RadioButton("Demo 2D", &m_select_scene, 0))
-						{
-							SceneManager::SetNextScene<SceneDemo2D>();
-						}
-						if (ImGui::RadioButton("Demo 3D", &m_select_scene, 1))
-						{
-							SceneManager::SetNextScene<SceneDemo3D>();
-						}
+					//export_shader_name
+					//ImGui::InputText("ShaderName", m_impl->node_shader_name, CHAR_MAX);
 
-						ImGui::EndTabItem();
-					}
+					//create_shader
+					(ImGui::Button("CreateShader")) ? m_impl->is_hlsl_export = true : m_impl->is_hlsl_export = false;
+					ImGui::SameLine();
+					ImGui::InputText("ShaderName", m_impl->node_shader_name, CHAR_MAX);
 
-					if (ImGui::BeginTabItem("Option"))
-					{
-						ImGui::Text("Option");
-						ImGui::EndTabItem();
-					}
-
-					ImGui::EndTabBar();
+					//reset_shader
+					if(ImGui::Button("Updatehlsl"))	Preview::Init(L"test.hlsl", m_tex_resouce.GetTexNames());
+					ImGui::EndTabItem();
 				}
+				if (ImGui::BeginTabItem("Texture"))
+				{
+					TextureUpdate();
+					ImGui::EndTabItem();
+				}
+				if (ImGui::BeginTabItem("TexParam"))
+				{
+					m_tex_resouce.Update();
+					ImGui::EndTabItem();
+				}
+
+				if (ImGui::BeginTabItem("Node"))
+				{
+					ImGui::Text("Node size %d", NodeCustom::NodeEditor::GetNodeSize());
+					ImGui::EndTabItem();
+				}
+
+				if (ImGui::BeginTabItem("Link"))
+				{
+					ImGui::Text("Link size %d", NodeCustom::NodeEditor::GetLinkSize());
+					if (ImGui::TreeNode("LinkState"))
+					{
+						for (auto & li : NodeCustom::NodeEditor::links)
+						{
+							ImGui::Text(li.StateStr().c_str());
+						}
+						ImGui::TreePop();
+					}
+					ImGui::EndTabItem();
+				}
+				if (ImGui::BeginTabItem("DemoScene"))
+				{
+					if (ImGui::RadioButton("Demo 2D", &m_select_scene, 0))
+					{
+						SceneManager::SetNextScene<SceneDemo2D>();
+					}
+					if (ImGui::RadioButton("Demo 3D", &m_select_scene, 1))
+					{
+						SceneManager::SetNextScene<SceneDemo3D>();
+					}
+
+					ImGui::EndTabItem();
+				}
+
+				if (ImGui::BeginTabItem("Option"))
+				{
+					ImGui::Text("Option");
+					ImGui::EndTabItem();
+				}
+
+				ImGui::EndTabBar();
 			}
 			PreviewEvent();
 			ImGui::End();

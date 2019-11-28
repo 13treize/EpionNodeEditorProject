@@ -85,12 +85,12 @@ namespace	epion::NodeCustom
 
 		//if (!m_is_slot_input[1])
 		//{
-		//	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::get_space(1), AngleOffset);
+		//	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::GetSpace(1), AngleOffset);
 		//}
 
 		//if (!m_is_slot_input[2])
 		//{
-		//	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::get_space(2), CellDensity);
+		//	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::GetSpace(2), CellDensity);
 		//}
 
 	}
