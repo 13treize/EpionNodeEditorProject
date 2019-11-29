@@ -47,7 +47,7 @@ namespace	epion::Shader
 	{
 	}
 
-	void	NodeShaderManager::generate(std::string	file_path)
+	void	NodeShaderManager::Generate(const std::string& file_path)
 	{
 		shader_function.clear();
 		create_str.clear();
@@ -246,7 +246,7 @@ namespace	epion::Shader
 		return	function_str;
 	}
 
-	void	NodeShaderManager::json_import(std::string	path)
+	void	NodeShaderManager::JsonImport(const std::string&	path)
 	{
 		epion::FileIO::FileIOJson	json_file;
 		json_file.Input(path, nodes, links);

@@ -45,7 +45,7 @@ namespace	epion::FileIO
 {
 
 	void	FileIOJson::Input(
-		std::string&	path,
+		const std::string& path,
 		std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>& node_base,
 		std::vector<epion::NodeCustom::NodeLink>&	node_link)
 	{
@@ -82,7 +82,7 @@ namespace	epion::FileIO
 	}
 
 	void	FileIOJson::Input(
-		std::string&	path,
+		const std::string&	path,
 		std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>& node_base,
 		std::list<epion::NodeCustom::NodeLink>&	node_link)
 	{

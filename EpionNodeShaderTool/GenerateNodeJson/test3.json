@@ -1,0 +1,39 @@
+{
+    "node_param": [
+        {
+            "polymorphic_id": 2147483649,
+            "polymorphic_name": "epion::NodeCustom::UnlitMasterNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Unlit Master",
+                        "m_ID": 0,
+                        "m_Pos": {
+                            "x": 812,
+                            "y": 348
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),float3(0.875740,0.103638,0.103638),1.000000,0.000000);\n"
+                    },
+                    "Pos": {
+                        "cereal_class_version": 0,
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "color": {
+                        "cereal_class_version": 0,
+                        "x": 0.87573963403701782,
+                        "y": 0.10363780707120895,
+                        "z": 0.10363780707120895
+                    },
+                    "Alpha": 1,
+                    "AlphaChipThreshold": 0
+                }
+            }
+        }
+    ],
+    "link_param": []
+}

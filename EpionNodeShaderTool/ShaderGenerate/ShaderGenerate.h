@@ -33,9 +33,9 @@ namespace	epion::Shader
 
 		static	std::string	FuncSetup();
 
-		static	void	json_import(std::string	path);
+		static	void	JsonImport(const std::string&	path);
 
-		static	void	generate(std::string	file_path);
+		static	void	Generate(const std::string& file_path);
 	private:
 		static	std::vector<int>	current_id;
 		static	std::vector<int>	get_id;

@@ -28,15 +28,15 @@ namespace	epion::FileIO
 		~FileIOJson()
 		{}
 
-		void	Input(	std::string&	path,
+		void	Input(	const std::string& path,
 						std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>& node_base,
-						std::vector<epion::NodeCustom::NodeLink>&	node_link);
+						std::vector<epion::NodeCustom::NodeLink>& node_link);
 
 		void	Output(	const std::string&	path,
 						const std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>	&node_base,
 						const std::vector<epion::NodeCustom::NodeLink>&	node_link);
 
-		void	Input(std::string&	path,
+		void	Input(const std::string& path,
 			std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>& node_base,
 			std::list<epion::NodeCustom::NodeLink>&	node_link);
 

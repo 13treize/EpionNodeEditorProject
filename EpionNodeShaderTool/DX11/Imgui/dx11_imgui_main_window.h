@@ -35,21 +35,34 @@ namespace	epion
 		TextureResouce	m_tex_resouce;
 		void	impl_update();
 
+		void	PathSetting();
+
+		void	JsonSave();
+
+		void	ShaderGenerate();
+
+		std::string	m_json_path;
+		std::string	m_json_import_name;
+		std::string	m_json_import;
+
+		std::string	m_shader_path;
+		std::string	m_shader_generate_name;
+		std::string	m_shader_generate;
 		void	TextureInit();
 		void	TextureUpdate();
 		void	TextureRelease();
 
 		void	ResetEvent();
 
-
 		void	PreviewEvent();
 
-		std::string import_json_name;
+		std::string m_import_json_name;
 		//std::unique_ptr<Texture> m_preview_resouce;
 		bool	is_reset;
 		bool	m_is_node_window;
-		int	m_select_scene;
 
+		//Scene
+		int		m_select_scene;
+		void	SceneUpdate();
 	};
-
 }

@@ -1,0 +1,64 @@
+{
+    "node_param": [
+        {
+            "polymorphic_id": 2147483649,
+            "polymorphic_name": "epion::NodeCustom::CeilingNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Ceiling_float",
+                        "m_ID": 0,
+                        "m_Pos": {
+                            "x": 324,
+                            "y": 270
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float Ceiling_float_out0;\n    Ceiling_float(0.500000,Ceiling_float_out0);\n"
+                    },
+                    "In": {
+                        "cereal_class_version": 0,
+                        "x": 0.5,
+                        "y": 0.5,
+                        "z": 0.5,
+                        "w": 0.5
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483650,
+            "polymorphic_name": "epion::NodeCustom::UnlitMasterNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Unlit Master",
+                        "m_ID": 1,
+                        "m_Pos": {
+                            "x": 918,
+                            "y": 397
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),float3(0.840237,0.084521,0.084521),1.000000,0.000000);\n"
+                    },
+                    "Pos": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "color": {
+                        "cereal_class_version": 0,
+                        "x": 0.84023666381835938,
+                        "y": 0.0845208540558815,
+                        "z": 0.0845208540558815
+                    },
+                    "Alpha": 1,
+                    "AlphaChipThreshold": 0
+                }
+            }
+        }
+    ],
+    "link_param": []
+}

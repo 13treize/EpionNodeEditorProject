@@ -52,7 +52,7 @@ float4 PS(PSInput input) : SV_TARGET
     float Sin_Time_ =sin(Time.x);
     float Cos_Time_ =cos(Time.x);
     float2 Twirl_out1;
-    Twirl(input.uv,float2(0.500000,0.500000),30.000000,float2(0.000000,0.000000),Twirl_out1);
+    Twirl(input.uv,float2(0.500000,0.500000),40.000000,float2(0.000000,0.000000),Twirl_out1);
 
     float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),float3(Twirl_out1, 0.0),1.000000,0.000000);
     return flag_color;
