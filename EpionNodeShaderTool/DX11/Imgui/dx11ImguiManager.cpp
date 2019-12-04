@@ -5,7 +5,7 @@
 #include	"../../../imgui\\imgui_impl_dx11.h"
 #include	"../../../imgui\\imgui_internal.h"
 
-#include	"dx11_imgui_manager.h"
+#include	"Dx11ImguiManager.h"
 namespace
 {
 }

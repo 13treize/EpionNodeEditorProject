@@ -1,4 +1,4 @@
-struct PSInput
+                                  struct PSInput
 {
     float4 position : SV_POSITION;
     float4 normal : NORMAL;
@@ -39,9 +39,9 @@ float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)
 
 float4 PS(PSInput input) : SV_TARGET
 {
-    float Time_ =Time.x;
-    float Sin_Time_ =sin(Time.x);
-    float Cos_Time_ =cos(Time.x);
-    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),float3(1.000000,0.999990,0.999990),1.000000,0.000000);
+    float Time_ = Time.x;
+    float Sin_Time_ = sin(Time.x);
+    float Cos_Time_ = cos(Time.x);
+    float4 flag_color = Unlit(float4(0.000000, 0.000000, 0.000000, 0.000000), float3(0.000000, 0.000000, 0.000000), 1.000000, 0.000000);
     return flag_color;
 }

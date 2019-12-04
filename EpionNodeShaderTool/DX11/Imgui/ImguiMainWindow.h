@@ -1,5 +1,8 @@
 #pragma once
 #include	"TextureResouce.h"
+#include	"FileIOAdjust.h"
+#include	"TextureAdjust.h"
+
 
 namespace	epion
 {
@@ -32,31 +35,24 @@ namespace	epion
 		class	Impl;
 		std::unique_ptr<Impl>	m_impl;
 
+
+		bool m_is_update_node;
+
 		TextureResouce	m_tex_resouce;
 		void	impl_update();
 
-		void	PathSetting();
+		GUI::FileIOAdjust	m_file_io_adjust;
+		GUI::TextureAdjust	m_texture_adjust;
 
-		void	JsonSave();
+		void ShaderSet();
 
-		void	ShaderGenerate();
 
-		std::string	m_json_path;
-		std::string	m_json_import_name;
-		std::string	m_json_import;
 
-		std::string	m_shader_path;
-		std::string	m_shader_generate_name;
-		std::string	m_shader_generate;
-		void	TextureInit();
-		void	TextureUpdate();
-		void	TextureRelease();
 
 		void	ResetEvent();
 
 		void	PreviewEvent();
 
-		std::string m_import_json_name;
 		//std::unique_ptr<Texture> m_preview_resouce;
 		bool	is_reset;
 		bool	m_is_node_window;

@@ -12,9 +12,9 @@
 #include <cereal/types/list.hpp>
 
 #include	"EpionNodeEditor.h"
-#include	"epion_imgui_node_context.h"
+#include	"ImguiNodeContext.h"
 
-#include	"grid.h"
+#include	"Grid.h"
 #include	"../../ImguiFunction.h"
 #include	"../../Node/NodeParam.h"
 #include	"../../Node/NodeData.h"
@@ -22,7 +22,7 @@
 #include	"../../FileIO/Fileio_json.h"
 
 
-#pragma warning(disable:4996)
+//#pragma warning(disable:4996)
 
 #define	DEBUG 1
 
@@ -73,10 +73,6 @@ namespace
 
 	ImU32	NODE_LINE_COLOR	= IM_COL32(0, 150, 250, 250);
 
-
-
-	std::string	name = "GenerateNodeJson\\test.json";
-
 	epion::math::FVector2 getFVec2(ImVec2& vec2)
 	{
 		return epion::math::FVector2(vec2.x, vec2.y);
@@ -106,6 +102,7 @@ namespace	epion::NodeCustom
 		m_line_size = 3.0f;
 
 		m_offset = ImVec2(0, 0);
+
 		m_drag_offset = ImVec2(0, 0);
 
 		m_screen_pos = ImVec2(1350, 1000);
@@ -119,6 +116,8 @@ namespace	epion::NodeCustom
 
 	void	NodeEditor::Update(bool* opened,std::string	node_bar_name)
 	{
+		m_offset = ImGui::GetCursorScreenPos() + m_scrolling_pos;
+
 		NodeCustom::ContextManager::Update(m_offset);
 
 		ImGui::SetNextWindowSize(m_screen_pos,1);
@@ -140,14 +139,12 @@ namespace	epion::NodeCustom
 		ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColor::U32::BLACK);	//”wŒi
 		ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, 12);
 
-		m_offset = ImGui::GetCursorScreenPos() + m_scrolling_pos;
 		ImDrawList*	draw_list = ImGui::GetWindowDrawList();
 
 		draw_list->ChannelsSplit(5);
 
 		// Display grid
-		epion::NodeCustom::Grids	grid;
-		grid.Init(64.0f, IM_COL32(0, 200, 120, 120));
+		epion::NodeCustom::Grids	grid(64.0f, IM_COL32(0, 200, 120, 120));
 
 		grid.ShowGrid(draw_list, ImGui::GetCursorScreenPos(),ImGui::GetWindowSize(), m_scrolling_pos);
 
@@ -168,7 +165,7 @@ namespace	epion::NodeCustom
 		}
 		if (!m_is_line)
 		{
-			ContextManager::ClickEvent();
+			ContextManager::ClickEvent(m_offset);
 		}
 		ContextManager::LineEvent();
 
@@ -190,7 +187,7 @@ namespace	epion::NodeCustom
 	{
 	}
 
-	void	NodeEditor::ImportNodeData(std::string nodejson)
+	void	NodeEditor::ImportNodeData(const std::string& nodejson)
 	{
 			nodes.clear();
 			links.clear();
@@ -204,6 +201,8 @@ namespace	epion::NodeCustom
 
 	std::string	NodeEditor::ExportNodeData(const std::string& json_name)
 	{
+		std::string	name;
+
 		epion::FileIO::FileIOJson	json_file;
 		json_file.Output(json_name,	nodes,	links);
 		return name;
@@ -227,7 +226,7 @@ namespace	epion::NodeCustom
 			if (physics::Collider2D::LineCircle(::getFVec2(left_pos), ::getFVec2(right_pos), ::getFVec2(ImGui::GetIO().MousePos), 8.0f))
 			{
 				m_line_size = 10.0f;
-				if (ImGui::IsMouseClicked(1))
+				if (ImGui::IsMouseDoubleClicked(1))
 				{
 					m_is_line_delete_menu =true;
 				}
@@ -247,20 +246,25 @@ namespace	epion::NodeCustom
 		{
 			if(m_is_line_delete_menu)
 			{
-				ImGui::OpenPopup("context_menu");
+				ImGui::OpenPopup("delete_menu");
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 12));
-				if (ImGui::BeginPopup("context_menu"))
+				if (ImGui::BeginPopup("delete_menu"))
 				{
 					if (ImGui::MenuItem("Delete", nullptr))
 					{
 						links.erase(links.begin() + i);
 						m_is_line_delete_menu = false;
 					}
+					//if (ImGui::IsMouseClicked(1))
+					//{
+					//	m_is_line_delete_menu = false;
+					//}
 					ImGui::EndPopup();
 				}
 				ImGui::PopStyleVar();
 			}
 		}
+
 
 
 		for (auto& l : links)
@@ -289,7 +293,7 @@ namespace	epion::NodeCustom
 		{
 			ImGui::PushID(nodes[node_size]->m_ID);
 			ImVec2 node_rect_min = m_offset + ::getImVec2(nodes[node_size]->m_Pos);
-			ImVec2 node_rect_max = node_rect_min + nodes[node_size]->m_Size;
+			//ImVec2 node_rect_max = node_rect_min + nodes[node_size]->m_Size;
 
 			ImGui::SetCursorScreenPos(node_rect_min);
 			NodeDrag(draw_list, node_size);

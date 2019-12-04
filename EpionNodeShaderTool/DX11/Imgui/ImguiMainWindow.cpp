@@ -5,15 +5,16 @@
 #include	"../../../imgui\\imgui_impl_win32.h"
 #include	"../../../imgui\\imgui_impl_dx11.h"
 #include	"../../../imgui\\imgui_internal.h"
+
+
 #include	"../../ImguiFunction.h"
 
-
-#include	"dx11_imgui_main_window.h"
+#include	"ImguiMainWindow.h"
 #include	"PreviewWindow.h"
 #include	"../dx11_dxgi.h"
 
 #include	"EpionNodeEditor.h"
-#include	"epion_imgui_node_context.h"
+#include	"ImguiNodeContext.h"
 
 #include	"../../Node/NodeData.h"
 
@@ -46,7 +47,6 @@ namespace	epion
 		std::array<float, 4>	m_back_color;
 
 		bool	is_update;
-		bool	is_update_node;
 		//bool	is_show_node_window;
 
 
@@ -62,13 +62,6 @@ namespace	epion
 		char node_shader_name[CHAR_MAX] = "";
 
 		std::unique_ptr<Texture>	preview_resouce;
-		//private:
-
-		//テクスチャの数を取得
-		int	tex_num;
-		std::vector<bool>	is_tex;
-		std::vector<std::string>	tex_name;
-		std::vector<std::unique_ptr<Texture>>	tex_resouce;
 
 	};
 
@@ -76,7 +69,7 @@ namespace	epion
 	{
 		m_impl = std::make_unique<ImguiMain::Impl>();
 		m_impl->is_update = true;
-		m_impl->is_update_node = true;
+		m_is_update_node = true;
 		m_is_node_window = true;
 
 
@@ -100,12 +93,11 @@ namespace	epion
 	{
 		m_impl = std::make_unique<ImguiMain::Impl>();
 		m_impl->is_update = true;
-		m_impl->is_update_node = true;
+		m_is_update_node = true;
 		is_reset = false;
 		m_impl->is_link_reset = false;
 
 		m_impl->is_shader_reset = false;
-
 
 		m_impl->json_name = "";
 
@@ -124,15 +116,14 @@ namespace	epion
 		ImGuiFunction::DefaultWindowFlagsSetiing(m_impl->window_flags);
 
 
-		m_json_path = "GenerateNodeJson";
-		m_shader_path = "GenerateShader";
-		TextureInit();
+		m_texture_adjust.Init();
 		NodeCustom::ContextManager::Init();
 		ImGui::StyleColorsDark();
 		NodeCustom::NodeEditor::Init();
 		ColorPicker::Init();
 		m_tex_resouce.Init();
-		Preview::Init(L"test.hlsl",m_tex_resouce.GetTexNames(),1);
+		m_file_io_adjust.Init();
+		Preview::Init(L"Default/Init.hlsl",m_tex_resouce.GetTexNames(),1);
 	}
 
 	void	ImguiMain::impl_update()
@@ -141,10 +132,9 @@ namespace	epion
 
 	void	ImguiMain::Update()
 	{
-
 		if (m_is_node_window)
 		{
-			NodeCustom::NodeEditor::Update(&m_impl->is_update_node, m_impl->node_title_name);
+			NodeCustom::NodeEditor::Update(&m_is_update_node, m_impl->node_title_name);
 		}
 
 
@@ -154,58 +144,19 @@ namespace	epion
 
 			ImGui::Begin("MainWindow", &m_impl->is_update, m_impl->window_flags);
 
-			auto&	io = ImGui::GetIO();
-			//ImGui::Image(m_impl->shader_resouce_view.Get(), ImVec2(512,512));
-
-			ImGui::Text("FPS: %.2f (%.2gms)", io.Framerate, io.Framerate ? 1000.0f / io.Framerate : 0.0f);
-
 			ImGui::PushItemWidth(200.0f);
 
-			MenuBar::ShowExampleAppMain();
+			//MenuBar::ShowExampleAppMain();
 			ImGui::Checkbox("NodeWindow", &m_is_node_window);
 
 			//create_shader
 			if (ImGui::BeginTabBar("##tabs", ImGuiTabBarFlags_None))
 			{
-				if (ImGui::BeginTabItem("MainMenu"))
-				{
 
-					ResetEvent();
-					//reset
+				m_file_io_adjust.Update();
 
-					//import jsonfile
-					if (ImGui::Button("Import"))
-					{
-						//std::string path = "GenerateNodeJson\\";
-						std::string path = "GenerateNodeJson\\test.json";
-						//path += import_json_name;
-						NodeCustom::NodeEditor::Clear();
-						NodeCustom::NodeEditor::Init();
-						//		NodeCustom::ContextManager::init();
-						NodeCustom::NodeEditor::ImportNodeData(path);
-					}
-					ImGui::SameLine();
-					ImGui::InputText("JsonName", const_cast<char*>(m_import_json_name.c_str()), CHAR_MAX);
-
-					ImGui::Text(m_import_json_name.c_str());
-
-					PathSetting();
-
-					//Node情報をJsonに書き出し
-					JsonSave();
-
-					//export_shader_name
-					//ImGui::InputText("ShaderName", m_impl->node_shader_name, CHAR_MAX);
-
-					//create_shader
-					ShaderGenerate();
-
-					//reset_shader
-					if(ImGui::Button("Updatehlsl"))	Preview::Init(L"aaaa.hlsl", m_tex_resouce.GetTexNames());
-					ImGui::EndTabItem();
-				}
-				TextureUpdate();
-
+				m_texture_adjust.Update();
+				ShaderSet();
 				if (ImGui::BeginTabItem("TexParam"))
 				{
 					m_tex_resouce.Update();
@@ -215,6 +166,11 @@ namespace	epion
 				if (ImGui::BeginTabItem("Node"))
 				{
 					ImGui::Text("Node size %d", NodeCustom::NodeEditor::GetNodeSize());
+					for (const auto& n : NodeCustom::NodeEditor::nodes)
+					{
+						ImGui::Text("Node pos x %d, y %d", n->m_Pos.x ,n->m_Pos.y);
+
+					}
 					ImGui::EndTabItem();
 				}
 
@@ -236,6 +192,8 @@ namespace	epion
 				if (ImGui::BeginTabItem("Option"))
 				{
 					ImGui::Text("Option");
+					auto&	io = ImGui::GetIO();
+					ImGui::Text("FPS: %.2f (%.2gms)", io.Framerate, io.Framerate ? 1000.0f / io.Framerate : 0.0f);
 					ImGui::EndTabItem();
 				}
 
@@ -252,114 +210,18 @@ namespace	epion
 		//m_impl->preview->render(m_impl->time, math::FVector2(1450, 650), math::FVector2(400, 400), 0, FixColor::Red);
 	}
 
-	void ImguiMain::PathSetting()
+#pragma region File Settings
+
+	void ImguiMain::ShaderSet()
 	{
-		if (ImGui::CollapsingHeader("Path Setting"))
+		if (ImGui::Button("Updatehlsl"))
 		{
-			ImGui::InputText("Json Path", const_cast<char*>(m_json_path.c_str()), CHAR_MAX);
-			ImGui::InputText("Shader Path", const_cast<char*>(m_shader_path.c_str()), CHAR_MAX);
+			Preview::Init(L"Default/Default.hlsl", m_tex_resouce.GetTexNames());
 		}
 	}
 
-	void ImguiMain::JsonSave()
-	{
-		if (ImGui::CollapsingHeader("JsonSave"))
-		{
-			if (ImGui::Button("Save"))
-			{
-				m_impl->json_name = NodeCustom::NodeEditor::ExportNodeData(path);
-			}
-		}
-	}
+#pragma endregion
 
-	void ImguiMain::ShaderGenerate()
-	{
-		if (ImGui::CollapsingHeader("ShaderGenerate"))
-		{
-			ImGui::Text(const_cast<char*>(m_json_path.c_str()));
-			ImGui::Text(const_cast<char*>(m_shader_path.c_str()));
-
-			ImGui::InputText("Json Name", const_cast<char*>(m_json_import_name.c_str()), CHAR_MAX);
-			ImGui::Text(const_cast<char*>(m_json_import_name.c_str()));
-			ImGui::InputText("Shader Name", const_cast<char*>(m_shader_generate_name.c_str()), CHAR_MAX);
-			ImGui::Text(const_cast<char*>(m_shader_generate_name.c_str()));
-
-
-			if (ImGui::Button("Generate"))
-			{
-				if(m_json_path.empty())
-				{
-					m_json_import = m_json_import_name;
-				}
-				else
-				{
-					m_json_import = m_json_path + "/"/* += m_json_import_name*/;
-					m_json_import += m_json_import_name;
-
-				}
-
-				if(m_shader_path.empty())
-				{
-					m_shader_generate = m_shader_generate_name;
-				}
-				else
-				{
-					m_shader_generate = m_shader_path + "/" /*+=m_shader_generate_name*/;
-					m_shader_generate += m_shader_generate_name;
-
-				}
-
-				Shader::NodeShaderManager::JsonImport("test3.json");
-				Shader::NodeShaderManager::Generate("aaaa.hlsl");
-			}
-		}
-	}
-
-	void ImguiMain::TextureInit()
-	{
-		for (auto& x : std::filesystem::directory_iterator("Assets"))
-		{
-			if (x.path().extension() != "")
-			{
-				m_impl->tex_name.push_back(x.path().string());
-				m_impl->tex_num++;
-				m_impl->is_tex.push_back(false);
-			}
-		}
-		m_impl->tex_resouce.resize(m_impl->tex_num);
-
-		for (int i = 0; i < m_impl->tex_num; i++)
-		{
-			m_impl->tex_resouce[i] = std::make_unique<Texture>();
-			TextureFileIO::LoadTexture(StringConverter::to_wstring(m_impl->tex_name[i]), m_impl->tex_resouce[i]->m_metadata, m_impl->tex_resouce[i]->m_image, m_impl->tex_resouce[i]->m_shader_resource);
-		}
-	}
-	void	ImguiMain::TextureUpdate()
-	{
-		if (ImGui::BeginTabItem("Texture"))
-		{
-			if (ImGui::TreeNode("Texture"))
-			{
-				for (int i = 0; i < m_impl->tex_num; i++)
-				{
-					if (ImGui::Button(m_impl->tex_name[i].c_str()))
-					{
-						m_impl->is_tex[i] = true;
-					}
-					if (m_impl->is_tex[i])
-					{
-						if (ImGui::Button("Close"))
-						{
-							m_impl->is_tex[i] = false;
-						}
-						ImGui::Image(m_impl->tex_resouce[i]->m_shader_resource.Get(), ImVec2(200, 200), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1, 1, 1, 1), ImVec4(1, 0, 0, 1));
-					}
-				}
-				ImGui::TreePop();
-			}
-			ImGui::EndTabItem();
-		}
-	}
 
 	void	ImguiMain::PreviewEvent()
 	{

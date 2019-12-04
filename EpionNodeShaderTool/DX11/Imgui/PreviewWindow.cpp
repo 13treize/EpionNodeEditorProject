@@ -11,7 +11,7 @@
 
 #include	"../../Node/NodeParamDx11.h"
 #include	"EpionNodeEditor.h"
-#include	"epion_imgui_node_context.h"
+//#include	"ImguiNodeContext.h"
 
 #include	"../../Node/NodeData.h"
 #include	"../../ImguiFunction.h"
@@ -35,7 +35,7 @@ namespace	epion
 	math::FVector4					Preview::time;
 	int Preview::m_used_tex;
 
-	bool	Preview::Init(std::wstring	ps_name, std::vector<std::string>& tex_name,int use_tex)
+	bool	Preview::Init(const std::wstring&	ps_name, std::vector<std::string>& tex_name,int use_tex)
 	{
 		m_used_tex = use_tex;
 		m_used_tex = std::clamp(m_used_tex, 0, 15);

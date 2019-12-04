@@ -5,7 +5,7 @@ namespace	epion::NodeCustom
 	class	Grids
 	{
 	public:
-		Grids();
+		Grids() =delete;
 		Grids(float	size, ImU32	color);
 
 		~Grids();

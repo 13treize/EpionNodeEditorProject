@@ -43,7 +43,7 @@ namespace	epion::NodeCustom
 
 		static	void	Release();
 
-		static	void	ImportNodeData(std::string nodejson);
+		static	void	ImportNodeData(const std::string& nodejson);
 
 
 		static	std::string	ExportNodeData(const std::string& json_name);

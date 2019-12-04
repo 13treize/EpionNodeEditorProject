@@ -91,6 +91,12 @@ namespace	epion::NodeCustom
 		{
 			m_Size = { 130.0f,55.0f};
 		}
+
+		if (m_inputs_count == 0)
+		{
+			m_Size = { 55.0f *m_outputs_count +30.0f,55.0f*m_outputs_count };
+		}
+
 	}
 	void NodeBase::Finalize()
 	{}
@@ -480,10 +486,10 @@ namespace	epion::NodeCustom
 	NodeLink::NodeLink()
 	{
 	}
-	NodeLink::NodeLink(int output_id, int output_slot, int input_id, int input_slot)
+	NodeLink::NodeLink(int output_id,int output_slot, int input_id, int input_slot)
 		:m_output({ output_id ,output_slot }), m_output_type(SLOT_TYPE::VECTOR1),
 		m_input({ input_id, input_slot }), m_input_type(SLOT_TYPE::VECTOR1),
-		m_is_hit(false)
+		m_is_hit(false),	m_is_delete_menu(false)
 	{
 	}
 

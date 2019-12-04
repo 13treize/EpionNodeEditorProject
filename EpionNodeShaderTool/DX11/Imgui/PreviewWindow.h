@@ -10,7 +10,7 @@ namespace	epion
 	class	Preview	final
 	{
 	public:
-		static bool Init(std::wstring ps_name, std::vector<std::string>& tex_name,int use_tex = 0);
+		static bool Init(const std::wstring& ps_name, std::vector<std::string>& tex_name,int use_tex = 0);
 		static void Render();
 
 	private:

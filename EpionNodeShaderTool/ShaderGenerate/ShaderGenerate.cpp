@@ -253,7 +253,7 @@ namespace	epion::Shader
 	}
 
 
-	std::string	NodeShaderManager::call_uv()
+	std::string	NodeShaderManager::CallUV()
 	{
 		return	"input.uv";
 	}

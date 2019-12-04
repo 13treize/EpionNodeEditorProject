@@ -12,20 +12,21 @@ namespace epion
 {
 	void SceneDemo2D::Init()
 	{
-		//m_vertex = std::make_unique<VertexShader>(L"HLSLShader\\square_vertex_shader.hlsl");
-		//m_pixel = std::make_unique<PixelShader>(L"test.hlsl");
 		CameraManager::Init();
 		NodeCustom::Dx11::ConstantBufferManager::Create();
 
 		m_vertex = std::make_unique<VertexShader>(L"HLSLShader\\ObjVertexShader.hlsl");
-		m_pixel[0] = std::make_unique<PixelShader>(L"GenerateShader\\demo1.hlsl");
-		m_pixel[1] = std::make_unique<PixelShader>(L"GenerateShader\\Dissolve.hlsl");
+		m_pixel[0] = std::make_unique<PixelShader>(L"GenerateShader\\Demo1.hlsl");
+		m_pixel[1] = std::make_unique<PixelShader>(L"GenerateShader\\Demo2.hlsl");
+		m_pixel[2] = std::make_unique<PixelShader>(L"GenerateShader\\Dissolve.hlsl");
 
 		m_preview_3d = std::make_unique<Cube>(L"Assets//obj//plane//plane.obj",m_vertex->GetBlob());
 		//m_preview_3d = std::make_unique<Cube>(L"Assets//obj//sphere//sphere.obj", m_vertex->GetBlob());
 
-		m_pos[0]= { 6.3f,3.0f,-20.0f };
-		m_pos[1] = { 8.4f,3.0f,-20.0f };
+		m_pos[0] = { 8.4f,3.0f,-20.0f };
+		m_pos[1] = { 6.3f,3.0f,-20.0f };
+		m_pos[2] = { 4.2f,3.0f,-20.0f };
+
 		math::FVector3 scale = { 1.0f,1.0f,1.0f };
 		m_preview_3d->SetScale(scale);
 		math::FVector3 angle = { 200.0f,0.0,0.0f };
@@ -59,6 +60,10 @@ namespace epion
 		m_pixel[1]->SetState();
 		m_preview_3d->Render(CameraManager::GetView(), CameraManager::GetProjection());
 
+		m_preview_3d->SetPos(m_pos[2]);
+		m_preview_3d->Update();
+		m_pixel[2]->SetState();
+		m_preview_3d->Render(CameraManager::GetView(), CameraManager::GetProjection());
 	}
 	void SceneDemo2D::Release()
 	{

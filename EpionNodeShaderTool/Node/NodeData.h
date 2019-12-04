@@ -117,6 +117,8 @@ namespace	epion::NodeCustom
 		}
 
 		bool m_is_hit;
+		bool m_is_delete_menu;
+
 
 		std::string StateStr();
 

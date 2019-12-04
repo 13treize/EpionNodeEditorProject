@@ -6,7 +6,7 @@
 
 #include	"EpionNodeEditor.h"
 
-#include	"epion_imgui_node_context.h"
+#include	"ImguiNodeContext.h"
 
 #include	"../../Node/NodeData.h"
 #include	"../../Node/ArtisticAdjustment.h"
@@ -111,7 +111,8 @@ namespace
 }
 namespace	epion::NodeCustom
 {
-	ImVec2	ContextManager::m_offfset;
+	ImVec2	ContextManager::m_offset;
+	ImVec2	ContextManager::m_menu_pos;
 
 	bool	ContextManager::m_is_open_artistic_adjustment_menu;
 
@@ -136,6 +137,8 @@ namespace	epion::NodeCustom
 
 	void	ContextManager::Init()
 	{
+		m_offset = ImVec2(0, 0);
+		m_menu_pos=ImVec2(0, 0);
 		for (int i = 0; i < ArraySize; i++)
 		{
 			m_is_open_menu[i] = false;
@@ -167,7 +170,6 @@ namespace	epion::NodeCustom
 
 	void	ContextManager::Update(ImVec2& offset)
 	{
-		m_offfset=/*offset+*/ ImGui::GetIO().MousePos;
 
 		ClickAdd();
 		ArtisticContext();
@@ -185,18 +187,19 @@ namespace	epion::NodeCustom
 	}
 
 
-	void	ContextManager::ClickEvent()
+	void	ContextManager::ClickEvent(ImVec2& offset)
 	{
 		if (m_is_open_context_menu)
 		{
 			//ƒm[ƒh‚Ì’Ç‰Á
-			ImGui::OpenPopup("context_menu");
+			ImGui::OpenPopup("create_menu");
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 12));
-			if (ImGui::BeginPopup("context_menu"))
+			if (ImGui::BeginPopup("create_menu"))
 			{
 				if (ImGui::MenuItem("Create Node", nullptr, &m_is_open_node_menu))
 				{
 					m_is_open_context_menu = false;
+					m_offset =/*offset+ */ImGui::GetIO().MousePos;
 				}
 				ImGui::EndPopup();
 			}
@@ -266,7 +269,7 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("ArtisticAdjustmentMenu"))
 			{
-				MenuCreateNode<ReplaceColorNode>("RePlaceColor", m_offfset, m_create_count, m_is_open_artistic_adjustment_menu);
+				MenuCreateNode<ReplaceColorNode>("RePlaceColor", m_offset, m_create_count, m_is_open_artistic_adjustment_menu);
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
@@ -280,7 +283,7 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("ChannelMenu"))
 			{
-				MenuCreateNode<CombineNode>("Combine", m_offfset, m_create_count, m_is_open_menu[Channel]);
+				MenuCreateNode<CombineNode>("Combine", m_offset, m_create_count, m_is_open_menu[Channel]);
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
@@ -307,12 +310,12 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("InputBasicMenu"))
 			{
-				MenuCreateNode<FloatNode>("Float", m_offfset, m_create_count, m_is_open_input_basic_menu);
-				MenuCreateNode<Vector2Node>("Vector2", m_offfset, m_create_count, m_is_open_input_basic_menu);
-				MenuCreateNode<Vector3Node>("Vector3", m_offfset, m_create_count, m_is_open_input_basic_menu);
-				MenuCreateNode<Vector4Node>("Vector4", m_offfset, m_create_count, m_is_open_input_basic_menu);
-				MenuCreateNode<ColorNode>("Color", m_offfset, m_create_count, m_is_open_input_basic_menu);
-				MenuCreateNode<TimeNode>("Time", m_offfset, m_create_count, m_is_open_input_basic_menu);
+				MenuCreateNode<FloatNode>("Float", m_offset, m_create_count, m_is_open_input_basic_menu);
+				MenuCreateNode<Vector2Node>("Vector2", m_offset, m_create_count, m_is_open_input_basic_menu);
+				MenuCreateNode<Vector3Node>("Vector3", m_offset, m_create_count, m_is_open_input_basic_menu);
+				MenuCreateNode<Vector4Node>("Vector4", m_offset, m_create_count, m_is_open_input_basic_menu);
+				MenuCreateNode<ColorNode>("Color", m_offset, m_create_count, m_is_open_input_basic_menu);
+				MenuCreateNode<TimeNode>("Time", m_offset, m_create_count, m_is_open_input_basic_menu);
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
@@ -323,9 +326,9 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("InputTextureMenu"))
 			{
-				MenuCreateNode<SamplerStateNode>("SamplerState", m_offfset, m_create_count, m_is_open_input_texture_menu);
-				MenuCreateNode<SamplerTexture2DNode>("Sampler Texture2D", m_offfset, m_create_count, m_is_open_input_texture_menu);
-				MenuCreateNode<Texture2DNode>("Texture2D", m_offfset, m_create_count, m_is_open_input_texture_menu);
+				MenuCreateNode<SamplerStateNode>("SamplerState", m_offset, m_create_count, m_is_open_input_texture_menu);
+				MenuCreateNode<SamplerTexture2DNode>("Sampler Texture2D", m_offset, m_create_count, m_is_open_input_texture_menu);
+				MenuCreateNode<Texture2DNode>("Texture2D", m_offset, m_create_count, m_is_open_input_texture_menu);
 
 			}
 			ImGui::PopStyleVar();
@@ -343,8 +346,8 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("MasterMenu"))
 			{
-				MenuCreateNode<UnlitMasterNode>("Unlit", m_offfset, m_create_count,m_is_open_menu[Master]);
-				MenuCreateNode<PBRMasterNode>("PBR", m_offfset, m_create_count, m_is_open_menu[Master]);
+				MenuCreateNode<UnlitMasterNode>("Unlit", m_offset, m_create_count,m_is_open_menu[Master]);
+				//MenuCreateNode<PBRMasterNode>("PBR", m_offset, m_create_count, m_is_open_menu[Master]);
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
@@ -365,7 +368,7 @@ namespace	epion::NodeCustom
 				MenuItem("Round", NodeType::Math, m_is_open_math_round_menu);
 				MenuItem("Wave", NodeType::Math, m_is_open_math_wave_menu);
 
-				MenuCreateNode<LerpNode>("Lerp", m_offfset, m_create_count, m_is_open_menu[Math]);
+				MenuCreateNode<LerpNode>("Lerp", m_offset, m_create_count, m_is_open_menu[Math]);
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
@@ -376,9 +379,9 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("MathAdvancedMenu"))
 			{
-				MenuCreateNode<AbsoluteNode>("Absolute", m_offfset, m_create_count, m_is_open_math_advanced_menu);
-				MenuCreateNode<LengthNode>("Length",m_offfset, m_create_count, m_is_open_math_advanced_menu);
-				MenuCreateNode<ModuloNode>("Modulo",m_offfset, m_create_count, m_is_open_math_advanced_menu);
+				MenuCreateNode<AbsoluteNode>("Absolute", m_offset, m_create_count, m_is_open_math_advanced_menu);
+				MenuCreateNode<LengthNode>("Length",m_offset, m_create_count, m_is_open_math_advanced_menu);
+				MenuCreateNode<ModuloNode>("Modulo",m_offset, m_create_count, m_is_open_math_advanced_menu);
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
@@ -390,12 +393,12 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("MathBasicMenu"))
 			{
-				MenuCreateNode<AddNode>("Add", m_offfset, m_create_count, m_is_open_math_basic_menu);
-				MenuCreateNode<DivideNode>("Divide", m_offfset, m_create_count, m_is_open_math_basic_menu);
-				MenuCreateNode<MultiplyNode>("Multiply", m_offfset, m_create_count, m_is_open_math_basic_menu);
-				MenuCreateNode<PowerNode>("Power", m_offfset, m_create_count, m_is_open_math_basic_menu);
-				MenuCreateNode<SquareRootNode>("SquareRoot", m_offfset, m_create_count, m_is_open_math_basic_menu);
-				MenuCreateNode<SubtractNode>("Subtract", m_offfset, m_create_count, m_is_open_math_basic_menu);
+				MenuCreateNode<AddNode>("Add", m_offset, m_create_count, m_is_open_math_basic_menu);
+				MenuCreateNode<DivideNode>("Divide", m_offset, m_create_count, m_is_open_math_basic_menu);
+				MenuCreateNode<MultiplyNode>("Multiply", m_offset, m_create_count, m_is_open_math_basic_menu);
+				MenuCreateNode<PowerNode>("Power", m_offset, m_create_count, m_is_open_math_basic_menu);
+				MenuCreateNode<SquareRootNode>("SquareRoot", m_offset, m_create_count, m_is_open_math_basic_menu);
+				MenuCreateNode<SubtractNode>("Subtract", m_offset, m_create_count, m_is_open_math_basic_menu);
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
@@ -406,11 +409,11 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("MathRangeMenu"))
 			{
-				MenuCreateNode<ClampNode>("Clamp", m_offfset, m_create_count, m_is_open_math_range_menu);
-				MenuCreateNode<FractionNode>("Fraction", m_offfset, m_create_count, m_is_open_math_range_menu);
-				MenuCreateNode<MaximumNode>("Maximum", m_offfset, m_create_count, m_is_open_math_range_menu);
-				MenuCreateNode<MinimumNode>("Minimum", m_offfset, m_create_count, m_is_open_math_range_menu);
-				MenuCreateNode<OneMinusNode>("OneMinus", m_offfset, m_create_count, m_is_open_math_range_menu);
+				MenuCreateNode<ClampNode>("Clamp", m_offset, m_create_count, m_is_open_math_range_menu);
+				MenuCreateNode<FractionNode>("Fraction", m_offset, m_create_count, m_is_open_math_range_menu);
+				MenuCreateNode<MaximumNode>("Maximum", m_offset, m_create_count, m_is_open_math_range_menu);
+				MenuCreateNode<MinimumNode>("Minimum", m_offset, m_create_count, m_is_open_math_range_menu);
+				MenuCreateNode<OneMinusNode>("OneMinus", m_offset, m_create_count, m_is_open_math_range_menu);
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
@@ -421,8 +424,8 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("MathRoundMenu"))
 			{
-				MenuCreateNode<CeilingNode>("Ceiling", m_offfset, m_create_count, m_is_open_math_round_menu);
-				MenuCreateNode<StepNode>("Step", m_offfset, m_create_count, m_is_open_math_round_menu);
+				MenuCreateNode<CeilingNode>("Ceiling", m_offset, m_create_count, m_is_open_math_round_menu);
+				MenuCreateNode<StepNode>("Step", m_offset, m_create_count, m_is_open_math_round_menu);
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
@@ -434,8 +437,8 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("MathWaveMenu"))
 			{
-				MenuCreateNode<NoiseSineWaveNode>("NoiseSineWave", m_offfset, m_create_count, m_is_open_math_wave_menu);
-				MenuCreateNode<SawtoothWaveNode>("SawtoothWave", m_offfset, m_create_count, m_is_open_math_wave_menu);
+				MenuCreateNode<NoiseSineWaveNode>("NoiseSineWave", m_offset, m_create_count, m_is_open_math_wave_menu);
+				MenuCreateNode<SawtoothWaveNode>("SawtoothWave", m_offset, m_create_count, m_is_open_math_wave_menu);
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
@@ -451,12 +454,12 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("ProceduralMenu"))
 			{
-				MenuCreateNode<CheckerboardNode>("Checkerboard", m_offfset, m_create_count, m_is_open_menu[Procedural]);
-				MenuCreateNode<EllipseNode>("Ellipse", m_offfset, m_create_count, m_is_open_menu[Procedural]);
-				MenuCreateNode<HexagonNode>("Hexagon", m_offfset, m_create_count, m_is_open_menu[Procedural]);
-				MenuCreateNode<PolygonNode>("Polygon", m_offfset, m_create_count, m_is_open_menu[Procedural]);
-				MenuCreateNode<RippleNode>("Ripple", m_offfset, m_create_count, m_is_open_menu[Procedural]);
-				MenuCreateNode<RoundedRectangleNode>("RoundedRectangle", m_offfset, m_create_count, m_is_open_menu[Procedural]);
+				MenuCreateNode<CheckerboardNode>("Checkerboard", m_offset, m_create_count, m_is_open_menu[Procedural]);
+				MenuCreateNode<EllipseNode>("Ellipse", m_offset, m_create_count, m_is_open_menu[Procedural]);
+				MenuCreateNode<HexagonNode>("Hexagon", m_offset, m_create_count, m_is_open_menu[Procedural]);
+				MenuCreateNode<PolygonNode>("Polygon", m_offset, m_create_count, m_is_open_menu[Procedural]);
+				MenuCreateNode<RippleNode>("Ripple", m_offset, m_create_count, m_is_open_menu[Procedural]);
+				MenuCreateNode<RoundedRectangleNode>("RoundedRectangle", m_offset, m_create_count, m_is_open_menu[Procedural]);
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
@@ -477,12 +480,12 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("UVMenu"))
 			{
-				MenuCreateNode<PolarCoordinatesNode>("PolarCoordinates", m_offfset, m_create_count, m_is_open_menu[UV]);
-				MenuCreateNode<RadialShearNode>("RadialShear", m_offfset, m_create_count, m_is_open_menu[UV]);
-				MenuCreateNode<SpherizeNode>("Spherize", m_offfset, m_create_count, m_is_open_menu[UV]);
-				MenuCreateNode<TilingAndOffsetNode>("TilingAndOffset", m_offfset, m_create_count, m_is_open_menu[UV]);
-				MenuCreateNode<TwirlNode>("Twirl", m_offfset, m_create_count, m_is_open_menu[UV]);
-				MenuCreateNode<UVNode>("UV", m_offfset, m_create_count, m_is_open_menu[UV]);
+				MenuCreateNode<PolarCoordinatesNode>("PolarCoordinates", m_offset, m_create_count, m_is_open_menu[UV]);
+				MenuCreateNode<RadialShearNode>("RadialShear", m_offset, m_create_count, m_is_open_menu[UV]);
+				MenuCreateNode<SpherizeNode>("Spherize", m_offset, m_create_count, m_is_open_menu[UV]);
+				MenuCreateNode<TilingAndOffsetNode>("TilingAndOffset", m_offset, m_create_count, m_is_open_menu[UV]);
+				MenuCreateNode<TwirlNode>("Twirl", m_offset, m_create_count, m_is_open_menu[UV]);
+				MenuCreateNode<UVNode>("UV", m_offset, m_create_count, m_is_open_menu[UV]);
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();
@@ -497,10 +500,10 @@ namespace	epion::NodeCustom
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("NoiseMenu"))
 			{
-				MenuCreateNode<FBMNode>("FBM", m_offfset, m_create_count, m_is_open_menu[Noise]);
-				MenuCreateNode<GradientNoiseNode>("GradientNoise", m_offfset, m_create_count, m_is_open_menu[Noise]);
-				MenuCreateNode<SimpleNoiseNode>("SimpleNoise", m_offfset, m_create_count, m_is_open_menu[Noise]);
-				MenuCreateNode<VoronoiNode>("Voronoi", m_offfset, m_create_count, m_is_open_menu[Noise]);
+				MenuCreateNode<FBMNode>("FBM", m_offset, m_create_count, m_is_open_menu[Noise]);
+				MenuCreateNode<GradientNoiseNode>("GradientNoise", m_offset, m_create_count, m_is_open_menu[Noise]);
+				MenuCreateNode<SimpleNoiseNode>("SimpleNoise", m_offset, m_create_count, m_is_open_menu[Noise]);
+				MenuCreateNode<VoronoiNode>("Voronoi", m_offset, m_create_count, m_is_open_menu[Noise]);
 			}
 			ImGui::PopStyleVar();
 			ImGui::EndPopup();

@@ -27,7 +27,7 @@ namespace	epion::NodeCustom
 
 		static	void	DragAndDropEvent();
 
-		static	void	ClickEvent();
+		static	void	ClickEvent(ImVec2& offset);
 		static	void	SetContext(bool is_set);
 		static	bool	GetContext();
 
@@ -49,7 +49,10 @@ namespace	epion::NodeCustom
 		static bool		m_is_open_menu[ArraySize];
 		static std::string	m_str_menu[ArraySize];
 
-		static	ImVec2	m_offfset;
+		static	ImVec2	m_offset;
+
+		static	ImVec2	m_menu_pos;
+
 
 		//IDを割り振るためのカウント,被りはダメ
 		static	int	m_create_count;

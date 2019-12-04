@@ -10,11 +10,10 @@
 namespace	epion::NodeCustom
 {
 	//ƒOƒŠƒbƒh
-	Grids::Grids()
-	{
-	}
 	Grids::Grids(float	size, ImU32	color)
-		:m_is_show_grid(true), m_grid_size(size),m_grid_color(color)
+		:m_is_show_grid(true),
+		m_grid_size(size),
+		m_grid_color(color)
 	{
 	}
 	Grids::~Grids()

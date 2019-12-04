@@ -5,8 +5,8 @@
 #include	"Dx11//Renderer.h"
 
 
-#include	"Dx11//Imgui//dx11_imgui_manager.h"
-#include	"Dx11//Imgui//dx11_imgui_main_window.h"
+#include	"Dx11//Imgui//Dx11ImguiManager.h"
+#include	"Dx11//Imgui//ImguiMainWindow.h"
 
 #include	"Scene/SceneManager.h"
 #include	"Framework.h"

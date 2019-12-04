@@ -144,9 +144,6 @@
     <ClCompile Include="DX11\dx11_dxgi.cpp">
       <Filter>ソース ファイル\Dx11</Filter>
     </ClCompile>
-    <ClCompile Include="DX11\Imgui\grid.cpp">
-      <Filter>ソース ファイル\Dx11\Imgui</Filter>
-    </ClCompile>
     <ClCompile Include="..\Imgui\imgui.cpp">
       <Filter>Imgui</Filter>
     </ClCompile>
@@ -288,12 +285,6 @@
     <ClCompile Include="Node\ChannelNode.cpp">
       <Filter>ソース ファイル\Node\Channel</Filter>
     </ClCompile>
-    <ClCompile Include="DX11\Imgui\dx11ImguiMainWindow.cpp">
-      <Filter>ソース ファイル\Dx11\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="DX11\Imgui\dx11ImguiManager.cpp">
-      <Filter>ソース ファイル\Dx11\Imgui</Filter>
-    </ClCompile>
     <ClCompile Include="Node\NodeParamDx11.cpp">
       <Filter>ソース ファイル\Node</Filter>
     </ClCompile>
@@ -324,14 +315,29 @@
     <ClCompile Include="Node\NodeFunction.cpp">
       <Filter>ソース ファイル\Node</Filter>
     </ClCompile>
-    <ClCompile Include="DX11\Imgui\EpionImguiNodeContext.cpp">
-      <Filter>ソース ファイル\Dx11\Imgui</Filter>
-    </ClCompile>
     <ClCompile Include="Scene\SceneDemo3D.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Node\ArtisticAdjustment.cpp">
       <Filter>ソース ファイル\Node\Artistic</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\Imgui\FileIOAdjust.cpp">
+      <Filter>ソース ファイル\Dx11\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\Imgui\Grid.cpp">
+      <Filter>ソース ファイル\Dx11\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\Imgui\ImguiMainWindow.cpp">
+      <Filter>ソース ファイル\Dx11\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\Imgui\Dx11ImguiManager.cpp">
+      <Filter>ソース ファイル\Dx11\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\Imgui\ImguiNodeContext.cpp">
+      <Filter>ソース ファイル\Dx11\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="DX11\Imgui\TextureAdjust.cpp">
+      <Filter>ソース ファイル\Dx11\Imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -344,12 +350,6 @@
     <ClInclude Include="win_core.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="DX11\Imgui\dx11_imgui_main_window.h">
-      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="DX11\Imgui\dx11_imgui_manager.h">
-      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
-    </ClInclude>
     <ClInclude Include="Framework.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -361,9 +361,6 @@
     </ClInclude>
     <ClInclude Include="DX11\viewport.h">
       <Filter>ヘッダー ファイル\Dx11</Filter>
-    </ClInclude>
-    <ClInclude Include="DX11\Imgui\grid.h">
-      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\Imgui\imconfig.h">
       <Filter>Imgui</Filter>
@@ -467,9 +464,6 @@
     <ClInclude Include="DX11\square.h">
       <Filter>ヘッダー ファイル\Dx11</Filter>
     </ClInclude>
-    <ClInclude Include="DX11\Imgui\epion_imgui_node_context.h">
-      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
-    </ClInclude>
     <ClInclude Include="Node\RotateNode.h">
       <Filter>ヘッダー ファイル\Node\UV</Filter>
     </ClInclude>
@@ -571,6 +565,24 @@
     </ClInclude>
     <ClInclude Include="Node\ArtisticAdjustment.h">
       <Filter>ヘッダー ファイル\Node\Artistic</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\Imgui\FileIOAdjust.h">
+      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\Imgui\Grid.h">
+      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\Imgui\Dx11ImguiManager.h">
+      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\Imgui\ImguiMainWindow.h">
+      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\Imgui\ImguiNodeContext.h">
+      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\Imgui\TextureAdjust.h">
+      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

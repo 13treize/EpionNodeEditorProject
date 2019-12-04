@@ -42,6 +42,6 @@ float4 PS(PSInput input) : SV_TARGET
     float Time_ =Time.x;
     float Sin_Time_ =sin(Time.x);
     float Cos_Time_ =cos(Time.x);
-    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),float3(1.000000,0.999990,0.999990),1.000000,0.000000);
+    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),float3(0.000001,0.000000,0.000000),1.000000,0.000000);
     return flag_color;
 }

@@ -1,12 +1,15 @@
 #pragma once
 
-#include	<map>
-
 namespace	epion::Shader
 {
 	/*
 		¶¬ŠÇ—
+		’†ŠÔŒ`®(Json)‚©‚çAHLSL‚ğ¶¬
+
+		¶¬è‡
+		PSInput ¨cbuffer ¨Node‚ÌŠÖ” ¨main
 	*/
+
 	class	NodeShaderManager	final
 	{
 	public:
@@ -60,7 +63,7 @@ namespace	epion::Shader
 
 		static	std::string	m_space;
 
-		static	std::string	call_uv();
+		static	std::string	CallUV();
 
 		static	std::string	EventBegin();
 		static	std::string	EventEnd();
