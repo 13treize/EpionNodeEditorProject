@@ -13,6 +13,7 @@
 #include	"PreviewWindow.h"
 #include	"../dx11_dxgi.h"
 
+
 #include	"EpionNodeEditor.h"
 #include	"ImguiNodeContext.h"
 
@@ -20,6 +21,7 @@
 
 #include	"../../ShaderGenerate/ShaderGenerate.h"
 #include	"../texture.h"
+
 
 #include	"../../Scene/SceneManager.h"
 #include	"../../Scene/SceneDemo2D.h"
@@ -124,6 +126,8 @@ namespace	epion
 		m_tex_resouce.Init();
 		m_file_io_adjust.Init();
 		Preview::Init(L"Default/Init.hlsl",m_tex_resouce.GetTexNames(),1);
+		tests.Init();
+
 	}
 
 	void	ImguiMain::impl_update()
@@ -132,6 +136,9 @@ namespace	epion
 
 	void	ImguiMain::Update()
 	{
+		//HINSTANCE ret = ShellExecute(MainSystem::GetHwnd(), "explore", "c:\\windows", NULL, NULL, SW_SHOW);
+
+		//tests.Update();
 		if (m_is_node_window)
 		{
 			NodeCustom::NodeEditor::Update(&m_is_update_node, m_impl->node_title_name);

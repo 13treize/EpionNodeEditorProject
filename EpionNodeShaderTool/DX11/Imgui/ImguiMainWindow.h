@@ -2,6 +2,8 @@
 #include	"TextureResouce.h"
 #include	"FileIOAdjust.h"
 #include	"TextureAdjust.h"
+#include	"ExplorerWindow.h"
+
 
 
 namespace	epion
@@ -46,6 +48,7 @@ namespace	epion
 
 		void ShaderSet();
 
+		GUI::ExplorerWindow tests;
 
 
 

@@ -37,8 +37,6 @@ namespace	epion::NodeCustom
 
 		static	void	SetCreateCount(int size);
 
-
-
 		static	void	ClickAdd();
 
 		static void reset_create_count()
@@ -84,6 +82,12 @@ namespace	epion::NodeCustom
 		static	inline	void	UVContext();
 		static	inline	void	NoiseContext();
 
+		static	inline	void	BaseMenuContext(const std::string& menu_name, bool& is_back, bool& is_current);
+		static	inline	void	CloseContext(bool& is_current);
+		static	inline	void	BackContext(bool& is_back,bool& is_current);
+
+		static	inline	void	PopupBeginSettings();
+		static	inline	void	PopupEndSettings();
 		static	inline	void	MenuItem(const std::string& str,NodeType type,bool&is_menu);
 
 	};

@@ -97,8 +97,8 @@ namespace
 		set_false(args...);
 	}
 
-	template <class T =epion::NodeCustom::NodeBase, class First, class... Args>
-	void MenuCreateNode(const std::string& name,ImVec2& pos,int& count, First&first, Args&... args)
+	template <class T = epion::NodeCustom::NodeBase, class First, class... Args>
+	void MenuCreateNode(const std::string& name, ImVec2& pos, int& count, First&first, Args&... args)
 	{
 		static_assert(std::is_base_of<epion::NodeCustom::NodeBase, T>::value == true, "BaseClass not NodeBase");
 		if (ImGui::MenuItem(name.c_str()))
@@ -138,7 +138,7 @@ namespace	epion::NodeCustom
 	void	ContextManager::Init()
 	{
 		m_offset = ImVec2(0, 0);
-		m_menu_pos=ImVec2(0, 0);
+		m_menu_pos = ImVec2(0, 0);
 		for (int i = 0; i < ArraySize; i++)
 		{
 			m_is_open_menu[i] = false;
@@ -193,16 +193,22 @@ namespace	epion::NodeCustom
 		{
 			//ƒm[ƒh‚Ì’Ç‰Á
 			ImGui::OpenPopup("create_menu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 12));
+
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
+			ImGui::PushStyleColor(ImGuiCol_Border, ImColor::U32::GREEN);
+			ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_PopupBg, ImColor::U32::GRAY);
 			if (ImGui::BeginPopup("create_menu"))
 			{
+				ImGui::TextColored(ImColor::Vec4::BLCAK, "Menu");
+				ImGui::Separator();
 				if (ImGui::MenuItem("Create Node", nullptr, &m_is_open_node_menu))
 				{
-					m_is_open_context_menu = false;
 					m_offset =/*offset+ */ImGui::GetIO().MousePos;
+					m_is_open_context_menu = false;
 				}
 				ImGui::EndPopup();
 			}
+			ImGui::PopStyleColor(2);
 			ImGui::PopStyleVar();
 		}
 	}
@@ -231,10 +237,12 @@ namespace	epion::NodeCustom
 	{
 		if (m_is_open_node_menu)
 		{
+			PopupBeginSettings();
 			ImGui::OpenPopup("nodemenu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("nodemenu"))
 			{
+				ImGui::TextColored(ImColor::Vec4::BLCAK, "Create Node");
+				ImGui::Separator();
 				for (int i = 0; i < NodeType::ArraySize; i++)
 				{
 					if (ImGui::MenuItem(m_str_menu[i].c_str(), nullptr, &m_is_open_menu[i]))
@@ -242,74 +250,75 @@ namespace	epion::NodeCustom
 						m_is_open_node_menu = false;
 					}
 				}
-				ImGui::EndPopup();
 			}
-			ImGui::PopStyleVar();
+			PopupEndSettings();
 		}
-
 	}
 
 	void	ContextManager::ArtisticContext()
 	{
 		if (m_is_open_menu[Artistic])
 		{
+			PopupBeginSettings();
 			ImGui::OpenPopup("ArtisticMenu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("ArtisticMenu"))
 			{
+				ImGui::TextColored(ImColor::Vec4::BLCAK, "Artistic");
+				ImGui::Separator();
+
+				BackContext(m_is_open_node_menu, m_is_open_menu[Artistic]);
 				m_is_open_artistic_adjustment_menu = true;
 				m_is_open_menu[Artistic] = false;
 			}
-			ImGui::PopStyleVar();
-			ImGui::EndPopup();
+			PopupEndSettings();
 		}
 		if (m_is_open_artistic_adjustment_menu)
 		{
+			PopupBeginSettings();
 			ImGui::OpenPopup("ArtisticAdjustmentMenu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("ArtisticAdjustmentMenu"))
 			{
+				BaseMenuContext("Adjustment", m_is_open_menu[Artistic], m_is_open_artistic_adjustment_menu);
 				MenuCreateNode<ReplaceColorNode>("RePlaceColor", m_offset, m_create_count, m_is_open_artistic_adjustment_menu);
 			}
-			ImGui::PopStyleVar();
-			ImGui::EndPopup();
+			PopupEndSettings();
 		}
 	}
 	void	ContextManager::ChannelContext()
 	{
 		if (m_is_open_menu[Channel])
 		{
+			PopupBeginSettings();
 			ImGui::OpenPopup("ChannelMenu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("ChannelMenu"))
 			{
+				BaseMenuContext("Channel", m_is_open_node_menu, m_is_open_menu[Channel]);
 				MenuCreateNode<CombineNode>("Combine", m_offset, m_create_count, m_is_open_menu[Channel]);
 			}
-			ImGui::PopStyleVar();
-			ImGui::EndPopup();
+			PopupEndSettings();
 		}
 	}
-
 	void	ContextManager::InputContext()
 	{
 		if (m_is_open_menu[Input])
 		{
+			PopupBeginSettings();
 			ImGui::OpenPopup("InputMenu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("InputMenu"))
 			{
+				BaseMenuContext("Input", m_is_open_node_menu, m_is_open_menu[Input]);
 				MenuItem("Basic", NodeType::Input, m_is_open_input_basic_menu);
 				MenuItem("Texture", NodeType::Input, m_is_open_input_texture_menu);
 			}
-			ImGui::PopStyleVar();
-			ImGui::EndPopup();
+			PopupEndSettings();
 		}
 		if (m_is_open_input_basic_menu)
 		{
+			PopupBeginSettings();
 			ImGui::OpenPopup("InputBasicMenu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("InputBasicMenu"))
 			{
+				BaseMenuContext("Basic", m_is_open_menu[Input], m_is_open_input_basic_menu);
 				MenuCreateNode<FloatNode>("Float", m_offset, m_create_count, m_is_open_input_basic_menu);
 				MenuCreateNode<Vector2Node>("Vector2", m_offset, m_create_count, m_is_open_input_basic_menu);
 				MenuCreateNode<Vector3Node>("Vector3", m_offset, m_create_count, m_is_open_input_basic_menu);
@@ -317,51 +326,46 @@ namespace	epion::NodeCustom
 				MenuCreateNode<ColorNode>("Color", m_offset, m_create_count, m_is_open_input_basic_menu);
 				MenuCreateNode<TimeNode>("Time", m_offset, m_create_count, m_is_open_input_basic_menu);
 			}
-			ImGui::PopStyleVar();
-			ImGui::EndPopup();
+			PopupEndSettings();
 		}
 		if (m_is_open_input_texture_menu)
 		{
+			PopupBeginSettings();
 			ImGui::OpenPopup("InputTextureMenu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("InputTextureMenu"))
 			{
+				BaseMenuContext("Texture", m_is_open_menu[Input], m_is_open_input_texture_menu);
 				MenuCreateNode<SamplerStateNode>("SamplerState", m_offset, m_create_count, m_is_open_input_texture_menu);
 				MenuCreateNode<SamplerTexture2DNode>("Sampler Texture2D", m_offset, m_create_count, m_is_open_input_texture_menu);
 				MenuCreateNode<Texture2DNode>("Texture2D", m_offset, m_create_count, m_is_open_input_texture_menu);
-
 			}
-			ImGui::PopStyleVar();
-			ImGui::EndPopup();
+			PopupEndSettings();
 		}
-
-
 	}
-
 	void	ContextManager::MasterContext()
 	{
 		if (m_is_open_menu[Master])
 		{
+			PopupBeginSettings();
 			ImGui::OpenPopup("MasterMenu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("MasterMenu"))
 			{
-				MenuCreateNode<UnlitMasterNode>("Unlit", m_offset, m_create_count,m_is_open_menu[Master]);
+				BaseMenuContext("Master", m_is_open_node_menu, m_is_open_menu[Master]);
+				MenuCreateNode<UnlitMasterNode>("Unlit", m_offset, m_create_count, m_is_open_menu[Master]);
 				//MenuCreateNode<PBRMasterNode>("PBR", m_offset, m_create_count, m_is_open_menu[Master]);
 			}
-			ImGui::PopStyleVar();
-			ImGui::EndPopup();
+			PopupEndSettings();
 		}
 	}
-
 	void	ContextManager::MathContext()
 	{
 		if (m_is_open_menu[Math])
 		{
+			PopupBeginSettings();
 			ImGui::OpenPopup("MathMenu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("MathMenu"))
 			{
+				BaseMenuContext("Math", m_is_open_node_menu, m_is_open_menu[Math]);
 				MenuItem("Advanced", NodeType::Math, m_is_open_math_advanced_menu);
 				MenuItem("Basic", NodeType::Math, m_is_open_math_basic_menu);
 				MenuItem("Range", NodeType::Math, m_is_open_math_range_menu);
@@ -370,29 +374,28 @@ namespace	epion::NodeCustom
 
 				MenuCreateNode<LerpNode>("Lerp", m_offset, m_create_count, m_is_open_menu[Math]);
 			}
-			ImGui::PopStyleVar();
-			ImGui::EndPopup();
+			PopupEndSettings();
 		}
 		if (m_is_open_math_advanced_menu)
 		{
+			PopupBeginSettings();
 			ImGui::OpenPopup("MathAdvancedMenu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("MathAdvancedMenu"))
 			{
+				BaseMenuContext("Advanced", m_is_open_menu[Math], m_is_open_math_advanced_menu);
 				MenuCreateNode<AbsoluteNode>("Absolute", m_offset, m_create_count, m_is_open_math_advanced_menu);
-				MenuCreateNode<LengthNode>("Length",m_offset, m_create_count, m_is_open_math_advanced_menu);
-				MenuCreateNode<ModuloNode>("Modulo",m_offset, m_create_count, m_is_open_math_advanced_menu);
+				MenuCreateNode<LengthNode>("Length", m_offset, m_create_count, m_is_open_math_advanced_menu);
+				MenuCreateNode<ModuloNode>("Modulo", m_offset, m_create_count, m_is_open_math_advanced_menu);
 			}
-			ImGui::PopStyleVar();
-			ImGui::EndPopup();
+			PopupEndSettings();
 		}
-
 		if (m_is_open_math_basic_menu)
 		{
+			PopupBeginSettings();
 			ImGui::OpenPopup("MathBasicMenu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("MathBasicMenu"))
 			{
+				BaseMenuContext("Basic", m_is_open_menu[Math], m_is_open_math_basic_menu);
 				MenuCreateNode<AddNode>("Add", m_offset, m_create_count, m_is_open_math_basic_menu);
 				MenuCreateNode<DivideNode>("Divide", m_offset, m_create_count, m_is_open_math_basic_menu);
 				MenuCreateNode<MultiplyNode>("Multiply", m_offset, m_create_count, m_is_open_math_basic_menu);
@@ -400,60 +403,58 @@ namespace	epion::NodeCustom
 				MenuCreateNode<SquareRootNode>("SquareRoot", m_offset, m_create_count, m_is_open_math_basic_menu);
 				MenuCreateNode<SubtractNode>("Subtract", m_offset, m_create_count, m_is_open_math_basic_menu);
 			}
-			ImGui::PopStyleVar();
-			ImGui::EndPopup();
+			PopupEndSettings();
 		}
 		if (m_is_open_math_range_menu)
 		{
+			PopupBeginSettings();
 			ImGui::OpenPopup("MathRangeMenu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("MathRangeMenu"))
 			{
+				BaseMenuContext("Range", m_is_open_menu[Math], m_is_open_math_range_menu);
 				MenuCreateNode<ClampNode>("Clamp", m_offset, m_create_count, m_is_open_math_range_menu);
 				MenuCreateNode<FractionNode>("Fraction", m_offset, m_create_count, m_is_open_math_range_menu);
 				MenuCreateNode<MaximumNode>("Maximum", m_offset, m_create_count, m_is_open_math_range_menu);
 				MenuCreateNode<MinimumNode>("Minimum", m_offset, m_create_count, m_is_open_math_range_menu);
 				MenuCreateNode<OneMinusNode>("OneMinus", m_offset, m_create_count, m_is_open_math_range_menu);
 			}
-			ImGui::PopStyleVar();
-			ImGui::EndPopup();
+			PopupEndSettings();
 		}
 		if (m_is_open_math_round_menu)
 		{
+			PopupBeginSettings();
 			ImGui::OpenPopup("MathRoundMenu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("MathRoundMenu"))
 			{
+				BaseMenuContext("Round", m_is_open_menu[Math], m_is_open_math_round_menu);
 				MenuCreateNode<CeilingNode>("Ceiling", m_offset, m_create_count, m_is_open_math_round_menu);
 				MenuCreateNode<StepNode>("Step", m_offset, m_create_count, m_is_open_math_round_menu);
 			}
-			ImGui::PopStyleVar();
-			ImGui::EndPopup();
+			PopupEndSettings();
 		}
-
 		if (m_is_open_math_wave_menu)
 		{
+			PopupBeginSettings();
 			ImGui::OpenPopup("MathWaveMenu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("MathWaveMenu"))
 			{
+				BaseMenuContext("Wave", m_is_open_menu[Math], m_is_open_math_wave_menu);
 				MenuCreateNode<NoiseSineWaveNode>("NoiseSineWave", m_offset, m_create_count, m_is_open_math_wave_menu);
 				MenuCreateNode<SawtoothWaveNode>("SawtoothWave", m_offset, m_create_count, m_is_open_math_wave_menu);
 			}
-			ImGui::PopStyleVar();
-			ImGui::EndPopup();
+			PopupEndSettings();
 		}
 
 	}
-
 	void	ContextManager::ProceduralContext()
 	{
 		if (m_is_open_menu[Procedural])
 		{
+			PopupBeginSettings();
 			ImGui::OpenPopup("ProceduralMenu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("ProceduralMenu"))
 			{
+				BaseMenuContext("Procedural", m_is_open_node_menu, m_is_open_menu[Procedural]);
 				MenuCreateNode<CheckerboardNode>("Checkerboard", m_offset, m_create_count, m_is_open_menu[Procedural]);
 				MenuCreateNode<EllipseNode>("Ellipse", m_offset, m_create_count, m_is_open_menu[Procedural]);
 				MenuCreateNode<HexagonNode>("Hexagon", m_offset, m_create_count, m_is_open_menu[Procedural]);
@@ -461,25 +462,23 @@ namespace	epion::NodeCustom
 				MenuCreateNode<RippleNode>("Ripple", m_offset, m_create_count, m_is_open_menu[Procedural]);
 				MenuCreateNode<RoundedRectangleNode>("RoundedRectangle", m_offset, m_create_count, m_is_open_menu[Procedural]);
 			}
-			ImGui::PopStyleVar();
-			ImGui::EndPopup();
+			PopupEndSettings();
 		}
 
 	}
-
 	void	ContextManager::UtilityContext()
 	{
 
 	}
-
 	void	ContextManager::UVContext()
 	{
 		if (m_is_open_menu[UV])
 		{
+			PopupBeginSettings();
 			ImGui::OpenPopup("UVMenu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("UVMenu"))
 			{
+				BaseMenuContext("UV", m_is_open_node_menu, m_is_open_menu[UV]);
 				MenuCreateNode<PolarCoordinatesNode>("PolarCoordinates", m_offset, m_create_count, m_is_open_menu[UV]);
 				MenuCreateNode<RadialShearNode>("RadialShear", m_offset, m_create_count, m_is_open_menu[UV]);
 				MenuCreateNode<SpherizeNode>("Spherize", m_offset, m_create_count, m_is_open_menu[UV]);
@@ -487,27 +486,65 @@ namespace	epion::NodeCustom
 				MenuCreateNode<TwirlNode>("Twirl", m_offset, m_create_count, m_is_open_menu[UV]);
 				MenuCreateNode<UVNode>("UV", m_offset, m_create_count, m_is_open_menu[UV]);
 			}
-			ImGui::PopStyleVar();
-			ImGui::EndPopup();
+			PopupEndSettings();
 		}
 	}
-
 	void	ContextManager::NoiseContext()
 	{
 		if (m_is_open_menu[Noise])
 		{
+			PopupBeginSettings();
 			ImGui::OpenPopup("NoiseMenu");
-			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
 			if (ImGui::BeginPopup("NoiseMenu"))
 			{
+				BaseMenuContext("Noise", m_is_open_node_menu, m_is_open_menu[Noise]);
 				MenuCreateNode<FBMNode>("FBM", m_offset, m_create_count, m_is_open_menu[Noise]);
 				MenuCreateNode<GradientNoiseNode>("GradientNoise", m_offset, m_create_count, m_is_open_menu[Noise]);
 				MenuCreateNode<SimpleNoiseNode>("SimpleNoise", m_offset, m_create_count, m_is_open_menu[Noise]);
 				MenuCreateNode<VoronoiNode>("Voronoi", m_offset, m_create_count, m_is_open_menu[Noise]);
 			}
-			ImGui::PopStyleVar();
-			ImGui::EndPopup();
+			PopupEndSettings();
 		}
+	}
+
+	void	ContextManager::BaseMenuContext(const std::string& menu_name, bool& is_back, bool& is_current)
+	{
+		ImGui::TextColored(ImColor::Vec4::BLCAK, menu_name.c_str());
+		ImGui::Separator();
+		BackContext(is_back, is_current);
+		CloseContext(is_current);
+		ImGui::Separator();
+	}
+
+	void	ContextManager::CloseContext(bool& is_current)
+	{
+		if (ImGui::MenuItem("Close"))
+		{
+			is_current = false;
+		}
+	}
+
+	void	ContextManager::BackContext(bool& is_back, bool& is_current)
+	{
+		if (ImGui::MenuItem("<-"))
+		{
+			is_back = true;
+			is_current = false;
+		}
+	}
+
+	void ContextManager::PopupBeginSettings()
+	{
+		ImGui::SetNextWindowPos(m_offset);
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
+		ImGui::PushStyleColor(ImGuiCol_Border, ImColor::U32::GREEN);
+		ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_PopupBg, ImColor::U32::GRAY);
+	}
+	void ContextManager::PopupEndSettings()
+	{
+		ImGui::PopStyleColor(2);
+		ImGui::PopStyleVar();
+		ImGui::EndPopup();
 	}
 
 	void	ContextManager::MenuItem(const std::string& str, NodeType type, bool& is_menu)

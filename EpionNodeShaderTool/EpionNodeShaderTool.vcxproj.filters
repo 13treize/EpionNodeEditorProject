@@ -339,6 +339,9 @@
     <ClCompile Include="DX11\Imgui\TextureAdjust.cpp">
       <Filter>ソース ファイル\Dx11\Imgui</Filter>
     </ClCompile>
+    <ClCompile Include="DX11\Imgui\ExplorerWindow.cpp">
+      <Filter>ソース ファイル\Dx11\Imgui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -583,6 +586,12 @@
     </ClInclude>
     <ClInclude Include="DX11\Imgui\TextureAdjust.h">
       <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="DX11\Imgui\ExplorerWindow.h">
+      <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Imgui\imfilebrowser.h">
+      <Filter>Imgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

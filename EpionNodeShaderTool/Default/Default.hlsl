@@ -38,49 +38,27 @@ float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)
 };
 
 
-void Multiply_float3(float3 A,float3 B, out float3 Out)
+void Checkerboard(float2 UV, float3 ColorA, float3 ColorB, float2 Frequency, out float3 Out)
 {
-	Out = A * B;
+    UV = (UV.xy + 0.5) * Frequency;
+    float4 derivatives = float4(ddx(UV), ddy(UV));
+    float2 duv_length = sqrt(float2(dot(derivatives.xz, derivatives.xz), dot(derivatives.yw, derivatives.yw)));
+    float width = 1.0;
+    float2 distance3 = 4.0 * abs(frac(UV + 0.25) - 0.5) - width;
+    float2 scale = 0.35 / duv_length.xy;
+    float freqLimiter = sqrt(clamp(1.1f - max(duv_length.x, duv_length.y), 0.0, 1.0));
+    float2 vector_alpha = clamp(distance3 * scale.xy, -1.0, 1.0);
+    float alpha = saturate(0.5f + 0.5f * vector_alpha.x * vector_alpha.y * freqLimiter);
+    Out = lerp(ColorA, ColorB, alpha.xxx);
 }
 
-void Multiply_float(float A,float B, out float Out)
+void Twirl(float2 UV, float2 Center, float Strength, float2 Offset, out float2 Out)
 {
-	Out = A * B;
-}
-
-float2 gradientNoise_dir(float2 p)
-{
-    p = p % 289;
-    float x = (34 * p.x + 1) * p.x % 289 + p.y;
-    x = (34 * x + 1) * x % 289;
-    x = frac(x / 41) * 2 - 1;
-    return normalize(float2(x - floor(x + 0.5), abs(x) - 0.5));
-}
-float gradient_noise(float2 p)
-{
-    float2 ip = floor(p);
-    float2 fp = frac(p);
-    float d00 = dot(gradientNoise_dir(ip), fp);
-    float d01 = dot(gradientNoise_dir(ip + float2(0, 1)), fp - float2(0, 1));
-    float d10 = dot(gradientNoise_dir(ip + float2(1, 0)), fp - float2(1, 0));
-    float d11 = dot(gradientNoise_dir(ip + float2(1, 1)), fp - float2(1, 1));
-    fp = fp * fp * fp * (fp * (fp * 6 - 15) + 10);
-    return lerp(lerp(d00, d01, fp.y), lerp(d10, d11, fp.y), fp.x);
-}
-void GradientNoise(float2 UV, float Scale, out float Out)
-{
-    Out = gradient_noise(UV * Scale) + 0.5;
-}
-
-void TilingAndOffset(float2 UV, float2 Tiling, float2 Offset, out float2 Out)
-{
-    Out = UV * Tiling + Offset;
-}
-
-
-void Power_float(float A,float B, out float Out)
-{
-	Out = pow(A, B);
+    float2 delta = UV - Center;
+    float angle = Strength * length(delta);
+    float x = cos(angle) * delta.x - sin(angle) * delta.y;
+    float y = sin(angle) * delta.x + cos(angle) * delta.y;
+    Out = float2(x + Center.x + Offset.x, y + Center.y + Offset.y);
 }
 
 inline float2 voronoi_noise_randomVector(float2 UV, float offset)
@@ -129,50 +107,24 @@ void Voronoi(float2 UV, float AngleOffset, float CellDensity, out float Out, out
     Lines = 1.-smoothstep(0.0, 0.1, c.y-c.x);
 }
 
-
-void Add_float(float A,float B, out float Out)
-{
-	Out = A + B;
-}
-
 float4 PS(PSInput input) : SV_TARGET
 {
     float Time_ =Time.x;
     float Sin_Time_ =sin(Time.x);
     float Cos_Time_ =cos(Time.x);
+    float VoronoiOut_out4;
+    float VoronoiCell_out4;
+    float VoronoiLine_out4;
+    Voronoi(input.uv,0.900000,1.000000,VoronoiOut_out4,VoronoiCell_out4,VoronoiLine_out4);
 
+    float3 Vector3_out1=float3(VoronoiOut_out4,1.000000,1.000000);
 
-    float2 TilingAndOffset_out9;
-    TilingAndOffset(input.uv,float2(1.000000,1.000000),Time_,TilingAndOffset_out9);
+    float2 Twirl_out3;
+    Twirl(input.uv,float2(0.500000,0.500000),10.000000,float2(0.000000,0.000000),Twirl_out3);
 
+    float3 Checkerboard_out2;
+    Checkerboard(Twirl_out3,float3(1.000000,0.000000,0.000000),Vector3_out1,float2(7.000000,7.000000),Checkerboard_out2);
 
-    float Add_float_out12;
-    Add_float(Sin_Time_,1.300000,Add_float_out12);
-
-    float VoronoiOut_out8;
-    float VoronoiCell_out8;
-    float VoronoiLine_out8;
-    Voronoi(TilingAndOffset_out9,2.000000,1.000000,VoronoiOut_out8,VoronoiCell_out8,VoronoiLine_out8);
-
-    float2 TilingAndOffset_out5;
-    TilingAndOffset(input.uv,float2(1.000000,1.000000),Time_,TilingAndOffset_out5);
-
-    float3 Vector3_out10=float3(Add_float_out12,0.600000,0.000000);
-
-    float Power_float_out7;
-    Power_float(VoronoiOut_out8,0.000000,Power_float_out7);
-
-    float GradientNoise_out4;
-    GradientNoise(TilingAndOffset_out5,5.000000,GradientNoise_out4);
-
-    float Multiply_float_out3;
-    Multiply_float(GradientNoise_out4,Power_float_out7,Multiply_float_out3);
-
-    float3 Color_out1=Vector3_out10;
-
-    float3 Multiply_float3_out2;
-    Multiply_float3(Color_out1,Multiply_float_out3,Multiply_float3_out2);
-
-    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Multiply_float3_out2,1.000000,0.000000);
+    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Checkerboard_out2,0.200000,0.000000);
     return flag_color;
 }
