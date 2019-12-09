@@ -17,15 +17,15 @@ namespace
 {
 }
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::AddNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::SubtractNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::MultiplyNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::DivideNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::PowerNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::SquareRootNode)
+CEREAL_REGISTER_TYPE(epion::Node::AddNode)
+CEREAL_REGISTER_TYPE(epion::Node::SubtractNode)
+CEREAL_REGISTER_TYPE(epion::Node::MultiplyNode)
+CEREAL_REGISTER_TYPE(epion::Node::DivideNode)
+CEREAL_REGISTER_TYPE(epion::Node::PowerNode)
+CEREAL_REGISTER_TYPE(epion::Node::SquareRootNode)
 
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 #pragma region Add
 	AddNode::AddNode()

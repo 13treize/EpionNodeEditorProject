@@ -13,7 +13,7 @@ namespace epion
 	void SceneDemo3D::Init()
 	{
 		CameraManager::Init();
-		NodeCustom::Dx11::ConstantBufferManager::Create();
+		Node::Dx11::ConstantBufferManager::Create();
 
 		m_vertex = std::make_unique<VertexShader>(L"HLSLShader\\ObjVertexShader.hlsl");
 		m_pixel[0] = std::make_unique<PixelShader>(L"GenerateShader\\demo1.hlsl");
@@ -42,7 +42,7 @@ namespace epion
 		time.x += 0.001f;
 
 		math::FVector2 a = { 1920,1080 };
-		NodeCustom::Dx11::ConstantBufferManager::UpdateCBuffer0(time, a);
+		Node::Dx11::ConstantBufferManager::UpdateCBuffer0(time, a);
 
 		m_vertex->SetState();
 

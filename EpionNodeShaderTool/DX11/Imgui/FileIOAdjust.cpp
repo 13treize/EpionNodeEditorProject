@@ -72,9 +72,9 @@ namespace	epion::GUI
 			{
 				m_import_json_path_name = "";
 				m_import_json_path_name.append(m_json_path+ "/"+ m_import_json_name);
-				NodeCustom::NodeEditor::Clear();
-				NodeCustom::NodeEditor::Init();
-				NodeCustom::NodeEditor::ImportNodeData(m_import_json_path_name);
+				Node::NodeEditor::Clear();
+				Node::NodeEditor::Init();
+				Node::NodeEditor::ImportNodeData(m_import_json_path_name);
 			}
 		}
 	}
@@ -85,7 +85,7 @@ namespace	epion::GUI
 		{
 			if (ImGui::Button("Save"))
 			{
-				NodeCustom::NodeEditor::ExportNodeData("Default/Default.json");
+				Node::NodeEditor::ExportNodeData("Default/Default.json");
 			}
 
 			//if (ImGui::Button("Export"))
@@ -95,7 +95,7 @@ namespace	epion::GUI
 
 			//	m_export_json_path_name = "";
 			//	m_export_json_path_name.append(m_json_path + "/" + m_export_json_name);
-			//	NodeCustom::NodeEditor::ExportNodeData("Default/Default.json");
+			//	Node::NodeEditor::ExportNodeData("Default/Default.json");
 			//}
 
 		}

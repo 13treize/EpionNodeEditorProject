@@ -18,10 +18,10 @@ namespace
 	const ImVec2	size(0, 0);
 }
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::NoiseSineWaveNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::SawtoothWaveNode)
+CEREAL_REGISTER_TYPE(epion::Node::NoiseSineWaveNode)
+CEREAL_REGISTER_TYPE(epion::Node::SawtoothWaveNode)
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 	NoiseSineWaveNode::NoiseSineWaveNode()
 		:NodeBase(2, 1)

@@ -34,7 +34,7 @@ namespace epion
 	com_ptr<ID3D11DepthStencilView>	depth_view;
 
 }
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 	NodeBase::NodeBase(int inputs_count, int outputs_count)
 		:m_inputs_count(inputs_count), m_outputs_count(outputs_count)
@@ -112,7 +112,7 @@ namespace	epion::NodeCustom
 		if (m_node_type != NODE_TYPE::MASTER)	draw_list->AddRectFilled(node_rect_min, node_rect_max2, RECT_COLOR, 2.0f);
 		draw_list->AddRectFilled(node_rect_min, node_rect_min + ImVec2(m_Size.x, 18.0f), TITLE_BAR_COLOR, 2.0f);
 		ImGui::SetCursorScreenPos(node_rect_min + NODE_FONT_ADD_POS);	//ノードのタイトル描画の座標を指定
-		ImGui::TextColored(ImColor::Vec4::WHITE, "%s", m_Name.c_str());
+		ImGui::TextColored(ImColors::Vec4::WHITE, "%s", m_Name.c_str());
 #ifdef DEBUG
 	ResouceRender( offset, 	draw_list);
 	draw_list->ChannelsSetCurrent(0); // input_slot
@@ -149,11 +149,11 @@ namespace	epion::NodeCustom
 		ImVec2 node_rect_max = node_rect_min + m_Size;
 		if (m_is_push)
 		{
-			draw_list->AddRect(node_rect_min, node_rect_max, ImColor::U32::GREEN, 7.0f);
+			draw_list->AddRect(node_rect_min, node_rect_max, ImColors::U32::GREEN, 7.0f);
 		}
 		else
 		{
-			draw_list->AddRect(node_rect_min, node_rect_max, ImColor::U32::ZERO, 7.0f);
+			draw_list->AddRect(node_rect_min, node_rect_max, ImColors::U32::ZERO, 7.0f);
 		}
 
 		for (int i = 0; i < m_inputs_count; i++)
@@ -161,12 +161,12 @@ namespace	epion::NodeCustom
 			m_input_pos[i] = offset + GetInputSlotPos(i);
 			m_input_pos[i].y += 10.0f;
 			ImGui::SetCursorScreenPos(m_input_pos[i] + ImVec2(10.0f, -SLOT_INPUT_FLOAT));
-			ImGui::TextColored(ImColor::Vec4::WHITE, "%s", m_input_name[i].c_str());
+			ImGui::TextColored(ImColors::Vec4::WHITE, "%s", m_input_name[i].c_str());
 			NodeFunction::NodeCircle(draw_list, m_input_pos[i], NODE_SLOT_RADIUS, m_input_slot_color[i], m_input_slot_type[i]);
 
 			if (physics::Collider2D::SphereAndSphere(math::FVector2(m_input_pos[i].x, m_input_pos[i].y), math::FVector2(ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y), NODE_SLOT_RADIUS, 2.0f))
 			{
-				draw_list->AddCircleFilled(m_input_pos[i], NODE_SLOT_RADIUS - 2, ImColor::U32::GREEN);
+				draw_list->AddCircleFilled(m_input_pos[i], NODE_SLOT_RADIUS - 2, ImColors::U32::GREEN);
 			}
 		}
 		for (int i = 0; i < m_outputs_count; i++)
@@ -176,11 +176,11 @@ namespace	epion::NodeCustom
 
 			ImGui::SetCursorScreenPos(m_output_pos[i] + ImVec2(-60.0f, -SLOT_INPUT_FLOAT));
 
-			ImGui::TextColored(ImColor::Vec4::WHITE, "%s", m_output_name[i].c_str());
+			ImGui::TextColored(ImColors::Vec4::WHITE, "%s", m_output_name[i].c_str());
 			NodeFunction::NodeCircle(draw_list, m_output_pos[i], NODE_SLOT_RADIUS, m_output_slot_color[i], m_output_slot_type[i]);
 			if (physics::Collider2D::SphereAndSphere(math::FVector2(m_output_pos[i].x, m_output_pos[i].y), math::FVector2(ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y), NODE_SLOT_RADIUS, 2.0f))
 			{
-				draw_list->AddCircleFilled(m_output_pos[i], NODE_SLOT_RADIUS - 2, ImColor::U32::RED);
+				draw_list->AddCircleFilled(m_output_pos[i], NODE_SLOT_RADIUS - 2, ImColors::U32::RED);
 			}
 		}
 
@@ -189,7 +189,7 @@ namespace	epion::NodeCustom
 		{
 			if (m_is_slot_input[i] !=INPUT_SLOT_STATE::ONE)
 			{
-				draw_list->AddLine(m_input_pos[i] + ImVec2(-20, 0), m_input_pos[i], ImColor::U32::GREEN, 1.0f);
+				draw_list->AddLine(m_input_pos[i] + ImVec2(-20, 0), m_input_pos[i], ImColors::U32::GREEN, 1.0f);
 				NodeFunction::InputRectDraw(draw_list, m_input_pos[i], m_input_slot_type[i]);
 			}
 		}

@@ -54,8 +54,8 @@ namespace	epion::Shader
 
 		static	std::list<std::string>	node_create_str;
 
-		static	std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>	nodes;
-		static	std::vector<epion::NodeCustom::NodeLink>	links;
+		static	std::vector<std::unique_ptr<epion::Node::NodeBase>>	nodes;
+		static	std::vector<epion::Node::NodeLink>	links;
 
 		static	std::vector	<std::string>	variable;
 

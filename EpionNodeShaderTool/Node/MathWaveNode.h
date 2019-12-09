@@ -1,6 +1,6 @@
 #pragma once
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 	class	NoiseSineWaveNode final :public	NodeBase
 	{

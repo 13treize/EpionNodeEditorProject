@@ -7,7 +7,7 @@
 * @date 2019/11/20
 */
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 
 	/**

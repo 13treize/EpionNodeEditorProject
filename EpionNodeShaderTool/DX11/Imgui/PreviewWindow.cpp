@@ -45,7 +45,7 @@ namespace	epion
 		m_preview = std::make_unique<Square>(m_vertex->GetBlob());
 		for (int i = 0; i < m_used_tex; i++)
 		{
-			NodeCustom::Dx11::SamplerStateManager::Create(i, D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_WRAP);
+			Node::Dx11::SamplerStateManager::Create(i, D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_WRAP);
 			m_preview_tex[i] = std::make_unique<Texture2D>();
 			TextureFileIO::LoadTexture(StringConverter::to_wstring(tex_name[i]), m_preview_tex[i]->GetMata(), m_preview_tex[i]->GetImage(), m_preview_tex[i]->GetShaderResouce());
 		}
@@ -60,7 +60,7 @@ namespace	epion
 		for (int i = 0; i < m_used_tex; i++)
 		{
 			Device::GetContext()->PSSetShaderResources(i, 1, m_preview_tex[i]->GetShaderResouce().GetAddressOf());
-			NodeCustom::Dx11::SamplerStateManager::SetState(i);
+			Node::Dx11::SamplerStateManager::SetState(i);
 		}
 		m_preview->Render(math::FVector2(1450, 650), math::FVector2(400, 400), 0, FixColor::Red);
 

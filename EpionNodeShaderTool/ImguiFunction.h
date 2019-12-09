@@ -16,6 +16,16 @@ namespace	epion
 	public:
 		static void DefaultWindowFlagsSetiing(ImGuiWindowFlags& window_flags);
 
+
+		static math::FVector2 GetFVector2(ImVec2& vec2)
+		{
+			return math::FVector2(vec2.x, vec2.y);
+		}
+		static ImVec2 GetImVec2(math::FVector2& vec2)
+		{
+			return ImVec2(vec2.x, vec2.y);
+		}
+
 	};
 
 	/**

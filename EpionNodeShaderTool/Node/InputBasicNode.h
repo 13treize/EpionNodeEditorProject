@@ -10,7 +10,7 @@
 	time
 */
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 	class	FloatNode final :public	NodeBase
 	{

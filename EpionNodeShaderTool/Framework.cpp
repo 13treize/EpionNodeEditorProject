@@ -8,6 +8,8 @@
 #include	"Dx11//Imgui//Dx11ImguiManager.h"
 #include	"Dx11//Imgui//ImguiMainWindow.h"
 
+#include	"GUI/NodeEditor.h"
+
 #include	"Scene/SceneManager.h"
 #include	"Framework.h"
 
@@ -17,7 +19,6 @@
 namespace
 {
 	epion::math::FVector4	vari;
-
 
 }
 
@@ -31,6 +32,7 @@ namespace	epion
 		Dxgi::Set(src);
 		ImguiManager::Init();
 		ImguiMain::GetInst().Init();
+		GUI::NodeEditor::Init();
 		Renderer::SetScreenSize(width, height);
 	}
 
@@ -40,7 +42,7 @@ namespace	epion
 		ImguiManager::Begin();
 		SceneManager::Update();
 		ImguiMain::GetInst().Update();
-
+		//GUI::NodeEditor::Update();
 	}
 
 	void	FrameWork::Render()

@@ -17,13 +17,13 @@ namespace
 {
 }
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::ClampNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::FractionNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::MaximumNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::MinimumNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::OneMinusNode)
+CEREAL_REGISTER_TYPE(epion::Node::ClampNode)
+CEREAL_REGISTER_TYPE(epion::Node::FractionNode)
+CEREAL_REGISTER_TYPE(epion::Node::MaximumNode)
+CEREAL_REGISTER_TYPE(epion::Node::MinimumNode)
+CEREAL_REGISTER_TYPE(epion::Node::OneMinusNode)
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 #pragma region Clamp
 	ClampNode::ClampNode()

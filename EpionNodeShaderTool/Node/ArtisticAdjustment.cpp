@@ -18,10 +18,10 @@ namespace
 
 }
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::ReplaceColorNode)
+CEREAL_REGISTER_TYPE(epion::Node::ReplaceColorNode)
 
 
-namespace epion::NodeCustom
+namespace epion::Node
 {
 #pragma region ReplaceColor
 	ReplaceColorNode::ReplaceColorNode()

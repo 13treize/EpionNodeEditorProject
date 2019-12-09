@@ -17,15 +17,15 @@ namespace
 {
 }
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::AbsoluteNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::LengthNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::ModuloNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::NegateNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::NormalizeNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::PosterizeNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::ReciprocalSquareRootNode)
+CEREAL_REGISTER_TYPE(epion::Node::AbsoluteNode)
+CEREAL_REGISTER_TYPE(epion::Node::LengthNode)
+CEREAL_REGISTER_TYPE(epion::Node::ModuloNode)
+CEREAL_REGISTER_TYPE(epion::Node::NegateNode)
+CEREAL_REGISTER_TYPE(epion::Node::NormalizeNode)
+CEREAL_REGISTER_TYPE(epion::Node::PosterizeNode)
+CEREAL_REGISTER_TYPE(epion::Node::ReciprocalSquareRootNode)
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 #pragma region Absolute
 	AbsoluteNode::AbsoluteNode()

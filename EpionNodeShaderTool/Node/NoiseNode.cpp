@@ -17,12 +17,12 @@ namespace
 {
 }
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::FBMNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::GradientNoiseNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::SimpleNoiseNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::VoronoiNode)
+CEREAL_REGISTER_TYPE(epion::Node::FBMNode)
+CEREAL_REGISTER_TYPE(epion::Node::GradientNoiseNode)
+CEREAL_REGISTER_TYPE(epion::Node::SimpleNoiseNode)
+CEREAL_REGISTER_TYPE(epion::Node::VoronoiNode)
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 #pragma region FBM
 	FBMNode::FBMNode()

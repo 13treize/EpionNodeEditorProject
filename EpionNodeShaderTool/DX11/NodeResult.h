@@ -1,5 +1,5 @@
 #pragma once
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 	struct	SquareVertex	final
 	{
@@ -106,7 +106,7 @@ namespace	epion::NodeCustom
 
 
 template<class	T>
-bool	epion::NodeCustom::VertexBuffer::Create(std::vector<T>&	buffer, com_ptr<ID3D11Buffer>&	vertex_buffer_ptr)
+bool	epion::Node::VertexBuffer::Create(std::vector<T>&	buffer, com_ptr<ID3D11Buffer>&	vertex_buffer_ptr)
 {
 	HRESULT	hr = S_OK;
 	buffer_desc.ByteWidth = sizeof(T)	*static_cast<unsigned int>(buffer.size());

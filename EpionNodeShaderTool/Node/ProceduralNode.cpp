@@ -17,14 +17,14 @@ namespace
 {
 }
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::CheckerboardNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::EllipseNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::HexagonNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::PolygonNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::RippleNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::RoundedRectangleNode)
+CEREAL_REGISTER_TYPE(epion::Node::CheckerboardNode)
+CEREAL_REGISTER_TYPE(epion::Node::EllipseNode)
+CEREAL_REGISTER_TYPE(epion::Node::HexagonNode)
+CEREAL_REGISTER_TYPE(epion::Node::PolygonNode)
+CEREAL_REGISTER_TYPE(epion::Node::RippleNode)
+CEREAL_REGISTER_TYPE(epion::Node::RoundedRectangleNode)
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 #pragma region Checkerboard
 	CheckerboardNode::CheckerboardNode()

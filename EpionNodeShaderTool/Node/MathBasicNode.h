@@ -6,7 +6,7 @@
  * @date 2019/10/25
  */
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 	/**
 	* @brief +

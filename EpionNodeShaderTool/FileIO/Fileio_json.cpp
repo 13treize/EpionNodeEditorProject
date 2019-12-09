@@ -46,8 +46,8 @@ namespace	epion::FileIO
 
 	void	FileIOJson::Input(
 		const std::string& path,
-		std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>& node_base,
-		std::vector<epion::NodeCustom::NodeLink>&	node_link)
+		std::vector<std::unique_ptr<epion::Node::NodeBase>>& node_base,
+		std::vector<epion::Node::NodeLink>&	node_link)
 	{
 		std::ifstream	ifs(path, std::ios::in);
 		std::stringstream	stream;
@@ -62,8 +62,8 @@ namespace	epion::FileIO
 	}
 
 	void	FileIOJson::Output(	const std::string&	path,
-								const std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>& node_base,
-								const std::vector<epion::NodeCustom::NodeLink>&	node_link)
+								const std::vector<std::unique_ptr<epion::Node::NodeBase>>& node_base,
+								const std::vector<epion::Node::NodeLink>&	node_link)
 	{
 		FileIOStates	output_node_data;
 
@@ -83,8 +83,8 @@ namespace	epion::FileIO
 
 	void	FileIOJson::Input(
 		const std::string&	path,
-		std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>& node_base,
-		std::list<epion::NodeCustom::NodeLink>&	node_link)
+		std::vector<std::unique_ptr<epion::Node::NodeBase>>& node_base,
+		std::list<epion::Node::NodeLink>&	node_link)
 	{
 		std::ifstream	ifs(path, std::ios::in);
 		std::stringstream	stream;
@@ -99,8 +99,8 @@ namespace	epion::FileIO
 	}
 
 	void	FileIOJson::Output(const std::string&	path,
-		const std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>& node_base,
-		const std::list<epion::NodeCustom::NodeLink>&	node_link)
+		const std::vector<std::unique_ptr<epion::Node::NodeBase>>& node_base,
+		const std::list<epion::Node::NodeLink>&	node_link)
 	{
 		FileIOStates	output_node_data;
 

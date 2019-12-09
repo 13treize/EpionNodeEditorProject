@@ -18,11 +18,11 @@ namespace
 	const ImVec2	size(0, 0);
 }
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::SamplerStateNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::SamplerTexture2DNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::Texture2DNode)
+CEREAL_REGISTER_TYPE(epion::Node::SamplerStateNode)
+CEREAL_REGISTER_TYPE(epion::Node::SamplerTexture2DNode)
+CEREAL_REGISTER_TYPE(epion::Node::Texture2DNode)
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 #pragma region SamplerState
 	SamplerStateNode::SamplerStateNode()

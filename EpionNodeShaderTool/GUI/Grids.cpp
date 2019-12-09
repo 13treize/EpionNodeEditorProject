@@ -1,33 +1,31 @@
-#include	"../../../imgui\\imgui.h"
-#include	"../../../imgui\\imgui_impl_win32.h"
-#include	"../../../imgui\\imgui_impl_dx11.h"
-#include	"../../../imgui\\imgui_internal.h"
+#include	"../../imgui\\imgui.h"
+#include	"../../imgui\\imgui_impl_win32.h"
+#include	"../../imgui\\imgui_impl_dx11.h"
+#include	"../../imgui\\imgui_internal.h"
 
 
-#include	"grid.h"
-
-
-namespace	epion::Node
+#include	"Grids.h"
+namespace	epion::GUI
 {
 	//ƒOƒŠƒbƒh
-	Grids::Grids(float	size, ImU32	color)
+	BackGrids::BackGrids(float	size, ImU32	color)
 		:m_is_show_grid(true),
 		m_grid_size(size),
 		m_grid_color(color)
 	{
 	}
-	Grids::~Grids()
+	BackGrids::~BackGrids()
 	{
 	}
 
-	void	Grids::Init(float	size, ImU32	color)
+	void BackGrids::Init(float	size, ImU32	color)
 	{
-		m_is_show_grid	=true;
-		m_grid_size	=size;
+		m_is_show_grid = true;
+		m_grid_size = size;
 		m_grid_color = color;
 	}
 
-	void	Grids::ShowGrid(ImDrawList*	draw_list, ImVec2	win_pos, ImVec2	canvas_size, const	ImVec2&	scroll)
+	void BackGrids::Draw(ImDrawList*	draw_list, ImVec2	win_pos, ImVec2	canvas_size, const	ImVec2&	scroll)
 	{
 		m_win_pos = win_pos;
 		m_canvas_size = canvas_size;

@@ -10,7 +10,7 @@
 #include	"../ImguiFunction.h"
 
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 
 	std::string	NodeFunction::SetVarFloat(const std::string& in, const std::string& out) { return "    float " + out + "=" + in + ";\n"; }
@@ -45,17 +45,17 @@ namespace	epion::NodeCustom
 	void NodeFunction::SetInputSlotUV(ImVec2& set_cursor)
 	{
 		ImGui::SetCursorScreenPos(set_cursor + ImVec2(-50, -SLOT_INPUT_FLOAT));
-		ImGui::TextColored(ImColor::Vec4::WHITE, "%s", "uv");
+		ImGui::TextColored(ImColors::Vec4::WHITE, "%s", "uv");
 	}
 	void NodeFunction::SetInputSlotTexture2D(ImVec2& set_cursor)
 	{
 		ImGui::SetCursorScreenPos(set_cursor + ImVec2(-50, -SLOT_INPUT_FLOAT));
-		ImGui::TextColored(ImColor::Vec4::WHITE, "%s", "tex");
+		ImGui::TextColored(ImColors::Vec4::WHITE, "%s", "tex");
 	}
 	void NodeFunction::SetInputSlotSamplerState(ImVec2& set_cursor)
 	{
 		ImGui::SetCursorScreenPos(set_cursor + ImVec2(-50, -SLOT_INPUT_FLOAT));
-		ImGui::TextColored(ImColor::Vec4::WHITE, "%s", "ss");
+		ImGui::TextColored(ImColors::Vec4::WHITE, "%s", "ss");
 	}
 
 	void NodeFunction::SetInputSlotColor(ImVec2& set_cursor, bool& popup, math::FVector3& num, int label_num)
@@ -101,28 +101,28 @@ namespace	epion::NodeCustom
 		switch (type)
 		{
 		default:
-		case epion::NodeCustom::SLOT_TYPE::VECTOR1:
-		case epion::NodeCustom::SLOT_TYPE::UV:
-		case epion::NodeCustom::SLOT_TYPE::TEXTURE2D:
-		case epion::NodeCustom::SLOT_TYPE::SAMPLERSTATE:
+		case epion::Node::SLOT_TYPE::VECTOR1:
+		case epion::Node::SLOT_TYPE::UV:
+		case epion::Node::SLOT_TYPE::TEXTURE2D:
+		case epion::Node::SLOT_TYPE::SAMPLERSTATE:
 			draw_list->AddRectFilled(pos + ImVec2(SLOT_INPUT_RECT_X, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), IM_COL32(60, 60, 60, 255), 2.0f);
-			draw_list->AddRect(pos + ImVec2(SLOT_INPUT_RECT_X, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), ImColor::U32::GREEN, 2.0f);
+			draw_list->AddRect(pos + ImVec2(SLOT_INPUT_RECT_X, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), ImColors::U32::GREEN, 2.0f);
 			break;
-		case epion::NodeCustom::SLOT_TYPE::VECTOR2:
+		case epion::Node::SLOT_TYPE::VECTOR2:
 			draw_list->AddRectFilled(pos + ImVec2(SLOT_INPUT_RECT_X * 2 + 10.0f, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), IM_COL32(60, 60, 60, 255), 2.0f);
-			draw_list->AddRect(pos + ImVec2(SLOT_INPUT_RECT_X * 2 + 10.0f, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), ImColor::U32::GREEN, 2.0f);
+			draw_list->AddRect(pos + ImVec2(SLOT_INPUT_RECT_X * 2 + 10.0f, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), ImColors::U32::GREEN, 2.0f);
 			break;
-		case epion::NodeCustom::SLOT_TYPE::VECTOR3:
+		case epion::Node::SLOT_TYPE::VECTOR3:
 			draw_list->AddRectFilled(pos + ImVec2(SLOT_INPUT_RECT_X * 3 + 20.0f, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), IM_COL32(60, 60, 60, 255), 2.0f);
-			draw_list->AddRect(pos + ImVec2(SLOT_INPUT_RECT_X * 3 + 20.0f, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), ImColor::U32::GREEN, 2.0f);
+			draw_list->AddRect(pos + ImVec2(SLOT_INPUT_RECT_X * 3 + 20.0f, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), ImColors::U32::GREEN, 2.0f);
 			break;
-		case epion::NodeCustom::SLOT_TYPE::VECTOR4:
+		case epion::Node::SLOT_TYPE::VECTOR4:
 			draw_list->AddRectFilled(pos + ImVec2(SLOT_INPUT_RECT_X * 4 + 30.0f, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), IM_COL32(60, 60, 60, 255), 2.0f);
-			draw_list->AddRect(pos + ImVec2(SLOT_INPUT_RECT_X * 4 + 30.0f, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), ImColor::U32::GREEN, 2.0f);
+			draw_list->AddRect(pos + ImVec2(SLOT_INPUT_RECT_X * 4 + 30.0f, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), ImColors::U32::GREEN, 2.0f);
 			break;
-		case epion::NodeCustom::SLOT_TYPE::COLOR:
+		case epion::Node::SLOT_TYPE::COLOR:
 			draw_list->AddRectFilled(pos + ImVec2(SLOT_INPUT_RECT_X * 1.8 + 30.0f, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), IM_COL32(60, 60, 60, 255), 2.0f);
-			draw_list->AddRect(pos + ImVec2(SLOT_INPUT_RECT_X * 1.8 + 30.0f, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), ImColor::U32::GREEN, 2.0f);
+			draw_list->AddRect(pos + ImVec2(SLOT_INPUT_RECT_X * 1.8 + 30.0f, -SLOT_INPUT_FLOAT), pos + ImVec2(-15, SLOT_INPUT_FLOAT), ImColors::U32::GREEN, 2.0f);
 			break;
 		}
 
@@ -176,14 +176,14 @@ namespace	epion::NodeCustom
 	{
 		switch (type)
 		{
-		case SLOT_TYPE::VECTOR1:	color = ImColor::U32::LIGHTBLUE;	break;
+		case SLOT_TYPE::VECTOR1:	color = ImColors::U32::LIGHTBLUE;	break;
 		case SLOT_TYPE::VECTOR2:
-		case SLOT_TYPE::UV:			color = ImColor::U32::LAWNGREEN;	break;
+		case SLOT_TYPE::UV:			color = ImColors::U32::LAWNGREEN;	break;
 		case SLOT_TYPE::VECTOR3:
-		case SLOT_TYPE::COLOR:		color = ImColor::U32::YELLOW;	break;
-		case SLOT_TYPE::VECTOR4:	color = ImColor::U32::PURPLE;	break;
-		case SLOT_TYPE::TEXTURE2D:	color = ImColor::U32::RED;	break;
-		case SLOT_TYPE::SAMPLERSTATE:	color = ImColor::U32::WHITE;	break;
+		case SLOT_TYPE::COLOR:		color = ImColors::U32::YELLOW;	break;
+		case SLOT_TYPE::VECTOR4:	color = ImColors::U32::PURPLE;	break;
+		case SLOT_TYPE::TEXTURE2D:	color = ImColors::U32::RED;	break;
+		case SLOT_TYPE::SAMPLERSTATE:	color = ImColors::U32::WHITE;	break;
 		case SLOT_TYPE::BOOLEAN:	break;
 		}
 		draw_list->AddCircle(centre, NODE_SLOT_RADIUS, color);

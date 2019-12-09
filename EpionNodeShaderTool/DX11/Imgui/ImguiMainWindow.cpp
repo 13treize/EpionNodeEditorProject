@@ -18,6 +18,7 @@
 #include	"ImguiNodeContext.h"
 
 #include	"../../Node/NodeData.h"
+#include	"../../GUI/NodeEditor.h"
 
 #include	"../../ShaderGenerate/ShaderGenerate.h"
 #include	"../texture.h"
@@ -34,7 +35,7 @@ namespace
 	bool is_tex;
 	//std::string path = "GenerateNodeJson/test3.json";
 	std::string path = "test3.json";
-
+	bool test_window=false;
 }
 
 
@@ -119,9 +120,9 @@ namespace	epion
 
 
 		m_texture_adjust.Init();
-		NodeCustom::ContextManager::Init();
+		Node::ContextManager::Init();
 		ImGui::StyleColorsDark();
-		NodeCustom::NodeEditor::Init();
+		Node::NodeEditor::Init();
 		ColorPicker::Init();
 		m_tex_resouce.Init();
 		m_file_io_adjust.Init();
@@ -141,9 +142,13 @@ namespace	epion
 		//tests.Update();
 		if (m_is_node_window)
 		{
-			NodeCustom::NodeEditor::Update(&m_is_update_node, m_impl->node_title_name);
+			Node::NodeEditor::Update(&m_is_update_node, m_impl->node_title_name);
 		}
 
+		if (test_window)
+		{
+			GUI::NodeEditor::Update();
+		}
 
 		if (m_impl->is_update)
 		{
@@ -155,6 +160,9 @@ namespace	epion
 
 			//MenuBar::ShowExampleAppMain();
 			ImGui::Checkbox("NodeWindow", &m_is_node_window);
+
+
+			ImGui::Checkbox("test", &test_window);
 
 			//create_shader
 			if (ImGui::BeginTabBar("##tabs", ImGuiTabBarFlags_None))
@@ -172,10 +180,16 @@ namespace	epion
 
 				if (ImGui::BeginTabItem("Node"))
 				{
-					ImGui::Text("Node size %d", NodeCustom::NodeEditor::GetNodeSize());
-					for (const auto& n : NodeCustom::NodeEditor::nodes)
+					ImGui::Text("mouse pos x %f, y %f", ImGui::GetMousePos().x, ImGui::GetMousePos().y);
+
+					ImGui::Text("cursor screen pos x %f, y %f", ImGui::GetCursorScreenPos().x, ImGui::GetCursorScreenPos().y);
+
+					ImGui::Text("scroll pos x %f, y %f", Node::NodeEditor::GetScrolling().x, Node::NodeEditor::GetScrolling().y);
+
+					ImGui::Text("Node size %d", Node::NodeEditor::GetNodeSize());
+					for (const auto& n : Node::NodeEditor::nodes)
 					{
-						ImGui::Text("Node pos x %d, y %d", n->m_Pos.x ,n->m_Pos.y);
+						ImGui::Text("Node pos x %f, y %f", n->m_Pos.x ,n->m_Pos.y);
 
 					}
 					ImGui::EndTabItem();
@@ -183,10 +197,10 @@ namespace	epion
 
 				if (ImGui::BeginTabItem("Link"))
 				{
-					ImGui::Text("Link size %d", NodeCustom::NodeEditor::GetLinkSize());
+					ImGui::Text("Link size %d", Node::NodeEditor::GetLinkSize());
 					if (ImGui::TreeNode("LinkState"))
 					{
-						for (auto & li : NodeCustom::NodeEditor::links)
+						for (auto & li : Node::NodeEditor::links)
 						{
 							ImGui::Text(li.StateStr().c_str());
 						}
@@ -241,9 +255,9 @@ namespace	epion
 		is_reset = ImGui::Button("Reset");
 		if (is_reset)
 		{
-			NodeCustom::NodeEditor::Clear();
-			NodeCustom::NodeEditor::Init();
-			NodeCustom::ContextManager::Init();
+			Node::NodeEditor::Clear();
+			Node::NodeEditor::Init();
+			Node::ContextManager::Init();
 			//m_impl->preview = std::make_unique<Square>();
 			TextureFileIO::SaveTexture("GenerateTexture\\out", ".jpg", Dxgi::back_buffer);
 

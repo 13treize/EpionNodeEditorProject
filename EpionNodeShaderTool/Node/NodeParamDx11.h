@@ -1,6 +1,6 @@
 #pragma once
 
-namespace	epion::NodeCustom::Dx11
+namespace	epion::Node::Dx11
 {
 	/**
 	* @brief Nodeで規定している定数バッファ管理

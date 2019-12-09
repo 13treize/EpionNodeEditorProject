@@ -7,19 +7,19 @@
 #include	"NodeData.h"
 #include	"FlipbookNode.h"
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::FlipbookNode)
+CEREAL_REGISTER_TYPE(epion::Node::FlipbookNode)
 
 namespace
 {
 	const ImVec2	size(0, 0);
 
-	epion::NodeCustom::InputSlotState	UnlitInitState[] =
+	epion::Node::InputSlotState	UnlitInitState[] =
 	{
-		{"UV",			0,	epion::NodeCustom::SLOT_TYPE::VECTOR2 },
-		{"AngleOffset",	1,	epion::NodeCustom::SLOT_TYPE::VECTOR1 },
-		{"CellDensity",	2,	epion::NodeCustom::SLOT_TYPE::VECTOR1 },
-		{"CellDensity",	2,	epion::NodeCustom::SLOT_TYPE::VECTOR1 },
-		{"CellDensity",	2,	epion::NodeCustom::SLOT_TYPE::VECTOR1 },
+		{"UV",			0,	epion::Node::SLOT_TYPE::VECTOR2 },
+		{"AngleOffset",	1,	epion::Node::SLOT_TYPE::VECTOR1 },
+		{"CellDensity",	2,	epion::Node::SLOT_TYPE::VECTOR1 },
+		{"CellDensity",	2,	epion::Node::SLOT_TYPE::VECTOR1 },
+		{"CellDensity",	2,	epion::Node::SLOT_TYPE::VECTOR1 },
 
 	};
 	enum	NUM :unsigned char
@@ -30,7 +30,7 @@ namespace
 	};
 }
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 	FlipbookNode::FlipbookNode()
 		:NodeBase( 5, 1)
@@ -80,7 +80,7 @@ namespace	epion::NodeCustom
 		//if (!m_is_slot_input[0])
 		//{
 		//	ImGui::SetCursorScreenPos(m_input_pos[0] + ImVec2(-50, -SLOT_INPUT_FLOAT));
-		//	ImGui::TextColored(ImColor::Vec4::WHITE, "%s", "uv");
+		//	ImGui::TextColored(ImColors::Vec4::WHITE, "%s", "uv");
 		//}
 
 		//if (!m_is_slot_input[1])

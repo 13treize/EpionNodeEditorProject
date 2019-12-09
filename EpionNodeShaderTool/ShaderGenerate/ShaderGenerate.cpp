@@ -32,8 +32,8 @@ namespace	epion::Shader
 	std::list<std::string>	NodeShaderManager::create_str;
 	std::list<std::string>	NodeShaderManager::node_create_str;
 
-	std::vector<std::unique_ptr<NodeCustom::NodeBase>>	NodeShaderManager::nodes;
-	std::vector<NodeCustom::NodeLink>	NodeShaderManager::links;
+	std::vector<std::unique_ptr<Node::NodeBase>>	NodeShaderManager::nodes;
+	std::vector<Node::NodeLink>	NodeShaderManager::links;
 	std::vector	<std::string>	NodeShaderManager::variable;
 	std::map	<std::string, int>	NodeShaderManager::shader_function;
 
@@ -183,8 +183,8 @@ namespace	epion::Shader
 
 		for (auto&n : nodes)
 		{
-			if (typeid(*n) == typeid(NodeCustom::UnlitMasterNode) ||
-				typeid(*n) == typeid(NodeCustom::PBRMasterNode))
+			if (typeid(*n) == typeid(Node::UnlitMasterNode) ||
+				typeid(*n) == typeid(Node::PBRMasterNode))
 			{
 				create_str.push_back(float4Generate2("flag_color", n->get_function_call_str()));
 				current_id.push_back(n->m_ID);
@@ -209,7 +209,7 @@ namespace	epion::Shader
 		//texture
 		//for (auto&n : nodes)
 		//{
-		//	if (typeid(*n) == typeid(NodeCustom::SamplerTexture2DNode))
+		//	if (typeid(*n) == typeid(Node::SamplerTexture2DNode))
 		//	{
 		//		function_str += n->GetFunctionDefStr() + "(t" + std::to_string(texture2d_count) + ");\n";
 		//		texture2d_count++;
@@ -219,8 +219,8 @@ namespace	epion::Shader
 		//Sampler State
 		for (auto&n : nodes)
 		{
-			if (typeid(*n) == typeid(NodeCustom::SamplerStateNode) ||
-				typeid(*n) == typeid(NodeCustom::Texture2DNode))
+			if (typeid(*n) == typeid(Node::SamplerStateNode) ||
+				typeid(*n) == typeid(Node::Texture2DNode))
 			{
 				n->ShaderUpdate(nodes,links);
 				function_str += n->GetFunctionDefStr() + "\n";
@@ -232,8 +232,8 @@ namespace	epion::Shader
 		{
 			auto it = shader_function.find(n->m_Name);
 			if (it != shader_function.end()||
-				typeid(*n) == typeid(NodeCustom::SamplerStateNode) ||
-				typeid(*n) == typeid(NodeCustom::Texture2DNode))
+				typeid(*n) == typeid(Node::SamplerStateNode) ||
+				typeid(*n) == typeid(Node::Texture2DNode))
 			{
 				continue;
 			}

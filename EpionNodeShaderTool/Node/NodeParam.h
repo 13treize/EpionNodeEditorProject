@@ -1,7 +1,7 @@
 #pragma once
 #include	"../../../imgui\\imgui.h"
 
-namespace	epion::ImColor
+namespace	epion::ImColors
 {
 	namespace	U32
 	{
@@ -29,7 +29,7 @@ namespace	epion::ImColor
 	}
 }
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 	enum class SLOT_TYPE
 	{
@@ -74,6 +74,8 @@ namespace	epion::NodeCustom
 
 	static constexpr float NODE_SLOT_RADIUS = 5.0f;
 	const ImVec2 NODE_FONT_ADD_POS = { 10.0f, 5.0f };
+
+	const ImU32	NODE_LINE_COLOR = IM_COL32(0, 150, 250, 250);
 
 
 	const ImU32 RECT_COLOR = IM_COL32(60, 60, 60, 200);

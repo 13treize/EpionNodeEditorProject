@@ -8,11 +8,11 @@
  */
 
  /**
- * @namespace NodeCustom
+ * @namespace Node
  * @brief Node‚ð‚Ü‚Æ‚ß‚Ä‚é
  * @details
  */
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 	/**
 	* @brief FBM(Fractal Brownian Motion)	class

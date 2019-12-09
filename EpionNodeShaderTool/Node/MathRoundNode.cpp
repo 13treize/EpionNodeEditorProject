@@ -13,11 +13,11 @@
 #include	"NodeParam.h"
 #include	"NodeFunction.h"
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::CeilingNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::StepNode)
+CEREAL_REGISTER_TYPE(epion::Node::CeilingNode)
+CEREAL_REGISTER_TYPE(epion::Node::StepNode)
 
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 #pragma region Ceiling
 	CeilingNode::CeilingNode()

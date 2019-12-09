@@ -12,7 +12,7 @@ namespace	epion
  * @date 2019/11/1
  */
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 	/**
 	* @brief Checkerboard	class

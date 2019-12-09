@@ -17,11 +17,11 @@ namespace
 {
 }
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::DDXNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::DDYNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::DDXYNode)
+CEREAL_REGISTER_TYPE(epion::Node::DDXNode)
+CEREAL_REGISTER_TYPE(epion::Node::DDYNode)
+CEREAL_REGISTER_TYPE(epion::Node::DDXYNode)
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 	DDXNode::DDXNode()
 		:NodeBase( 1, 1)

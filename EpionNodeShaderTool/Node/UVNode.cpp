@@ -17,15 +17,15 @@ namespace
 {
 }
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::PolarCoordinatesNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::RadialShearNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::SpherizeNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::TilingAndOffsetNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::TwirlNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::UVNode)
+CEREAL_REGISTER_TYPE(epion::Node::PolarCoordinatesNode)
+CEREAL_REGISTER_TYPE(epion::Node::RadialShearNode)
+CEREAL_REGISTER_TYPE(epion::Node::SpherizeNode)
+CEREAL_REGISTER_TYPE(epion::Node::TilingAndOffsetNode)
+CEREAL_REGISTER_TYPE(epion::Node::TwirlNode)
+CEREAL_REGISTER_TYPE(epion::Node::UVNode)
 
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 #pragma region PolarCoordinates
 	PolarCoordinatesNode::PolarCoordinatesNode()

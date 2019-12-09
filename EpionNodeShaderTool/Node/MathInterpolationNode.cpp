@@ -17,9 +17,9 @@ namespace
 {
 }
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::LerpNode)
+CEREAL_REGISTER_TYPE(epion::Node::LerpNode)
 
-namespace epion::NodeCustom
+namespace epion::Node
 {
 #pragma region Lerp
 	LerpNode::LerpNode()

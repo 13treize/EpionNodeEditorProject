@@ -17,9 +17,9 @@ namespace
 {
 }
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::UnlitMasterNode)
+CEREAL_REGISTER_TYPE(epion::Node::UnlitMasterNode)
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 	UnlitMasterNode::UnlitMasterNode()
 		:NodeBase( 4, 0)

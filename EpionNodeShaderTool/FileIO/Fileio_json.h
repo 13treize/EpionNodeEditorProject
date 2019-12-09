@@ -2,14 +2,14 @@
 
 namespace	epion::FileIO
 {
-	class	epion::NodeCustom::NodeBase;
-	class	epion::NodeCustom::NodeLink;
+	class	epion::Node::NodeBase;
+	class	epion::Node::NodeLink;
 
 	struct	FileIOStates
 	{
 		FileIOStates() {}
-		std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>	nodes;
-		std::vector<epion::NodeCustom::NodeLink>	links;
+		std::vector<std::unique_ptr<epion::Node::NodeBase>>	nodes;
+		std::vector<epion::Node::NodeLink>	links;
 
 		template<class Archive>
 		void serialize(Archive & archive)
@@ -29,20 +29,20 @@ namespace	epion::FileIO
 		{}
 
 		void Input(	const std::string& path,
-					std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>& node_base,
-					std::vector<epion::NodeCustom::NodeLink>& node_link);
+					std::vector<std::unique_ptr<epion::Node::NodeBase>>& node_base,
+					std::vector<epion::Node::NodeLink>& node_link);
 
 		void Output(	const std::string&	path,
-						const std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>	&node_base,
-						const std::vector<epion::NodeCustom::NodeLink>&	node_link);
+						const std::vector<std::unique_ptr<epion::Node::NodeBase>>	&node_base,
+						const std::vector<epion::Node::NodeLink>&	node_link);
 
 		void	Input(const std::string& path,
-			std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>& node_base,
-			std::list<epion::NodeCustom::NodeLink>&	node_link);
+			std::vector<std::unique_ptr<epion::Node::NodeBase>>& node_base,
+			std::list<epion::Node::NodeLink>&	node_link);
 
 		void	Output(const std::string&	path,
-			const std::vector<std::unique_ptr<epion::NodeCustom::NodeBase>>	&node_base,
-			const std::list<epion::NodeCustom::NodeLink>&	node_link);
+			const std::vector<std::unique_ptr<epion::Node::NodeBase>>	&node_base,
+			const std::list<epion::Node::NodeLink>&	node_link);
 
 
 	private:

@@ -1,5 +1,5 @@
 #pragma once
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 	class ClampNode final :public NodeBase
 	{

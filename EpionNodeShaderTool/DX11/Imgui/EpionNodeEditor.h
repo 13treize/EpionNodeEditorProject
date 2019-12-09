@@ -1,6 +1,6 @@
 #pragma once
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 	constexpr	int	INIT_NUM = -1;
 
@@ -103,6 +103,10 @@ namespace	epion::NodeCustom
 		static	void	NodeInputUpdate(ImDrawList* draw_list, int size);
 		static	void	NodeOutputUpdate(ImDrawList* draw_list, int size);
 		static	void	NodeTabBar();
+		static	void	NodeErase(ImDrawList* draw_list, int size);
+
+		static	int		m_node_erase_num;
+		static	bool	m_is_node_erase_menu;
 
 		static	bool	m_is_node_widgets_active;
 		static	bool	m_is_now_any_active;

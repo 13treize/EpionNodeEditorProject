@@ -16,24 +16,24 @@
 namespace
 {
 	const ImVec2	size(0, 0);
-	epion::NodeCustom::InputSlotState	InitStates[9] =
+	epion::Node::InputSlotState	InitStates[9] =
 	{
-		{"Pos",					0,epion::NodeCustom::SLOT_TYPE::VECTOR4},
-		{"Albedo",				1,epion::NodeCustom::SLOT_TYPE::VECTOR3},
-		{"Normal",				2,epion::NodeCustom::SLOT_TYPE::VECTOR3},
-		{"Emission",			3,epion::NodeCustom::SLOT_TYPE::VECTOR3},
-		{"Metallic",			4,epion::NodeCustom::SLOT_TYPE::VECTOR1},
-		{"Smoothness",			5,epion::NodeCustom::SLOT_TYPE::VECTOR1},
-		{"Occulusion",			6,epion::NodeCustom::SLOT_TYPE::VECTOR1},
-		{"Alpha",				7,epion::NodeCustom::SLOT_TYPE::VECTOR1},
-		{"AlphaChipThreshold",	8,epion::NodeCustom::SLOT_TYPE::VECTOR1},
+		{"Pos",					0,epion::Node::SLOT_TYPE::VECTOR4},
+		{"Albedo",				1,epion::Node::SLOT_TYPE::VECTOR3},
+		{"Normal",				2,epion::Node::SLOT_TYPE::VECTOR3},
+		{"Emission",			3,epion::Node::SLOT_TYPE::VECTOR3},
+		{"Metallic",			4,epion::Node::SLOT_TYPE::VECTOR1},
+		{"Smoothness",			5,epion::Node::SLOT_TYPE::VECTOR1},
+		{"Occulusion",			6,epion::Node::SLOT_TYPE::VECTOR1},
+		{"Alpha",				7,epion::Node::SLOT_TYPE::VECTOR1},
+		{"AlphaChipThreshold",	8,epion::Node::SLOT_TYPE::VECTOR1},
 	};
 }
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::PBRMasterNode)
+CEREAL_REGISTER_TYPE(epion::Node::PBRMasterNode)
 
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 	PBRMasterNode::PBRMasterNode()
 		:NodeBase( 9, 0)

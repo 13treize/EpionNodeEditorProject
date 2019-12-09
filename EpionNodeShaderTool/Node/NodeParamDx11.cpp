@@ -3,7 +3,7 @@
 #include	"../DX11/dx11_device.h"
 #include	"NodeParamDx11.h"
 
-namespace	epion::NodeCustom::Dx11
+namespace	epion::Node::Dx11
 {
 	com_ptr<ID3D11Buffer>	ConstantBufferManager::m_constant_buffer0;
 	com_ptr<ID3D11Buffer>	ConstantBufferManager::m_constant_buffer1;

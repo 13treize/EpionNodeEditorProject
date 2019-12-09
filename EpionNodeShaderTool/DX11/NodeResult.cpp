@@ -5,7 +5,7 @@
 
 #include	"NodeResult.h"
 
-namespace epion::NodeCustom
+namespace epion::Node
 {
 	bool	ShaderCompiler2::compile(const	std::wstring	hlsl_name,
 		const	std::string		entry_point,
@@ -324,7 +324,7 @@ namespace epion::NodeCustom
 		v[1].uv = { 1,0 };
 		v[2].uv = { 0,1 };
 		v[3].uv = { 1,1 };
-		auto size = sizeof(epion::NodeCustom::SquareVertex) * 4;
+		auto size = sizeof(epion::Node::SquareVertex) * 4;
 
 
 		D3D11_MAPPED_SUBRESOURCE	map_resouce = {};
@@ -332,7 +332,7 @@ namespace epion::NodeCustom
 		memcpy(map_resouce.pData, v.data(), size);
 		Device::GetContext()->Unmap(m_vertex_buffer.Get(), 0);
 
-		unsigned	int	stride = sizeof(epion::NodeCustom::SquareVertex);
+		unsigned	int	stride = sizeof(epion::Node::SquareVertex);
 		unsigned	int	offset = 0;
 
 		Device::GetContext()->IASetVertexBuffers(0, 1, m_vertex_buffer.GetAddressOf(), &stride,&offset);

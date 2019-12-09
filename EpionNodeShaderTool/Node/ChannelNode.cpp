@@ -17,10 +17,10 @@ namespace
 {
 }
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::CombineNode)
+CEREAL_REGISTER_TYPE(epion::Node::CombineNode)
 
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 #pragma region Combine
 	CombineNode::CombineNode()

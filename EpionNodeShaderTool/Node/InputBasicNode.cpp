@@ -17,14 +17,14 @@ namespace
 {
 }
 
-CEREAL_REGISTER_TYPE(epion::NodeCustom::FloatNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::Vector2Node)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::Vector3Node)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::Vector4Node)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::ColorNode)
-CEREAL_REGISTER_TYPE(epion::NodeCustom::TimeNode)
+CEREAL_REGISTER_TYPE(epion::Node::FloatNode)
+CEREAL_REGISTER_TYPE(epion::Node::Vector2Node)
+CEREAL_REGISTER_TYPE(epion::Node::Vector3Node)
+CEREAL_REGISTER_TYPE(epion::Node::Vector4Node)
+CEREAL_REGISTER_TYPE(epion::Node::ColorNode)
+CEREAL_REGISTER_TYPE(epion::Node::TimeNode)
 
-namespace	epion::NodeCustom
+namespace	epion::Node
 {
 #pragma region Float
 	FloatNode::FloatNode()

@@ -177,6 +177,12 @@
     <ClCompile Include="epion_string\epion_string.cpp" />
     <ClCompile Include="FileIO\Fileio_json.cpp" />
     <ClCompile Include="Framework.cpp" />
+    <ClCompile Include="GUI\Grids.cpp" />
+    <ClCompile Include="GUI\NodeContext.cpp" />
+    <ClCompile Include="GUI\NodeEditor.cpp" />
+    <ClCompile Include="GUI\SettingWindow.cpp" />
+    <ClCompile Include="GUI\NodeWindow.cpp" />
+    <ClCompile Include="GUI\NodePreviewWindow.cpp" />
     <ClCompile Include="ImguiFunction.cpp" />
     <ClCompile Include="Node\ArtisticAdjustment.cpp" />
     <ClCompile Include="Node\ArtisticNormalNode.cpp" />
@@ -262,6 +268,12 @@
     <ClInclude Include="epion_string\epion_string.h" />
     <ClInclude Include="FileIO\Fileio_json.h" />
     <ClInclude Include="Framework.h" />
+    <ClInclude Include="GUI\Grids.h" />
+    <ClInclude Include="GUI\NodeContext.h" />
+    <ClInclude Include="GUI\NodeEditor.h" />
+    <ClInclude Include="GUI\SettingWindow.h" />
+    <ClInclude Include="GUI\NodeWindow.h" />
+    <ClInclude Include="GUI\NodePreviewWindow.h" />
     <ClInclude Include="ImguiFunction.h" />
     <ClInclude Include="Node\ArtisticAdjustment.h" />
     <ClInclude Include="Node\ArtisticNormalNode.h" />

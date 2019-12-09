@@ -37,30 +37,6 @@ float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)
     return ret_color;
 };
 
-
-void Checkerboard(float2 UV, float3 ColorA, float3 ColorB, float2 Frequency, out float3 Out)
-{
-    UV = (UV.xy + 0.5) * Frequency;
-    float4 derivatives = float4(ddx(UV), ddy(UV));
-    float2 duv_length = sqrt(float2(dot(derivatives.xz, derivatives.xz), dot(derivatives.yw, derivatives.yw)));
-    float width = 1.0;
-    float2 distance3 = 4.0 * abs(frac(UV + 0.25) - 0.5) - width;
-    float2 scale = 0.35 / duv_length.xy;
-    float freqLimiter = sqrt(clamp(1.1f - max(duv_length.x, duv_length.y), 0.0, 1.0));
-    float2 vector_alpha = clamp(distance3 * scale.xy, -1.0, 1.0);
-    float alpha = saturate(0.5f + 0.5f * vector_alpha.x * vector_alpha.y * freqLimiter);
-    Out = lerp(ColorA, ColorB, alpha.xxx);
-}
-
-void Twirl(float2 UV, float2 Center, float Strength, float2 Offset, out float2 Out)
-{
-    float2 delta = UV - Center;
-    float angle = Strength * length(delta);
-    float x = cos(angle) * delta.x - sin(angle) * delta.y;
-    float y = sin(angle) * delta.x + cos(angle) * delta.y;
-    Out = float2(x + Center.x + Offset.x, y + Center.y + Offset.y);
-}
-
 inline float2 voronoi_noise_randomVector(float2 UV, float offset)
 {
     float2x2 m = float2x2(15.27, 47.63, 99.41, 89.98);
@@ -112,19 +88,11 @@ float4 PS(PSInput input) : SV_TARGET
     float Time_ =Time.x;
     float Sin_Time_ =sin(Time.x);
     float Cos_Time_ =cos(Time.x);
-    float VoronoiOut_out4;
-    float VoronoiCell_out4;
-    float VoronoiLine_out4;
-    Voronoi(input.uv,0.900000,1.000000,VoronoiOut_out4,VoronoiCell_out4,VoronoiLine_out4);
+    float VoronoiOut_out1;
+    float VoronoiCell_out1;
+    float VoronoiLine_out1;
+    Voronoi(input.uv,1.000000,1.000000,VoronoiOut_out1,VoronoiCell_out1,VoronoiLine_out1);
 
-    float3 Vector3_out1=float3(VoronoiOut_out4,1.000000,1.000000);
-
-    float2 Twirl_out3;
-    Twirl(input.uv,float2(0.500000,0.500000),10.000000,float2(0.000000,0.000000),Twirl_out3);
-
-    float3 Checkerboard_out2;
-    Checkerboard(Twirl_out3,float3(1.000000,0.000000,0.000000),Vector3_out1,float2(7.000000,7.000000),Checkerboard_out2);
-
-    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Checkerboard_out2,0.200000,0.000000);
+    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),VoronoiCell_out1,1.000000,0.000000);
     return flag_color;
 }
