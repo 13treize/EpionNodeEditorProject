@@ -83,15 +83,27 @@ void Voronoi(float2 UV, float AngleOffset, float CellDensity, out float Out, out
     Lines = 1.-smoothstep(0.0, 0.1, c.y-c.x);
 }
 
+void Twirl(float2 UV, float2 Center, float Strength, float2 Offset, out float2 Out)
+{
+    float2 delta = UV - Center;
+    float angle = Strength * length(delta);
+    float x = cos(angle) * delta.x - sin(angle) * delta.y;
+    float y = sin(angle) * delta.x + cos(angle) * delta.y;
+    Out = float2(x + Center.x + Offset.x, y + Center.y + Offset.y);
+}
+
 float4 PS(PSInput input) : SV_TARGET
 {
     float Time_ =Time.x;
     float Sin_Time_ =sin(Time.x);
     float Cos_Time_ =cos(Time.x);
+    float2 Twirl_out2;
+    Twirl(input.uv,float2(0.500000,0.500000),10.000000,float2(0.000000,0.000000),Twirl_out2);
+
     float VoronoiOut_out1;
     float VoronoiCell_out1;
     float VoronoiLine_out1;
-    Voronoi(input.uv,1.000000,1.000000,VoronoiOut_out1,VoronoiCell_out1,VoronoiLine_out1);
+    Voronoi(Twirl_out2,8.000000,8.000000,VoronoiOut_out1,VoronoiCell_out1,VoronoiLine_out1);
 
     float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),VoronoiCell_out1,1.000000,0.000000);
     return flag_color;

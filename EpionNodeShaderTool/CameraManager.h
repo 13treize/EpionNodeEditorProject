@@ -71,6 +71,25 @@ namespace	epion
 
 	};
 
+	//NodeÇÃPreviewCamera
+	class	PreviewCamera	final : public	View
+	{
+	public:
+		PreviewCamera();
+
+		PreviewCamera(const	math::FVector3& p_,
+			const	math::FVector3& t_,
+			const	math::FVector3& u_,
+			float fov_,
+			float aspect_,
+			float n_,
+			float f_);
+
+		~PreviewCamera() {};
+
+	};
+
+
 	class	CameraManager	final
 	{
 	public:
@@ -78,11 +97,18 @@ namespace	epion
 		static	void	Update();
 
 		//getä÷êî
+
+		static std::unique_ptr<BasicCamera>&	GetBasicCamera();
+		static std::unique_ptr<PreviewCamera>&	GetPreviewCamera();
+
+
 		static	DirectX::XMFLOAT4X4& GetView();
 
 		static	DirectX::XMFLOAT4X4& GetProjection();
 
 	private:
-		static	std::unique_ptr<BasicCamera>	basic_camera;
+		static	std::unique_ptr<BasicCamera>	m_basic_camera;
+		static	std::unique_ptr<PreviewCamera>	m_preview_camera;
+
 	};
 }

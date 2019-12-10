@@ -53,17 +53,24 @@ namespace	epion::GUI
 
 		m_node_window.Update();
 
-		m_node_setting_window.Update();
+		m_node_setting_window.Update(m_node_window.GetNodes(),m_node_window.GetLinks());
 
-		m_node_preview_window.Update();
 
-		ImGui::SetNextWindowPos(ImVec2(1450, 560));
-		ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColors::U32::BLUE);	//îwåi
-		ImGui::BeginChild("test5", ImVec2(400, 400));
+		ImGui::SetNextWindowPos(ImVec2(150, 710));
+		ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColors::U32::GRAY);	//îwåi
+		ImGui::BeginChild("test3", ImVec2(1200, 300));
 		ImGui::EndChild();
 
-		ImGui::PopStyleColor(3);
+		m_node_preview_window.Update(m_node_setting_window.m_is_preview_reset);
+
+		ImGui::PopStyleColor(2);
 
 		ImGui::End();
 	}
+
+	void	NodeEditor::Render()
+	{
+		m_node_preview_window.Render();
+	}
+
 }

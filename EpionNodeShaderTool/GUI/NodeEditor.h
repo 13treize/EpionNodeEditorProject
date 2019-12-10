@@ -10,6 +10,7 @@ namespace	epion::GUI
 	public:
 		static	void	Init();
 		static	void	Update();
+		static	void	Render();
 
 	private:
 		static NodeWindow	m_node_window;

@@ -51,7 +51,7 @@ namespace	epion
 		{
 			{0.6f,0.6f,0.6f,0.6f}
 		};
-		Dxgi::begin(back_color);
+		Dxgi::Begin(back_color);
 
 		SceneManager::Render();
 		ImguiMain::GetInst().Render();

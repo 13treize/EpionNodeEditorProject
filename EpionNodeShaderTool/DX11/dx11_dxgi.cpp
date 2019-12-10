@@ -1,5 +1,4 @@
-#include	<array>
-
+#include	"../All.h"
 #include	"../epion.h"
 
 #include	"dx11_device.h"
@@ -110,9 +109,9 @@ namespace	epion
 		view_port.Set(win_size_);
 	}
 
-	void	epion::Dxgi::begin(std::array<float, 4>&	colordata_)
+	void	epion::Dxgi::Begin(std::array<float, 4>&	colordata_)
 	{
-		Device::GetContext()->RSSetViewports(1, &view_port.get_vp());
+		Device::GetContext()->RSSetViewports(1, &view_port.GetViewPort());
 		Device::GetContext()->OMSetRenderTargets(1, render_target_view.GetAddressOf(), depth_stencil_view.Get());
 		Device::GetContext()->ClearRenderTargetView(render_target_view.Get(), colordata_.data());
 		Device::GetContext()->ClearDepthStencilView(depth_stencil_view.Get(), D3D11_CLEAR_FLAG::D3D11_CLEAR_DEPTH | D3D11_CLEAR_FLAG::D3D11_CLEAR_STENCIL, 1.0f, 0);

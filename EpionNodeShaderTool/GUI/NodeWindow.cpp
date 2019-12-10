@@ -85,6 +85,11 @@ namespace epion::GUI
 
 				ImGui::EndTabItem();
 			}
+			if (ImGui::BeginTabItem("Demo"))
+			{
+				ImGui::EndTabItem();
+			}
+
 			ImGui::EndTabBar();
 		}
 		ImGui::EndChild();
@@ -464,10 +469,6 @@ namespace epion::GUI
 			m_scrolling_pos.x = std::clamp(m_scrolling_pos.x, -1000.0f, 1000.0f);
 			m_scrolling_pos.y = std::clamp(m_scrolling_pos.y, -1000.0f, 1000.0f);
 		}
-
-		//if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemActive() && ImGui::IsAnyMouseDown)
-		//{
-		//}
 	}
 #pragma endregion
 
@@ -475,4 +476,10 @@ namespace epion::GUI
 	{
 		return m_nodes;
 	}
+
+	std::vector<Node::NodeLink>&	NodeWindow::GetLinks()
+	{
+		return m_links;
+	}
+
 }

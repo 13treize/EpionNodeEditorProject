@@ -48,10 +48,10 @@ namespace	epion
 	{
 	public:
 		static	void	Set(math::FVector2&	win_size_);
-		static	void	begin(std::array<float, 4>&	colordata_);
+		static	void	Begin(std::array<float, 4>&	colordata_);
 		static	void	End();
 
-		static	ViewPort&	get_view_port()
+		static	ViewPort&	GetViewPort()
 		{
 			return	view_port;
 		};

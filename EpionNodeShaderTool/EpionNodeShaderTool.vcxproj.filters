@@ -133,6 +133,9 @@
     <Filter Include="ソース ファイル\GUI">
       <UniqueIdentifier>{ceee3a52-b550-4658-83c0-21ced0f11cf3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Node\Master">
+      <UniqueIdentifier>{fdcc8fb9-d30f-472d-a9bb-6ee5f6732b42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Winmain.cpp">
@@ -170,9 +173,6 @@
     </ClCompile>
     <ClCompile Include="FileIO\Fileio_json.cpp">
       <Filter>ソース ファイル\FileIO</Filter>
-    </ClCompile>
-    <ClCompile Include="Node\PBRNode.cpp">
-      <Filter>ソース ファイル\Node</Filter>
     </ClCompile>
     <ClCompile Include="DX11\viewport.cpp">
       <Filter>ソース ファイル\Dx11</Filter>
@@ -276,9 +276,6 @@
     <ClCompile Include="ImguiFunction.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Node\MasterNode.cpp">
-      <Filter>ソース ファイル\Node</Filter>
-    </ClCompile>
     <ClCompile Include="Node\MathInterpolationNode.cpp">
       <Filter>ソース ファイル\Node\Math</Filter>
     </ClCompile>
@@ -364,6 +361,15 @@
       <Filter>ソース ファイル\GUI</Filter>
     </ClCompile>
     <ClCompile Include="GUI\NodePreviewWindow.cpp">
+      <Filter>ソース ファイル\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\PBRNode.cpp">
+      <Filter>ソース ファイル\Node\Master</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\MasterNode.cpp">
+      <Filter>ソース ファイル\Node\Master</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\NodeDragWindow.cpp">
       <Filter>ソース ファイル\GUI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -633,6 +639,9 @@
       <Filter>ヘッダー ファイル\GUI</Filter>
     </ClInclude>
     <ClInclude Include="GUI\NodePreviewWindow.h">
+      <Filter>ヘッダー ファイル\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\NodeDragWindow.h">
       <Filter>ヘッダー ファイル\GUI</Filter>
     </ClInclude>
   </ItemGroup>

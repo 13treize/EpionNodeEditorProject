@@ -27,6 +27,7 @@ namespace epion::GUI
 		void Update();
 
 		std::vector<std::unique_ptr<Node::NodeBase>>&	GetNodes();
+		std::vector<Node::NodeLink>&	GetLinks();
 
 	private:
 

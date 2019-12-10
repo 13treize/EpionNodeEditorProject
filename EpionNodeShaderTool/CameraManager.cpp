@@ -4,7 +4,7 @@
 
 namespace
 {
-	epion::math::FVector3	pos = {0.0f,	0.0f,	10.0f };
+	epion::math::FVector3	pos = {0.0f,	0.0f, 10.0f };
 	epion::math::FVector3	target = { 0.0f,	0.0f,	0.0f };
 	epion::math::FVector3	up = { 0.0f,	1.0f,	0.0f };
 
@@ -96,36 +96,66 @@ namespace	epion
 
 	}
 
-	std::unique_ptr<BasicCamera>	CameraManager::basic_camera;
+	PreviewCamera::PreviewCamera()
+	{
+
+	}
+	PreviewCamera::PreviewCamera(const math::FVector3& p_, const math::FVector3& t_, const math::FVector3& u_,
+		float fov_, float aspect_, float n_, float f_) :View(p_, t_, u_, fov_, aspect_, n_, f_)
+	{
+
+	}
+
+
+	std::unique_ptr<BasicCamera>	CameraManager::m_basic_camera;
+	std::unique_ptr<PreviewCamera>	CameraManager::m_preview_camera;
 
 	void	CameraManager::Init()
 	{
 		//ÉJÉÅÉâèâä˙âª
-		basic_camera	=std::make_unique<BasicCamera>(	pos,
-														target,
-														up,
-		//basic_camera = std::make_unique<BasicCamera>(basic_camera_hotreload->get_data().pos,
-		//	basic_camera_hotreload->get_data().target,
-		//	basic_camera_hotreload->get_data().up,
+
+		m_basic_camera	=std::make_unique<BasicCamera>(
+			pos,
+			target,
+			up,
 			math::pi<float> / 8.0f,
-			Dxgi::get_view_port().get_aspect(),
+			Dxgi::GetViewPort().GetAspect(),
 			0.1f,
 			1000.0f);
+
+		m_preview_camera = std::make_unique<PreviewCamera>(
+			math::FVector3(0.0f, 0.0f, 10.0f),
+			target,
+			up,
+			math::pi<float> / 8.0f,
+			400.0f/400.f,
+			0.1f,
+			1000.0f);
+
 	}
 
 	void	CameraManager::Update()
 	{
-		basic_camera->activate();
+		m_basic_camera->activate();
+		m_preview_camera->activate();
 	}
 
+	std::unique_ptr<BasicCamera>&	CameraManager::GetBasicCamera()
+	{
+		return m_basic_camera;
+	}
+	std::unique_ptr<PreviewCamera>&	CameraManager::GetPreviewCamera()
+	{
+		return m_preview_camera;
+	}
 	DirectX::XMFLOAT4X4&	CameraManager::GetView()
 	{
-		return	basic_camera->GetView();
+		return	m_basic_camera->GetView();
 	}
 
 	DirectX::XMFLOAT4X4&	CameraManager::GetProjection()
 	{
-		return	basic_camera->GetProjection();
+		return	m_basic_camera->GetProjection();
 	}
 
 }

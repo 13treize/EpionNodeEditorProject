@@ -179,6 +179,7 @@
     <ClCompile Include="Framework.cpp" />
     <ClCompile Include="GUI\Grids.cpp" />
     <ClCompile Include="GUI\NodeContext.cpp" />
+    <ClCompile Include="GUI\NodeDragWindow.cpp" />
     <ClCompile Include="GUI\NodeEditor.cpp" />
     <ClCompile Include="GUI\SettingWindow.cpp" />
     <ClCompile Include="GUI\NodeWindow.cpp" />
@@ -270,6 +271,7 @@
     <ClInclude Include="Framework.h" />
     <ClInclude Include="GUI\Grids.h" />
     <ClInclude Include="GUI\NodeContext.h" />
+    <ClInclude Include="GUI\NodeDragWindow.h" />
     <ClInclude Include="GUI\NodeEditor.h" />
     <ClInclude Include="GUI\SettingWindow.h" />
     <ClInclude Include="GUI\NodeWindow.h" />

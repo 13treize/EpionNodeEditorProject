@@ -10,9 +10,9 @@ namespace	epion
 
 		void	Set(math::FVector2&	size);
 
-		D3D11_VIEWPORT	get_vp()	const	noexcept;
+		D3D11_VIEWPORT	GetViewPort()	const	noexcept;
 
-		/*[[nodiscard]]*/const	float	get_aspect()	const	noexcept;
+		/*[[nodiscard]]*/const	float	GetAspect()	const	noexcept;
 	private:
 		D3D11_VIEWPORT	vp = {};
 	};

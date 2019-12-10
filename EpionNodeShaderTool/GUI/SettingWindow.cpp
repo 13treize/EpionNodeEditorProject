@@ -8,45 +8,92 @@
 
 #include	"../ImguiFunction.h"
 #include	"../Node/NodeParam.h"
+#include	"../Node/NodeData.h"
 
 #include	"SettingWindow.h"
+
+#include	"../FileIO/Fileio_json.h"
+#include	"../ShaderGenerate/ShaderGenerate.h"
 
 
 namespace epion::GUI
 {
 	bool SettingWindow::Init()
 	{
+		m_is_preview_reset = false;
 		return true;
 	}
 
-	void SettingWindow::Update()
+	void SettingWindow::Update(std::vector<std::unique_ptr<Node::NodeBase>>&	nodes,std::vector<Node::NodeLink>& links)
 	{
 		ImGui::SetNextWindowPos(ImVec2(1450, 10));
 		ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColors::U32::GRAYBLACK);	//îwåi
 		ImGui::BeginChild("test4", ImVec2(400, 500));
 		ImGui::Text("Settings");
-		auto&	io = ImGui::GetIO();
-		ImGui::Text("FPS: %.2f (%.2gms)", io.Framerate, io.Framerate ? 1000.0f / io.Framerate : 0.0f);
 		if (ImGui::BeginTabBar("##sets", ImGuiTabBarFlags_None))
 		{
-			if (ImGui::BeginTabItem("Node Param"))
-			{
-				ImGui::Text("Node Param");
-				ImGui::EndTabItem();
-			}
-			if (ImGui::BeginTabItem("Option"))
-			{
-				ImGui::Text("Option");
-				auto&	io = ImGui::GetIO();
-				ImGui::Text("FPS: %.2f (%.2gms)", io.Framerate, io.Framerate ? 1000.0f / io.Framerate : 0.0f);
-				ImGui::EndTabItem();
-			}
-
-
+			FileIOUpdate(nodes, links);
+			NodeTabUpdate();
+			OptionTabUpdate();
 		}
 
 		ImGui::EndTabBar();
 
 		ImGui::EndChild();
 	}
+
+	void SettingWindow::FileIOUpdate(std::vector<std::unique_ptr<Node::NodeBase>>&	nodes, std::vector<Node::NodeLink>& links)
+	{
+		if (ImGui::BeginTabItem("File IO"))
+		{
+			ImGui::Text("File IO");
+			if (ImGui::Button("Json Save"))
+			{
+				FileIO::FileIOJson o_json;
+				o_json.Output("Default/Default2.json",nodes, links);
+				Shader::NodeShaderManager::JsonImport("Default/Default2.json");
+				Shader::NodeShaderManager::Generate("Default/Default2.hlsl");
+				m_is_preview_reset = true;
+			}
+			if (ImGui::Button("HLSL Generate"))
+			{
+			}
+			ImGui::EndTabItem();
+		}
+	}
+
+	void SettingWindow::NodeTabUpdate()
+	{
+		if (ImGui::BeginTabItem("Node Param"))
+		{
+			ImGui::Text("Node Param");
+
+			ImGui::Text("node size %d", m_node_size);
+
+
+			ImGui::EndTabItem();
+		}
+	}
+
+	void SettingWindow::OptionTabUpdate()
+	{
+		if (ImGui::BeginTabItem("Option"))
+		{
+			ImGui::Text("Option");
+			auto&	io = ImGui::GetIO();
+			ImGui::Text("FPS: %.2f (%.2gms)", io.Framerate, io.Framerate ? 1000.0f / io.Framerate : 0.0f);
+			ImGui::EndTabItem();
+		}
+	}
+
+
+	void SettingWindow::SetNodeState(int size, std::vector<int>& id, std::vector<math::FVector2>& pos)
+	{
+		m_node_size = size;
+		m_node_id = id;
+		m_node_pos = pos;
+	}
+
+
 }
+

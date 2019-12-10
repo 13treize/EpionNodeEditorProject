@@ -2,7 +2,7 @@
     "node_param": [
         {
             "polymorphic_id": 2147483649,
-            "polymorphic_name": "epion::NodeCustom::UnlitMasterNode",
+            "polymorphic_name": "epion::Node::UnlitMasterNode",
             "ptr_wrapper": {
                 "valid": 1,
                 "data": {
@@ -10,8 +10,8 @@
                         "m_Name": "Unlit Master",
                         "m_ID": 0,
                         "m_Pos": {
-                            "x": 924,
-                            "y": 49
+                            "x": 904,
+                            "y": 438
                         },
                         "m_dynamic_slot_type": 1,
                         "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),VoronoiCell_out1,1.000000,0.000000);\n"
@@ -36,7 +36,7 @@
         },
         {
             "polymorphic_id": 2147483650,
-            "polymorphic_name": "epion::NodeCustom::VoronoiNode",
+            "polymorphic_name": "epion::Node::VoronoiNode",
             "ptr_wrapper": {
                 "valid": 1,
                 "data": {
@@ -44,18 +44,50 @@
                         "m_Name": "Voronoi",
                         "m_ID": 1,
                         "m_Pos": {
-                            "x": 360,
-                            "y": 69
+                            "x": 668,
+                            "y": 213
                         },
                         "m_dynamic_slot_type": 1,
-                        "m_function_call_str": "    float VoronoiOut_out1;\n    float VoronoiCell_out1;\n    float VoronoiLine_out1;\n    Voronoi(input.uv,1.000000,1.000000,VoronoiOut_out1,VoronoiCell_out1,VoronoiLine_out1);\n"
+                        "m_function_call_str": "    float VoronoiOut_out1;\n    float VoronoiCell_out1;\n    float VoronoiLine_out1;\n    Voronoi(Twirl_out2,8.000000,8.000000,VoronoiOut_out1,VoronoiCell_out1,VoronoiLine_out1);\n"
                     },
                     "m_uv": {
                         "x": 0,
                         "y": 0
                     },
-                    "m_angleoffset": 1,
-                    "m_celldensity": 1
+                    "m_angleoffset": 8,
+                    "m_celldensity": 8
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483651,
+            "polymorphic_name": "epion::Node::TwirlNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Twirl",
+                        "m_ID": 2,
+                        "m_Pos": {
+                            "x": 194,
+                            "y": 99
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float2 Twirl_out2;\n    Twirl(input.uv,float2(0.500000,0.500000),10.000000,float2(0.000000,0.000000),Twirl_out2);\n"
+                    },
+                    "m_uv": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "m_center": {
+                        "x": 0.5,
+                        "y": 0.5
+                    },
+                    "m_strength": 10,
+                    "m_offset": {
+                        "x": 0,
+                        "y": 0
+                    }
                 }
             }
         }
@@ -68,6 +100,14 @@
             "m_output.id": 1,
             "m_output.slot": 1,
             "m_output_type": 1
+        },
+        {
+            "m_input.id": 1,
+            "m_input.slot": 0,
+            "m_input_type": 9,
+            "m_output.id": 2,
+            "m_output.slot": 0,
+            "m_output_type": 2
         }
     ]
 }

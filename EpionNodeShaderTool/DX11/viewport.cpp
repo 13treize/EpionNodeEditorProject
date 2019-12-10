@@ -13,12 +13,12 @@ namespace	epion
 		vp.TopLeftY = 0.0f;
 	}
 
-	D3D11_VIEWPORT	ViewPort::get_vp()const	noexcept
+	D3D11_VIEWPORT	ViewPort::GetViewPort()const	noexcept
 	{
 		return	vp;
 	}
 
-	[[nodiscard]]const	float	ViewPort::get_aspect()	const	noexcept
+	[[nodiscard]]const	float	ViewPort::GetAspect()	const	noexcept
 	{
 		return	vp.Width / vp.Height;
 	}
