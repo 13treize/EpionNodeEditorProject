@@ -24,13 +24,13 @@ namespace epion::GUI
 	{
 	public:
 		bool Init();
-		void Update();
+		void Update(std::vector<std::string>&	node_names);
 
 		std::vector<std::unique_ptr<Node::NodeBase>>&	GetNodes();
 		std::vector<Node::NodeLink>&	GetLinks();
 
 	private:
-
+		std::string m_get_node_name;
 		ImVec2	m_offset;
 		int	m_node_select_num;
 		int	m_node_hovered_list;
@@ -38,6 +38,7 @@ namespace epion::GUI
 
 		//ImGui Settings
 		ImGuiTabBarFlags m_bar_flags;
+		void ChildSettings();
 
 		ClickState	m_click_state;
 
@@ -51,6 +52,7 @@ namespace epion::GUI
 		float m_line_size;
 		bool m_is_line_hit;
 		bool m_is_line_delete_menu;
+		bool m_is_slot_hit;
 
 		void DrawLinkLine(ImDrawList* draw_list);
 
@@ -73,7 +75,6 @@ namespace epion::GUI
 		void	Enclose(ImDrawList* draw_list);
 		void	Scroll();
 		ImVec2	m_enclose_pos;
-		ImVec2	m_scrolling_pos;
 
 	};
 }

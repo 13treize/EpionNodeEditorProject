@@ -31,7 +31,8 @@ namespace	epion
 		s = DirectX::XMMatrixScaling(m_scale.x, m_scale.y, m_scale.z);
 
 		//　回転行列作成
-		r = DirectX::XMMatrixRotationRollPitchYaw(m_angle.x, m_angle.y, m_angle.z);
+		r = DirectX::XMMatrixRotationRollPitchYaw(m_angle.x*0.01745f, m_angle.y*0.01745f, m_angle.z*0.01745f);
+		//r = DirectX::XMMatrixRotationRollPitchYaw(m_angle.x, m_angle.y, m_angle.z);
 
 		//　移動行列作成
 		t = DirectX::XMMatrixTranslation(m_pos.x, m_pos.y, m_pos.z);

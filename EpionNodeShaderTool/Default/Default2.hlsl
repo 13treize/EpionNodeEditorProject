@@ -57,7 +57,7 @@ float4 PS(PSInput input) : SV_TARGET
     float Sin_Time_ =sin(Time.x);
     float Cos_Time_ =cos(Time.x);
     float3 Checkerboard_out1;
-    Checkerboard(input.uv,float3(1.000000,0.000000,0.000000),float3(0.000000,0.000000,0.000000),float2(1.000000,1.000000),Checkerboard_out1);
+    Checkerboard(input.uv,float3(0.000000,0.000000,0.000000),float3(1.000000,0.999990,0.999990),float2(5.000000,5.000000),Checkerboard_out1);
 
     float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Checkerboard_out1,1.000000,0.000000);
     return flag_color;

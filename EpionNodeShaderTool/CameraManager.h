@@ -19,7 +19,7 @@ namespace	epion
 
 		void set_projection(float fov, float aspect, float n, float f);
 		//s—ñXV
-		void activate();
+		void Activate();
 
 
 		DirectX::XMFLOAT4X4& GetView()

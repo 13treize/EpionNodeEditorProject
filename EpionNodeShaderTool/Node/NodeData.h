@@ -155,6 +155,7 @@ namespace	epion::Node
 		virtual	void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links) = 0;
 
 
+		void SetDrawPos(ImVec2& vec2);
 		std::string	m_Name;
 		int		m_ID;
 		math::FVector2	m_Pos;
@@ -200,6 +201,9 @@ namespace	epion::Node
 		void	ResouceCreate();
 
 	private:
+		//画面のスクロール等を含めた最終座標
+		ImVec2	m_draw_pos;
+
 		// 命名規則被りのせい
 		void Initialize();
 		void Finalize();

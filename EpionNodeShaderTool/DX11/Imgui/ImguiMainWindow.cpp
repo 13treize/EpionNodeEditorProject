@@ -145,10 +145,10 @@ namespace	epion
 			Node::NodeEditor::Update(&m_is_update_node, m_impl->node_title_name);
 		}
 
-		if (test_window)
-		{
-			GUI::NodeEditor::Update();
-		}
+		//if (test_window)
+		//{
+		//	GUI::NodeEditor::Update();
+		//}
 
 		if (m_impl->is_update)
 		{
@@ -227,7 +227,9 @@ namespace	epion
 
 	void	ImguiMain::Render()
 	{
-		Preview::Render();
+		GUI::NodeEditor::Render();
+
+		//Preview::Render();
 		//m_impl->preview->render(m_impl->time, math::FVector2(1450, 650), math::FVector2(400, 400), 0, FixColor::Red);
 	}
 

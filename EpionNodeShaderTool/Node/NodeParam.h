@@ -78,8 +78,11 @@ namespace	epion::Node
 	const ImU32	NODE_LINE_COLOR = IM_COL32(0, 150, 250, 250);
 
 
+
 	const ImU32 RECT_COLOR = IM_COL32(60, 60, 60, 200);
 	const ImU32 TITLE_BAR_COLOR = IM_COL32(40, 40, 40, 250);
+
+	static constexpr float TITLE_BAR_POS_Y = 18.0f;
 
 	const	ImVec2	NODE_WINDOW_PADDING = { 165.0f, 165.0f };
 

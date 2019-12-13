@@ -27,6 +27,11 @@ cbuffer WorldCBuffer : register(b3)
     row_major float4x4 WorldViewProjection;
     row_major float4x4 World;
 };
+void Power_float(float A,float B, out float Out)
+{
+	Out = pow(A, B);
+}
+
 float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)
 {
     if (Alpha < AlphaChipThreshold)
@@ -37,27 +42,14 @@ float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)
     return ret_color;
 };
 
-void Polygon(float2 UV, float Sides, float Width, float Height, out float Out)
-{
-    float pi = 3.14159265359;
-    float aWidth = Width * cos(pi / Sides);
-    float aHeight = Height * cos(pi / Sides);
-    float2 uv = (UV * 2 - 1) / float2(aWidth, aHeight);
-    uv.y *= -1;
-    float pCoord = atan2(uv.x, uv.y);
-    float r = 2 * pi / Sides;
-    float distance = cos(floor(0.5 + pCoord / r) * r - pCoord) * length(uv);
-    Out = saturate((1 - distance) / fwidth(distance));
-}
-
 float4 PS(PSInput input) : SV_TARGET
 {
     float Time_ =Time.x;
     float Sin_Time_ =sin(Time.x);
     float Cos_Time_ =cos(Time.x);
-    float Polygon_out1;
-    Polygon(input.uv,4.000000,1.000000,1.000000,Polygon_out1);
+    float Power_float_out0;
+    Power_float(0.000000,0.000000,Power_float_out0);
 
-    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Polygon_out1,1.000000,0.000000);
+    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Power_float_out0,1.000000,0.000000);
     return flag_color;
 }

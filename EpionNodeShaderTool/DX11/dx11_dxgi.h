@@ -56,12 +56,12 @@ namespace	epion
 			return	view_port;
 		};
 
-		static	com_ptr<ID3D11DepthStencilView>&	get_dsv()
+		static	com_ptr<ID3D11DepthStencilView>&	GetDSV()
 		{
 			return depth_stencil_view;
 		}
 
-		static	com_ptr<ID3D11RenderTargetView>&	get_rtv()
+		static	com_ptr<ID3D11RenderTargetView>&	GetRTV()
 		{
 			return render_target_view;
 		}

@@ -37,7 +37,7 @@ namespace	epion
 		farPlane = f;
 	}
 
-	void	View::activate()
+	void	View::Activate()
 	{
 		DirectX::XMMATRIX	mv, mp;
 
@@ -125,7 +125,7 @@ namespace	epion
 
 		m_preview_camera = std::make_unique<PreviewCamera>(
 			math::FVector3(0.0f, 0.0f, 10.0f),
-			target,
+			math::FVector3(0.0f, 1.0f, 0.0f),
 			up,
 			math::pi<float> / 8.0f,
 			400.0f/400.f,
@@ -136,8 +136,8 @@ namespace	epion
 
 	void	CameraManager::Update()
 	{
-		m_basic_camera->activate();
-		m_preview_camera->activate();
+		m_basic_camera->Activate();
+		m_preview_camera->Activate();
 	}
 
 	std::unique_ptr<BasicCamera>&	CameraManager::GetBasicCamera()

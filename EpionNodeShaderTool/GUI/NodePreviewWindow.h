@@ -14,6 +14,12 @@
 
 namespace epion::GUI
 {
+	enum class PreviewState :unsigned char
+	{
+		PLANE,
+		BOX,
+		SPHERE,
+	};
 	class NodePreviewWindow final
 	{
 	public:
@@ -24,11 +30,11 @@ namespace epion::GUI
 	private:
 		std::unique_ptr<epion::VertexShader> m_vertex;
 		std::unique_ptr<epion::PixelShader> m_pixel;
-		std::unique_ptr<epion::Cube>	m_preview;
+		std::unique_ptr<epion::Cube>	m_preview[3];
 		std::unique_ptr<epion::Texture>	m_tex;
 		std::unique_ptr<epion::DepthStencil>	m_depth;
-		math::FVector3	m_pos;
-		math::FVector3	m_angle;
+		math::FVector3	m_pos[3];
+		math::FVector3	m_angle[3];
 
 	};
 }

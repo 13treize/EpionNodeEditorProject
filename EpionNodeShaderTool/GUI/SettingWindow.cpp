@@ -47,7 +47,7 @@ namespace epion::GUI
 		if (ImGui::BeginTabItem("File IO"))
 		{
 			ImGui::Text("File IO");
-			if (ImGui::Button("Json Save"))
+			if (ImGui::Button("Update"))
 			{
 				FileIO::FileIOJson o_json;
 				o_json.Output("Default/Default2.json",nodes, links);
@@ -55,9 +55,35 @@ namespace epion::GUI
 				Shader::NodeShaderManager::Generate("Default/Default2.hlsl");
 				m_is_preview_reset = true;
 			}
+
+			ImGui::InputText("Json Name", const_cast<char*>(m_import_json_name.c_str()), CHAR_MAX);
+			ImGui::Text(m_import_json_name.c_str());
+			if (ImGui::Button("Json Generate"))
+			{
+				std::string path;
+				path = path + "GenerateNodeJson/" + m_import_json_name.c_str() + ".json";
+
+				FileIO::FileIOJson o_json;
+				o_json.Output(path, nodes, links);
+			}
+
+			ImGui::InputText("HLSL Name", const_cast<char*>(m_import_hlsl_name.c_str()), CHAR_MAX);
+			ImGui::Text(m_import_hlsl_name.c_str());
 			if (ImGui::Button("HLSL Generate"))
 			{
+				std::string path;
+				path = path + "GenerateShader/" + m_import_hlsl_name.c_str() + ".hlsl";
+
+				FileIO::FileIOJson o_json;
+				o_json.Output("Default/Default2.json", nodes, links);
+				Shader::NodeShaderManager::JsonImport("Default/Default2.json");
+				Shader::NodeShaderManager::Generate(path);
 			}
+
+			if (ImGui::Button("TGA Generate"))
+			{
+			}
+
 			ImGui::EndTabItem();
 		}
 	}

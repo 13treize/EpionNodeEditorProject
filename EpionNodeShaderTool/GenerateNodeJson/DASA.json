@@ -10,11 +10,11 @@
                         "m_Name": "Unlit Master",
                         "m_ID": 0,
                         "m_Pos": {
-                            "x": 1010,
-                            "y": 39
+                            "x": 653,
+                            "y": 217
                         },
                         "m_dynamic_slot_type": 1,
-                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Checkerboard_out1,1.000000,0.000000);\n"
+                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),VoronoiCell_out1,1.000000,0.000000);\n"
                     },
                     "Pos": {
                         "cereal_class_version": 0,
@@ -25,7 +25,7 @@
                     },
                     "color": {
                         "cereal_class_version": 0,
-                        "x": 0,
+                        "x": 0.98224854469299316,
                         "y": 0,
                         "z": 0
                     },
@@ -36,38 +36,26 @@
         },
         {
             "polymorphic_id": 2147483650,
-            "polymorphic_name": "epion::Node::CheckerboardNode",
+            "polymorphic_name": "epion::Node::VoronoiNode",
             "ptr_wrapper": {
                 "valid": 1,
                 "data": {
                     "value0": {
-                        "m_Name": "Checkerboard",
+                        "m_Name": "Voronoi",
                         "m_ID": 1,
                         "m_Pos": {
-                            "x": 460,
-                            "y": -38
+                            "x": 135,
+                            "y": 162
                         },
                         "m_dynamic_slot_type": 1,
-                        "m_function_call_str": "    float3 Checkerboard_out1;\n    Checkerboard(input.uv,float3(0.000000,0.000000,0.000000),float3(1.000000,0.999990,0.999990),float2(5.000000,5.000000),Checkerboard_out1);\n"
+                        "m_function_call_str": "    float VoronoiOut_out1;\n    float VoronoiCell_out1;\n    float VoronoiLine_out1;\n    Voronoi(input.uv,6.000000,6.000000,VoronoiOut_out1,VoronoiCell_out1,VoronoiLine_out1);\n"
                     },
                     "m_uv": {
                         "x": 0,
                         "y": 0
                     },
-                    "m_colora": {
-                        "x": 0,
-                        "y": 0,
-                        "z": 0
-                    },
-                    "m_colorb": {
-                        "x": 1,
-                        "y": 0.99998998641967773,
-                        "z": 0.99998998641967773
-                    },
-                    "m_frequency": {
-                        "x": 5,
-                        "y": 5
-                    }
+                    "m_angleoffset": 6,
+                    "m_celldensity": 6
                 }
             }
         }
@@ -78,8 +66,8 @@
             "m_input.slot": 1,
             "m_input_type": 10,
             "m_output.id": 1,
-            "m_output.slot": 0,
-            "m_output_type": 3
+            "m_output.slot": 1,
+            "m_output_type": 1
         }
     ]
 }

@@ -103,15 +103,14 @@ namespace	epion::Node
 
 	void	NodeBase::TitleDraw(ImVec2& offset, ImDrawList*	draw_list)
 	{
-		ImVec2 node_rect_min = { offset.x + m_Pos.x,offset.y + m_Pos.y };
-		ImVec2 node_rect_max = node_rect_min + m_Size;
-		ImVec2 node_rect_max2 = node_rect_min + ImVec2(m_Size.x*0.5f, m_Size.y);
+		ImVec2 node_rect_size = m_draw_pos+ m_Size;
+		ImVec2 node_rect_max2 =m_draw_pos + ImVec2(m_Size.x*0.5f, m_Size.y);
 
-		draw_list->AddRectFilled(node_rect_min, node_rect_max, RECT_COLOR, 2.0f);
+		draw_list->AddRectFilled(m_draw_pos, node_rect_size, RECT_COLOR, 2.0f);
 
-		if (m_node_type != NODE_TYPE::MASTER)	draw_list->AddRectFilled(node_rect_min, node_rect_max2, RECT_COLOR, 2.0f);
-		draw_list->AddRectFilled(node_rect_min, node_rect_min + ImVec2(m_Size.x, 18.0f), TITLE_BAR_COLOR, 2.0f);
-		ImGui::SetCursorScreenPos(node_rect_min + NODE_FONT_ADD_POS);	//ノードのタイトル描画の座標を指定
+		if (m_node_type != NODE_TYPE::MASTER)	draw_list->AddRectFilled(m_draw_pos, node_rect_max2, RECT_COLOR, 2.0f);
+		draw_list->AddRectFilled(m_draw_pos, m_draw_pos + ImVec2(m_Size.x, 18.0f), TITLE_BAR_COLOR, 2.0f);
+		ImGui::SetCursorScreenPos(m_draw_pos + NODE_FONT_ADD_POS);	//ノードのタイトル描画の座標を指定
 		ImGui::TextColored(ImColors::Vec4::WHITE, "%s", m_Name.c_str());
 #ifdef DEBUG
 	ResouceRender( offset, 	draw_list);
@@ -136,7 +135,7 @@ namespace	epion::Node
 	//	draw_list->ChannelsSetCurrent(4); // input_slot
 	//	ImGui::SetCursorScreenPos(ImVec2(m_Pos.x + offset.x, m_Pos.y + m_Size.y + offset.y));
 	//	ImGui::Image(m_resouce->ShaderResourceView.Get(), ImVec2(m_Size.x, m_Size.x), ImVec2(0, 0), ImVec2(1, 1), ImVec4(1, 1, 1, 1), ImVec4(0, 0, 0, 1));
-	//	Device::get_context()->OMSetRenderTargets(1, Dxgi::get_rtv().GetAddressOf(), Dxgi::get_dsv().Get());
+	//	Device::get_context()->OMSetRenderTargets(1, Dxgi::GetRTV().GetAddressOf(), Dxgi::get_dsv().Get());
 
 	}
 
@@ -144,16 +143,14 @@ namespace	epion::Node
 	{
 		assert(m_is_slot_input.size() == m_inputs_count);
 		draw_list->ChannelsSetCurrent(1);
-
-		ImVec2 node_rect_min = { offset.x + m_Pos.x,offset.y + m_Pos.y };
-		ImVec2 node_rect_max = node_rect_min + m_Size;
+		ImVec2 node_rect_size = m_draw_pos + m_Size;
 		if (m_is_push)
 		{
-			draw_list->AddRect(node_rect_min, node_rect_max, ImColors::U32::GREEN, 7.0f);
+			draw_list->AddRect(m_draw_pos, node_rect_size, ImColors::U32::GREEN, 7.0f);
 		}
 		else
 		{
-			draw_list->AddRect(node_rect_min, node_rect_max, ImColors::U32::ZERO, 7.0f);
+			draw_list->AddRect(m_draw_pos, node_rect_size, ImColors::U32::ZERO, 7.0f);
 		}
 
 		for (int i = 0; i < m_inputs_count; i++)
@@ -194,7 +191,10 @@ namespace	epion::Node
 			}
 		}
 	}
-
+	void NodeBase::SetDrawPos(ImVec2& vec2)
+	{
+		m_draw_pos = vec2 + ImGuiFunction::GetImVec2(m_Pos);
+	}
 
 	void	NodeBase::StrCheck(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
@@ -297,10 +297,10 @@ namespace	epion::Node
 
 		//Device::GetContext()->OMSetRenderTargets(_countof(dummyRTVs), dummyRTVs, nullptr);
 		//Device::GetContext()->PSSetShaderResources(0, _countof(dummySRVs), dummySRVs);
-		Device::GetContext()->OMSetRenderTargets(0, m_resouce->RenderTargetView.GetAddressOf(), Dxgi::get_dsv().Get());
+		Device::GetContext()->OMSetRenderTargets(0, m_resouce->RenderTargetView.GetAddressOf(), Dxgi::GetDSV().Get());
 		float color[4] = { 1,0,0,0 };
 		Device::GetContext()->ClearRenderTargetView(m_resouce->RenderTargetView.Get(), color);
-		Device::GetContext()->ClearDepthStencilView(Dxgi::get_dsv().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+		Device::GetContext()->ClearDepthStencilView(Dxgi::GetDSV().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 		Device::GetContext()->PSSetShaderResources(0, 1, m_resouce->m_shader_resource.GetAddressOf());
 		m_preview->Render(math::FVector2(0, 0), math::FVector2(m_Size.x, m_Size.x), 0, FixColor::Red);
 		draw_list->ChannelsSetCurrent(4); // input_slot

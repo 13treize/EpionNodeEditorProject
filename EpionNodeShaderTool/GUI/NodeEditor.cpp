@@ -7,7 +7,9 @@
 
 #include	"NodeEditor.h"
 #include	"NodeWindow.h"
+#include	"NodeDragWindow.h"
 #include	"SettingWindow.h"
+
 #include	"NodePreviewWindow.h"
 
 
@@ -24,12 +26,14 @@ namespace
 namespace	epion::GUI
 {
 	NodeWindow	NodeEditor::m_node_window;
+	NodeDragWindow	NodeEditor::m_node_drag_window;
 	SettingWindow	NodeEditor::m_node_setting_window;
 	NodePreviewWindow	NodeEditor::m_node_preview_window;
 
 	void	NodeEditor::Init()
 	{
 		m_node_window.Init();
+		m_node_drag_window.Init();
 		m_node_setting_window.Init();
 		m_node_preview_window.Init();
 	}
@@ -46,20 +50,11 @@ namespace	epion::GUI
 			ImGui::End();
 			return;
 		}
-		//ImGui::SetNextWindowPos(ImVec2(0, 0));
-		//ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColors::U32::RED);	//îwåi
-		//ImGui::BeginChild("test1", ImVec2(200, 0));
-		//ImGui::EndChild();
+		m_node_window.Update(m_node_drag_window.GetNodeNames());
 
-		m_node_window.Update();
+		m_node_drag_window.Update();
 
 		m_node_setting_window.Update(m_node_window.GetNodes(),m_node_window.GetLinks());
-
-
-		ImGui::SetNextWindowPos(ImVec2(150, 710));
-		ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColors::U32::GRAY);	//îwåi
-		ImGui::BeginChild("test3", ImVec2(1200, 300));
-		ImGui::EndChild();
 
 		m_node_preview_window.Update(m_node_setting_window.m_is_preview_reset);
 

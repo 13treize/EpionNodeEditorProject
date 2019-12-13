@@ -110,8 +110,6 @@ namespace	epion::Node
 
 	void	NodeEditor::Update(bool* opened,std::string	node_bar_name)
 	{
-		//m_offset =/* ImGui::GetMousePosOnOpeningCurrentPopup()-*/ImGui::GetCursorScreenPos() + m_scrolling_pos;
-
 		m_offset = m_scrolling_pos;
 
 		Node::ContextManager::Update(m_offset);

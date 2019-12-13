@@ -30,25 +30,22 @@ namespace epion::GUI
 		m_bar_flags |= ImGuiTabBarFlags_::ImGuiTabBarFlags_NoTabListScrollingButtons;
 		m_bar_flags |= ImGuiTabBarFlags_::ImGuiTabBarFlags_TabListPopupButton;
 
-		//m_nodes.clear();
-		//m_links.clear();
+		m_nodes.clear();
+		m_links.clear();
 		m_line_size = 0.0f;
 		m_is_line_hit = false;
 		m_is_line_delete_menu = false;
-		m_scrolling_pos = ImVec2(0, 0);
+		m_is_slot_hit=false;
+		m_offset = ImVec2(0, 0);
 		ContextManager::Init();
 
 		return true;
 	}
-	void NodeWindow::Update()
+	void NodeWindow::Update(std::vector<std::string>&	node_names)
 	{
-		m_offset = m_scrolling_pos;
 		ContextManager::Update(m_offset,m_nodes);
 
-		ImGui::SetNextWindowPos(ImVec2(30, 10));
-		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
-		ImGui::PushStyleColor(ImGuiCol_Border, ImColors::U32::GREEN);
-		ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColors::U32::GRAYBLACK);
+		ChildSettings();
 		ImGui::BeginChild("test2", ImVec2(1400, 670));
 		ImDrawList*	draw_list = ImGui::GetWindowDrawList();
 		draw_list->ChannelsSplit(5);
@@ -57,9 +54,22 @@ namespace epion::GUI
 
 		if (ImGui::BeginTabBar("##tabs", m_bar_flags))
 		{
+			//for (int i = 0; i < node_names.size(); i++)
+			//{
+			//	if (ImGui::BeginDragDropTarget())
+			//	{
+			//		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("DND_DEMO_CELL"))
+			//		{
+			//			IM_ASSERT(payload->DataSize == sizeof(int));
+			//			int payload_n = *(const int*)payload->Data;
+			//			node_names[0] = node_names[payload_n];
+			//		}
+			//		ImGui::EndDragDropTarget();
+			//	}
+			//}
 			if (ImGui::BeginTabItem("Node"))
 			{
-				grid.Draw(draw_list, ImGui::GetCursorScreenPos(), ImGui::GetWindowSize(), m_scrolling_pos);
+				grid.Draw(draw_list, ImGui::GetCursorScreenPos(), ImGui::GetWindowSize(), m_offset);
 
 				DrawLinkLine(draw_list);
 
@@ -77,16 +87,19 @@ namespace epion::GUI
 				}
 				if (!m_is_line_hit)
 				{
-					//Node::ContextManager::ClickEvent(m_offset);
+					ContextManager::ClickEvent(m_offset);
 				}
-				ContextManager::ClickEvent(m_offset);
+			//	ContextManager::ClickEvent(m_offset);
 
-				ContextManager::LineEvent();
+				//ContextManager::LineEvent();
 
 				ImGui::EndTabItem();
 			}
 			if (ImGui::BeginTabItem("Demo"))
 			{
+				ImGui::Text(m_get_node_name.c_str());
+				ImGui::Text("AAA");
+
 				ImGui::EndTabItem();
 			}
 
@@ -98,6 +111,13 @@ namespace epion::GUI
 		ImGui::PopStyleVar();
 	}
 
+	void NodeWindow::ChildSettings()
+	{
+		ImGui::SetNextWindowPos(ImVec2(30, 10));
+		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
+		ImGui::PushStyleColor(ImGuiCol_Border, ImColors::U32::GREEN);
+		ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColors::U32::GRAYBLACK);
+	}
 	void NodeWindow::DrawLinkLine(ImDrawList* draw_list)
 	{
 		draw_list->ChannelsSetCurrent(2); // Line
@@ -241,9 +261,11 @@ namespace epion::GUI
 			m_nodes[size]->m_is_push = false;
 		}
 
+		m_nodes[size]->SetDrawPos(m_offset);
 		draw_list->ChannelsSetCurrent(1);
 
 		ImGui::SetWindowFontScale(1.0f);
+		
 		m_nodes[size]->TitleDraw(m_offset, draw_list);
 
 		ImGui::SetWindowFontScale(0.9f);
@@ -272,7 +294,7 @@ namespace epion::GUI
 			//output slotをクリックしてる
 			if (m_click_state.is_click_output_slot	&&ImGui::IsMouseReleased(0))
 			{
-				bool	is_hit = false;
+				m_is_slot_hit = false;
 				bool	is_input = false;
 				if (physics::Collider2D::SphereAndSphere(ImGuiFunction::GetFVector2(input_slot_pos), ImGuiFunction::GetFVector2(ImGui::GetIO().MousePos), NODE_SLOT_RADIUS, 2.0f))
 				{
@@ -283,7 +305,7 @@ namespace epion::GUI
 							//既にノードがあるか確認
 							if (check_link == Node::NodeLink(m_click_state.id, m_click_state.slot, m_nodes[size]->m_ID, slot_input))
 							{
-								is_hit = true;
+								m_is_slot_hit = true;
 								break;
 							}
 							if (check_link.GetInputID() == m_nodes[size]->m_ID&&
@@ -294,7 +316,7 @@ namespace epion::GUI
 							}
 						}
 						if (is_input)	m_links.erase(m_links.begin() + slot_input - 1);
-						if (!is_hit)
+						if (!m_is_slot_hit)
 						{
 							m_links.push_back(Node::NodeLink(m_click_state.id, m_click_state.slot, m_nodes[m_click_state.id]->m_output_slot_type[m_click_state.slot],
 								m_nodes[size]->m_ID, slot_input, m_nodes[size]->m_input_slot_type[slot_input]));
@@ -327,7 +349,7 @@ namespace epion::GUI
 			//input →outputにノードを挿入するとき
 			if (m_click_state.is_click_input_slot	&&ImGui::IsMouseReleased(0))
 			{
-				bool	is_hit = false;
+				m_is_slot_hit = false;
 				if (physics::Collider2D::SphereAndSphere(math::FVector2(output_slot_pos.x, output_slot_pos.y), math::FVector2(ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y), NODE_SLOT_RADIUS, 2.0f))
 				{
 					if (m_click_state.id != m_nodes[size]->m_ID)
@@ -337,11 +359,11 @@ namespace epion::GUI
 							//既にノードがあるか確認
 							if (check_link == Node::NodeLink(m_nodes[size]->m_ID, slot_output, m_click_state.id, m_click_state.slot))
 							{
-								is_hit = true;
+								m_is_slot_hit = true;
 								break;
 							}
 						}
-						if (!is_hit)
+						if (!m_is_slot_hit)
 						{
 							m_links.push_back(Node::NodeLink(m_nodes[size]->m_ID, slot_output, m_nodes[size]->m_output_slot_type[slot_output],
 								m_click_state.id, m_click_state.slot, m_nodes[m_click_state.id]->m_input_slot_type[m_click_state.slot]));
@@ -447,15 +469,12 @@ namespace epion::GUI
 
 	void NodeWindow::Enclose(ImDrawList* draw_list)
 	{
-		if (ImGui::IsMouseClicked(0))
+		if (ImGui::IsMouseClicked(0)&&!m_click_state.is_click_input_slot && !m_click_state.is_click_output_slot)
 		{
-			if (!m_click_state.is_click_input_slot && !m_click_state.is_click_output_slot)
-			{
-				m_click_state.is_click_display = true;
-				m_enclose_pos = ImGui::GetIO().MousePos;
-			}
+			m_click_state.is_click_display = true;
+			m_enclose_pos = ImGui::GetIO().MousePos;
 		}
-		if (m_click_state.is_click_display	&&ImGui::IsMouseDragging(0))
+		if ((!m_click_state.is_click_input_slot || !m_click_state.is_click_output_slot)&&m_click_state.is_click_display	&&ImGui::IsMouseDragging(0))
 		{
 			draw_list->AddRect(m_enclose_pos, ImGui::GetIO().MousePos, IM_COL32(215, 15, 15, 255), 5.0f, 0);
 		}
@@ -465,9 +484,9 @@ namespace epion::GUI
 	{
 		if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemActive() && ImGui::IsMouseDragging(2, 0.0f))
 		{
-			m_scrolling_pos = m_scrolling_pos + ImGui::GetIO().MouseDelta;
-			m_scrolling_pos.x = std::clamp(m_scrolling_pos.x, -1000.0f, 1000.0f);
-			m_scrolling_pos.y = std::clamp(m_scrolling_pos.y, -1000.0f, 1000.0f);
+			m_offset = m_offset + ImGui::GetIO().MouseDelta;
+			m_offset.x = std::clamp(m_offset.x, -1000.0f, 1000.0f);
+			m_offset.y = std::clamp(m_offset.y, -1000.0f, 1000.0f);
 		}
 	}
 #pragma endregion

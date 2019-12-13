@@ -31,7 +31,7 @@ namespace	epion
 		Device::set_up();
 		Dxgi::Set(src);
 		ImguiManager::Init();
-		ImguiMain::GetInst().Init();
+		//ImguiMain::GetInst().Init();
 		GUI::NodeEditor::Init();
 		Renderer::SetScreenSize(width, height);
 	}
@@ -41,20 +41,22 @@ namespace	epion
 		SceneManager::ChangeScene();
 		ImguiManager::Begin();
 		SceneManager::Update();
-		ImguiMain::GetInst().Update();
-		//GUI::NodeEditor::Update();
+		//ImguiMain::GetInst().Update();
+		GUI::NodeEditor::Update();
 	}
 
 	void	FrameWork::Render()
 	{
 		std::array<float, 4>	back_color
 		{
-			{0.6f,0.6f,0.6f,0.6f}
+			{0.0f,0.0f,0.0f,1.0f}
 		};
 		Dxgi::Begin(back_color);
 
-		SceneManager::Render();
-		ImguiMain::GetInst().Render();
+		//SceneManager::Render();
+		//ImguiMain::GetInst().Render();
+
+		GUI::NodeEditor::Render();
 
 		ImguiManager::End();
 		Dxgi::End();
