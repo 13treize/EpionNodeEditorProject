@@ -49,12 +49,12 @@ namespace epion
 		m_preview_3d->SetPos(m_pos[0]);
 		m_preview_3d->Update();
 		m_pixel[0]->SetState();
-		m_preview_3d->Render(CameraManager::GetView(), CameraManager::GetProjection());
+		m_preview_3d->Render(CameraManager::GetBasicCamera()->GetView(), CameraManager::GetBasicCamera()->GetProjection());
 
 		m_preview_3d->SetPos(m_pos[1]);
 		m_preview_3d->Update();
 		m_pixel[1]->SetState();
-		m_preview_3d->Render(CameraManager::GetView(), CameraManager::GetProjection());
+		m_preview_3d->Render(CameraManager::GetBasicCamera()->GetView(), CameraManager::GetBasicCamera()->GetProjection());
 	}
 
 	void SceneDemo3D::Release()

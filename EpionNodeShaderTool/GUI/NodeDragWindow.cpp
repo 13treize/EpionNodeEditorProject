@@ -35,7 +35,7 @@ namespace	epion::GUI
 	void NodeDragWindow::Update()
 	{
 		ImGui::SetNextWindowPos(ImVec2(150, 710));
-		ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColors::U32::GRAY);	//”wŒi
+		ImGui::PushStyleColor(ImGuiCol_ChildBg, ImColors::U32::GRAY);	//”wŒi
 		ImGui::BeginChild("test3", ImVec2(1200, 300));
 
 		//ImGui::ImageButton(m_icon_tex->m_shader_resource.Get(), ImVec2(51, 64));

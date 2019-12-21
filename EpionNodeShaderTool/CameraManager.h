@@ -15,9 +15,9 @@ namespace	epion
 
 
 
-		void set_view(const	math::FVector3&	p, const	math::FVector3& t, const math::FVector3& u);
+		void SetView(const	math::FVector3&	p, const	math::FVector3& t, const math::FVector3& u);
 
-		void set_projection(float fov, float aspect, float n, float f);
+		void SetProjection(float fov, float aspect, float n, float f);
 		//çsóÒçXêV
 		void Activate();
 
@@ -86,7 +86,23 @@ namespace	epion
 			float f_);
 
 		~PreviewCamera() {};
+	};
 
+	class	Scene3DCamera	final : public	View
+	{
+	public:
+		Scene3DCamera();
+
+		Scene3DCamera(
+			const	math::FVector3& p_,
+			const	math::FVector3& t_,
+			const	math::FVector3& u_,
+			float fov_,
+			float aspect_,
+			float n_,
+			float f_);
+
+		~Scene3DCamera() {};
 	};
 
 
@@ -100,15 +116,12 @@ namespace	epion
 
 		static std::unique_ptr<BasicCamera>&	GetBasicCamera();
 		static std::unique_ptr<PreviewCamera>&	GetPreviewCamera();
-
-
-		static	DirectX::XMFLOAT4X4& GetView();
-
-		static	DirectX::XMFLOAT4X4& GetProjection();
+		static std::unique_ptr<Scene3DCamera>&	GetScene3DCamera();
 
 	private:
 		static	std::unique_ptr<BasicCamera>	m_basic_camera;
 		static	std::unique_ptr<PreviewCamera>	m_preview_camera;
+		static	std::unique_ptr<Scene3DCamera>	m_scene3d_camera;
 
 	};
 }

@@ -27,11 +27,6 @@ cbuffer WorldCBuffer : register(b3)
     row_major float4x4 WorldViewProjection;
     row_major float4x4 World;
 };
-void Power_float(float A,float B, out float Out)
-{
-	Out = pow(A, B);
-}
-
 float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)
 {
     if (Alpha < AlphaChipThreshold)
@@ -47,9 +42,6 @@ float4 PS(PSInput input) : SV_TARGET
     float Time_ =Time.x;
     float Sin_Time_ =sin(Time.x);
     float Cos_Time_ =cos(Time.x);
-    float Power_float_out0;
-    Power_float(0.000000,0.000000,Power_float_out0);
-
-    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Power_float_out0,1.000000,0.000000);
+    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),float3(1.000000,0.000000,0.000000),1.000000,0.000000);
     return flag_color;
 }

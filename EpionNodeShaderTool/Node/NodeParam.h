@@ -24,7 +24,7 @@ namespace	epion::ImColors
 
 	namespace	Vec4
 	{
-		static ImVec4	BLCAK = { 0, 0, 0, 255 };
+		static ImVec4	BLACK = { 0, 0, 0, 255 };
 		static ImVec4	WHITE = { 255, 255, 255, 255 };
 	}
 }
@@ -61,6 +61,7 @@ namespace	epion::Node
 		OUTOFRANGE,
 	};
 
+	static constexpr int INIT_NUM = -1;
 	static constexpr int SLOT_POS = 10;
 	static constexpr float SLOT_INPUT_RECT_X = -70.0f;
 	static constexpr float SLOT_INPUT_FLOAT = 8;
@@ -75,7 +76,13 @@ namespace	epion::Node
 	static constexpr float NODE_SLOT_RADIUS = 5.0f;
 	const ImVec2 NODE_FONT_ADD_POS = { 10.0f, 5.0f };
 
+
+	const ImVec2 BEZIERCURVE_LEFT_POS = { 80.0f, 0.0f };
+
+	const ImVec2 BEZIERCURVE_RIGHT_POS = { -80.0f, 0.0f };
+
 	const ImU32	NODE_LINE_COLOR = IM_COL32(0, 150, 250, 250);
+	const ImU32	NODE_LINE_HIT_COLOR = IM_COL32(250, 0, 0, 250);
 
 
 

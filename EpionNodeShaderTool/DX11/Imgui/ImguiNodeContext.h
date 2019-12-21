@@ -27,8 +27,8 @@ namespace	epion::Node
 
 		static	void	DragAndDropEvent();
 
-		static	void	ClickEvent(ImVec2& offset);
-		static	void	OpenContext(bool is_set, ImVec2& pos);
+		static	void	CreateNodeMenu(ImVec2& offset);
+		static	void	OpenNodeCreateContext(bool is_set, ImVec2& pos);
 
 		static	bool	GetContext();
 
@@ -38,15 +38,15 @@ namespace	epion::Node
 
 		static	void	SetCreateCount(int size);
 
-		static	void	ClickAdd();
+		static	void	NodeMenu();
 
 		static void reset_create_count()
 		{
 			m_create_count = 0;
 		}
 	private:
-		static bool		m_is_open_menu[ArraySize];
-		static std::string	m_str_menu[ArraySize];
+		static bool		m_is_open_node_menus[ArraySize];
+		static std::string	m_str_menus[ArraySize];
 
 		static	ImVec2	m_pos;
 
@@ -70,8 +70,8 @@ namespace	epion::Node
 		static	bool	m_is_open_math_round_menu;
 		static	bool	m_is_open_math_wave_menu;
 
-		static	bool	m_is_open_context_menu;
-		static	bool	m_is_open_line_menu;
+		static	bool	m_is_open_node_create_menu;
+		static	bool	m_is_open_line_delete_menu;
 
 		static	bool	m_is_open_node_menu;
 

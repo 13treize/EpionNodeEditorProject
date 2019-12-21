@@ -5,7 +5,6 @@
 #include	"../../../imgui\\imgui_impl_win32.h"
 #include	"../../../imgui\\imgui_impl_dx11.h"
 #include	"../../../imgui\\imgui_internal.h"
-#include	"../../../imgui\\imfilebrowser.h"
 
 #include	"../../ImguiFunction.h"
 #include	"ExplorerWindow.h"
@@ -13,14 +12,11 @@
 
 namespace
 {
-	ImGui::FileBrowser fileDialog;
 }
 namespace	epion::GUI
 {
 	void ExplorerWindow::Init()
 	{
-		fileDialog.SetTitle("title");
-		fileDialog.SetTypeFilters({ ".json", ".hlsl" });
 	}
 
 
@@ -39,18 +35,11 @@ namespace	epion::GUI
 		NameSet();
 		if (ImGui::Button("open file dialog"))
 		{
-			fileDialog.Open();
 		}
 
 
 		ImGui::Text("Name");
 		ImGui::End();
-		fileDialog.Display();
-		if (fileDialog.HasSelected())
-		{
-			std::cout << "Selected filename" << fileDialog.GetSelected().string() << std::endl;
-			fileDialog.ClearSelected();
-		}
 	}
 
 	void ExplorerWindow::LocationSet()

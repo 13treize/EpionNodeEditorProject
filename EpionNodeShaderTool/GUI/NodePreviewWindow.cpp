@@ -23,16 +23,17 @@ namespace epion::GUI
 		m_vertex = std::make_unique<VertexShader>(L"HLSLShader\\ObjVertexShader.hlsl");
 		m_pixel = std::make_unique<PixelShader>(L"Default\\Default2.hlsl");
 		m_preview[0] = std::make_unique<Cube>(L"Assets//obj//plane//plane2.obj", m_vertex->GetBlob());
-		m_preview[0] = std::make_unique<Cube>(L"Assets//obj//sphere//sphere.obj",m_vertex->GetBlob());
-		m_preview[0] = std::make_unique<Cube>(L"Assets//obj//box//box.obj", m_vertex->GetBlob());
+		m_preview[0] = std::make_unique<Cube>(L"Assets//obj//sphere//sphere.obj", m_vertex->GetBlob());
+		//m_preview[0] = std::make_unique<Cube>(L"Assets//obj//box//box.obj", m_vertex->GetBlob());
 
 		math::FVector3 scale = { 1.0f,1.0f,1.0f };
-		m_pos[0] = { 0.0f,0.0f,4.0f };
+		m_pos[0] = { 0.0f,0.5f,3.0f };
 		m_preview[0]->SetPos(m_pos[0]);
 		m_preview[0]->SetScale(scale);
 
-		m_tex = std::make_unique<Texture>();
 		m_depth = std::make_unique<DepthStencil>();
+
+		m_tex = std::make_unique<Texture>();
 		m_tex->Create(1920, 1080, DXGI_FORMAT::DXGI_FORMAT_R8G8B8A8_UNORM);
 		return true;
 	}
@@ -48,29 +49,26 @@ namespace epion::GUI
 
 		static float a = 0.0f;
 		a++;
-		math::FVector3 angle = { a,0.0f,0.0f };
+		math::FVector3 angle = {a, 30.0f, 0.0f };
+
 		m_preview[0]->SetAngle(angle);
-
-
 		m_preview[0]->Update();
 
 		ImGui::SetNextWindowPos(ImVec2(1450, 560));
 		ImGui::BeginChild("test5", ImVec2(403, 403));
 		ImGui::Image(m_tex->m_shader_resource.Get(), ImVec2(400, 400), ImVec2(0, 0), ImVec2(1.0, 1.0), ImVec4(1, 1, 1, 1), ImVec4(0, 0, 0, 1));
 		ImGui::EndChild();
-
-
 	}
 	void NodePreviewWindow::Render()
 	{
-		float color[4] = { 0.5,0.5,0.5,1 };
+		float color[4] = { 0.5, 0.5, 0.5, 1};
 
 		Device::GetContext()->OMSetRenderTargets(1, m_tex->RenderTargetView.GetAddressOf(), Dxgi::GetDSV().Get());
 		Device::GetContext()->ClearRenderTargetView(m_tex->RenderTargetView.Get(), color);
 		Device::GetContext()->ClearDepthStencilView(Dxgi::GetDSV().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 		//m_depth->SetState();
 		static math::FVector4 time;
-		time.x += 0.001f;
+		time.x += 0.01f;
 
 		math::FVector2 a = { 1920,1080 };
 		Node::Dx11::ConstantBufferManager::UpdateCBuffer0(time, a);

@@ -49,9 +49,9 @@ namespace epion::GUI
 		std::vector<Node::NodeLink>	m_links;
 
 		//Link
+		int m_hit_line_num;
 		float m_line_size;
 		bool m_is_line_hit;
-		bool m_is_line_delete_menu;
 		bool m_is_slot_hit;
 
 		void DrawLinkLine(ImDrawList* draw_list);
@@ -61,7 +61,7 @@ namespace epion::GUI
 		bool	m_is_node_push;
 
 		void	NodeUpdate(ImDrawList* draw_list);
-		void	NodeDrag(ImDrawList* draw_list, int size);
+		void	NodeMouseUpdate(ImDrawList* draw_list, int size);
 		void	NodeDraw(ImDrawList* draw_list, int size);
 		void	NodeInputUpdate(ImDrawList* draw_list, int size);
 		void	NodeOutputUpdate(ImDrawList* draw_list, int size);
@@ -70,11 +70,13 @@ namespace epion::GUI
 
 		//Mouse
 		void	MouseUpdate(ImDrawList* draw_list);
+
 		void	CallContext();
 		void	Drag(ImDrawList* draw_list);
 		void	Enclose(ImDrawList* draw_list);
 		void	Scroll();
 		ImVec2	m_enclose_pos;
+		float	m_scroll_scale;
 
 	};
 }

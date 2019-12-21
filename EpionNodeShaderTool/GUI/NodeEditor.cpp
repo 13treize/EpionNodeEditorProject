@@ -63,7 +63,7 @@ namespace	epion::GUI
 		ImGui::End();
 	}
 
-	void	NodeEditor::Render()
+	void NodeEditor::Render()
 	{
 		m_node_preview_window.Render();
 	}

@@ -6,6 +6,9 @@
 #include	"../../imgui/imgui_internal.h"
 
 #include	"NodeContext.h"
+#include	"../Scene/SceneManager.h"
+#include	"../Scene/SceneDemo2D.h"
+#include	"../Scene/SceneDemo3D.h"
 
 #include	"../ImguiFunction.h"
 #include	"../Node/NodeParam.h"
@@ -16,9 +19,22 @@
 
 namespace
 {
-	constexpr	int	INIT_NUM = -1;
 	constexpr	float	NODE_SLOT_RADIUS = 5.0f;
 }
+
+//for (int i = 0; i < node_names.size(); i++)
+//{
+//	if (ImGui::BeginDragDropTarget())
+//	{
+//		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("DND_DEMO_CELL"))
+//		{
+//			IM_ASSERT(payload->DataSize == sizeof(int));
+//			int payload_n = *(const int*)payload->Data;
+//			node_names[0] = node_names[payload_n];
+//		}
+//		ImGui::EndDragDropTarget();
+//	}
+//}
 
 namespace epion::GUI
 {
@@ -32,10 +48,11 @@ namespace epion::GUI
 
 		m_nodes.clear();
 		m_links.clear();
+		m_hit_line_num = 0;
 		m_line_size = 0.0f;
 		m_is_line_hit = false;
-		m_is_line_delete_menu = false;
-		m_is_slot_hit=false;
+		m_is_slot_hit = false;
+		m_scroll_scale = 1.0f;
 		m_offset = ImVec2(0, 0);
 		ContextManager::Init();
 
@@ -43,10 +60,10 @@ namespace epion::GUI
 	}
 	void NodeWindow::Update(std::vector<std::string>&	node_names)
 	{
-		ContextManager::Update(m_offset,m_nodes);
+		ContextManager::Update(m_offset, m_nodes);
 
 		ChildSettings();
-		ImGui::BeginChild("test2", ImVec2(1400, 670));
+		ImGui::BeginChild("NodeWindow", ImVec2(1400, 670));
 		ImDrawList*	draw_list = ImGui::GetWindowDrawList();
 		draw_list->ChannelsSplit(5);
 
@@ -54,19 +71,6 @@ namespace epion::GUI
 
 		if (ImGui::BeginTabBar("##tabs", m_bar_flags))
 		{
-			//for (int i = 0; i < node_names.size(); i++)
-			//{
-			//	if (ImGui::BeginDragDropTarget())
-			//	{
-			//		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("DND_DEMO_CELL"))
-			//		{
-			//			IM_ASSERT(payload->DataSize == sizeof(int));
-			//			int payload_n = *(const int*)payload->Data;
-			//			node_names[0] = node_names[payload_n];
-			//		}
-			//		ImGui::EndDragDropTarget();
-			//	}
-			//}
 			if (ImGui::BeginTabItem("Node"))
 			{
 				grid.Draw(draw_list, ImGui::GetCursorScreenPos(), ImGui::GetWindowSize(), m_offset);
@@ -77,28 +81,23 @@ namespace epion::GUI
 
 				MouseUpdate(draw_list);
 
-				if (m_node_hovered_list != INIT_NUM)
+				if (m_node_hovered_list != Node::INIT_NUM)
 				{
 					m_node_select_num = m_node_hovered_list;
 				}
-				if (m_node_hovered_in_scene != INIT_NUM)
+				if (m_node_hovered_in_scene != Node::INIT_NUM)
 				{
 					m_node_select_num = m_node_hovered_in_scene;
 				}
-				if (!m_is_line_hit)
-				{
-					ContextManager::ClickEvent(m_offset);
-				}
-			//	ContextManager::ClickEvent(m_offset);
+				//	ContextManager::ClickEvent(m_offset);
 
-				//ContextManager::LineEvent();
+					//ContextManager::LineEvent();
 
 				ImGui::EndTabItem();
 			}
 			if (ImGui::BeginTabItem("Demo"))
 			{
-				ImGui::Text(m_get_node_name.c_str());
-				ImGui::Text("AAA");
+				ImGui::Image(SceneManager::GetTexData()->m_shader_resource.Get(), ImVec2(1920, 1080), ImVec2(0, 0), ImVec2(1.0, 1.0), ImVec4(1, 1, 1, 1), ImVec4(0, 0, 0, 1));
 
 				ImGui::EndTabItem();
 			}
@@ -116,8 +115,9 @@ namespace epion::GUI
 		ImGui::SetNextWindowPos(ImVec2(30, 10));
 		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
 		ImGui::PushStyleColor(ImGuiCol_Border, ImColors::U32::GREEN);
-		ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColors::U32::GRAYBLACK);
+		ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_ChildBg, ImColors::U32::GRAYBLACK);
 	}
+
 	void NodeWindow::DrawLinkLine(ImDrawList* draw_list)
 	{
 		draw_list->ChannelsSetCurrent(2); // Line
@@ -131,10 +131,11 @@ namespace epion::GUI
 			ImVec2 left_pos = m_offset + m_nodes[l.GetOutputID()]->GetOutputSlotPos(l.GetOutputSlot());
 			left_pos.y += 10.0f;
 			right_pos.y += 10.0f;
+			ImVec2 get_pos = ImBezierClosestPoint(left_pos, left_pos + Node::BEZIERCURVE_LEFT_POS, right_pos + Node::BEZIERCURVE_RIGHT_POS, right_pos, ImGui::GetIO().MousePos, 12.0f);
 
-			if (physics::Collider2D::LineCircle(ImGuiFunction::GetFVector2(left_pos), ImGuiFunction::GetFVector2(right_pos), ImGuiFunction::GetFVector2(ImGui::GetIO().MousePos), 8.0f))
+			if (physics::Collider2D::SphereAndSphere(ImGuiFunction::GetFVector2(ImGui::GetIO().MousePos), ImGuiFunction::GetFVector2(get_pos), 8.0f))
 			{
-				m_line_size = 10.0f;
+				draw_list->AddBezierCurve(left_pos, left_pos + Node::BEZIERCURVE_LEFT_POS, right_pos + Node::BEZIERCURVE_RIGHT_POS, right_pos, Node::NODE_LINE_HIT_COLOR, 7.0f, 12.0f);
 				l.m_is_hit = true;
 			}
 			else
@@ -142,48 +143,14 @@ namespace epion::GUI
 				m_line_size = 3.0f;
 				l.m_is_hit = false;
 			}
-
-			draw_list->AddBezierCurve(left_pos, left_pos /*+ ImVec2(+50, 0)*/, right_pos /*+ ImVec2(-50, 0)*/, right_pos, Node::NODE_LINE_COLOR, m_line_size);
+			draw_list->AddBezierCurve(left_pos, left_pos + Node::BEZIERCURVE_LEFT_POS, right_pos + Node::BEZIERCURVE_RIGHT_POS, right_pos, Node::NODE_LINE_COLOR, m_line_size, 12.0f);
 		}
 
-		if (m_is_line_hit &&ImGui::IsMouseClicked(1))
+		for (int i=0;i< m_links.size();i++)
 		{
-			m_is_line_delete_menu = true;
-		}
-
-
-		for (int i = 0; i < m_links.size(); i++)
-		{
-			if (m_is_line_delete_menu)
+			if (m_links[i].m_is_hit)
 			{
-				ImGui::OpenPopup("delete_menu");
-				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 12));
-				if (ImGui::BeginPopup("delete_menu"))
-				{
-					if (ImGui::MenuItem("Close"))
-					{
-						m_is_line_delete_menu = false;
-					}
-					ImGui::Separator();
-					if (ImGui::MenuItem("Delete"))
-					{
-						m_links.erase(m_links.begin() + i);
-						m_is_line_delete_menu = false;
-					}
-					if (ImGui::IsMouseClicked(1))
-					{
-						m_is_line_delete_menu = false;
-					}
-					ImGui::EndPopup();
-				}
-				ImGui::PopStyleVar();
-			}
-		}
-
-		for (auto& l : m_links)
-		{
-			if (l.m_is_hit)
-			{
+				m_hit_line_num = i;
 				m_is_line_hit = true;
 				break;
 			}
@@ -194,21 +161,15 @@ namespace epion::GUI
 #pragma region Node
 	void	NodeWindow::NodeUpdate(ImDrawList*	draw_list)
 	{
-		//マウス関連
-		m_is_old_any_active = ImGui::IsAnyItemActive();
-
-		m_is_node_widgets_active = (!m_is_old_any_active && ImGui::IsAnyItemActive());
-
-		draw_list->ChannelsSetCurrent(1); // Background
+		//	draw_list->ChannelsSetCurrent(1); // Background
 
 		for (int node_size = 0; node_size < static_cast<int>(m_nodes.size()); node_size++)
 		{
 			ImGui::PushID(m_nodes[node_size]->m_ID);
 			ImVec2 node_rect_min = m_offset + ImGuiFunction::GetImVec2(m_nodes[node_size]->m_Pos);
-			//ImVec2 node_rect_max = node_rect_min + nodes[node_size]->m_Size;
 
 			ImGui::SetCursorScreenPos(node_rect_min);
-			NodeDrag(draw_list, node_size);
+			NodeMouseUpdate(draw_list, node_size);
 			NodeDraw(draw_list, node_size);
 			NodeErase(draw_list, node_size);
 			NodeInputUpdate(draw_list, node_size);
@@ -218,41 +179,39 @@ namespace epion::GUI
 		}
 		draw_list->ChannelsMerge();
 	}
-	void NodeWindow::NodeDrag(ImDrawList* draw_list, int size)
+	void NodeWindow::NodeMouseUpdate(ImDrawList* draw_list, int size)
 	{
-		ImGui::InvisibleButton("node", m_nodes[size]->m_Size);
+		//マウス関連
+		m_is_old_any_active = ImGui::IsAnyItemActive();
+
+		m_is_node_widgets_active = (!m_is_old_any_active && ImGui::IsAnyItemActive());
+
+		ImGui::InvisibleButton("Nodes", m_nodes[size]->m_Size);
 		if (ImGui::IsItemHovered())
 		{
 			m_node_hovered_in_scene = m_nodes[size]->m_ID;
 		}
 		else
 		{
-			m_node_hovered_in_scene = INIT_NUM;
+			m_node_hovered_in_scene = Node::INIT_NUM;
 		}
 
 		m_is_now_any_active = ImGui::IsItemActive();
-
-		if (m_is_node_widgets_active || m_is_now_any_active)
+		if (m_is_node_widgets_active ||
+			m_is_now_any_active)
 		{
 			m_node_select_num = m_nodes[size]->m_ID;
 		}
 		else
 		{
-			m_node_select_num = INIT_NUM;
+			m_node_select_num = Node::INIT_NUM;
 		}
 
-		if (m_is_now_any_active	&&ImGui::IsMouseDragging(0) && !m_click_state.is_click_input_slot && !m_click_state.is_click_output_slot)
-		{
-			m_nodes[size]->m_Pos = m_nodes[size]->m_Pos + ImGuiFunction::GetFVector2(ImGui::GetIO().MouseDelta);
-		}
-	}
-
-	void NodeWindow::NodeDraw(ImDrawList* draw_list, int size)
-	{
 		//Nodeに当たったか
-		if (m_node_hovered_list == m_nodes[size]->m_ID ||
+		if (
+			//m_node_hovered_list == m_nodes[size]->m_ID ||
 			m_node_hovered_in_scene == m_nodes[size]->m_ID ||
-			(m_node_hovered_list == INIT_NUM && m_node_select_num == m_nodes[m_is_node_push]->m_ID))
+			m_node_select_num == m_nodes[m_is_node_push]->m_ID)
 		{
 			m_nodes[size]->m_is_push = true;
 		}
@@ -261,14 +220,32 @@ namespace epion::GUI
 			m_nodes[size]->m_is_push = false;
 		}
 
+		if (m_nodes[size]->m_is_push &&
+			ImGui::IsMouseDoubleClicked(0))
+		{
+			m_nodes[size]->m_is_double_clicked = true;
+			m_nodes[size]->m_is_push = false;
+		}
+
+		if (m_is_now_any_active	&&
+			ImGui::IsMouseDragging(0) &&
+			!m_click_state.is_click_input_slot &&
+			!m_click_state.is_click_output_slot)
+		{
+			m_nodes[size]->m_Pos = m_nodes[size]->m_Pos + ImGuiFunction::GetFVector2(ImGui::GetIO().MouseDelta);
+		}
+	}
+
+	void NodeWindow::NodeDraw(ImDrawList* draw_list, int size)
+	{
 		m_nodes[size]->SetDrawPos(m_offset);
 		draw_list->ChannelsSetCurrent(1);
 
 		ImGui::SetWindowFontScale(1.0f);
-		
-		m_nodes[size]->TitleDraw(m_offset, draw_list);
 
-		ImGui::SetWindowFontScale(0.9f);
+		m_nodes[size]->TitleDraw(m_offset, draw_list, m_scroll_scale);
+
+		ImGui::SetWindowFontScale(0.9f *m_scroll_scale);
 		m_nodes[size]->Update(m_offset, draw_list);
 		m_nodes[size]->ShaderUpdate(m_nodes, m_links);
 	}
@@ -322,7 +299,7 @@ namespace epion::GUI
 								m_nodes[size]->m_ID, slot_input, m_nodes[size]->m_input_slot_type[slot_input]));
 						}
 					}
-					m_click_state = { INIT_NUM,	INIT_NUM,	ImVec2(0, 0),	false,	false,	false };
+					m_click_state = { Node::INIT_NUM,	Node::INIT_NUM,	ImVec2(0, 0),	false,	false,	false };
 					break;
 				}
 			}
@@ -369,7 +346,7 @@ namespace epion::GUI
 								m_click_state.id, m_click_state.slot, m_nodes[m_click_state.id]->m_input_slot_type[m_click_state.slot]));
 						}
 					}
-					m_click_state = { INIT_NUM,INIT_NUM,ImVec2(0, 0),	false,	false,	false };
+					m_click_state = { Node::INIT_NUM,Node::INIT_NUM,ImVec2(0, 0),	false,	false,	false };
 					break;
 				}
 			}
@@ -438,27 +415,39 @@ namespace epion::GUI
 		Scroll();
 	}
 
+
 	void NodeWindow::CallContext()
 	{
-		if (!ImGui::IsAnyItemHovered() && ImGui::IsMouseHoveringWindow() && ImGui::IsMouseClicked(1) && !ImGui::IsMouseClicked(0))
+		if (m_is_line_hit)
 		{
-			if (ContextManager::GetContext())
+			if (!ImGui::IsAnyItemHovered() &&
+				ImGui::IsMouseClicked(1) &&	//右クリック
+				!ImGui::IsMouseClicked(0))	//!左クリック
 			{
-				ContextManager::SetContext(false);
-			}
-			else
-			{
-				m_node_select_num = m_node_hovered_list = m_node_hovered_in_scene = INIT_NUM;
-				ContextManager::OpenContext(true, ImGui::GetIO().MousePos);
+				ContextManager::OpenLineDeleteContext(ImGui::GetIO().MousePos);
 			}
 		}
+		else
+		{
+			if(	!ImGui::IsAnyItemHovered() &&
+				ImGui::IsMouseClicked(1) &&	//右クリック
+				!ImGui::IsMouseClicked(0))	//!左クリック
+			{
+				m_node_select_num = m_node_hovered_list = m_node_hovered_in_scene = Node::INIT_NUM;
+				ContextManager::OpenNodeCreateContext(ImGui::GetIO().MousePos);
+			}
+		}
+		ContextManager::CreateNodeMenu(m_offset);
+		ContextManager::DeleteLineMenu(m_links,m_hit_line_num);
 	}
 
 	void NodeWindow::Drag(ImDrawList*	draw_list)
 	{
-		if (m_click_state.is_click_input_slot || m_click_state.is_click_output_slot)
+		if (m_click_state.is_click_input_slot ||
+			m_click_state.is_click_output_slot)
 		{
 			draw_list->AddBezierCurve(m_click_state.pos + m_offset, m_click_state.pos + ImVec2(50, 0) + m_offset, ImGui::GetIO().MousePos, ImGui::GetIO().MousePos, Node::NODE_LINE_COLOR, 4.0f);
+			//ドラッグをやめる
 			if (ImGui::IsMouseClicked(0))
 			{
 				m_click_state.is_click_input_slot = false;
@@ -469,12 +458,17 @@ namespace epion::GUI
 
 	void NodeWindow::Enclose(ImDrawList* draw_list)
 	{
-		if (ImGui::IsMouseClicked(0)&&!m_click_state.is_click_input_slot && !m_click_state.is_click_output_slot)
+		if (ImGui::IsMouseClicked(0) &&
+			!m_click_state.is_click_input_slot &&
+			!m_click_state.is_click_output_slot)
 		{
 			m_click_state.is_click_display = true;
 			m_enclose_pos = ImGui::GetIO().MousePos;
 		}
-		if ((!m_click_state.is_click_input_slot || !m_click_state.is_click_output_slot)&&m_click_state.is_click_display	&&ImGui::IsMouseDragging(0))
+		if ((!m_click_state.is_click_input_slot ||
+			!m_click_state.is_click_output_slot) &&
+			m_click_state.is_click_display	&&
+			ImGui::IsMouseDragging(0))
 		{
 			draw_list->AddRect(m_enclose_pos, ImGui::GetIO().MousePos, IM_COL32(215, 15, 15, 255), 5.0f, 0);
 		}
@@ -482,7 +476,9 @@ namespace epion::GUI
 
 	void NodeWindow::Scroll()
 	{
-		if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemActive() && ImGui::IsMouseDragging(2, 0.0f))
+		if (ImGui::IsWindowHovered() &&
+			!ImGui::IsAnyItemActive() &&
+			ImGui::IsMouseDragging(2, 0.0f))
 		{
 			m_offset = m_offset + ImGui::GetIO().MouseDelta;
 			m_offset.x = std::clamp(m_offset.x, -1000.0f, 1000.0f);

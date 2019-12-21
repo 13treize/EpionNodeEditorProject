@@ -620,9 +620,6 @@
     <ClInclude Include="DX11\Imgui\ExplorerWindow.h">
       <Filter>ヘッダー ファイル\Dx11\Imgui</Filter>
     </ClInclude>
-    <ClInclude Include="..\Imgui\imfilebrowser.h">
-      <Filter>Imgui</Filter>
-    </ClInclude>
     <ClInclude Include="GUI\NodeEditor.h">
       <Filter>ヘッダー ファイル\GUI</Filter>
     </ClInclude>

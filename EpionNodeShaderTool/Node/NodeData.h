@@ -117,7 +117,6 @@ namespace	epion::Node
 		bool m_is_hit;
 		bool m_is_delete_menu;
 
-
 		std::string StateStr();
 
 	private:
@@ -127,7 +126,6 @@ namespace	epion::Node
 		//right
 		LinkData m_input;
 		SLOT_TYPE m_input_type;
-
 	};
 
 
@@ -144,7 +142,7 @@ namespace	epion::Node
 
 		virtual	~NodeBase() {}
 
-		void	TitleDraw(ImVec2& offset, ImDrawList*	draw_list);
+		void	TitleDraw(ImVec2& offset, ImDrawList*	draw_list,float size);
 
 		virtual	void	Init() = 0;
 
@@ -162,6 +160,7 @@ namespace	epion::Node
 		ImVec2	m_Size;
 
 		bool	m_is_push;
+		bool	m_is_double_clicked;
 
 		int	m_inputs_count;
 		int	m_outputs_count;

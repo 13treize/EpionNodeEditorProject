@@ -27,7 +27,7 @@ namespace epion::GUI
 	void SettingWindow::Update(std::vector<std::unique_ptr<Node::NodeBase>>&	nodes,std::vector<Node::NodeLink>& links)
 	{
 		ImGui::SetNextWindowPos(ImVec2(1450, 10));
-		ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColors::U32::GRAYBLACK);	//îwåi
+		ImGui::PushStyleColor(ImGuiCol_ChildBg, ImColors::U32::GRAYBLACK);	//îwåi
 		ImGui::BeginChild("test4", ImVec2(400, 500));
 		ImGui::Text("Settings");
 		if (ImGui::BeginTabBar("##sets", ImGuiTabBarFlags_None))

@@ -22,14 +22,14 @@ namespace	epion
 	{
 	}
 
-	void	View::set_view(const	math::FVector3&	p, const	math::FVector3&	t, const	math::FVector3&	u)
+	void	View::SetView(const	math::FVector3&	p, const	math::FVector3&	t, const	math::FVector3&	u)
 	{
 		pos = p;
 		target = t;
 		up = u;
 	}
 
-	void	View::set_projection(float	fov_, float	aspect_, float	n, float	f)
+	void	View::SetProjection(float	fov_, float	aspect_, float	n, float	f)
 	{
 		fov = fov_;
 		aspect = aspect_;
@@ -88,34 +88,42 @@ namespace	epion
 
 	BasicCamera::BasicCamera()
 	{
-
 	}
 	BasicCamera::BasicCamera(const math::FVector3& p_, const math::FVector3& t_, const math::FVector3& u_,
 		float fov_, float aspect_, float n_, float f_) :View(p_, t_, u_, fov_, aspect_, n_, f_)
 	{
-
 	}
 
 	PreviewCamera::PreviewCamera()
 	{
-
 	}
+
 	PreviewCamera::PreviewCamera(const math::FVector3& p_, const math::FVector3& t_, const math::FVector3& u_,
 		float fov_, float aspect_, float n_, float f_) :View(p_, t_, u_, fov_, aspect_, n_, f_)
 	{
-
 	}
 
+	Scene3DCamera::Scene3DCamera()
+	{
+	}
+
+	Scene3DCamera::Scene3DCamera(const math::FVector3& p_, const math::FVector3& t_, const math::FVector3& u_,
+		float fov_, float aspect_, float n_, float f_) :View(p_, t_, u_, fov_, aspect_, n_, f_)
+	{
+	}
 
 	std::unique_ptr<BasicCamera>	CameraManager::m_basic_camera;
 	std::unique_ptr<PreviewCamera>	CameraManager::m_preview_camera;
+	std::unique_ptr<Scene3DCamera>	CameraManager::m_scene3d_camera;
 
 	void	CameraManager::Init()
 	{
 		//ÉJÉÅÉâèâä˙âª
 
+		epion::math::FVector3	pos = { 0.0f,	0.0f, 10.0f };
+
 		m_basic_camera	=std::make_unique<BasicCamera>(
-			pos,
+			math::FVector3(0.0f, 0.0f, 5.0f),
 			target,
 			up,
 			math::pi<float> / 8.0f,
@@ -128,9 +136,19 @@ namespace	epion
 			math::FVector3(0.0f, 1.0f, 0.0f),
 			up,
 			math::pi<float> / 8.0f,
-			400.0f/400.f,
+			400.0f/400.0f,
 			0.1f,
 			1000.0f);
+
+		m_scene3d_camera= std::make_unique<Scene3DCamera>(
+			math::FVector3(0.0f, 0.0f, 10.0f),
+			math::FVector3(0.0f, 1.0f, 0.0f),
+			up,
+			math::pi<float> / 8.0f,
+			400.0f / 400.0f,
+			0.1f,
+			1000.0f);
+
 
 	}
 
@@ -138,6 +156,7 @@ namespace	epion
 	{
 		m_basic_camera->Activate();
 		m_preview_camera->Activate();
+		m_scene3d_camera->Activate();
 	}
 
 	std::unique_ptr<BasicCamera>&	CameraManager::GetBasicCamera()
@@ -148,14 +167,8 @@ namespace	epion
 	{
 		return m_preview_camera;
 	}
-	DirectX::XMFLOAT4X4&	CameraManager::GetView()
+	std::unique_ptr<Scene3DCamera>&	CameraManager::GetScene3DCamera()
 	{
-		return	m_basic_camera->GetView();
+		return m_scene3d_camera;
 	}
-
-	DirectX::XMFLOAT4X4&	CameraManager::GetProjection()
-	{
-		return	m_basic_camera->GetProjection();
-	}
-
 }

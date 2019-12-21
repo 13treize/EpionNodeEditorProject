@@ -1,4 +1,6 @@
 #include	"../All.h"
+#include	"../epion.h"
+
 #include	"SceneManager.h"
 #include	"SceneDemo2D.h"
 #include	"SceneDemo3D.h"
@@ -16,6 +18,11 @@ namespace	epion
 	void	SceneManager::Render()
 	{
 		m_scene->Render();
+	}
+
+	std::unique_ptr<Texture>& SceneManager::GetTexData()
+	{
+		return m_scene->m_tex;
 	}
 
 	void	SceneManager::ChangeScene()

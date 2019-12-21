@@ -10,12 +10,11 @@
 
 #include	"GUI/NodeEditor.h"
 
+#include	"CameraManager.h"
+
 #include	"Scene/SceneManager.h"
 #include	"Framework.h"
 
-//#include	"DX11/blender.h"
-//#include	"DX11/rasterizer.h"
-//#include	"CameraManager.h"
 namespace
 {
 	epion::math::FVector4	vari;
@@ -32,6 +31,7 @@ namespace	epion
 		Dxgi::Set(src);
 		ImguiManager::Init();
 		//ImguiMain::GetInst().Init();
+		CameraManager::Init();
 		GUI::NodeEditor::Init();
 		Renderer::SetScreenSize(width, height);
 	}
@@ -53,7 +53,7 @@ namespace	epion
 		};
 		Dxgi::Begin(back_color);
 
-		//SceneManager::Render();
+		SceneManager::Render();
 		//ImguiMain::GetInst().Render();
 
 		GUI::NodeEditor::Render();

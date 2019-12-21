@@ -50,7 +50,8 @@ namespace	epion::Node
 		m_outputs_count(outputs_count),
 		m_function_call_str(""),
 		m_dynamic_slot_type(SLOT_TYPE::VECTOR1),
-		m_is_push(false)
+		m_is_push(false),
+		m_is_double_clicked(false)
 	{
 		Initialize();
 #ifdef DEBUG
@@ -101,15 +102,15 @@ namespace	epion::Node
 	void NodeBase::Finalize()
 	{}
 
-	void	NodeBase::TitleDraw(ImVec2& offset, ImDrawList*	draw_list)
+	void	NodeBase::TitleDraw(ImVec2& offset, ImDrawList*	draw_list,float size)
 	{
-		ImVec2 node_rect_size = m_draw_pos+ m_Size;
-		ImVec2 node_rect_max2 =m_draw_pos + ImVec2(m_Size.x*0.5f, m_Size.y);
-
+		ImVec2 node_rect_size	= m_draw_pos+ m_Size;
+		ImVec2 node_rect_max	=m_draw_pos + ImVec2(m_Size.x*0.5f, m_Size.y)*size;
+		ImVec2 title_bar_pos	= m_draw_pos + ImVec2(m_Size.x, 18.0f) *size;
 		draw_list->AddRectFilled(m_draw_pos, node_rect_size, RECT_COLOR, 2.0f);
 
-		if (m_node_type != NODE_TYPE::MASTER)	draw_list->AddRectFilled(m_draw_pos, node_rect_max2, RECT_COLOR, 2.0f);
-		draw_list->AddRectFilled(m_draw_pos, m_draw_pos + ImVec2(m_Size.x, 18.0f), TITLE_BAR_COLOR, 2.0f);
+		if (m_node_type != NODE_TYPE::MASTER)	draw_list->AddRectFilled(m_draw_pos, node_rect_max, RECT_COLOR, 2.0f);
+		draw_list->AddRectFilled(m_draw_pos, title_bar_pos, TITLE_BAR_COLOR, 2.0f);
 		ImGui::SetCursorScreenPos(m_draw_pos + NODE_FONT_ADD_POS);	//ノードのタイトル描画の座標を指定
 		ImGui::TextColored(ImColors::Vec4::WHITE, "%s", m_Name.c_str());
 #ifdef DEBUG
@@ -144,15 +145,14 @@ namespace	epion::Node
 		assert(m_is_slot_input.size() == m_inputs_count);
 		draw_list->ChannelsSetCurrent(1);
 		ImVec2 node_rect_size = m_draw_pos + m_Size;
-		if (m_is_push)
+		if (m_is_push&& !m_is_double_clicked)
 		{
-			draw_list->AddRect(m_draw_pos, node_rect_size, ImColors::U32::GREEN, 7.0f);
+			draw_list->AddRect(m_draw_pos, node_rect_size, ImColors::U32::GREEN);
 		}
-		else
+		if (m_is_double_clicked)
 		{
-			draw_list->AddRect(m_draw_pos, node_rect_size, ImColors::U32::ZERO, 7.0f);
+			draw_list->AddRect(m_draw_pos, node_rect_size, ImColors::U32::REDPURPLE);
 		}
-
 		for (int i = 0; i < m_inputs_count; i++)
 		{
 			m_input_pos[i] = offset + GetInputSlotPos(i);

@@ -1,4 +1,5 @@
 #pragma once
+#include	"../DX11/texture.h"
 namespace	epion
 {
 	class	Scene	abstract
@@ -10,6 +11,8 @@ namespace	epion
 		virtual	void	Update() = 0;
 		virtual	void	Render() = 0;
 		virtual	void	Release() = 0;
+
+		std::unique_ptr<Texture> m_tex;
 	};
 
 	class SceneManager	final
@@ -17,6 +20,7 @@ namespace	epion
 	public:
 		static void Update();
 		static void Render();
+		static std::unique_ptr<Texture>& GetTexData();
 
 		template<class T, class ...Args>
 		static void SetNextScene(Args ...args);

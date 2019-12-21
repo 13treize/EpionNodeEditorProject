@@ -2,7 +2,6 @@
 
 namespace	epion::Node
 {
-	constexpr	int	INIT_NUM = -1;
 
 	const float zoom_levels[] =
 	{
@@ -72,7 +71,7 @@ namespace	epion::Node
 
 		static	bool	m_is_line;
 		static	bool	m_is_line_delete_menu;
-		static	bool	m_is_open_context_menu;
+		static	bool	m_is_open_node_create_menu;
 
 		static	bool	m_is_node_push;
 
