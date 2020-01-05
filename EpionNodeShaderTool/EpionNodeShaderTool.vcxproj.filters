@@ -136,6 +136,12 @@
     <Filter Include="ソース ファイル\Node\Master">
       <UniqueIdentifier>{fdcc8fb9-d30f-472d-a9bb-6ee5f6732b42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Node\Other">
+      <UniqueIdentifier>{8bc59fdd-4b93-4f79-8c7e-4e03cede28ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Node\Other">
+      <UniqueIdentifier>{f460aa96-6dd6-48d4-9b8c-d6c03d6b716d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Winmain.cpp">
@@ -371,6 +377,9 @@
     </ClCompile>
     <ClCompile Include="GUI\NodeDragWindow.cpp">
       <Filter>ソース ファイル\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Node\YuppiNode.cpp">
+      <Filter>ソース ファイル\Node\Other</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -640,6 +649,9 @@
     </ClInclude>
     <ClInclude Include="GUI\NodeDragWindow.h">
       <Filter>ヘッダー ファイル\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Node\YuppiNode.h">
+      <Filter>ヘッダー ファイル\Node\Other</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

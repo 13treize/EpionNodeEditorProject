@@ -83,27 +83,60 @@ void Voronoi(float2 UV, float AngleOffset, float CellDensity, out float Out, out
     Lines = 1.-smoothstep(0.0, 0.1, c.y-c.x);
 }
 
-void Multiply_float3(float3 A,float3 B, out float3 Out)
+void Checkerboard(float2 UV, float3 ColorA, float3 ColorB, float2 Frequency, out float3 Out)
 {
-	Out = A * B;
+    UV = (UV.xy + 0.5) * Frequency;
+    float4 derivatives = float4(ddx(UV), ddy(UV));
+    float2 duv_length = sqrt(float2(dot(derivatives.xz, derivatives.xz), dot(derivatives.yw, derivatives.yw)));
+    float width = 1.0;
+    float2 distance3 = 4.0 * abs(frac(UV + 0.25) - 0.5) - width;
+    float2 scale = 0.35 / duv_length.xy;
+    float freqLimiter = sqrt(clamp(1.1f - max(duv_length.x, duv_length.y), 0.0, 1.0));
+    float2 vector_alpha = clamp(distance3 * scale.xy, -1.0, 1.0);
+    float alpha = saturate(0.5f + 0.5f * vector_alpha.x * vector_alpha.y * freqLimiter);
+    Out = lerp(ColorA, ColorB, alpha.xxx);
 }
 
+float2 gradientNoise_dir(float2 p)
+{
+    p = p % 289;
+    float x = (34 * p.x + 1) * p.x % 289 + p.y;
+    x = (34 * x + 1) * x % 289;
+    x = frac(x / 41) * 2 - 1;
+    return normalize(float2(x - floor(x + 0.5), abs(x) - 0.5));
+}
+float gradient_noise(float2 p)
+{
+    float2 ip = floor(p);
+    float2 fp = frac(p);
+    float d00 = dot(gradientNoise_dir(ip), fp);
+    float d01 = dot(gradientNoise_dir(ip + float2(0, 1)), fp - float2(0, 1));
+    float d10 = dot(gradientNoise_dir(ip + float2(1, 0)), fp - float2(1, 0));
+    float d11 = dot(gradientNoise_dir(ip + float2(1, 1)), fp - float2(1, 1));
+    fp = fp * fp * fp * (fp * (fp * 6 - 15) + 10);
+    return lerp(lerp(d00, d01, fp.y), lerp(d10, d11, fp.y), fp.x);
+}
+void GradientNoise(float2 UV, float Scale, out float Out)
+{
+    Out = gradient_noise(UV * Scale) + 0.5;
+}
 
 float4 PS(PSInput input) : SV_TARGET
 {
     float Time_ =Time.x;
     float Sin_Time_ =sin(Time.x);
     float Cos_Time_ =cos(Time.x);
-    float3 Color_out3=float3(0.000000,1.000000,0.908366);
-
     float VoronoiOut_out1;
     float VoronoiCell_out1;
     float VoronoiLine_out1;
-    Voronoi(input.uv,7.000000,7.000000,VoronoiOut_out1,VoronoiCell_out1,VoronoiLine_out1);
+    Voronoi(input.uv,4.000000,4.000000,VoronoiOut_out1,VoronoiCell_out1,VoronoiLine_out1);
 
-    float3 Multiply_float3_out2;
-    Multiply_float3(Color_out3,VoronoiCell_out1,Multiply_float3_out2);
+    float GradientNoise_out3;
+    GradientNoise(input.uv,32.000000,GradientNoise_out3);
 
-    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Multiply_float3_out2,1.000000,0.000000);
+    float3 Checkerboard_out2;
+    Checkerboard(input.uv,VoronoiCell_out1,GradientNoise_out3,float2(1.000000,1.000000),Checkerboard_out2);
+
+    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Checkerboard_out2,1.000000,0.000000);
     return flag_color;
 }

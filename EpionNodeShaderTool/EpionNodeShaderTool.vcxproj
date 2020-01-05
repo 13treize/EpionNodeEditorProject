@@ -208,6 +208,7 @@
     <ClCompile Include="Node\TextureNode.cpp" />
     <ClCompile Include="Node\UVNode.cpp" />
     <ClCompile Include="Node\NoiseNode.cpp" />
+    <ClCompile Include="Node\YuppiNode.cpp" />
     <ClCompile Include="Scene\SceneDemo2D.cpp" />
     <ClCompile Include="Scene\SceneDemo3D.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
@@ -300,6 +301,7 @@
     <ClInclude Include="Node\TextureNode.h" />
     <ClInclude Include="Node\UVNode.h" />
     <ClInclude Include="Node\NoiseNode.h" />
+    <ClInclude Include="Node\YuppiNode.h" />
     <ClInclude Include="Scene\SceneDemo2D.h" />
     <ClInclude Include="Scene\SceneDemo3D.h" />
     <ClInclude Include="Scene\SceneManager.h" />

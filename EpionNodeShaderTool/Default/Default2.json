@@ -10,11 +10,11 @@
                         "m_Name": "Unlit Master",
                         "m_ID": 0,
                         "m_Pos": {
-                            "x": 834,
-                            "y": 128
+                            "x": 1011,
+                            "y": 181
                         },
                         "m_dynamic_slot_type": 1,
-                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Multiply_float3_out2,1.000000,0.000000);\n"
+                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Checkerboard_out2,1.000000,0.000000);\n"
                     },
                     "Pos": {
                         "cereal_class_version": 0,
@@ -25,7 +25,7 @@
                     },
                     "color": {
                         "cereal_class_version": 0,
-                        "x": 0,
+                        "x": 1,
                         "y": 0,
                         "z": 0
                     },
@@ -44,94 +44,84 @@
                         "m_Name": "Voronoi",
                         "m_ID": 1,
                         "m_Pos": {
-                            "x": 345,
-                            "y": 269
+                            "x": 194,
+                            "y": 187
                         },
                         "m_dynamic_slot_type": 1,
-                        "m_function_call_str": "    float VoronoiOut_out1;\n    float VoronoiCell_out1;\n    float VoronoiLine_out1;\n    Voronoi(input.uv,7.000000,7.000000,VoronoiOut_out1,VoronoiCell_out1,VoronoiLine_out1);\n"
+                        "m_function_call_str": "    float VoronoiOut_out1;\n    float VoronoiCell_out1;\n    float VoronoiLine_out1;\n    Voronoi(input.uv,4.000000,4.000000,VoronoiOut_out1,VoronoiCell_out1,VoronoiLine_out1);\n"
                     },
                     "m_uv": {
                         "x": 0,
                         "y": 0
                     },
-                    "m_angleoffset": 7,
-                    "m_celldensity": 7
+                    "m_angleoffset": 4,
+                    "m_celldensity": 4
                 }
             }
         },
         {
             "polymorphic_id": 2147483651,
-            "polymorphic_name": "epion::Node::MultiplyNode",
+            "polymorphic_name": "epion::Node::CheckerboardNode",
             "ptr_wrapper": {
                 "valid": 1,
                 "data": {
                     "value0": {
-                        "m_Name": "Multiply_float3",
+                        "m_Name": "Checkerboard",
                         "m_ID": 2,
                         "m_Pos": {
-                            "x": 575,
-                            "y": 163
+                            "x": 737,
+                            "y": 61
                         },
-                        "m_dynamic_slot_type": 3,
-                        "m_function_call_str": "    float3 Multiply_float3_out2;\n    Multiply_float3(Color_out3,VoronoiCell_out1,Multiply_float3_out2);\n"
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float3 Checkerboard_out2;\n    Checkerboard(input.uv,VoronoiCell_out1,GradientNoise_out3,float2(1.000000,1.000000),Checkerboard_out2);\n"
                     },
-                    "A": {
+                    "m_uv": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "m_colora": {
                         "x": 0,
                         "y": 0,
-                        "z": 0,
-                        "w": 0
+                        "z": 0
                     },
-                    "B": {
-                        "x": 0,
+                    "m_colorb": {
+                        "x": 1,
                         "y": 0,
-                        "z": 0,
-                        "w": 0
+                        "z": 0
+                    },
+                    "m_frequency": {
+                        "x": 1,
+                        "y": 1
                     }
                 }
             }
         },
         {
             "polymorphic_id": 2147483652,
-            "polymorphic_name": "epion::Node::ColorNode",
+            "polymorphic_name": "epion::Node::GradientNoiseNode",
             "ptr_wrapper": {
                 "valid": 1,
                 "data": {
                     "value0": {
-                        "m_Name": "Color",
+                        "m_Name": "GradientNoise",
                         "m_ID": 3,
                         "m_Pos": {
-                            "x": 365,
-                            "y": 128
+                            "x": 494,
+                            "y": 263
                         },
                         "m_dynamic_slot_type": 1,
-                        "m_function_call_str": "    float3 Color_out3=float3(0.000000,1.000000,0.908366);\n"
+                        "m_function_call_str": "    float GradientNoise_out3;\n    GradientNoise(input.uv,32.000000,GradientNoise_out3);\n"
                     },
-                    "m_color": {
+                    "m_uv": {
                         "x": 0,
-                        "y": 1,
-                        "z": 0.90836644172668457
-                    }
+                        "y": 0
+                    },
+                    "m_scale": 32
                 }
             }
         }
     ],
     "link_param": [
-        {
-            "m_input.id": 2,
-            "m_input.slot": 1,
-            "m_input_type": 1,
-            "m_output.id": 1,
-            "m_output.slot": 1,
-            "m_output_type": 1
-        },
-        {
-            "m_input.id": 2,
-            "m_input.slot": 0,
-            "m_input_type": 1,
-            "m_output.id": 3,
-            "m_output.slot": 0,
-            "m_output_type": 3
-        },
         {
             "m_input.id": 0,
             "m_input.slot": 1,
@@ -139,6 +129,22 @@
             "m_output.id": 2,
             "m_output.slot": 0,
             "m_output_type": 3
+        },
+        {
+            "m_input.id": 2,
+            "m_input.slot": 2,
+            "m_input_type": 10,
+            "m_output.id": 3,
+            "m_output.slot": 0,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 2,
+            "m_input.slot": 1,
+            "m_input_type": 10,
+            "m_output.id": 1,
+            "m_output.slot": 1,
+            "m_output_type": 1
         }
     ]
 }

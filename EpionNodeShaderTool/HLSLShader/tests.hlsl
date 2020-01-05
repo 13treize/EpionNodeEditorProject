@@ -1,5 +1,4 @@
 #include "square.hlsli"
-
 SamplerState sample0 : register(s0);
 Texture2D tex0 : register(t0);
 RWTexture2D tex1 : register(u1);

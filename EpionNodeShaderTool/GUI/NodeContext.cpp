@@ -182,7 +182,6 @@ namespace	epion::GUI
 	{
 		if (m_is_open_node_create_menu)
 		{
-			//ÉmÅ[ÉhÇÃí«â¡
 			ImGui::OpenPopup("create_menu");
 
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 16));
@@ -192,6 +191,7 @@ namespace	epion::GUI
 			{
 				ImGui::TextColored(ImColors::Vec4::BLACK, "Menu");
 				ImGui::Separator();
+				CloseContext(m_is_open_node_create_menu);
 				if (ImGui::MenuItem("Create Node", nullptr, &m_is_open_node_menu))
 				{
 					m_offset = m_menu_pos - pos;
@@ -499,6 +499,7 @@ namespace	epion::GUI
 			{
 				ImGui::TextColored(ImColors::Vec4::BLACK, "Menu");
 				ImGui::Separator();
+				CloseContext(m_is_open_line_delete_menu);
 				if (ImGui::MenuItem("Delete", nullptr))
 				{
 					lines.erase(lines.begin() + hit_index);
