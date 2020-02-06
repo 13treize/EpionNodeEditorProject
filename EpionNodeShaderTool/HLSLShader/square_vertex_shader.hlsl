@@ -1,7 +1,7 @@
 #include "square.hlsli"
 
 
-PSInput VS(VSInput input)// : SV_POSITION
+PSInput VS(VSInput input)
 {
     PSInput output;
 

@@ -60,7 +60,7 @@ namespace	epion
 		return	SUCCEEDED(hr);
 	}
 
-	struct	constant_buffer_3d
+	struct	cbuffer_3
 	{
 		DirectX::XMFLOAT4X4	world_view_projection;
 		DirectX::XMFLOAT4X4	world;

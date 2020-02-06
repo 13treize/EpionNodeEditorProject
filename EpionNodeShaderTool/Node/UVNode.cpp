@@ -422,3 +422,49 @@ namespace	epion::Node
 #pragma endregion
 
 }
+
+//void Ellipse(vec2 UV, float Width, float Height, out float Out)
+//{
+//	float d = length((UV * 2.0 - 1.0) / vec2(Width, Height));
+//	Out += clamp((1.0 - d) / fwidth(d), 0.0, 1.0);
+//}
+//
+//void Yuppi2D(vec2 UV, vec3 BodyColor, out vec3 Out)
+//{
+//	//Body
+//	float body;
+//	Ellipse(UV, 0.7, 0.7, body);
+//
+//	//Eye
+//	vec2 eye_uv = vec2(-0.18, 0.0);
+//	float pupil;
+//	Ellipse(UV + eye_uv, 0.2, 0.2, pupil);
+//	Ellipse(UV + abs(eye_uv), 0.2, 0.2, pupil);
+//	float eye;
+//	Ellipse(UV + eye_uv, 0.1, 0.1, eye);
+//	Ellipse(UV + abs(eye_uv), 0.1, 0.1, eye);
+//
+//	//Mouth
+//	float mouth, mouth2;
+//	vec3 mouth_color = vec3(1.0, 1.0, .0);
+//	Ellipse(UV + vec2(0.0, 0.2), 0.5, 0.2, mouth);
+//	Ellipse(UV, 0.6, 0.6, mouth2);
+//
+//	//Face
+//	vec3 face = body * BodyColor;
+//	mouth_color *= mouth * mouth2;
+//	face += mouth_color;
+//	face += pupil;
+//	face *= body * 1.0 - eye;
+//
+//	Out = face;
+//}
+//void mainImage(out vec4 fragColor, in vec2 fragCoord)
+//{
+//	vec2 uv = fragCoord / iResolution.yy;
+//	vec3 body_color = vec3(0.0, 1.0, 0.0);
+//	vec3 col = vec3(0.0, 0.0, 0.0);
+//	Yuppi2D(uv, body_color, col);
+//
+//	fragColor = vec4(col, 1.0);
+//}

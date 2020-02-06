@@ -1,0 +1,183 @@
+{
+    "node_param": [
+        {
+            "polymorphic_id": 2147483649,
+            "polymorphic_name": "epion::Node::UnlitMasterNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Unlit Master",
+                        "m_ID": 0,
+                        "m_Pos": {
+                            "x": 1161,
+                            "y": 77
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Add_float3_out4,1.000000,0.000000);\n"
+                    },
+                    "Pos": {
+                        "cereal_class_version": 0,
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "color": {
+                        "cereal_class_version": 0,
+                        "x": 0,
+                        "y": 1,
+                        "z": 0.86852574348449707
+                    },
+                    "Alpha": 1,
+                    "AlphaChipThreshold": 0
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483650,
+            "polymorphic_name": "epion::Node::FBMNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "FBM",
+                        "m_ID": 1,
+                        "m_Pos": {
+                            "x": 516,
+                            "y": 398
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float FBM_out1;\n    FBM(input.uv,4.000000,2.000000,FBM_out1);\n"
+                    },
+                    "m_uv": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "m_amplitude": 4,
+                    "m_frequency": 2
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483651,
+            "polymorphic_name": "epion::Node::ColorNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Color",
+                        "m_ID": 2,
+                        "m_Pos": {
+                            "x": 529,
+                            "y": 154
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float3 Color_out2=float3(0.000000,0.812669,0.953519);\n"
+                    },
+                    "m_color": {
+                        "x": 0,
+                        "y": 0.81266897916793823,
+                        "z": 0.95351928472518921
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483652,
+            "polymorphic_name": "epion::Node::MultiplyNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Multiply_float3",
+                        "m_ID": 3,
+                        "m_Pos": {
+                            "x": 768,
+                            "y": 258
+                        },
+                        "m_dynamic_slot_type": 3,
+                        "m_function_call_str": "    float3 Multiply_float3_out3;\n    Multiply_float3(Color_out2,FBM_out1,Multiply_float3_out3);\n"
+                    },
+                    "A": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "B": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483653,
+            "polymorphic_name": "epion::Node::AddNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Add_float3",
+                        "m_ID": 4,
+                        "m_Pos": {
+                            "x": 892,
+                            "y": 134
+                        },
+                        "m_dynamic_slot_type": 3,
+                        "m_function_call_str": "    float3 Add_float3_out4;\n    Add_float3(float3(0.000000,0.000000,0.000000),Multiply_float3_out3,Add_float3_out4);\n"
+                    },
+                    "A": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "B": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    }
+                }
+            }
+        }
+    ],
+    "link_param": [
+        {
+            "m_input.id": 3,
+            "m_input.slot": 0,
+            "m_input_type": 1,
+            "m_output.id": 2,
+            "m_output.slot": 0,
+            "m_output_type": 3
+        },
+        {
+            "m_input.id": 3,
+            "m_input.slot": 1,
+            "m_input_type": 1,
+            "m_output.id": 1,
+            "m_output.slot": 0,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 4,
+            "m_input.slot": 1,
+            "m_input_type": 1,
+            "m_output.id": 3,
+            "m_output.slot": 0,
+            "m_output_type": 3
+        },
+        {
+            "m_input.id": 0,
+            "m_input.slot": 1,
+            "m_input_type": 11,
+            "m_output.id": 4,
+            "m_output.slot": 0,
+            "m_output_type": 3
+        }
+    ]
+}

@@ -39,6 +39,7 @@ namespace	epion::Node
 		VECTOR4,
 		BOOLEAN,
 		TEXTURE2D,
+		TEXTURE3D,
 		SAMPLERSTATE,
 		POS,//inputÇÃÇ›ÅAàµÇ¢ÇÕVECTOR3ìØÇ∂
 		UV,	//inputÇÃÇ›ÅAàµÇ¢ÇÕVECTOR2ìØÇ∂
@@ -82,7 +83,7 @@ namespace	epion::Node
 	const ImVec2 BEZIERCURVE_RIGHT_POS = { -80.0f, 0.0f };
 
 	const ImU32	NODE_LINE_COLOR = IM_COL32(0, 150, 250, 250);
-	const ImU32	NODE_LINE_HIT_COLOR = IM_COL32(250, 0, 0, 250);
+	const ImU32	NODE_LINE_HIT_COLOR = IM_COL32(0, 250, 120, 250);
 
 
 

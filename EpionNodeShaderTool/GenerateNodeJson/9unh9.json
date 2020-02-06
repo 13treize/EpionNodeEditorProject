@@ -1,0 +1,144 @@
+{
+    "node_param": [
+        {
+            "polymorphic_id": 2147483649,
+            "polymorphic_name": "epion::Node::UnlitMasterNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Unlit Master",
+                        "m_ID": 0,
+                        "m_Pos": {
+                            "x": 998,
+                            "y": 228
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Multiply_float3_out3,1.000000,0.000000);\n"
+                    },
+                    "Pos": {
+                        "cereal_class_version": 0,
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "color": {
+                        "cereal_class_version": 0,
+                        "x": 1,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "Alpha": 1,
+                    "AlphaChipThreshold": 0
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483650,
+            "polymorphic_name": "epion::Node::VoronoiNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Voronoi",
+                        "m_ID": 1,
+                        "m_Pos": {
+                            "x": 533,
+                            "y": 326
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float VoronoiOut_out1;\n    float VoronoiCell_out1;\n    float VoronoiLine_out1;\n    Voronoi(input.uv,7.000000,7.000000,VoronoiOut_out1,VoronoiCell_out1,VoronoiLine_out1);\n"
+                    },
+                    "m_uv": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "m_angleoffset": 7,
+                    "m_celldensity": 7
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483651,
+            "polymorphic_name": "epion::Node::ColorNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Color",
+                        "m_ID": 2,
+                        "m_Pos": {
+                            "x": 669,
+                            "y": 74
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float3 Color_out2=float3(0.109564,0.250948,0.887118);\n"
+                    },
+                    "m_color": {
+                        "x": 0.10956443101167679,
+                        "y": 0.25094828009605408,
+                        "z": 0.88711822032928467
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483652,
+            "polymorphic_name": "epion::Node::MultiplyNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Multiply_float3",
+                        "m_ID": 3,
+                        "m_Pos": {
+                            "x": 789,
+                            "y": 271
+                        },
+                        "m_dynamic_slot_type": 3,
+                        "m_function_call_str": "    float3 Multiply_float3_out3;\n    Multiply_float3(Color_out2,VoronoiCell_out1,Multiply_float3_out3);\n"
+                    },
+                    "A": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "B": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    }
+                }
+            }
+        }
+    ],
+    "link_param": [
+        {
+            "m_input.id": 3,
+            "m_input.slot": 1,
+            "m_input_type": 1,
+            "m_output.id": 1,
+            "m_output.slot": 1,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 3,
+            "m_input.slot": 0,
+            "m_input_type": 1,
+            "m_output.id": 2,
+            "m_output.slot": 0,
+            "m_output_type": 3
+        },
+        {
+            "m_input.id": 0,
+            "m_input.slot": 1,
+            "m_input_type": 11,
+            "m_output.id": 3,
+            "m_output.slot": 0,
+            "m_output_type": 3
+        }
+    ]
+}

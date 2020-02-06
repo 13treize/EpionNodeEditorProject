@@ -22,7 +22,7 @@ namespace	epion
 
 		~Square();
 
-		void	Render(math::FVector2 d_xy, math::FVector2 d_wh, float angle, Color data);
+		void	Render(math::FVector2 d_xy, math::FVector2 d_wh, float angle=0, Color data=Color(0,0,0,0));
 
 		com_ptr<ID3D11ShaderResourceView>&get_shader_resouce();
 	private:

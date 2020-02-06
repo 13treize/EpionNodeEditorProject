@@ -74,7 +74,7 @@ namespace	epion::Node
 	std::string	Yuppi2DNode::GetFunctionDefStr()
 	{
 		return
-			"void yuppi_llipse(float2 UV, float Width, float Height, out float Out)\n"
+			"void yuppi_ellipse(float2 UV, float Width, float Height, out float Out)\n"
 			"{\n"
 			"    float d = length((UV * 2 - 1) / float2(Width, Height));\n"
 			"    Out = saturate((1 - d) / fwidth(d));\n"

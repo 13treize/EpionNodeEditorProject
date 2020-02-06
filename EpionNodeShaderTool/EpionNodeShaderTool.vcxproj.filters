@@ -381,6 +381,9 @@
     <ClCompile Include="Node\YuppiNode.cpp">
       <Filter>ソース ファイル\Node\Other</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\SceneDemoRay.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -653,6 +656,9 @@
     <ClInclude Include="Node\YuppiNode.h">
       <Filter>ヘッダー ファイル\Node\Other</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\SceneDemoRay.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -695,6 +701,9 @@
       <Filter>Imgui</Filter>
     </FxCompile>
     <FxCompile Include="HLSLShader\tests.hlsl">
+      <Filter>リソース ファイル\HLSLShader</Filter>
+    </FxCompile>
+    <FxCompile Include="HLSLShader\tex3d_ps.hlsl">
       <Filter>リソース ファイル\HLSLShader</Filter>
     </FxCompile>
   </ItemGroup>

@@ -40,7 +40,7 @@ namespace	epion::Node
 
 		static	void	NodeMenu();
 
-		static void reset_create_count()
+		static void ResetCreateCount()
 		{
 			m_create_count = 0;
 		}

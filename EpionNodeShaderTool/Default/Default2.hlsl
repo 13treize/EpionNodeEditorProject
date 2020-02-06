@@ -3,6 +3,8 @@ struct PSInput
     float4 position : SV_POSITION;
     float4 normal : NORMAL;
     float2 uv : TEXCOORD0;
+    float4 wpos : TEXCOORD1;
+    float4 lpos : TEXCOORD2;
 };
 cbuffer TimeCBuffer : register(b0)
 {
@@ -27,16 +29,6 @@ cbuffer WorldCBuffer : register(b3)
     row_major float4x4 WorldViewProjection;
     row_major float4x4 World;
 };
-float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)
-{
-    if (Alpha < AlphaChipThreshold)
-    {
-        Alpha = 0;
-    }
-    float4 ret_color = float4(Color, Alpha);
-    return ret_color;
-};
-
 inline float2 voronoi_noise_randomVector(float2 UV, float offset)
 {
     float2x2 m = float2x2(15.27, 47.63, 99.41, 89.98);
@@ -83,42 +75,57 @@ void Voronoi(float2 UV, float AngleOffset, float CellDensity, out float Out, out
     Lines = 1.-smoothstep(0.0, 0.1, c.y-c.x);
 }
 
-void Checkerboard(float2 UV, float3 ColorA, float3 ColorB, float2 Frequency, out float3 Out)
+float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)
 {
-    UV = (UV.xy + 0.5) * Frequency;
-    float4 derivatives = float4(ddx(UV), ddy(UV));
-    float2 duv_length = sqrt(float2(dot(derivatives.xz, derivatives.xz), dot(derivatives.yw, derivatives.yw)));
-    float width = 1.0;
-    float2 distance3 = 4.0 * abs(frac(UV + 0.25) - 0.5) - width;
-    float2 scale = 0.35 / duv_length.xy;
-    float freqLimiter = sqrt(clamp(1.1f - max(duv_length.x, duv_length.y), 0.0, 1.0));
-    float2 vector_alpha = clamp(distance3 * scale.xy, -1.0, 1.0);
-    float alpha = saturate(0.5f + 0.5f * vector_alpha.x * vector_alpha.y * freqLimiter);
-    Out = lerp(ColorA, ColorB, alpha.xxx);
+    if (Alpha < AlphaChipThreshold)
+    {
+        Alpha = 0;
+    }
+    float4 ret_color = float4(Color, Alpha);
+    return ret_color;
+};
+
+void Twirl(float2 UV, float2 Center, float Strength, float2 Offset, out float2 Out)
+{
+    float2 delta = UV - Center;
+    float angle = Strength * length(delta);
+    float x = cos(angle) * delta.x - sin(angle) * delta.y;
+    float y = sin(angle) * delta.x + cos(angle) * delta.y;
+    Out = float2(x + Center.x + Offset.x, y + Center.y + Offset.y);
 }
 
-float2 gradientNoise_dir(float2 p)
+void Hexagon(float2 UV, float Scale, out float Out, out float2 Pos, out float2 oUV, out float2 Index)
 {
-    p = p % 289;
-    float x = (34 * p.x + 1) * p.x % 289 + p.y;
-    x = (34 * x + 1) * x % 289;
-    x = frac(x / 41) * 2 - 1;
-    return normalize(float2(x - floor(x + 0.5), abs(x) - 0.5));
+    float2 p = UV * Scale;
+    p.x *= 1.15470053838;
+    float isTwo = frac(floor(p.x) / 2.0) * 2.0;
+    float isOne = 1.0 - isTwo;
+    p.y += isTwo * 0.5;
+    float2 rectUV = frac(p);
+    float2 grid = floor(p);
+    p = frac(p) - 0.5;
+    float2 s = sign(p);
+    p = abs(p);
+    Out = abs(max(p.x * 1.5 + p.y, p.y * 2.0) - 1.0);
+    float isInHex = step(p.x * 1.5 + p.y, 1.0);
+    float isOutHex = 1.0 - isInHex;
+    float2 grid2 = float2(0, 0);
+    grid2 = lerp(float2(s.x, +step(0.0, s.y)), float2(s.x, -step(s.y, 0.0)), isTwo) *isOutHex;
+    Index = grid + grid2;
+    Pos = Index / Scale;
+    oUV = lerp(rectUV, rectUV - s * float2(1.0, 0.5), isOutHex);
 }
-float gradient_noise(float2 p)
+
+
+void Absolute_float(float In, out float Out)
 {
-    float2 ip = floor(p);
-    float2 fp = frac(p);
-    float d00 = dot(gradientNoise_dir(ip), fp);
-    float d01 = dot(gradientNoise_dir(ip + float2(0, 1)), fp - float2(0, 1));
-    float d10 = dot(gradientNoise_dir(ip + float2(1, 0)), fp - float2(1, 0));
-    float d11 = dot(gradientNoise_dir(ip + float2(1, 1)), fp - float2(1, 1));
-    fp = fp * fp * fp * (fp * (fp * 6 - 15) + 10);
-    return lerp(lerp(d00, d01, fp.y), lerp(d10, d11, fp.y), fp.x);
+	Out = abs(In);
 }
-void GradientNoise(float2 UV, float Scale, out float Out)
+
+
+void Multiply_float(float A,float B, out float Out)
 {
-    Out = gradient_noise(UV * Scale) + 0.5;
+	Out = A * B;
 }
 
 float4 PS(PSInput input) : SV_TARGET
@@ -126,17 +133,22 @@ float4 PS(PSInput input) : SV_TARGET
     float Time_ =Time.x;
     float Sin_Time_ =sin(Time.x);
     float Cos_Time_ =cos(Time.x);
-    float VoronoiOut_out1;
-    float VoronoiCell_out1;
-    float VoronoiLine_out1;
-    Voronoi(input.uv,4.000000,4.000000,VoronoiOut_out1,VoronoiCell_out1,VoronoiLine_out1);
 
-    float GradientNoise_out3;
-    GradientNoise(input.uv,32.000000,GradientNoise_out3);
+    float Absolute_float_out5;
+    Absolute_float(Sin_Time_,Absolute_float_out5);
 
-    float3 Checkerboard_out2;
-    Checkerboard(input.uv,VoronoiCell_out1,GradientNoise_out3,float2(1.000000,1.000000),Checkerboard_out2);
+    float Multiply_float_out8;
+    Multiply_float(Absolute_float_out5,5.000000,Multiply_float_out8);
 
-    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),Checkerboard_out2,1.000000,0.000000);
+    float2 Twirl_out7;
+    Twirl(input.uv,float2(0.500000,0.500000),Multiply_float_out8,float2(0.000000,0.000000),Twirl_out7);
+
+    float HexagonOut_out3;
+    float2 HexagonPos_out3;
+    float2 HexagonScale_out3;
+    float2 HexagonIndex_out3;
+    Hexagon(Twirl_out7,5.000000,HexagonOut_out3,HexagonPos_out3,HexagonScale_out3,HexagonIndex_out3);
+
+    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),HexagonOut_out3,1.000000,0.000000);
     return flag_color;
 }

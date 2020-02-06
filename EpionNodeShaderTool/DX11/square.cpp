@@ -92,10 +92,15 @@ namespace	epion
 			v[i].color = data;
 		}
 
-		v[0].uv = { 0,0 };
-		v[1].uv = { 1,0 };
-		v[2].uv = { 0,1 };
-		v[3].uv = { 1,1 };
+		//v[0].uv = { 0,0 };
+		//v[1].uv = { 1,0 };
+		//v[2].uv = { 0,1 };
+		//v[3].uv = { 1,1 };
+
+		v[0].uv = { -1,1 };
+		v[1].uv = { 1,1 };
+		v[2].uv = { -1,-1 };
+		v[3].uv = { 1,-1 };
 
 		D3D11_MAPPED_SUBRESOURCE	map_resouce = {};
 		Device::GetContext()->Map(vertex_buffer->get_buffer_ptr().Get(), 0, D3D11_MAP::D3D11_MAP_WRITE_DISCARD, 0, &map_resouce);

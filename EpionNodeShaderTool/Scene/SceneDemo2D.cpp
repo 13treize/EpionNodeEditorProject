@@ -5,7 +5,6 @@
 #include	"SceneDemo2D.h"
 
 #include	"../Dx11/texture.h"
-
 #include	"../DX11/dx11_dxgi.h"
 
 #include	"../Node/NodeParamDx11.h"
@@ -23,12 +22,14 @@ namespace epion
 		m_pixel[0] = std::make_unique<PixelShader>(L"GenerateShader\\Demo1.hlsl");
 		m_pixel[1] = std::make_unique<PixelShader>(L"GenerateShader\\Demo2.hlsl");
 		m_pixel[2] = std::make_unique<PixelShader>(L"GenerateShader\\Dissolve.hlsl");
+		m_pixel[3] = std::make_unique<PixelShader>(L"GenerateShader\\ray.hlsl");
 
 		m_preview_3d = std::make_unique<Cube>(L"Assets//obj//plane//plane2.obj",m_vertex->GetBlob());
 
 		m_pos[0] = { 4.2f,3.0f,-18.0f };
 		m_pos[1] = { 2.1f,3.0f,-18.0f };
 		m_pos[2] = { 0.0f,3.0f,-18.0f };
+		m_pos[3] = { 4.2f,0.9f,-18.0f };
 
 		math::FVector3 angle = { 30.0f/0.01745f,0.0,0.0f };
 		m_preview_3d->SetAngle(angle);
@@ -60,6 +61,11 @@ namespace epion
 		math::FVector2 a = { 1920,1080 };
 		Node::Dx11::ConstantBufferManager::UpdateCBuffer0(time, a);
 
+		Node::Dx11::ConstantBufferManager::UpdateCBuffer2(
+			CameraManager::GetBasicCamera()->GetPos(),
+			CameraManager::GetBasicCamera()->GetTarget(),
+			CameraManager::GetBasicCamera()->GetUp());
+
 
 		m_vertex->SetState();
 
@@ -77,8 +83,20 @@ namespace epion
 		m_preview_3d->Update();
 		m_pixel[2]->SetState();
 		m_preview_3d->Render(CameraManager::GetBasicCamera()->GetView(), CameraManager::GetBasicCamera()->GetProjection());
+
+		m_preview_3d->SetPos(m_pos[3]);
+		m_preview_3d->Update();
+		m_pixel[3]->SetState();
+		m_preview_3d->Render(CameraManager::GetBasicCamera()->GetView(), CameraManager::GetBasicCamera()->GetProjection());
+
+
 		Device::GetContext()->OMSetRenderTargets(1, Dxgi::GetRTV().GetAddressOf(), Dxgi::GetDSV().Get());
 	}
+	void SceneDemo2D::RenderTex()
+	{
+
+	}
+
 	void SceneDemo2D::Release()
 	{
 	}

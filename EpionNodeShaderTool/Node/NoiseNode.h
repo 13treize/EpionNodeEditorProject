@@ -83,6 +83,41 @@ namespace	epion::Node
 		float m_scale;
 	};
 
+	//phasor
+	class PhasorNoiseNode :public	NodeBase
+	{
+	public:
+		PhasorNoiseNode();
+		PhasorNoiseNode(int id, const math::FVector2& pos);
+		~ PhasorNoiseNode();
+
+
+		void Init()override;
+		void Update(ImVec2 offset, ImDrawList*	draw_list)	override;
+		void ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)	override;
+
+		std::string	GetFunctionDefStr()	override;
+
+
+		template<class Archive>
+		void serialize(Archive & archive)
+		{
+			archive(
+				cereal::base_class<NodeBase>(this),
+				CEREAL_NVP(m_uv),
+				CEREAL_NVP(m_a),
+				CEREAL_NVP(m_b),
+				CEREAL_NVP(m_c));
+		};
+
+	private:
+		math::FVector2	m_uv;
+		float m_a;
+		float m_b;
+		float m_c;
+
+	};
+
 	/**
 	* @brief SimpleNoise	class
 	* @details	InputSlot 0 UV(VECTOR2)

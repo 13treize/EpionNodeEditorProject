@@ -177,4 +177,48 @@ namespace	epion::Node
 	}
 #pragma endregion
 
+#pragma region Texture3D
+	Texture3DNode::Texture3DNode()
+		: NodeBase(1, 1)
+	{
+		Init();
+	}
+
+	Texture3DNode::Texture3DNode(int id, const math::FVector2& pos)
+		: NodeBase("Texture3D", id, pos, 1, 1)
+	{
+		Init();
+	}
+
+	Texture3DNode::~Texture3DNode()
+	{
+	}
+	void Texture3DNode::Init()
+	{
+		m_slot_no = 0;
+		m_input_slot_type.push_back(SLOT_TYPE::VECTOR1);
+		m_input_name.push_back("Slot");
+
+		m_output_slot_type.push_back(SLOT_TYPE::TEXTURE2D);
+		m_output_name.push_back("Out");
+
+		m_node_type = NODE_TYPE::VARIABLE;
+	}
+	void Texture3DNode::Update(ImVec2 offset, ImDrawList*	draw_list)
+	{
+		DrawUpdate(offset, draw_list);
+	}
+
+	void Texture3DNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
+	{
+		m_input_str[0] = std::to_string(static_cast<int>(m_slot_no));
+		m_out_str[0] = "tex" + m_input_str[0];
+	}
+
+	std::string Texture3DNode::GetFunctionDefStr()
+	{
+		return "Texture3D " + m_out_str[0] + " : register(t" + m_input_str[0] + ");\n";
+	}
+#pragma endregion
+
 }

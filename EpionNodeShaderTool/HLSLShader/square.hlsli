@@ -9,6 +9,8 @@ struct PSInput
     float4 position : SV_POSITION;
     float4 normal : NORMAL;
     float2 uv : TEXCOORD0;
+    float4 wpos : TEXCOORD1;
+    float4 lpos : TEXCOORD2;
 };
 //cbuffer Buffers : register(b0)
 //{

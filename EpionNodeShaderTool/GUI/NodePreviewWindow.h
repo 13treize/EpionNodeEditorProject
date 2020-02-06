@@ -35,6 +35,11 @@ namespace epion::GUI
 		std::unique_ptr<epion::DepthStencil>	m_depth;
 		math::FVector3	m_pos[3];
 		math::FVector3	m_angle[3];
+		math::FVector3	m_rotate;
+
+		PreviewState m_preview_state;
+		bool m_is_rotates[3];
+		bool m_is_rotate;
 
 	};
 }

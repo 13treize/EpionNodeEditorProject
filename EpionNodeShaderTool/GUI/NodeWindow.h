@@ -57,7 +57,7 @@ namespace epion::GUI
 		void DrawLinkLine(ImDrawList* draw_list);
 
 		//Node
-
+		int		m_hit_node_num;
 		bool	m_is_node_push;
 
 		void	NodeUpdate(ImDrawList* draw_list);
