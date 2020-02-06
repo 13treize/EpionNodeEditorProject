@@ -4,11 +4,12 @@
 #include	"SceneManager.h"
 #include	"SceneDemo2D.h"
 #include	"SceneDemo3D.h"
+#include	"SceneDemoRay.h"
 
 namespace	epion
 {
 	std::unique_ptr<Scene>	SceneManager::m_scene = {};
-	std::unique_ptr<Scene>	SceneManager::m_next_scene = std::make_unique<SceneDemo2D>();
+	std::unique_ptr<Scene>	SceneManager::m_next_scene = std::make_unique<SceneDemo3D>();
 
 	void	SceneManager::Update()
 	{

@@ -95,12 +95,11 @@ namespace epion::GUI
 
 				ImGui::EndTabItem();
 			}
-			if (ImGui::BeginTabItem("Demo"))
-			{
-				ImGui::Image(SceneManager::GetTexData()->m_shader_resource.Get(), ImVec2(1920, 1080), ImVec2(0, 0), ImVec2(1.0, 1.0), ImVec4(1, 1, 1, 1), ImVec4(0, 0, 0, 1));
-
-				ImGui::EndTabItem();
-			}
+			//if (ImGui::BeginTabItem("Demo"))
+			//{
+			//	//ImGui::Image(SceneManager::GetTexData()->m_shader_resource.Get(), ImVec2(1400, 670), ImVec2(0, 0), ImVec2(1.0, 1.0), ImVec4(1, 1, 1, 1), ImVec4(0, 0, 0, 1));
+			//	ImGui::EndTabItem();
+			//}
 
 			ImGui::EndTabBar();
 		}
@@ -171,7 +170,7 @@ namespace epion::GUI
 			ImGui::SetCursorScreenPos(node_rect_min);
 			NodeMouseUpdate(draw_list, node_size);
 			NodeDraw(draw_list, node_size);
-			NodeErase(draw_list, node_size);
+			//NodeErase(draw_list, node_size);
 			NodeInputUpdate(draw_list, node_size);
 			NodeOutputUpdate(draw_list, node_size);
 
@@ -429,15 +428,23 @@ namespace epion::GUI
 		}
 		else
 		{
-			if(	!ImGui::IsAnyItemHovered() &&
-				ImGui::IsMouseClicked(1) &&	//右クリック
+			if(	ImGui::IsMouseClicked(1) &&	//右クリック
 				!ImGui::IsMouseClicked(0))	//!左クリック
 			{
-				m_node_select_num = m_node_hovered_list = m_node_hovered_in_scene = Node::INIT_NUM;
-				ContextManager::OpenNodeCreateContext(ImGui::GetIO().MousePos);
+				if (!ImGui::IsAnyItemHovered())
+				{
+					m_node_select_num = m_node_hovered_list = m_node_hovered_in_scene = Node::INIT_NUM;
+					ContextManager::OpenNodeCreateContext(ImGui::GetIO().MousePos);
+				}
+				else
+				{
+					m_node_select_num = m_node_hovered_list = m_node_hovered_in_scene = Node::INIT_NUM;
+					ContextManager::OpenNodeDeleteContext(ImGui::GetIO().MousePos);
+				}
 			}
 		}
 		ContextManager::CreateNodeMenu(m_offset);
+		//ContextManager::DeleteNodeMenu(m_nodes,m_hit_line_num);
 		ContextManager::DeleteLineMenu(m_links,m_hit_line_num);
 	}
 

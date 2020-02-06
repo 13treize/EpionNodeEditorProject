@@ -25,10 +25,9 @@ namespace	epion
 
 		input_layout.Create(shader_refrection.get_layout(), blob);
 
-		depth_stencil.Create();
 		assert(vertex_buffer.Create<epion::obj_vertex>(obj_data->vertices));
 		assert(index_buffer.Create(obj_data->indices));
-		assert(constant_buffer.Create<constant_buffer_3d>());
+		assert(constant_buffer.Create<cbuffer_3>());
 	}
 
 	void	ObjMesh::Render(const	DirectX::XMFLOAT4X4	&world_view_projection,
@@ -41,14 +40,14 @@ namespace	epion
 		index_buffer.SetState(DXGI_FORMAT::DXGI_FORMAT_R32_UINT);
 		Renderer::set_state_list();
 		input_layout.SetState();
-		depth_stencil.SetState();
+
 		for (auto& material : obj_data->materials)
 		{
 			D3D11_MAPPED_SUBRESOURCE	mapped_buffer = {};
 
 			Device::GetContext()->Map(constant_buffer.get_buffer_ptr().Get(), 0, D3D11_MAP::D3D11_MAP_WRITE_DISCARD, 0, &mapped_buffer);
 
-			constant_buffer_3d	*data = static_cast<constant_buffer_3d*>(mapped_buffer.pData);
+			cbuffer_3	*data = static_cast<cbuffer_3*>(mapped_buffer.pData);
 			DirectX::XMStoreFloat4x4(&data->world_view_projection, DirectX::XMLoadFloat4x4(&coordinate_conversion)	*DirectX::XMLoadFloat4x4(&world_view_projection));
 			DirectX::XMStoreFloat4x4(&data->world, DirectX::XMLoadFloat4x4(&coordinate_conversion)	*DirectX::XMLoadFloat4x4(&world));
 

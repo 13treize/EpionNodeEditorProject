@@ -6,6 +6,12 @@
 #include	"../../imgui/imgui_impl_dx11.h"
 #include	"../../imgui/imgui_internal.h"
 
+#include	"../Scene/SceneManager.h"
+#include	"../Scene/SceneDemo2D.h"
+#include	"../Scene/SceneDemo3D.h"
+#include	"../Scene/SceneDemoRay.h"
+
+
 #include	"../ImguiFunction.h"
 #include	"../Node/NodeParam.h"
 #include	"../Node/NodeData.h"
@@ -80,9 +86,9 @@ namespace epion::GUI
 				Shader::NodeShaderManager::Generate(path);
 			}
 
-			if (ImGui::Button("TGA Generate"))
-			{
-			}
+			//if (ImGui::Button("TGA Generate"))
+			//{
+			//}
 
 			ImGui::EndTabItem();
 		}
@@ -108,6 +114,26 @@ namespace epion::GUI
 			ImGui::Text("Option");
 			auto&	io = ImGui::GetIO();
 			ImGui::Text("FPS: %.2f (%.2gms)", io.Framerate, io.Framerate ? 1000.0f / io.Framerate : 0.0f);
+			ImGui::EndTabItem();
+		}
+		//if (ImGui::BeginTabItem("DemoScene"))
+		//{
+		//	if (ImGui::RadioButton("Demo 2D", &m_select_scene, 0))
+		//	{
+		//		SceneManager::SetNextScene<SceneDemo2D>();
+		//	}
+		//	if (ImGui::RadioButton("Demo 3D", &m_select_scene, 1))
+		//	{
+		//		SceneManager::SetNextScene<SceneDemo3D>();
+		//	}
+		//	if (ImGui::RadioButton("Demo Ray", &m_select_scene, 2))
+		//	{
+		//		SceneManager::SetNextScene<SceneDemoRay>();
+		//	}
+		//	ImGui::EndTabItem();
+		//}
+		if (ImGui::BeginTabItem("Camera"))
+		{
 			ImGui::EndTabItem();
 		}
 	}

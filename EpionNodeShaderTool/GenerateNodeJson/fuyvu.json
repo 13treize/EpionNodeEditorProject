@@ -1,0 +1,145 @@
+{
+    "node_param": [
+        {
+            "polymorphic_id": 2147483649,
+            "polymorphic_name": "epion::Node::VoronoiNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Voronoi",
+                        "m_ID": 0,
+                        "m_Pos": {
+                            "x": 692,
+                            "y": 321
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float VoronoiOut_out0;\n    float VoronoiCell_out0;\n    float VoronoiLine_out0;\n    Voronoi(HexagonScale_out3,7.000000,6.000000,VoronoiOut_out0,VoronoiCell_out0,VoronoiLine_out0);\n"
+                    },
+                    "m_uv": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "m_angleoffset": 7,
+                    "m_celldensity": 6
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483650,
+            "polymorphic_name": "epion::Node::UnlitMasterNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Unlit Master",
+                        "m_ID": 1,
+                        "m_Pos": {
+                            "x": 1137,
+                            "y": 53
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": " = Unlit(float4(0.000000,0.000000,0.000000,0.000000),VoronoiCell_out0,1.000000,0.000000);\n"
+                    },
+                    "Pos": {
+                        "cereal_class_version": 0,
+                        "x": 0,
+                        "y": 0,
+                        "z": 0,
+                        "w": 0
+                    },
+                    "color": {
+                        "cereal_class_version": 0,
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "Alpha": 1,
+                    "AlphaChipThreshold": 0
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483651,
+            "polymorphic_name": "epion::Node::SpherizeNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Spherize",
+                        "m_ID": 2,
+                        "m_Pos": {
+                            "x": 177,
+                            "y": 25
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float2 Spherize_out2;\n    Spherize(input.uv,float2(0.500000,0.500000),10.000000,float2(0.000000,0.000000),Spherize_out2);\n"
+                    },
+                    "m_uv": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "m_center": {
+                        "x": 0.5,
+                        "y": 0.5
+                    },
+                    "m_strength": 10,
+                    "m_offset": {
+                        "x": 0,
+                        "y": 0
+                    }
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483652,
+            "polymorphic_name": "epion::Node::HexagonNode",
+            "ptr_wrapper": {
+                "valid": 1,
+                "data": {
+                    "value0": {
+                        "m_Name": "Hexagon",
+                        "m_ID": 3,
+                        "m_Pos": {
+                            "x": 638,
+                            "y": 24
+                        },
+                        "m_dynamic_slot_type": 1,
+                        "m_function_call_str": "    float HexagonOut_out3;\n    float2 HexagonPos_out3;\n    float2 HexagonScale_out3;\n    float2 HexagonIndex_out3;\n    Hexagon(Spherize_out2,12.000000,HexagonOut_out3,HexagonPos_out3,HexagonScale_out3,HexagonIndex_out3);\n"
+                    },
+                    "m_uv": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "m_scale": 12
+                }
+            }
+        }
+    ],
+    "link_param": [
+        {
+            "m_input.id": 1,
+            "m_input.slot": 1,
+            "m_input_type": 11,
+            "m_output.id": 0,
+            "m_output.slot": 1,
+            "m_output_type": 1
+        },
+        {
+            "m_input.id": 3,
+            "m_input.slot": 0,
+            "m_input_type": 10,
+            "m_output.id": 2,
+            "m_output.slot": 0,
+            "m_output_type": 2
+        },
+        {
+            "m_input.id": 0,
+            "m_input.slot": 0,
+            "m_input_type": 10,
+            "m_output.id": 3,
+            "m_output.slot": 2,
+            "m_output_type": 2
+        }
+    ]
+}

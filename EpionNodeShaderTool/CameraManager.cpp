@@ -123,7 +123,7 @@ namespace	epion
 		epion::math::FVector3	pos = { 0.0f,	0.0f, 10.0f };
 
 		m_basic_camera	=std::make_unique<BasicCamera>(
-			math::FVector3(0.0f, 0.0f, 5.0f),
+			math::FVector3(0.0f, 0.0f, 10.0f),
 			target,
 			up,
 			math::pi<float> / 8.0f,
@@ -141,11 +141,11 @@ namespace	epion
 			1000.0f);
 
 		m_scene3d_camera= std::make_unique<Scene3DCamera>(
-			math::FVector3(0.0f, 0.0f, 10.0f),
-			math::FVector3(0.0f, 1.0f, 0.0f),
+			math::FVector3(0.0f, 0.0f, -10.0f),
+			math::FVector3(0.0f, 0.0f, 0.0f),
 			up,
 			math::pi<float> / 8.0f,
-			400.0f / 400.0f,
+			Dxgi::GetViewPort().GetAspect(),
 			0.1f,
 			1000.0f);
 

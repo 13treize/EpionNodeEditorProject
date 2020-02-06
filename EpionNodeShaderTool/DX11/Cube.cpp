@@ -22,6 +22,10 @@ namespace	epion
 
 	void	Cube::Update()
 	{
+		m_world_matrix= DirectX::XMFLOAT4X4(1, 0, 0, 0,
+											0, 1, 0, 0,
+											0, 0, 1, 0,
+											0, 0, 0, 1);
 		DirectX::XMMATRIX	mw = DirectX::XMMatrixIdentity();
 
 		DirectX::XMMATRIX	s, r, t;

@@ -209,8 +209,10 @@
     <ClCompile Include="Node\UVNode.cpp" />
     <ClCompile Include="Node\NoiseNode.cpp" />
     <ClCompile Include="Node\YuppiNode.cpp" />
+    <ClCompile Include="Scene\SceneDefault.cpp" />
     <ClCompile Include="Scene\SceneDemo2D.cpp" />
     <ClCompile Include="Scene\SceneDemo3D.cpp" />
+    <ClCompile Include="Scene\SceneDemoRay.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="ShaderGenerate\ShaderGenerate.cpp" />
     <ClCompile Include="Winmain.cpp" />
@@ -302,8 +304,10 @@
     <ClInclude Include="Node\UVNode.h" />
     <ClInclude Include="Node\NoiseNode.h" />
     <ClInclude Include="Node\YuppiNode.h" />
+    <ClInclude Include="Scene\SceneDefault.h" />
     <ClInclude Include="Scene\SceneDemo2D.h" />
     <ClInclude Include="Scene\SceneDemo3D.h" />
+    <ClInclude Include="Scene\SceneDemoRay.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="ShaderGenerate\ShaderGenerate.h" />
     <ClInclude Include="win_core.h" />
@@ -436,6 +440,20 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="HLSLShader\tex3d_ps.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
   </ItemGroup>

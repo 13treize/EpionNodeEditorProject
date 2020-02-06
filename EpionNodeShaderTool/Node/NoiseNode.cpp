@@ -19,6 +19,7 @@ namespace
 
 CEREAL_REGISTER_TYPE(epion::Node::FBMNode)
 CEREAL_REGISTER_TYPE(epion::Node::GradientNoiseNode)
+CEREAL_REGISTER_TYPE(epion::Node::PhasorNoiseNode)
 CEREAL_REGISTER_TYPE(epion::Node::SimpleNoiseNode)
 CEREAL_REGISTER_TYPE(epion::Node::VoronoiNode)
 
@@ -191,6 +192,133 @@ namespace	epion::Node
 			"    Out = gradient_noise(UV * Scale) + 0.5;\n"
 			"}\n";
 	}
+#pragma endregion
+
+
+#pragma region PhasorNoise
+	PhasorNoiseNode::PhasorNoiseNode()
+		:NodeBase(4, 3)
+	{
+		Init();
+	}
+	PhasorNoiseNode::PhasorNoiseNode(int id, const math::FVector2& pos)
+		: NodeBase("PhasorNoise", id, pos, 4, 3)
+	{
+		Init();
+	}
+	PhasorNoiseNode::~PhasorNoiseNode()
+	{
+	}
+
+	void	PhasorNoiseNode::Init()
+	{
+		m_uv = { 0.0f, 0.0f };
+		m_a = 1.0f;
+		m_b = 1.0f;
+		m_c = 1.0f;
+
+		m_input_name =
+		{
+			"UV",	"A",	"B",	"C",
+		};
+		m_input_slot_type =
+		{
+			SLOT_TYPE::UV,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR1
+		};
+		m_output_name =
+		{
+			"A",	"B",	"C"
+		};
+
+		m_output_slot_type =
+		{
+			SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR1,	SLOT_TYPE::VECTOR1
+		};
+
+		m_node_type = NODE_TYPE::NORMAL;
+	}
+
+	void	PhasorNoiseNode::Update(ImVec2 offset, ImDrawList*	draw_list)
+	{
+		DrawUpdate(offset, draw_list);
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotUV(m_input_pos[0]);
+		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[1], StringConverter::GetSpace(1), m_a);
+		if (m_is_slot_input[2] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[2], StringConverter::GetSpace(2), m_b);
+		if (m_is_slot_input[3] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[3], StringConverter::GetSpace(3), m_c);
+
+	}
+
+	void	PhasorNoiseNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
+	{
+		m_input_str[0] = "input.uv";
+		m_input_str[1] = std::to_string(m_a);
+		m_input_str[2] = std::to_string(m_b);
+		m_input_str[3] = std::to_string(m_c);
+
+		m_out_str[0] = NodeFunction::SetDefineOutName(m_Name + "A", m_ID);
+		m_out_str[1] = NodeFunction::SetDefineOutName(m_Name + "B", m_ID);
+		m_out_str[2] = NodeFunction::SetDefineOutName(m_Name + "C", m_ID);
+		m_function_call_str = NodeFunction::SetDefineOutStr1(m_out_str[0]);
+		m_function_call_str += NodeFunction::SetDefineOutStr1(m_out_str[1]);
+		m_function_call_str += NodeFunction::SetDefineOutStr1(m_out_str[2]);
+		m_function_call_str += NodeFunction::SetFuncCall(m_Name);
+		StrCheck(nodes_ptr, links);
+	}
+
+	std::string	PhasorNoiseNode::GetFunctionDefStr()
+	{
+		return
+			"inline float2 voronoi_noise_randomVector(float2 UV, float offset)\n"
+			"{\n"
+			"    float2x2 m = float2x2(15.27, 47.63, 99.41, 89.98);\n"
+			"    UV = frac(sin(mul(UV, m)) * 46839.32);\n"
+			"    return float2(sin(UV.y * +offset) * 0.5 + 0.5, cos(UV.x * offset) * 0.5 + 0.5);\n"
+			"}\n"
+			"void Voronoi(float2 UV, float AngleOffset, float CellDensity, out float Out, out float Cells, out float Lines)\n"
+			"{\n"
+			"    float2 g = floor(UV * CellDensity);\n"
+			"    float2 f = frac(UV * CellDensity);\n"
+			"    float3 res = float3(8.0, 0.0, 0.0);\n"
+			"    float2 res2 = float2(8.0, 8.0);\n"
+
+			"    for (int y = -1; y <= 1; y++)\n"
+			"    {\n"
+			"        for (int x = -1; x <= 1; x++)\n"
+			"        {\n"
+			"            float2 lattice = float2(x, y);\n"
+			"            float2 offset = voronoi_noise_randomVector(lattice + g, AngleOffset);\n"
+			"            float d = distance(lattice + offset, f);\n"
+
+			"            float2 r = lattice +offset -f;\n"
+			"            float d2 = dot(r,r);\n"
+
+			"            if (d < res.x)\n"
+			"            {\n"
+			"                res = float3(d, offset.x, offset.y);\n"
+			"                Out = res.x;\n"
+			"                Cells = res.y;\n"
+			"            }\n"
+			"            else if (d < res.y)\n"
+			"            {\n"
+			"                res.y = d; \n"
+			"            }\n"
+
+			"            if (d2 < res2.x)\n"
+			"            {\n"
+			"                res2.y = res2.x;\n"
+			"                res2.x = d2;\n"
+			"            }\n"
+			"            else if (d2 < res2.y)\n"
+			"            {\n"
+			"                res2.y = d2; \n"
+			"            }\n"
+			"        }\n"
+			"    }\n"
+			"    float2 c = sqrt(res2);\n"
+			"    Lines = 1.-smoothstep(0.0, 0.1, c.y-c.x);\n"
+			"}\n";
+	}
+
 #pragma endregion
 
 #pragma region SimpleNoise

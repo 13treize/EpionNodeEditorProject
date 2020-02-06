@@ -15,6 +15,7 @@ namespace	epion
 		void	Init()		override;
 		void	Update()	override;
 		void	Render()	override;
+		void	RenderTex()	override;
 		void	Release()	override;
 
 	private:
@@ -26,5 +27,8 @@ namespace	epion
 		//std::array<math::FVector3, 20>	m_scale;
 		std::array<math::FVector3, 20>	m_angle;
 		std::unique_ptr<Blender>		m_blender;
+
+		std::unique_ptr<Square> square;
+
 	};
 }

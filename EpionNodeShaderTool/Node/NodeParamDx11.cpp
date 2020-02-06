@@ -77,10 +77,11 @@ namespace	epion::Node::Dx11
 		cb.Pos.w = 0;
 		cb.Target.w = 0;
 		cb.Up.w = 0;
-		Device::GetContext()->UpdateSubresource(m_constant_buffer1.Get(), 0, nullptr, &cb, 0, 0);
-		Device::GetContext()->VSSetConstantBuffers(1, 1, m_constant_buffer1.GetAddressOf());
-		Device::GetContext()->PSSetConstantBuffers(1, 1, m_constant_buffer1.GetAddressOf());
+		Device::GetContext()->UpdateSubresource(m_constant_buffer2.Get(), 0, nullptr, &cb, 0, 0);
+		Device::GetContext()->VSSetConstantBuffers(2, 1, m_constant_buffer2.GetAddressOf());
+		Device::GetContext()->PSSetConstantBuffers(2, 1, m_constant_buffer2.GetAddressOf());
 	}
+
 	com_ptr<ID3D11SamplerState> SamplerStateManager::m_sampler_states[D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT];
 
 	bool SamplerStateManager::Create(int index, D3D11_FILTER filter, D3D11_TEXTURE_ADDRESS_MODE address)
@@ -112,10 +113,33 @@ namespace	epion::Node::Dx11
 		return true;
 
 	}
+
 	void SamplerStateManager::SetState(int index)
 	{
 		int array_index = std::clamp(index, 0, D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT - 1);
 		Device::GetContext()->PSSetSamplers(array_index, 1, m_sampler_states[array_index].GetAddressOf());
 	}
+
+	com_ptr<ID3D11DepthStencilState>	DepthStencilStateManager::m_depth_stencil_state;
+
+	bool DepthStencilStateManager::Create()
+	{
+		HRESULT	hr = S_OK;
+
+		D3D11_DEPTH_STENCIL_DESC depth_stencil_desc = {};
+		depth_stencil_desc.DepthEnable = true;
+		depth_stencil_desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+		depth_stencil_desc.DepthFunc = D3D11_COMPARISON_LESS;
+		hr = Device::GetDevice()->CreateDepthStencilState(&depth_stencil_desc,m_depth_stencil_state.GetAddressOf());
+
+		if (FAILED(hr))	return false;
+		return true;
+	}
+
+	void DepthStencilStateManager::SetState()
+	{
+		Device::GetContext()->OMSetDepthStencilState(m_depth_stencil_state.Get(), 1);
+	}
+
 
 }

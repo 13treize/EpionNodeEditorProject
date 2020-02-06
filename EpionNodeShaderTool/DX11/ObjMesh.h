@@ -33,7 +33,6 @@ namespace	epion
 		VertexBuffer	vertex_buffer;
 		IndexBuffer		index_buffer;
 
-		DepthStencil	depth_stencil;
 		DirectX::XMFLOAT4X4	coordinate_conversion = { 1, 0, 0, 0,
 														0, 1, 0, 0,
 														0, 0,-1, 0,

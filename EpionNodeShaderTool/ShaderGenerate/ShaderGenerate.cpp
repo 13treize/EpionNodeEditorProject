@@ -298,6 +298,8 @@ namespace	epion::Shader
 		ret_str += m_space + "float4 position : SV_POSITION;\n";
 		ret_str += m_space + "float4 normal : NORMAL;\n";
 		ret_str += m_space + "float2 uv : TEXCOORD0;\n";
+		ret_str += m_space + "float4 wpos : TEXCOORD1;\n";
+		ret_str += m_space + "float4 lpos : TEXCOORD2;\n";
 		ret_str += event_end2();
 		return	ret_str;
 	}

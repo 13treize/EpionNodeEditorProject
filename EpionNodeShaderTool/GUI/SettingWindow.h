@@ -12,6 +12,7 @@ namespace	epion::GUI
 		bool m_is_preview_reset;
 	private:
 		int m_node_size;
+		int m_select_scene;
 		std::vector<int> m_node_id;
 		std::vector<math::FVector2> m_node_pos;
 

@@ -52,13 +52,13 @@ namespace	epion::GUI
 		}
 		m_node_window.Update(m_node_drag_window.GetNodeNames());
 
-		m_node_drag_window.Update();
+		//m_node_drag_window.Update();
 
 		m_node_setting_window.Update(m_node_window.GetNodes(),m_node_window.GetLinks());
 
 		m_node_preview_window.Update(m_node_setting_window.m_is_preview_reset);
 
-		ImGui::PopStyleColor(2);
+		ImGui::PopStyleColor();
 
 		ImGui::End();
 	}

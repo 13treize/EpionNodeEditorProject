@@ -46,6 +46,7 @@ namespace	epion::Node::Dx11
 		static void	UpdateCBuffer0(math::FVector4&	Time, math::FVector2&	ScreenSize);
 		static void	UpdateCBuffer1(math::FVector4&	LightColor, math::FVector4&	LightDir, math::FVector4&	AmbientColor);
 		static void	UpdateCBuffer2(math::FVector3&	Pos, math::FVector3&	Target, math::FVector3&	Up);
+		static void	UpdateCBuffer3(const	DirectX::XMFLOAT4X4&	WorldViewProjection,	const	DirectX::XMFLOAT4X4&	World);
 
 	private:
 		static void CreateDesc(D3D11_BUFFER_DESC& desc, UINT size);
@@ -70,6 +71,21 @@ namespace	epion::Node::Dx11
 
 	private:
 		static com_ptr<ID3D11SamplerState>	m_sampler_states[D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT];
+	};
+
+	/**
+	* @brief	このエディタで規定されてるSamplerの管理
+	* @details	TODO ユーザー側に提供するときの考慮
+	*/
+
+	class DepthStencilStateManager	final
+	{
+	public:
+		static bool Create();
+		static void SetState();
+
+	private:
+		static com_ptr<ID3D11DepthStencilState>	m_depth_stencil_state;
 	};
 
 }
