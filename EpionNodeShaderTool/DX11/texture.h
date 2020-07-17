@@ -51,10 +51,9 @@ namespace	epion
 	{
 		PNG,
 		JPG,
-		NONE,
-
 		//TGA,
 		//BMP,
+		NONE,
 	};
 
 	//TextureExport
@@ -62,12 +61,10 @@ namespace	epion
 	{
 	public:
 		static bool LoadTexture(std::wstring load_texture, DirectX::TexMetadata& m_metadata, DirectX::ScratchImage& m_image, com_ptr<ID3D11ShaderResourceView>& srv);
-
 		static bool SaveTexture(std::string name, com_ptr<ID3D11Texture2D>& texture);
 		static bool SaveTexture(std::string name, std::string extension, com_ptr<ID3D11Texture2D>& texture);
 	private:
 		//enum class‚É‚·‚é
 		static Extension ExtensionGet(std::string extension);
-
 	};
 }

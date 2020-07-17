@@ -22,14 +22,14 @@ CEREAL_REGISTER_TYPE(epion::Node::UnlitMasterNode)
 namespace	epion::Node
 {
 	UnlitMasterNode::UnlitMasterNode()
-		:NodeBase( 4, 0)
+		:NodeBase( 3, 0)
 	{
 		Init();
 	}
 
 	//Position‚ÍŒã‚Å’Ç‰Á
 	UnlitMasterNode::UnlitMasterNode(int id, const epion::math::FVector2& pos)
-		:NodeBase("Unlit Master", id, pos, 4, 0)
+		:NodeBase("Unlit Master", id, pos, 3, 0)
 	{
 		Init();
 	}
@@ -46,11 +46,11 @@ namespace	epion::Node
 		AlphaChipThreshold = 0;
 		m_input_slot_type =
 		{
-			SLOT_TYPE::POS,	SLOT_TYPE::COLOR, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1
+			SLOT_TYPE::COLOR, SLOT_TYPE::VECTOR1, SLOT_TYPE::VECTOR1
 		};
 		m_input_name =
 		{
-			"Pos","Color","Alpha","AlphaChipThreshold"
+			"Color","Alpha","AlphaChipThreshold"
 		};
 		m_function_call_str = "";
 
@@ -65,22 +65,17 @@ namespace	epion::Node
 	void	UnlitMasterNode::Update(ImVec2 offset, ImDrawList*	draw_list)
 	{
 		DrawUpdate(offset, draw_list);
-		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)
-		{
-		}
-		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	m_color_picker[0].SetInputSlotColor2(m_input_pos[1], m_open_popup[0], color, 1);
-		if (m_is_slot_input[2] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[2],StringConverter::GetSpace(2), Alpha);
-		if (m_is_slot_input[3] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[3],StringConverter::GetSpace(3), AlphaChipThreshold);
+		if (m_is_slot_input[0] != INPUT_SLOT_STATE::ONE)	m_color_picker[0].SetInputSlotColor2(m_input_pos[0], m_open_popup[0], color, 1);
+		if (m_is_slot_input[1] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[1],StringConverter::GetSpace(1), Alpha);
+		if (m_is_slot_input[2] != INPUT_SLOT_STATE::ONE)	NodeFunction::SetInputSlotFloat(m_input_pos[2],StringConverter::GetSpace(2), AlphaChipThreshold);
 	}
 
 	void	UnlitMasterNode::ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links)
 	{
 		std::string set_up_str = "";
-
-		m_input_str[0] = NodeFunction::SetInputToString4(Pos);
-		m_input_str[1] = NodeFunction::SetInputToString3(color);
-		m_input_str[2] = std::to_string(Alpha);
-		m_input_str[3] = std::to_string(AlphaChipThreshold);
+		m_input_str[0] = NodeFunction::SetInputToString3(color);
+		m_input_str[1] = std::to_string(Alpha);
+		m_input_str[2] = std::to_string(AlphaChipThreshold);
 
 		m_function_call_str = " = Unlit(";
 		StrCheck(nodes_ptr, links);
@@ -89,7 +84,7 @@ namespace	epion::Node
 	std::string	UnlitMasterNode::GetFunctionDefStr()
 	{
 		return
-			"float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)\n"
+			"float4 Unlit(float3 Color, float Alpha, float AlphaChipThreshold)\n"
 			"{\n"
 			"    if (Alpha < AlphaChipThreshold)\n"
 			"    {\n"

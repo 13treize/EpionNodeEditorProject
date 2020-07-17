@@ -6,19 +6,17 @@
 
 
 #include	"Dx11//Imgui//Dx11ImguiManager.h"
-#include	"Dx11//Imgui//ImguiMainWindow.h"
+
+#include	"Node/NodeParamDx11.h"
 
 #include	"GUI/NodeEditor.h"
 
 #include	"CameraManager.h"
 
-#include	"Scene/SceneManager.h"
 #include	"Framework.h"
 
 namespace
 {
-	epion::math::FVector4	vari;
-
 }
 
 namespace	epion
@@ -30,18 +28,16 @@ namespace	epion
 		Device::set_up();
 		Dxgi::Set(src);
 		ImguiManager::Init();
-		//ImguiMain::GetInst().Init();
 		CameraManager::Init();
+		Node::Dx11::ConstantBufferManager::Create();
 		GUI::NodeEditor::Init();
 		Renderer::SetScreenSize(width, height);
 	}
 
 	void	FrameWork::Update()
 	{
-		SceneManager::ChangeScene();
+		CameraManager::Update();
 		ImguiManager::Begin();
-		SceneManager::Update();
-		//ImguiMain::GetInst().Update();
 		GUI::NodeEditor::Update();
 	}
 
@@ -52,12 +48,7 @@ namespace	epion
 			{0.0f,0.0f,0.0f,1.0f}
 		};
 		Dxgi::Begin(back_color);
-
-		SceneManager::Render();
-		//ImguiMain::GetInst().Render();
-
 		GUI::NodeEditor::Render();
-
 		ImguiManager::End();
 		Dxgi::End();
 

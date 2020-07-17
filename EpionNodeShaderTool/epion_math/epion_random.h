@@ -8,7 +8,7 @@ namespace	epion::math
 	public:
 		//w’è‚µ‚½”ÍˆÍ‚ÌŠÔ‚Ì—”‚ğ•Ô‚·
 		template<class	T>
-		__forceinline	static	T	get_num(T	min_,	T	max_);
+		__forceinline	static	T	get_num(T	min_, T	max_);
 
 		//w’è‚µ‚½Šm—¦(0.0f`1.0f)‚Ìtrue‚ğ•Ô‚·
 		__forceinline	static	bool	is_get(float	num_);
@@ -48,24 +48,24 @@ namespace	epion::math
 
 //À‘•
 template<class	T>
-__forceinline	static	T	epion::math::Random::get_num(T	min_,	T	max_)
+__forceinline	static	T	epion::math::Random::get_num(T	min_, T	max_)
 {
 	mt.seed(rd());
-	std::uniform_int_distribution<T>	rand_num(min_,	max_);
+	std::uniform_int_distribution<T>	rand_num(min_, max_);
 	return	rand_num(mt);
 }
 template<>
-__forceinline	static	float	epion::math::Random::get_num<float>(float	min_,	float	max_)
+__forceinline	static	float	epion::math::Random::get_num<float>(float	min_, float	max_)
 {
 	mt.seed(rd());
-	std::uniform_real_distribution<float>	rand_num(min_,	max_);
+	std::uniform_real_distribution<float>	rand_num(min_, max_);
 	return	rand_num(mt);
 }
 template<>
-__forceinline	static	double	epion::math::Random::get_num<double>(double	min_,	double	max_)
+__forceinline	static	double	epion::math::Random::get_num<double>(double	min_, double	max_)
 {
 	mt.seed(rd());
-	std::uniform_real_distribution<double>	rand_num(min_,	max_);
+	std::uniform_real_distribution<double>	rand_num(min_, max_);
 	return	rand_num(mt);
 }
 
@@ -74,6 +74,6 @@ template<class	T>
 __forceinline	static	int	epion::math::Random::discrete_get(const	std::vector<T>&	data)
 {
 	mt.seed(rd());
-	std::discrete_distribution<int>	dist(data.begin(),	data.end());
+	std::discrete_distribution<int>	dist(data.begin(), data.end());
 	return	dist(mt);
 };

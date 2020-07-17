@@ -29,53 +29,28 @@ cbuffer WorldCBuffer : register(b3)
     row_major float4x4 WorldViewProjection;
     row_major float4x4 World;
 };
-inline float2 voronoi_noise_randomVector(float2 UV, float offset)
+    void Combine(float R, float G, float B, float A, out float4 RGBA, out float3 RGB, out float2 RG)
 {
-    float2x2 m = float2x2(15.27, 47.63, 99.41, 89.98);
-    UV = frac(sin(mul(UV, m)) * 46839.32);
-    return float2(sin(UV.y * +offset) * 0.5 + 0.5, cos(UV.x * offset) * 0.5 + 0.5);
-}
-void Voronoi(float2 UV, float AngleOffset, float CellDensity, out float Out, out float Cells, out float Lines)
-{
-    float2 g = floor(UV * CellDensity);
-    float2 f = frac(UV * CellDensity);
-    float3 res = float3(8.0, 0.0, 0.0);
-    float2 res2 = float2(8.0, 8.0);
-    for (int y = -1; y <= 1; y++)
-    {
-        for (int x = -1; x <= 1; x++)
-        {
-            float2 lattice = float2(x, y);
-            float2 offset = voronoi_noise_randomVector(lattice + g, AngleOffset);
-            float d = distance(lattice + offset, f);
-            float2 r = lattice +offset -f;
-            float d2 = dot(r,r);
-            if (d < res.x)
-            {
-                res = float3(d, offset.x, offset.y);
-                Out = res.x;
-                Cells = res.y;
-            }
-            else if (d < res.y)
-            {
-                res.y = d; 
-            }
-            if (d2 < res2.x)
-            {
-                res2.y = res2.x;
-                res2.x = d2;
-            }
-            else if (d2 < res2.y)
-            {
-                res2.y = d2; 
-            }
-        }
-    }
-    float2 c = sqrt(res2);
-    Lines = 1.-smoothstep(0.0, 0.1, c.y-c.x);
+    RGBA = float4(R, G, B, A);
+    RGB = float3(R, G, B);
+    RG = float2(R, G);
 }
 
-float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)
+void Checkerboard(float2 UV, float3 ColorA, float3 ColorB, float2 Frequency, out float3 Out)
+{
+    UV = (UV.xy + 0.5) * Frequency;
+    float4 derivatives = float4(ddx(UV), ddy(UV));
+    float2 duv_length = sqrt(float2(dot(derivatives.xz, derivatives.xz), dot(derivatives.yw, derivatives.yw)));
+    float width = 1.0;
+    float2 distance3 = 4.0 * abs(frac(UV + 0.25) - 0.5) - width;
+    float2 scale = 0.35 / duv_length.xy;
+    float freqLimiter = sqrt(clamp(1.1f - max(duv_length.x, duv_length.y), 0.0, 1.0));
+    float2 vector_alpha = clamp(distance3 * scale.xy, -1.0, 1.0);
+    float alpha = saturate(0.5f + 0.5f * vector_alpha.x * vector_alpha.y * freqLimiter);
+    Out = lerp(ColorA, ColorB, alpha.xxx);
+}
+
+float4 Unlit(float3 Color, float Alpha, float AlphaChipThreshold)
 {
     if (Alpha < AlphaChipThreshold)
     {
@@ -85,70 +60,14 @@ float4 Unlit(float4 Pos, float3 Color, float Alpha, float AlphaChipThreshold)
     return ret_color;
 };
 
-void Twirl(float2 UV, float2 Center, float Strength, float2 Offset, out float2 Out)
-{
-    float2 delta = UV - Center;
-    float angle = Strength * length(delta);
-    float x = cos(angle) * delta.x - sin(angle) * delta.y;
-    float y = sin(angle) * delta.x + cos(angle) * delta.y;
-    Out = float2(x + Center.x + Offset.x, y + Center.y + Offset.y);
-}
-
-void Hexagon(float2 UV, float Scale, out float Out, out float2 Pos, out float2 oUV, out float2 Index)
-{
-    float2 p = UV * Scale;
-    p.x *= 1.15470053838;
-    float isTwo = frac(floor(p.x) / 2.0) * 2.0;
-    float isOne = 1.0 - isTwo;
-    p.y += isTwo * 0.5;
-    float2 rectUV = frac(p);
-    float2 grid = floor(p);
-    p = frac(p) - 0.5;
-    float2 s = sign(p);
-    p = abs(p);
-    Out = abs(max(p.x * 1.5 + p.y, p.y * 2.0) - 1.0);
-    float isInHex = step(p.x * 1.5 + p.y, 1.0);
-    float isOutHex = 1.0 - isInHex;
-    float2 grid2 = float2(0, 0);
-    grid2 = lerp(float2(s.x, +step(0.0, s.y)), float2(s.x, -step(s.y, 0.0)), isTwo) *isOutHex;
-    Index = grid + grid2;
-    Pos = Index / Scale;
-    oUV = lerp(rectUV, rectUV - s * float2(1.0, 0.5), isOutHex);
-}
-
-
-void Absolute_float(float In, out float Out)
-{
-	Out = abs(In);
-}
-
-
-void Multiply_float(float A,float B, out float Out)
-{
-	Out = A * B;
-}
-
 float4 PS(PSInput input) : SV_TARGET
 {
     float Time_ =Time.x;
     float Sin_Time_ =sin(Time.x);
     float Cos_Time_ =cos(Time.x);
+    float3 Checkerboard_out1;
+    Checkerboard(input.uv,float3(0.000000,0.926959,0.474013),float3(0.000000,0.688596,0.993360),float2(1.000000,1.000000),Checkerboard_out1);
 
-    float Absolute_float_out5;
-    Absolute_float(Sin_Time_,Absolute_float_out5);
-
-    float Multiply_float_out8;
-    Multiply_float(Absolute_float_out5,5.000000,Multiply_float_out8);
-
-    float2 Twirl_out7;
-    Twirl(input.uv,float2(0.500000,0.500000),Multiply_float_out8,float2(0.000000,0.000000),Twirl_out7);
-
-    float HexagonOut_out3;
-    float2 HexagonPos_out3;
-    float2 HexagonScale_out3;
-    float2 HexagonIndex_out3;
-    Hexagon(Twirl_out7,5.000000,HexagonOut_out3,HexagonPos_out3,HexagonScale_out3,HexagonIndex_out3);
-
-    float4 flag_color = Unlit(float4(0.000000,0.000000,0.000000,0.000000),HexagonOut_out3,1.000000,0.000000);
+    float4 flag_color = Unlit(Checkerboard_out1,1.000000,0.000000);
     return flag_color;
 }

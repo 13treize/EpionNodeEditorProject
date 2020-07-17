@@ -26,9 +26,10 @@ namespace	epion::Node
 	{
 	public:
 		InputSlotState()
+			:slot_name("no_init"), slot_no(0), slot_type(SLOT_TYPE::VECTOR1)
 		{
 		}
-		InputSlotState(std::string name, int no, SLOT_TYPE type)
+		InputSlotState(const std::string& name, int no, SLOT_TYPE type)
 			:slot_name(name), slot_no(no), slot_type(type)
 		{
 		}
@@ -138,17 +139,14 @@ namespace	epion::Node
 		//Json
 		NodeBase(int inputs_count, int outputs_count);
 		//Editor
-		NodeBase(std::string name, int id, const math::FVector2& pos, int inputs_count, int outputs_count);
+		NodeBase(const std::string& name, int id, const math::FVector2& pos, int inputs_count, int outputs_count);
 
 		virtual	~NodeBase() {}
 
 		void	TitleDraw(ImVec2& offset, ImDrawList*	draw_list,float size);
 
 		virtual	void	Init() = 0;
-
-
 		virtual	void	Update(ImVec2 offset, ImDrawList*	draw_list) = 0;
-
 		//毎フレームは必要ない
 		virtual	void	ShaderUpdate(std::vector<std::unique_ptr<NodeBase>>&	nodes_ptr, std::vector<NodeLink>&	links) = 0;
 

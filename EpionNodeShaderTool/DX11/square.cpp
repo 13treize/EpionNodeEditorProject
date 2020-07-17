@@ -50,7 +50,7 @@ namespace	epion
 	Square::~Square()
 	{}
 
-	void	Square::Render(math::FVector2  d_xy, math::FVector2  d_wh, float angle, Color	data)
+	void	Square::Render(math::FVector2 d_xy, math::FVector2 d_wh, float angle, Color	data)
 	{
 		std::valarray<float>	arr_x =
 		{

@@ -42,7 +42,7 @@ namespace	epion::Node
 		Initialize();
 	}
 
-	NodeBase::NodeBase(std::string name, int id, const epion::math::FVector2& pos, int inputs_count, int outputs_count)
+	NodeBase::NodeBase(const std::string& name, int id, const math::FVector2& pos, int inputs_count, int outputs_count)
 		:m_Name(name),
 		m_ID(id),
 		m_Pos(pos),

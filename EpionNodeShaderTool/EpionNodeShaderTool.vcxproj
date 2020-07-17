@@ -22,32 +22,32 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{04EC2A2F-5318-4D75-97B5-DC0F40A81967}</ProjectGuid>
     <RootNamespace>EpionNodeShaderTool</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -210,9 +210,6 @@
     <ClCompile Include="Node\NoiseNode.cpp" />
     <ClCompile Include="Node\YuppiNode.cpp" />
     <ClCompile Include="Scene\SceneDefault.cpp" />
-    <ClCompile Include="Scene\SceneDemo2D.cpp" />
-    <ClCompile Include="Scene\SceneDemo3D.cpp" />
-    <ClCompile Include="Scene\SceneDemoRay.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="ShaderGenerate\ShaderGenerate.cpp" />
     <ClCompile Include="Winmain.cpp" />
@@ -305,9 +302,6 @@
     <ClInclude Include="Node\NoiseNode.h" />
     <ClInclude Include="Node\YuppiNode.h" />
     <ClInclude Include="Scene\SceneDefault.h" />
-    <ClInclude Include="Scene\SceneDemo2D.h" />
-    <ClInclude Include="Scene\SceneDemo3D.h" />
-    <ClInclude Include="Scene\SceneDemoRay.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="ShaderGenerate\ShaderGenerate.h" />
     <ClInclude Include="win_core.h" />

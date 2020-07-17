@@ -309,12 +309,6 @@
     <ClCompile Include="epion_string\epion_string.cpp">
       <Filter>ソース ファイル\epion_string</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\SceneManager.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\SceneDemo2D.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Node\MathRangeNode.cpp">
       <Filter>ソース ファイル\Node\Math</Filter>
     </ClCompile>
@@ -323,9 +317,6 @@
     </ClCompile>
     <ClCompile Include="Node\NodeFunction.cpp">
       <Filter>ソース ファイル\Node</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\SceneDemo3D.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Node\ArtisticAdjustment.cpp">
       <Filter>ソース ファイル\Node\Artistic</Filter>
@@ -381,7 +372,10 @@
     <ClCompile Include="Node\YuppiNode.cpp">
       <Filter>ソース ファイル\Node\Other</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\SceneDemoRay.cpp">
+    <ClCompile Include="Scene\SceneManager.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneDefault.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
   </ItemGroup>
@@ -593,9 +587,6 @@
     <ClInclude Include="Scene\SceneManager.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\SceneDemo2D.h">
-      <Filter>ヘッダー ファイル\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Node\MathRangeNode.h">
       <Filter>ヘッダー ファイル\Node\Math</Filter>
     </ClInclude>
@@ -604,9 +595,6 @@
     </ClInclude>
     <ClInclude Include="Node\NodeFunction.h">
       <Filter>ヘッダー ファイル\Node</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\SceneDemo3D.h">
-      <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Node\ArtisticAdjustment.h">
       <Filter>ヘッダー ファイル\Node\Artistic</Filter>
@@ -656,7 +644,7 @@
     <ClInclude Include="Node\YuppiNode.h">
       <Filter>ヘッダー ファイル\Node\Other</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\SceneDemoRay.h">
+    <ClInclude Include="Scene\SceneDefault.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>

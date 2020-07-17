@@ -25,8 +25,6 @@
 
 
 #include	"../../Scene/SceneManager.h"
-#include	"../../Scene/SceneDemo2D.h"
-#include	"../../Scene/SceneDemo3D.h"
 
 #pragma warning(disable:4996)
 
@@ -273,17 +271,5 @@ namespace	epion
 
 	void	ImguiMain::SceneUpdate()
 	{
-		if (ImGui::BeginTabItem("DemoScene"))
-		{
-			if (ImGui::RadioButton("Demo 2D", &m_select_scene, 0))
-			{
-				SceneManager::SetNextScene<SceneDemo2D>();
-			}
-			if (ImGui::RadioButton("Demo 3D", &m_select_scene, 1))
-			{
-				SceneManager::SetNextScene<SceneDemo3D>();
-			}
-			ImGui::EndTabItem();
-		}
 	}
 }

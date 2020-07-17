@@ -22,7 +22,7 @@ namespace epion::GUI
 		CameraManager::Init();
 		m_vertex = std::make_unique<VertexShader>(L"HLSLShader\\ObjVertexShader.hlsl");
 		m_pixel = std::make_unique<PixelShader>(L"Default\\Default2.hlsl");
-		m_preview[0] = std::make_unique<Cube>(L"Assets//obj//plane//plane2.obj", m_vertex->GetBlob());
+		m_preview[0] = std::make_unique<Cube>(L"Assets//obj//plane//plane.obj", m_vertex->GetBlob());
 		m_preview[1] = std::make_unique<Cube>(L"Assets//obj//sphere//sphere.obj", m_vertex->GetBlob());
 		m_preview[2] = std::make_unique<Cube>(L"Assets//obj//box//box.obj", m_vertex->GetBlob());
 

@@ -7,8 +7,6 @@
 
 #include	"NodeContext.h"
 #include	"../Scene/SceneManager.h"
-#include	"../Scene/SceneDemo2D.h"
-#include	"../Scene/SceneDemo3D.h"
 
 #include	"../ImguiFunction.h"
 #include	"../Node/NodeParam.h"
@@ -95,11 +93,6 @@ namespace epion::GUI
 
 				ImGui::EndTabItem();
 			}
-			//if (ImGui::BeginTabItem("Demo"))
-			//{
-			//	//ImGui::Image(SceneManager::GetTexData()->m_shader_resource.Get(), ImVec2(1400, 670), ImVec2(0, 0), ImVec2(1.0, 1.0), ImVec4(1, 1, 1, 1), ImVec4(0, 0, 0, 1));
-			//	ImGui::EndTabItem();
-			//}
 
 			ImGui::EndTabBar();
 		}

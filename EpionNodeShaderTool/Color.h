@@ -8,7 +8,7 @@ namespace	epion
 		float	g;
 		float	b;
 		float	a;
-		Color() {};
+		Color() :r(0.0f), g(0.0f), b(0.0f), a(0.0f) {};
 		constexpr	Color(float	r_, float	g_, float	b_, float	a_) :r(r_), g(g_), b(b_), a(a_) {};
 	};
 

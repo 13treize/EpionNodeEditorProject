@@ -7,10 +7,6 @@
 #include	"../../imgui/imgui_internal.h"
 
 #include	"../Scene/SceneManager.h"
-#include	"../Scene/SceneDemo2D.h"
-#include	"../Scene/SceneDemo3D.h"
-#include	"../Scene/SceneDemoRay.h"
-
 
 #include	"../ImguiFunction.h"
 #include	"../Node/NodeParam.h"
